@@ -90,7 +90,7 @@ export default {
         icon: 'job',
         licenseRequired: true,
         hidden: ({ settings }) => !settings['TICKETS_ENABLED'],
-        permissions: ['tickets.view_ticket']
+        permissions: ['audits.view_ticketaudit']
       },
       children: TicketRoutes
     },
