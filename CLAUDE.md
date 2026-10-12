@@ -36,7 +36,7 @@ yarn apply-i18n           # python apply across locales
 
 - `/api/`, `/core/`, `/static/`, `/media/` → `VITE_CORE_HOST` (the JumpServer API)
 - `/ws/` → `VITE_CORE_HOST` (websockets)
-- `/koko/` → `VITE_KOKO_HOST` (terminal service), `/workspace/`, `/guacamole/`, `/facelive/`, `/chen/` → other JumpServer services
+- `/secureconnection/` → `VITE_KOKO_HOST` (terminal service), `/ai/` → `VITE_KAEL_HOST`, `/workspace/`, `/guacamole/`, `/facelive/`, `/webconnector/` → other services
 
 `@` is aliased to `src/`. Env vars must be prefixed `VITE_`.
 

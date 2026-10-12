@@ -64,15 +64,15 @@ const components_ce = [
     components: ['web', 'jms_web']
   },
   {
-    title: 'Koko',
+    title: 'SecureConnection',
     components: ['koko', 'jms_koko']
   },
   {
-    title: 'Lion',
+    title: 'SecureConnection Desktop',
     components: ['lion', 'jms_lion']
   },
   {
-    title: 'Chen',
+    title: 'WebConnector',
     components: ['chen', 'jms_chen']
   },
   {

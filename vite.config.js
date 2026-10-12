@@ -138,12 +138,12 @@ export default defineConfig(({ mode }) => {
       open: false,
       cors: createCorsOptions(),
       proxy: {
-        // Keep the browser-facing Host so Kael can verify Origin as same-origin.
-        '/kael/': createProxy(kaelHost, false, false),
+        // Keep the browser-facing Host so the AI service can verify Origin as same-origin.
+        '/ai/': createProxy(kaelHost, false, false),
         '/api/': createProxy(coreHost),
         '/ws/': createProxy(coreHost, true),
-        '/koko/': createProxy(kokoHost, true),
-        '/chen/': createProxy('http://127.0.0.1:9523', true),
+        '/secureconnection/': createProxy(kokoHost, true),
+        '/webconnector/': createProxy('http://127.0.0.1:9523', true),
         '/guacamole/': createProxy('http://127.0.0.1:8081', true),
         '/workspace/': createProxy('http://127.0.0.1:4200'),
         '/facelive/': createProxy(coreHost, true),

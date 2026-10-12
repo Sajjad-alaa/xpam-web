@@ -8,7 +8,7 @@ import {
   sanitizePageContext
 } from '@/components/Apps/ChatAi/utils/pageContext'
 
-const KAEL_BASE = '/kael/api/v1'
+const KAEL_BASE = '/ai/api/v1'
 const PAGE_SIZE = 100
 const HEARTBEAT_MS = 30 * 1000
 const PANEL_STREAM_RECONNECT_ATTEMPTS = 4
@@ -511,13 +511,13 @@ async function consumeEventStream(response, panel, run, cursor, onEvent) {
     if (!delivery) return null
     const sequence = Number(delivery.seq)
     if (!Number.isSafeInteger(sequence) || sequence < 1) {
-      throw new ChatAIRequestError('Kael returned an invalid event sequence.', {
+      throw new ChatAIRequestError('The AI service returned an invalid event sequence.', {
         code: 'invalid_event_sequence'
       })
     }
     if (sequence <= cursor.sequence) return null
     if (delivery.panel_session_id && delivery.panel_session_id !== panel.id) {
-      throw new ChatAIRequestError('Kael returned an event for another panel session.', {
+      throw new ChatAIRequestError('The AI service returned an event for another panel session.', {
         code: 'panel_event_mismatch'
       })
     }
@@ -562,7 +562,7 @@ async function consumeEventStream(response, panel, run, cursor, onEvent) {
       if (terminal) return terminal
     }
     throw new ChatAIRequestError(
-      'Kael event stream ended before the run reached a terminal state.',
+      'The AI service event stream ended before the run reached a terminal state.',
       {
         code: 'stream_ended',
         retryable: true

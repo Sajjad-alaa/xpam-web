@@ -18,7 +18,7 @@ export default {
       fields: [
         [this.$t('Basic'), ['SECURITY_SERVICE_ACCOUNT_REGISTRATION']],
         [
-          `SSH & KoKo`,
+          `SSH & SecureConnection`,
           [
             'TERMINAL_KOKO_SSH_ENABLED',
             'TERMINAL_PASSWORD_AUTH',

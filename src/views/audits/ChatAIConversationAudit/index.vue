@@ -133,7 +133,7 @@ const auditTableMetadata = () =>
     }
   })
 const tableConfig = computed(() => ({
-  url: '/kael/api/v1/admin/audit/conversations',
+  url: '/ai/api/v1/admin/audit/conversations',
   columnsShow: {
     min: ['user', 'title'],
     default: ['user', 'title', 'question_count', 'date_updated', 'actions']

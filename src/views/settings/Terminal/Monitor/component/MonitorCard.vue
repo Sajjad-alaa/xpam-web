@@ -99,18 +99,18 @@ export default {
   computed: {
     componentName() {
       const nameMapper = {
-        koko: 'KoKo',
+        koko: 'SecureConnection',
         omnidb: 'OmniDB',
         guacamole: 'Guacamole',
-        lion: 'Lion',
+        lion: 'SecureConnection Desktop',
         xrdp: 'Xrdp',
         razor: 'Razor',
         core: 'Core',
         celery: 'Celery',
         magnus: 'Magnus',
         tinker: 'Tinker',
-        chen: 'Chen',
-        kael: 'Kael',
+        chen: 'WebConnector',
+        kael: 'AI',
         video_worker: 'Video-Worker',
         panda: 'Panda',
         nec: 'Nec',

@@ -817,7 +817,7 @@ export function useChatAi(options = {}) {
       requestOptions
     )
     if (!isGeneralConversation(conversation)) {
-      throw new Error('Kael returned a non-general conversation to the Lina assistant.')
+      throw new Error('The AI service returned a non-general conversation to the web assistant.')
     }
     return conversation
   }
