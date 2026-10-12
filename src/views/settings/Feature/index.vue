@@ -30,7 +30,7 @@ export default {
         {
           title: this.$t('Ticket'),
           name: 'Ticket',
-          hidden: !this.$store.getters.hasValidLicense || !this.$hasPerm('settings.change_ticket')
+          hidden: !this.$store.getters.hasTicketLicense || !this.$hasPerm('settings.change_ticket')
         },
         {
           title: this.$t('JobCenter'),
@@ -40,7 +40,7 @@ export default {
         {
           title: this.$t('AccountStorage'),
           name: 'Vault',
-          hidden: !this.$store.getters.hasValidLicense || !this.$hasPerm('settings.change_vault')
+          hidden: !this.$hasPerm('settings.change_vault')
         },
         {
           title: this.$t('OpenBaoSSHCA'),
@@ -50,8 +50,7 @@ export default {
         {
           title: this.$t('VirtualApps'),
           name: 'VirtualApp',
-          hidden:
-            !this.$hasPerm('settings.change_virtualapp') || !this.$store.getters.hasValidLicense
+          hidden: !this.$hasPerm('settings.change_virtualapp')
         }
       ]
     }

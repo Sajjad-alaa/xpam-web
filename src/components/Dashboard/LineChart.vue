@@ -1,12 +1,6 @@
 <template>
   <div>
-    <Echart
-      ref="echarts"
-      :options="options"
-      :autoresize="true"
-      theme="light"
-      @finished="genSnapshot"
-    />
+    <Echart ref="echarts" :options="options" :autoresize="true" @finished="genSnapshot" />
   </div>
 </template>
 

@@ -11,22 +11,9 @@ const localeAliases = {
 }
 
 export function getLangCode(withInternalCode = false) {
-  const cookieLang = VueCookie.getCookie('django_language')
-  let lang = cookieLang || navigator.language.toLowerCase()
-  if (withInternalCode) {
-    const store = getStore()
-    const languages = store?.getters?.publicSettings?.['LANGUAGES'] || []
-    for (const langObj of languages) {
-      if (langObj['other_codes'].indexOf(lang) > -1) {
-        lang = langObj['code']
-        break
-      }
-    }
-  }
-  return lang
+  return 'en'
 }
 
 export function getI18nLocale() {
-  const lang = (getLangCode() || 'en').toLowerCase()
-  return localeAliases[lang] || lang.split('-')[0]
+  return 'en'
 }

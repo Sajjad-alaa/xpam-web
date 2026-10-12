@@ -10,6 +10,7 @@ import 'echarts/lib/component/legend'
 
 import Decimal from 'decimal.js'
 import Echart from '@/components/Dashboard/Echart.vue'
+import { getCssVar } from '@/utils/theme/color'
 
 export default {
   components: { Echart },
@@ -29,6 +30,12 @@ export default {
       percentage = isNaN(percentage) ? 0 : percentage
       percentage = percentage.toFixed(2)
 
+      const textPrimary = getCssVar('--color-text-primary', '#1F2329')
+      const textSecondary = getCssVar('--color-text-secondary', '#646A73')
+      const isDark =
+        typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
+      const emptyTrack = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(43, 147, 124, 0.06)'
+
       const formatTitle = (text) => {
         if (!text) return ''
         const maxLength = 25
@@ -44,7 +51,7 @@ export default {
           {
             text: formatTitle(this.config.chartTitle),
             textStyle: {
-              color: '#646A73',
+              color: textSecondary,
               fontSize: 12,
               lineHeight: 16,
               rich: {
@@ -65,19 +72,19 @@ export default {
             text: active,
             textStyle: {
               fontSize: 24,
-              color: '#1F2329'
+              color: textPrimary
             },
             subtext: this.$t('Proportion') + ' ' + percentage + '%',
             subtextStyle: {
               fontSize: 12,
-              color: '#646A73'
+              color: textSecondary
             }
           }
         ],
         legend: {
           show: false
         },
-        color: colors || [color, 'rgba(43, 147, 124, 0.05)'],
+        color: colors || [color, emptyTrack],
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b}: {d}%'

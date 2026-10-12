@@ -21,7 +21,11 @@ export function hasCurrentResAction(route, action) {
 }
 
 export function hasLicense(store) {
-  return store.getters.hasValidLicense
+  return store.getters.hasValidLicense !== false
+}
+
+export function hasTicketLicense(store) {
+  return Boolean(store.getters.hasTicketLicense)
 }
 
 export function isRootOrg(store) {

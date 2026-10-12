@@ -40,7 +40,33 @@ export default {
     }
   },
   computed: {
+    chartItems() {
+      return [
+        {
+          value: this.counter.total_count_change_secret_automation,
+          name: this.$t('BaseAccountChangeSecret')
+        },
+        {
+          value: this.counter.total_count_push_account_automation,
+          name: this.$t('BaseAccountPush')
+        },
+        {
+          value: this.counter.total_count_gathered_account_automation,
+          name: this.$t('DiscoverAccounts')
+        },
+        {
+          value: this.counter.total_count_backup_account_automation,
+          name: this.$t('AccountBackup')
+        },
+        { value: this.counter.total_count_integration_application, name: this.$t('RelevantApp') }
+      ]
+    },
     chartOption() {
+      const items = this.chartItems
+      // When every count is 0, minAngle still gives each item a slice, drawing five fake
+      // equal segments. Hide zero-sum sectors and show a neutral placeholder ring instead.
+      const hasData = items.some((item) => Number(item.value) > 0)
+      const ringLayout = { top: '22%', radius: ['45%', '60%'] }
       return {
         tooltip: {
           trigger: 'item',
@@ -49,10 +75,13 @@ export default {
           }
         },
         legend: {
+          // ECharts 6 moved the default legend to the bottom, where it overlaps the ring
+          top: 0,
           icon: 'rect',
           itemWidth: 10,
           itemHeight: 10,
-          left: '2%'
+          left: '2%',
+          data: items.map((item) => item.name)
         },
         grid: {
           left: '3%',
@@ -64,37 +93,16 @@ export default {
           {
             name: this.$t('TaskSummary'),
             type: 'pie',
-            minAngle: 5,
-            top: '10%',
-            radius: ['45%', '60%'],
+            minAngle: hasData ? 5 : 0,
+            ...ringLayout,
+            stillShowZeroSum: false,
             label: {
               show: false
             },
             labelLine: {
               show: false
             },
-            data: [
-              {
-                value: this.counter.total_count_change_secret_automation,
-                name: this.$t('BaseAccountChangeSecret')
-              },
-              {
-                value: this.counter.total_count_push_account_automation,
-                name: this.$t('BaseAccountPush')
-              },
-              {
-                value: this.counter.total_count_gathered_account_automation,
-                name: this.$t('DiscoverAccounts')
-              },
-              {
-                value: this.counter.total_count_backup_account_automation,
-                name: this.$t('AccountBackup')
-              },
-              {
-                value: this.counter.total_count_integration_application,
-                name: this.$t('RelevantApp')
-              }
-            ],
+            data: items,
             emphasis: {
               scaleSize: 5,
               itemStyle: {
@@ -103,7 +111,22 @@ export default {
                 shadowColor: 'rgba(0, 0, 0, 0.2)'
               }
             }
-          }
+          },
+          ...(hasData
+            ? []
+            : [
+                {
+                  type: 'pie',
+                  ...ringLayout,
+                  silent: true,
+                  z: 1,
+                  tooltip: { show: false },
+                  label: { show: false },
+                  labelLine: { show: false },
+                  itemStyle: { color: '#e5e7eb' },
+                  data: [{ value: 1, name: '' }]
+                }
+              ])
         ],
         color: ['#2B937C', '#5470c6', '#91cc75', '#fac858', '#ee6666']
       }

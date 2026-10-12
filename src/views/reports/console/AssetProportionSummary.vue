@@ -45,7 +45,8 @@ export default {
 .box {
   margin-top: 16px;
   padding: 20px;
-  background: #fff;
+  background: var(--page-background-color, #ffffff);
+  border-radius: var(--jms-card-radius, 8px);
   .head {
     display: flex;
     justify-content: space-between;

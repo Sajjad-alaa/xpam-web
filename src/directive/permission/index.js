@@ -3,6 +3,7 @@ import {
   hasApiActionPerm,
   hasCurrentResAction,
   hasLicense,
+  hasTicketLicense,
   hasPerm,
   isRootOrg
 } from '@/composables/usePermission'
@@ -21,6 +22,10 @@ export function installPermissionDirective(app) {
 
   app.config.globalProperties.$hasLicense = function () {
     return hasLicense(this.$store)
+  }
+
+  app.config.globalProperties.$hasTicketLicense = function () {
+    return hasTicketLicense(this.$store)
   }
 
   app.config.globalProperties.$isRootOrg = function () {

@@ -9,7 +9,10 @@
               <el-row>
                 <el-col :md="16" :xs="24" class="content-left">
                   <Session />
-                  <Ticket v-if="$hasLicense() && $hasPerm('tickets.view_ticket')" :url="url" />
+                  <Ticket
+                    v-if="$hasTicketLicense() && $hasPerm('tickets.view_ticket')"
+                    :url="url"
+                  />
                 </el-col>
                 <el-col :md="8" :xs="24">
                   <User />

@@ -78,6 +78,7 @@ export default {
     font-size: 12px;
     text-transform: uppercase;
     line-height: 1.2;
+    color: var(--color-text-secondary, #94a3b8);
   }
 }
 

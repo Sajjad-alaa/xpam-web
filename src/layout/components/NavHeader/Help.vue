@@ -6,13 +6,14 @@
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="docs">{{ $t('Docs') }}</el-dropdown-item>
-          <el-dropdown-item command="support">{{ $t('Support') }}</el-dropdown-item>
           <el-dropdown-item command="download">{{ $t('DownloadCenter') }}</el-dropdown-item>
           <el-dropdown-item v-if="!hasLicence" command="enterprise">{{
             $t('EnterpriseEdition')
           }}</el-dropdown-item>
-          <el-dropdown-item command="about">{{ $tc('About') }}</el-dropdown-item>
+          <el-dropdown-item command="about" class="about-item">
+            <span>{{ $tc('About') }}</span>
+            <span class="version-right">{{ appVersion }}</span>
+          </el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -31,42 +32,33 @@ export default {
   },
   data() {
     return {
-      visible: false,
-      URLSite: {
-        HELP_DOCUMENT_URL: '',
-        HELP_SUPPORT_URL: ''
-      }
+      visible: false
     }
   },
   computed: {
     hasLicence() {
       return this.$store.getters.hasValidLicense
+    },
+    appVersion() {
+      const ver =
+        this.$store.getters.publicSettings?.INTERFACE?.version ||
+        this.$store.getters.publicSettings?.VERSION ||
+        'v5.0.0'
+      const clean = String(ver).replace(/-build\d+.*/i, '')
+      return this.hasLicence ? clean.replace(/-ce$/i, '') : clean
     }
   },
-  created() {
-    this.initHelpURL()
-  },
   methods: {
-    initHelpURL() {
-      this.URLSite.HELP_DOCUMENT_URL = this.$store.getters.publicSettings.HELP_DOCUMENT_URL
-      this.URLSite.HELP_SUPPORT_URL = this.$store.getters.publicSettings.HELP_SUPPORT_URL
-    },
     handleCommand(command) {
       switch (command) {
         case 'download':
           window.open(addBasePath('/core/download/'), '_blank', 'noopener,noreferrer')
-          break
-        case 'support':
-          window.open(this.URLSite.HELP_SUPPORT_URL, '_blank')
           break
         case 'enterprise':
           window.open('https://www.jumpserver.com/#section-edition', '_blank')
           break
         case 'about':
           this.visible = true
-          break
-        default:
-          window.open(this.URLSite.HELP_DOCUMENT_URL, '_blank')
           break
       }
     }
@@ -77,5 +69,16 @@ export default {
 <style scoped>
 .icon {
   color: #fff;
+}
+.about-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 140px;
+}
+.version-right {
+  font-size: 11px;
+  color: var(--el-text-color-secondary, #909399);
+  margin-left: 16px;
 }
 </style>

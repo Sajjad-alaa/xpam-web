@@ -45,7 +45,8 @@ export default {
 <style lang="scss" scoped>
 .box {
   padding: 20px;
-  background: #ffffff;
+  background: var(--page-background-color, #ffffff);
+  border-radius: var(--jms-card-radius, 8px);
 
   .content {
     display: flex;
@@ -54,7 +55,7 @@ export default {
 
     .summary-card {
       padding-left: 16px;
-      border-left: 1px solid #eff0f1;
+      border-left: 1px solid var(--panel-border-color, #eff0f1);
 
       &:first-child {
         padding-left: 0;

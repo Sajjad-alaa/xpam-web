@@ -23,10 +23,7 @@ export default {
   },
   data() {
     return {
-      fields: [
-        [this.$t('Basic'), ['SITE_URL']], // 'USER_GUIDE_URL',]
-        [this.$t('Navigation'), ['HELP_DOCUMENT_URL', 'HELP_SUPPORT_URL']]
-      ],
+      fields: [[this.$t('Basic'), ['SITE_URL']]],
       fieldsMeta: {
         SITE_URL: {
           rules: [rules.Required],

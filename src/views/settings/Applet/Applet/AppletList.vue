@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import CardTable from '@/components/Table/CardTable'
 import UploadDialog from './UploadDialog'
 
@@ -35,15 +34,6 @@ export default {
         searchConfig: {
           getUrlQuery: false
         },
-        extraActions: [
-          {
-            title: this.$t('Marketplace'),
-            icon: 'el-icon-shopping-bag-1',
-            callback: () => {
-              window.open(this.publicSettings?.REMOTE_APP_STORE_URL)
-            }
-          }
-        ],
         detailRoute: 'AppletDetail',
         hasExport: false,
         hasImport: false,
@@ -55,11 +45,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch('users/enterSettingOrg')
-  },
-  computed: {
-    ...mapGetters({
-      publicSettings: 'publicSettings'
-    })
   },
   methods: {
     handleUpload(res) {

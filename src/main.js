@@ -3,6 +3,7 @@ import ElementPlus from 'element-plus'
 import { getElementLocale } from '@/i18n/langs'
 import { getLangCode } from '@/i18n/utils'
 import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import '@fortawesome/fontawesome-free/css/v4-shims.min.css'
 // 导入 Element Plus CSS 变量配置（需要在 Element Plus 样式之后，自定义样式之前）
@@ -38,7 +39,7 @@ import DOMPurify from 'dompurify'
 import _ from 'lodash'
 import { ElMessageBox } from 'element-plus'
 
-moment.locale('zh-cn')
+moment.locale('en')
 
 // 构建时间：生产环境为 Docker 构建时刻，开发环境为 dev server 启动时刻（见 vite.config.js）
 // 用双色徽章样式打印，与其它 console 信息区分开。

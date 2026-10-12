@@ -7,7 +7,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import * as echarts from 'echarts'
-import { mix } from '@/utils/theme/color'
+import { getCssVar, mix } from '@/utils/theme/color'
 import Echart from '@/components/Dashboard/Echart.vue'
 
 export default {
@@ -75,7 +75,7 @@ export default {
           itemWidth: 10,
           itemHeight: 10,
           textStyle: {
-            color: '#000',
+            color: getCssVar('--color-text-secondary', '#94a3b8'),
             lineHeight: 10
           },
           bottom: 30,

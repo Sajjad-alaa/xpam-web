@@ -40,7 +40,7 @@
           </el-icon>
         </div>
       </template>
-      <div v-if="unreadMsgCount !== 0" class="msg-list">
+      <div v-if="(messages && messages.length > 0) || unreadMsgCount !== 0" class="msg-list">
         <div
           v-for="msg of messages"
           :key="msg.id"
@@ -52,7 +52,10 @@
         >
           <div class="msg-item__head">
             <span v-if="!msg['has_read']" class="msg-item__dot" />
-            <span class="msg-item__subject">{{ msg.content.subject }}</span>
+            <span v-if="isAlertMsg(msg)" class="msg-alert-tag" :class="alertTagClass(msg)">
+              {{ isCriticalMsg(msg) ? 'CRITICAL' : 'ALERT' }}
+            </span>
+            <span class="msg-item__subject">{{ cleanSubject(msg.content.subject) }}</span>
             <span class="msg-item__meta">
               <a
                 v-if="hoverMsgId === msg.id && !msg['has_read']"
@@ -126,7 +129,14 @@ export default {
     }
   },
   mounted() {
+    this.fetchUnreadCount()
     this.enablePullMsgCount()
+    this.pullInterval = setInterval(this.fetchUnreadCount, 30000)
+  },
+  beforeUnmount() {
+    if (this.pullInterval) {
+      clearInterval(this.pullInterval)
+    }
   },
   methods: {
     handleClose() {
@@ -155,6 +165,36 @@ export default {
         .replace(/^\s{0,3}[-*+]\s+/gm, '') // 列表符号
         .replace(/\s+/g, ' ') // 折叠空白
         .trim()
+    },
+    fetchUnreadCount() {
+      this.$axios
+        .get('/api/v1/notifications/site-messages/unread-total/')
+        .then((resp) => {
+          if (resp && resp.total !== undefined) {
+            this.unreadMsgCount = resp.total
+          }
+        })
+        .catch(() => {})
+    },
+    isAlertMsg(msg) {
+      const s = msg?.content?.subject || ''
+      return (
+        s.includes('[Alert]') ||
+        s.includes('[Critical]') ||
+        s.includes('Log Shipment') ||
+        s.includes('License')
+      )
+    },
+    isCriticalMsg(msg) {
+      const s = msg?.content?.subject || ''
+      return s.includes('[Critical]') || s.includes('Expired')
+    },
+    alertTagClass(msg) {
+      return this.isCriticalMsg(msg) ? 'tag--danger' : 'tag--warning'
+    },
+    cleanSubject(subject) {
+      if (!subject) return ''
+      return subject.replace(/^\[(Alert|Critical)\]\s*/, '')
     },
     getMessages() {
       const url = '/api/v1/notifications/site-messages/?offset=0&limit=15&has_read=false'
@@ -340,6 +380,29 @@ export default {
   height: 6px;
   border-radius: 50%;
   background: var(--color-primary);
+}
+
+.msg-alert-tag {
+  flex: 0 0 auto;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+
+  &.tag--danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+
+  &.tag--warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
 }
 
 .msg-item__subject {

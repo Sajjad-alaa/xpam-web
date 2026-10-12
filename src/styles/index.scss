@@ -79,13 +79,99 @@ div:focus {
   background-color: var(--page-background-color, #fff);
 }
 
-// Dashboard/report blocks opt into this semantic class. Restricting the border
-// to explicit panels avoids double frames around nested charts and summary cards.
-.dashboard-panel {
+.dashboard-panel,
+.el-card,
+.ibox {
   box-sizing: border-box;
-  border: 1px solid var(--panel-border-color, var(--el-border-color));
-  border-radius: var(--el-card-border-radius, 4px);
-  background-color: var(--page-background-color, #fff);
+  border: 1px solid var(--panel-border-color, var(--el-border-color)) !important;
+  border-radius: var(--jms-card-radius, 8px) !important;
+  background-color: var(--page-background-color, #fff) !important;
+  box-shadow: var(--jms-card-shadow) !important;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  color: var(--color-text-primary);
+}
+
+html.dark {
+  .white-bg {
+    background-color: var(--page-background-color, #1e293b) !important;
+  }
+
+  .box,
+  .card {
+    background-color: var(--page-background-color, #1e293b);
+    color: var(--color-text-primary, #f8fafc);
+  }
+
+  .dashboard-panel,
+  .report-card,
+  .el-card,
+  .ibox {
+    background-color: var(--page-background-color, #1e293b) !important;
+    border-color: var(--panel-border-color, #243044) !important;
+    color: var(--color-text-primary, #f8fafc) !important;
+
+    .box,
+    .card {
+      background-color: transparent !important;
+      background: transparent !important;
+    }
+
+    .title,
+    .num,
+    h3,
+    h4,
+    h5 {
+      color: var(--color-text-primary, #f8fafc) !important;
+    }
+
+    .sub,
+    .meta,
+    .add,
+    .add-num,
+    .no-data {
+      color: var(--color-text-secondary, #94a3b8) !important;
+    }
+
+    .content .el-col,
+    .card-content {
+      border-color: var(--panel-border-color, #243044) !important;
+    }
+
+    .el-table {
+      background-color: transparent !important;
+      --el-table-bg-color: transparent !important;
+      --el-table-tr-bg-color: transparent !important;
+      --el-table-header-bg-color: rgba(255, 255, 255, 0.04) !important;
+      --el-table-border-color: var(--panel-border-color, #243044) !important;
+      --el-table-text-color: var(--color-text-primary, #f8fafc) !important;
+
+      th.el-table__cell {
+        background-color: rgba(255, 255, 255, 0.04) !important;
+        color: var(--color-text-primary, #f8fafc) !important;
+        border-color: var(--panel-border-color, #243044) !important;
+      }
+
+      td.el-table__cell {
+        border-color: var(--panel-border-color, #243044) !important;
+      }
+
+      tr {
+        background-color: transparent !important;
+      }
+    }
+  }
+
+  .nav .title-bar {
+    background-color: transparent !important;
+    border-color: var(--panel-border-color, #243044) !important;
+  }
+
+  .el-tag--info:not(.el-tag--dark):not(.el-tag--plain) {
+    --el-tag-bg-color: #1e293b;
+    --el-tag-border-color: #334155;
+    --el-tag-text-color: var(--color-text-primary);
+    --el-tag-hover-color: var(--el-text-color-secondary);
+  }
 }
 
 .small,
@@ -519,9 +605,9 @@ a.el-link.el-link--info.is-hover-underline:hover:after {
 
 .el-button.el-button--small,
 .el-button--small.is-round {
-  font-size: 0.7rem;
-  font-weight: 400;
-  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: var(--jms-border-radius, 6px);
 }
 
 .el-cascader__dropdown .el-cascader-panel .el-cascader-menu {

@@ -24,8 +24,8 @@
     font-size: 0;
     z-index: 2;
     overflow: visible;
-    border-radius: 0;
-    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.06);
+    border-right: 1px solid var(--panel-border-color);
+    box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.03);
     @media print {
       display: none;
     }

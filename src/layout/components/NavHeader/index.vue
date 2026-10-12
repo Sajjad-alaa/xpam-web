@@ -91,7 +91,7 @@ export default {
     ticketsEnabled() {
       return (
         this.publicSettings['TICKETS_ENABLED'] &&
-        this.$hasLicense() &&
+        this.$hasTicketLicense() &&
         this.$hasPerm('tickets.view_ticket')
       )
     },

@@ -94,7 +94,8 @@ export default {
 .box {
   margin-top: 16px;
   padding: 20px;
-  background: #fff;
+  background: var(--page-background-color, #ffffff);
+  border-radius: var(--jms-card-radius, 8px);
 
   .head {
     display: flex;
@@ -103,14 +104,42 @@ export default {
   }
 }
 
+:deep(.el-table) {
+  background-color: transparent !important;
+  --el-table-bg-color: transparent !important;
+  --el-table-tr-bg-color: transparent !important;
+  --el-table-header-bg-color: var(--el-fill-color-light, rgba(255, 255, 255, 0.04)) !important;
+  --el-table-border-color: var(--panel-border-color, #243044) !important;
+  --el-table-text-color: var(--color-text-primary, #f8fafc) !important;
+}
+
 :deep(.el-table td),
-.el-table th {
+:deep(.el-table th) {
   padding: 5px 0;
 }
 
-:deep(.el-table th),
-.el-table tr {
-  background-color: #f5f6f7 !important;
+:deep(.el-table th.el-table__cell) {
+  background-color: var(--el-fill-color-light, rgba(255, 255, 255, 0.04)) !important;
+  color: var(--color-text-secondary, #94a3b8) !important;
+  border-bottom: 1px solid var(--panel-border-color, #243044) !important;
+}
+
+:deep(.el-table td.el-table__cell) {
+  background-color: transparent !important;
+  color: var(--color-text-primary, #f8fafc) !important;
+  border-bottom: 1px solid var(--panel-border-color, #243044) !important;
+}
+
+:deep(.el-table tr) {
+  background-color: transparent !important;
+}
+
+:deep(.el-table__empty-block) {
+  background-color: transparent !important;
+}
+
+:deep(.el-table__empty-text) {
+  color: var(--color-text-secondary, #94a3b8) !important;
 }
 
 :deep(.el-table .cell) {

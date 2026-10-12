@@ -56,8 +56,7 @@ export default {
       meta: {
         app: 'orgs',
         resource: 'organization',
-        permissions: ['orgs.view_organization'],
-        licenseRequired: true
+        permissions: ['orgs.view_organization']
       },
       children: [
         {
@@ -114,7 +113,6 @@ export default {
         permissions: ['rbac.view_orgrole | rbac.view_systemrole'],
         app: 'rbac',
         disableOrgsChange: true,
-        licenseRequired: true,
         icon: 'role'
       },
       children: [
@@ -584,8 +582,17 @@ export default {
       meta: {
         title: i18n.t('InterfaceSettings'),
         icon: 'face',
-        licenseRequired: true,
         permissions: ['settings.change_interface']
+      }
+    },
+    {
+      path: '/settings/log-shipment',
+      name: 'LogShipment',
+      component: () => import('@/views/settings/LogShipment/index.vue'),
+      meta: {
+        title: i18n.t('LogShipment') || 'Log Shipment',
+        icon: 'log',
+        permissions: ['settings.view_setting']
       }
     },
     {

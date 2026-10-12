@@ -15,10 +15,6 @@ import Basic from './Basic'
 import CAS from './CAS'
 import OIDC from './OIDC'
 import Radius from './Radius'
-import DingTalk from './DingTalk'
-import FeiShu from './FeiShu'
-import Lark from './Lark'
-import WeCom from './WeCom'
 import SSO from './SSO'
 import SAML2 from './SAML2'
 import OAuth2 from './OAuth2'
@@ -38,10 +34,6 @@ export default {
     Basic,
     CAS,
     OIDC,
-    WeCom,
-    DingTalk,
-    FeiShu,
-    Lark,
     Radius,
     SSO,
     SAML2,

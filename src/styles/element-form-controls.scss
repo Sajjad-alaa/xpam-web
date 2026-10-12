@@ -123,7 +123,7 @@
     min-height: 30px;
     height: 30px;
     box-sizing: border-box;
-    border-radius: 0;
+    border-radius: var(--jms-border-radius, 6px);
   }
 
   .el-date-editor.el-input {
@@ -151,7 +151,7 @@
     min-height: 30px;
     height: auto;
     box-sizing: border-box;
-    border-radius: 0;
+    border-radius: var(--jms-border-radius, 6px);
   }
 
   .el-select__wrapper {
@@ -243,7 +243,8 @@
     height: 30px;
     box-sizing: border-box;
     border: 1px solid var(--el-border-color);
-    background-color: #fff;
+    background-color: var(--el-bg-color, var(--page-background-color, #fff));
+    border-radius: var(--jms-border-radius, 6px);
     overflow: hidden;
 
     &:hover {
@@ -269,7 +270,7 @@
 
   .el-select,
   .el-select .el-tooltip__trigger {
-    border-radius: 0;
+    border-radius: var(--jms-border-radius, 6px);
   }
 
   .el-input__inner,
@@ -332,7 +333,7 @@
   }
 
   .el-textarea .el-textarea__inner {
-    border-radius: 0;
+    border-radius: var(--jms-border-radius, 6px);
   }
 
   .el-data-table .el-table {

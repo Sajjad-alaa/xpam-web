@@ -17,6 +17,9 @@ export function changeElementColor(themeColors) {
       const disabledColor = mix('ffffff', value.replace(/#/g, ''), 50)
       const darken = mix('000000', value.replace(/#/g, ''), 10)
       const tooLightColor = mix('ffffff', value.replace(/#/g, ''), 90)
+      const isDark =
+        typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
+      const alertLightBg = isDark ? `rgba(255, 255, 255, 0.06)` : tooLightColor
       colorsCssText =
         colorsCssText +
         `
@@ -50,7 +53,7 @@ export function changeElementColor(themeColors) {
           background-color: ${value} !important;
         }
         .el-alert.el-alert--${key}.is-light {
-          background-color: ${tooLightColor};
+          background-color: ${alertLightBg};
         }
       `
     }

@@ -25,8 +25,7 @@ export default [
           title: i18n.t('UserLoginACLs'),
           app: 'acls',
           resource: 'loginacl',
-          disableOrgsChange: true,
-          licenseRequired: true
+          disableOrgsChange: true
         },
         children: [
           {
@@ -134,7 +133,6 @@ export default [
         name: 'LoginAssetACLs',
         meta: {
           title: i18n.t('BaseAssetACLs'),
-          licenseRequired: true,
           app: 'acls',
           resource: 'loginassetacl'
         },
@@ -181,7 +179,6 @@ export default [
         name: 'DataMaskingRules',
         meta: {
           title: i18n.t('DataMasking'),
-          licenseRequired: true,
           app: 'acls',
           resource: 'datamaskingrule'
         },
@@ -228,7 +225,6 @@ export default [
         name: 'ClipboardACLs',
         meta: {
           title: i18n.t('ClipboardACLs'),
-          licenseRequired: true,
           app: 'acls',
           resource: 'clipboardacl'
         },
@@ -335,7 +331,6 @@ export default [
         name: 'ConnectMethodACL',
         meta: {
           title: i18n.t('ConnectMethodList'),
-          licenseRequired: true,
           app: 'acls',
           disableOrgsChange: true,
           resource: 'connectmethodacl'

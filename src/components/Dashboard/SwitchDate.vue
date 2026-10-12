@@ -105,9 +105,9 @@ export default {
     line-height: 1;
     color: var(--color-text-primary);
     cursor: pointer;
-    background: #fff;
+    background: var(--page-background-color, #fff);
     border: 1px solid var(--color-border);
-    border-radius: 0;
+    border-radius: var(--jms-border-radius, 4px);
     outline: none;
 
     &:first-child {

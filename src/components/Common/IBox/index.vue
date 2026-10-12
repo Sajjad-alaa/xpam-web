@@ -1,10 +1,15 @@
 <template>
   <el-card v-bind="$attrs" :class="'ibox ' + type" :shadow="shadow">
-    <template v-if="title" #header>
+    <template v-if="title || $slots.header || $slots.tools" #header>
       <slot name="header">
-        <div v-if="title" class="clearfix ibox-title">
-          <i v-if="fa" :class="'fa ' + fa" />
-          <h5>{{ $t(title) }}</h5>
+        <div class="clearfix ibox-header-inner">
+          <div v-if="title" class="ibox-title">
+            <i v-if="fa" :class="'fa ' + fa" />
+            <h5>{{ $t(title) }}</h5>
+          </div>
+          <div v-if="$slots.tools" class="ibox-tools">
+            <slot name="tools" />
+          </div>
         </div>
       </slot>
     </template>
@@ -65,6 +70,13 @@ export default {
   font-weight: normal;
 }
 
+.ibox-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .ibox-title {
   display: flex;
   align-items: center;
@@ -98,12 +110,13 @@ export default {
 }
 
 .ibox-tools {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   float: none;
   margin-top: 0;
   position: relative;
   padding: 0;
-  text-align: right;
 }
 
 .fa {

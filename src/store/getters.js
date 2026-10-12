@@ -31,7 +31,8 @@ const getters = {
   protocolMap: (state) => state.table.protocolMap,
   currentUserIsSuperAdmin: (state) => state.users.isSuperAdmin,
   currentUserIsAdmin: (state) => state.users.isAdmin,
-  hasValidLicense: (state) => state.settings.hasValidLicense,
+  hasValidLicense: (state) => state.settings.hasValidLicense !== false,
+  hasTicketLicense: (state) => Boolean(state.settings.hasTicketLicense),
   isSystemAdmin: (state) =>
     state.users.profile.system_roles.some((i) => i?.id === '00000000-0000-0000-0000-000000000001'),
   sqlQueryCounter: (state) => state.common.sqlQueryCounter,

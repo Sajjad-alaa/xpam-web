@@ -78,6 +78,7 @@ export default {
       meta: {
         title: i18n.t('TicketsAudit'),
         icon: 'job',
+        licenseRequired: true,
         permissions: ['tickets.view_ticket']
       },
       children: TicketRoutes
@@ -90,8 +91,7 @@ export default {
       meta: {
         title: i18n.t('Report'),
         icon: 'report',
-        permissions: [],
-        licenseRequired: true
+        permissions: []
       },
       children: ReportsRoutes
     }

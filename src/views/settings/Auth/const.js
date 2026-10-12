@@ -60,38 +60,7 @@ export function getAuthItems() {
       type: 'SSO',
       description: t('OAuth2Summary')
     },
-    {
-      name: 'WeCom',
-      logo: getAssetUrl('img/auth/wecom_logo.png'),
-      title: t('WeCom'),
-      authKey: 'AUTH_WECOM',
-      type: 'IdP',
-      description: t('WeComSummary')
-    },
-    {
-      name: 'DingTalk',
-      logo: getAssetUrl('img/auth/dingtalk_logo.webp'),
-      title: t('DingTalk'),
-      authKey: 'AUTH_DINGTALK',
-      type: 'IdP',
-      description: t('DingTalkSummary')
-    },
-    {
-      name: 'FeiShu',
-      logo: getAssetUrl('img/auth/feishu_logo.png'),
-      title: t('FeiShu'),
-      authKey: 'AUTH_FEISHU',
-      type: 'IdP',
-      description: t('FeiShuSummary')
-    },
-    {
-      name: 'Lark',
-      logo: getAssetUrl('img/auth/lark_logo.png'),
-      title: t('Lark'),
-      authKey: 'AUTH_LARK',
-      type: 'IdP',
-      description: t('LarkSummary')
-    },
+
     {
       name: 'Slack',
       logo: getAssetUrl('img/auth/slack_logo.png'),

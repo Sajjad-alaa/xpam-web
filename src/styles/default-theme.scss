@@ -1,31 +1,30 @@
-// 默认主题 CSS 变量定义
-// 这些变量会被注入到 :root 中
+// 现代主题 CSS 变量定义
+// 这些变量会被注入到 :root 中，支持明亮与深色模式切换
 
-// SCSS 颜色变量定义（可以被其他 SCSS 文件导入使用）
-$color-primary: #1ab394;
-$color-success: #2793d7;
-$color-info: #1c84c6;
-$color-warning: #f8ac59;
-$color-danger: #ed5565;
-$color-error: #ed5565;
-$color-link: #1c84c5;
-$color-text-primary: #292827;
-$color-text-secondary: #7c7c7c;
-$color-icon-primary: #605e5c;
-$color-border: #e9ecef;
-$color-input-border: #bbbfc4;
-$color-disabled-background: #f5f7fa;
-$color-disabled: #bbb;
-$color-help-text: #8f959e;
+$color-primary: #38bdf8;
+$color-success: #10b981;
+$color-info: #3b82f6;
+$color-warning: #f59e0b;
+$color-danger: #ef4444;
+$color-error: #ef4444;
+$color-link: #38bdf8;
+$color-text-primary: #0f172a;
+$color-text-secondary: #64748b;
+$color-icon-primary: #64748b;
+$color-border: #e2e8f0;
+$color-input-border: #cbd5e1;
+$color-disabled-background: #f1f5f9;
+$color-disabled: #94a3b8;
+$color-help-text: #64748b;
 $page-background-color: #ffffff;
-$page-content-background-color: #f3f3f4;
-$panel-border-color: var(--el-border-color-lighter, #ebeef5);
-$banner-bg: #148f76;
+$page-content-background-color: #f8fafc;
+$panel-border-color: #e2e8f0;
+$banner-bg: #090d16;
 $submenu-bg: #ffffff;
 $menu-bg: #ffffff;
-$menu-text: #292827;
-$menu-text-active: #1ab394;
-$menu-hover: #ffffff;
+$menu-text: #334155;
+$menu-text-active: #059669;
+$menu-hover: #f1f5f9;
 
 :root {
   /* 主题颜色变量 */
@@ -62,6 +61,19 @@ $menu-hover: #ffffff;
   --menu-text: #{$menu-text};
   --menu-text-active: #{$menu-text-active};
   --menu-hover: #{$menu-hover};
+  --menu-hover-bg: #{$menu-hover};
+
+  /* 现代圆角与阴影体系 */
+  --el-font-size-base: 13px;
+  --el-input-height: 32px;
+  --el-border-radius-base: 6px;
+  --el-border-radius-small: 4px;
+  --el-border-radius-round: 20px;
+  --el-card-border-radius: 8px;
+  --jms-border-radius: 6px;
+  --jms-card-radius: 8px;
+  --jms-card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  --jms-card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
 
   /* Element Plus CSS 变量覆盖 */
   --el-color-primary: #{$color-primary};
@@ -70,8 +82,65 @@ $menu-hover: #ffffff;
   --el-color-warning: #{$color-warning};
   --el-color-danger: #{$color-danger};
   --el-color-error: #{$color-error};
+}
 
-  --el-font-size-base: 13px;
-  --el-input-height: 30px;
-  --el-border-radius-base: 0;
+/* 深色模式全局样式与 CSS 变量 (Dark Theme) */
+html.dark {
+  color-scheme: dark;
+
+  /* 文本颜色 */
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-icon-primary: #94a3b8;
+
+  /* 边框和输入框 */
+  --color-border: #243044;
+  --color-input-border: #334155;
+
+  /* 禁用状态 */
+  --color-disabled-background: #1e293b;
+  --color-disabled: #64748b;
+  --color-help-text: #94a3b8;
+
+  /* 页面画布与背景 (深蓝墨灰) */
+  --page-background-color: #1e293b;
+  --page-content-background-color: #0f172a;
+  --panel-border-color: #243044;
+
+  /* 菜单与顶栏相关 */
+  --banner-bg: #090d16;
+  --submenu-bg: #0b0f19;
+  --menu-bg: #0f172a;
+  --menu-text: #cbd5e1;
+  --menu-hover: #1e293b;
+  --menu-hover-bg: #1e293b;
+
+  /* 现代卡片阴影 (深色) */
+  --jms-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.35), 0 2px 4px -2px rgba(0, 0, 0, 0.25);
+  --jms-card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.45), 0 4px 6px -4px rgba(0, 0, 0, 0.35);
+
+  /* Element Plus 深色覆盖适配 */
+  --el-bg-color: #1e293b;
+  --el-bg-color-page: #0f172a;
+  --el-bg-color-overlay: #1e293b;
+  --el-text-color-primary: #f8fafc;
+  --el-text-color-regular: #cbd5e1;
+  --el-text-color-secondary: #94a3b8;
+  --el-text-color-placeholder: #64748b;
+  --el-border-color: #334155;
+  --el-border-color-light: #243044;
+  --el-border-color-lighter: #1e293b;
+  --el-border-color-extra-light: #161f2e;
+  --el-fill-color: #1e293b;
+  --el-fill-color-light: #243044;
+  --el-fill-color-lighter: #1e293b;
+  --el-fill-color-extra-light: #161f2e;
+  --el-fill-color-blank: #1e293b;
+  --el-card-bg-color: #1e293b;
+  --el-table-tr-bg-color: #1e293b;
+  --el-table-header-bg-color: #162032;
+  --el-table-row-hover-bg-color: #243044;
+  --el-dialog-bg-color: #1e293b;
+  --el-popover-bg-color: #1e293b;
+  --el-dropdown-menuItem-hover-fill: #243044;
 }

@@ -11,7 +11,8 @@ const state = {
   sidebarLogo,
   tagsView,
   publicSettings: {},
-  hasValidLicense: false,
+  hasValidLicense: true,
+  hasTicketLicense: false,
   authMethods: {},
   themeColors: JSON.parse(localStorage.getItem('themeColors')) || {},
   vendor: ''
@@ -26,10 +27,8 @@ const mutations = {
   SET_PUBLIC_SETTINGS: (state, settings) => {
     state.publicSettings = settings
     state.themeColors = settings?.INTERFACE?.theme_info?.colors || {}
-
-    if (settings['XPACK_ENABLED']) {
-      state.hasValidLicense = settings['XPACK_LICENSE_IS_VALID']
-    }
+    state.hasValidLicense = true
+    state.hasTicketLicense = !!settings?.HAS_TICKET_LICENSE
   },
   SET_SECURITY_WATERMARK_ENABLED: (state, value) => {
     state.publicSettings['SECURITY_WATERMARK_ENABLED'] = value

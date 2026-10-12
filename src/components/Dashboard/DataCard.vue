@@ -60,11 +60,12 @@ export default {
 .card {
   width: 100%;
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--page-background-color, #ffffff);
+  border-radius: var(--jms-card-radius, 8px);
 
   .card-content {
     padding-bottom: 16px;
-    border-bottom: 1px solid #eff0f1;
+    border-bottom: 1px solid var(--panel-border-color, #eff0f1);
 
     .title,
     .num {
@@ -84,7 +85,7 @@ export default {
 
     .sub,
     .add {
-      color: var(--color-icon-primary);
+      color: var(--color-text-secondary, #646a73);
     }
 
     .sub {

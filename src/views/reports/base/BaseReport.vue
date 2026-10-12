@@ -568,20 +568,20 @@ export default {
 
 .title {
   min-height: 40px;
-  background-color: white;
+  background-color: var(--page-background-color, #ffffff);
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
   font-size: 15px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-primary, #0f172a);
   padding: 6px 16px;
   border-radius: 4px;
 
   .datetime {
     font-size: 12px;
-    color: #999;
+    color: var(--color-text-secondary, #94a3b8);
   }
 }
 
@@ -613,9 +613,9 @@ export default {
 
 .description {
   font-size: 14px;
-  color: #333;
+  color: var(--color-text-primary, #0f172a);
   padding: 16px;
-  background-color: white;
+  background-color: var(--page-background-color, #ffffff);
 }
 
 .export-btn {
@@ -656,7 +656,7 @@ export default {
 }
 
 .content {
-  background-color: var(--page-background-color, #fff);
+  background-color: var(--page-content-background-color, #f8fafc);
   height: calc(100vh - 40px);
   overflow-y: auto;
 
@@ -833,7 +833,7 @@ export default {
   :deep(.chart-container-title-text) {
     font-size: 14px;
     font-weight: 500;
-    color: #333;
+    color: var(--color-text-primary, #0f172a);
     margin-bottom: 8px;
   }
 

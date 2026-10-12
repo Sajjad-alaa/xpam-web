@@ -79,9 +79,13 @@ export default {
       }
     },
     iVersion() {
-      // 'version-dev' 是构建时 sed 替换的占位符（替换为如 v4.0.0-build01）。
-      // 展示时去掉 -build<编号> 及其后面的内容：v4.0.0-build01 -> v4.0.0
-      return 'version-dev'.replace(/-build\d+.*/i, '')
+      const ver =
+        this.publicSettings?.INTERFACE?.version || this.publicSettings?.VERSION || 'v5.0.0'
+      const clean = String(ver).replace(/-build\d+.*/i, '')
+      if (this.hasXPack) {
+        return clean.replace(/-ce$/i, '')
+      }
+      return clean
     },
     versionType() {
       return this.hasXPack ? this.$t('EnterpriseEdition') : this.$tc('CommunityEdition') + ' GPLv3'
@@ -104,24 +108,20 @@ export default {
         {
           label: 'Copyright',
           value: this.copyright,
-          has: !this.hasXPack
+          has: false
         }
       ]
     },
     visibleActions() {
       return this.actions.filter((action) => {
-        return !(action.name === 'github' && this.publicSettings.XPACK_LICENSE_IS_VALID)
+        return !(action.name === 'github' && this.publicSettings?.XPACK_LICENSE_IS_VALID)
       })
     },
     corporation() {
-      return this.publicSettings.XPACK_LICENSE_INFO.corporation
+      return this.publicSettings?.XPACK_LICENSE_INFO?.corporation || 'JumpServer PAM'
     },
     copyright() {
-      if (this.corporation?.indexOf('FIT2CLOUD 飞致云') > -1) {
-        return this.corporation
-      } else {
-        return ''
-      }
+      return ''
     },
     logoSrc() {
       const logo = this.publicSettings.INTERFACE?.logo_logout

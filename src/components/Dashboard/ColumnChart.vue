@@ -7,7 +7,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import * as echarts from 'echarts'
-import { mix } from '@/utils/theme/color'
+import { getCssVar, mix } from '@/utils/theme/color'
 import Echart from '@/components/Dashboard/Echart.vue'
 
 export default {
@@ -32,7 +32,7 @@ export default {
   computed: {
     mixColors() {
       const documentStyle = document.documentElement.style
-      const primary = documentStyle.getPropertyValue('--color-primary')
+      const primary = documentStyle.getPropertyValue('--color-primary') || '#38bdf8'
       const colorValue = primary.replace(/#/g, '')
       const TwoLevelColor = mix(colorValue, 'ffffff', 48)
       const ThreeLevelColor = mix(colorValue, 'ffffff', 6)
@@ -44,6 +44,8 @@ export default {
     },
     options() {
       const { primary, TwoLevelColor, ThreeLevelColor } = this.mixColors
+      const textSecondary = getCssVar('--color-text-secondary', '#8796AD')
+      const border = getCssVar('--color-border', '#243044')
       return {
         grid: {
           left: '2%',
@@ -62,18 +64,18 @@ export default {
             nameLocation: 'center',
             nameGap: 35,
             nameTextStyle: {
-              color: '#8796AD',
+              color: textSecondary,
               fontSize: '16'
             },
             axisLabel: {
-              color: '#8796AD',
+              color: textSecondary,
               fontSize: '14'
             },
             data: this.datesMetrics,
             axisLine: {
               lineStyle: {
-                width: 2,
-                color: '#BBBFC4'
+                width: 1,
+                color: border
               }
             },
             axisTick: {
@@ -88,11 +90,11 @@ export default {
             nameLocation: 'middle',
             nameGap: 45,
             nameTextStyle: {
-              color: '#8796AD',
+              color: textSecondary,
               fontSize: '16'
             },
             axisLabel: {
-              color: '#8796AD',
+              color: textSecondary,
               fontSize: '14'
             },
             axisTick: {
@@ -103,7 +105,7 @@ export default {
             },
             splitLine: {
               lineStyle: {
-                color: 'rgba(160,160,160,0.3)'
+                color: border
               }
             }
           }

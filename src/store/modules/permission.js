@@ -3,9 +3,11 @@ import i18n from '@/i18n/i18n'
 import _ from 'lodash'
 
 function hasLicense(route, rootState) {
-  const licenseIsValid = rootState.settings.hasValidLicense
   const licenseRequired = route.meta?.licenseRequired
-  return !(!licenseIsValid && licenseRequired)
+  if (!licenseRequired) {
+    return true
+  }
+  return Boolean(rootState.settings.hasTicketLicense)
 }
 
 function isNeedHidden(route, rootState) {

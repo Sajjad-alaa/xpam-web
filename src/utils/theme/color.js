@@ -10,7 +10,10 @@ export function generateColors(themeColors) {
   let primaryColor = themeColors
   const subColor = themeColors || defaultThemeConfig
   if (typeof themeColors === 'object') {
-    primaryColor = themeColors['--color-primary']
+    primaryColor =
+      themeColors['--color-primary'] ||
+      themeColors['primary'] ||
+      defaultThemeConfig['--color-primary']
   }
 
   for (const [key, value] of Object.entries(formula)) {
@@ -133,21 +136,101 @@ function syncElementPlusColorVars(elementStyle, colorName, currentColor) {
   elementStyle.setProperty(`${elColorKey}-dark-2`, mix(black, currentColor.replace(/#/g, ''), 20))
 }
 
-export function changeMenuColor(themeColors) {
+export function getSavedThemeMode() {
+  if (typeof window === 'undefined' || !window.localStorage) {
+    return 'auto'
+  }
+  return localStorage.getItem('lina-theme-mode') || 'auto'
+}
+
+export function isDarkMode(themeColors = {}) {
+  if (themeColors && typeof themeColors === 'object') {
+    if (themeColors.is_dark === true || themeColors.theme_mode === 'dark') {
+      return true
+    }
+    if (themeColors.is_dark === false || themeColors.theme_mode === 'light') {
+      return false
+    }
+    const bg =
+      themeColors['--page-background-color'] || themeColors['sidebarBg'] || themeColors['--menu-bg']
+    if (
+      bg &&
+      (bg === '#0f172a' ||
+        bg === '#090d16' ||
+        bg === '#0b1318' ||
+        bg === '#120e1f' ||
+        bg === '#1e293b' ||
+        bg === '#131b2e' ||
+        bg === '#111f26' ||
+        bg === '#1d1730' ||
+        bg.startsWith('#0') ||
+        bg.startsWith('#1'))
+    ) {
+      return true
+    }
+  }
+
+  const savedMode = getSavedThemeMode()
+  if (savedMode === 'dark') return true
+  if (savedMode === 'light') return false
+
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+  }
+  return false
+}
+
+export function setDarkMode(isDark) {
+  if (typeof document === 'undefined') return
+  const root = document.documentElement
+  if (isDark) {
+    root.classList.add('dark')
+  } else {
+    root.classList.remove('dark')
+  }
+}
+
+export function toggleDarkMode(currentThemeColors = {}) {
+  const currentDark =
+    typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
+  const newMode = currentDark ? 'light' : 'dark'
+  if (typeof window !== 'undefined' && window.localStorage) {
+    localStorage.setItem('lina-theme-mode', newMode)
+  }
+  setDarkMode(!currentDark)
+  changeMenuColor(currentThemeColors)
+  return !currentDark
+}
+
+export function changeMenuColor(themeColors = {}) {
   const elementStyle = document.documentElement.style
   const colors = {
     ...(Object.keys(themeColors).length > 0 ? themeColors : defaultThemeConfig)
   }
 
+  const dark = isDarkMode(colors)
+  setDarkMode(dark)
+
+  if (colors['primary'] && !colors['--color-primary']) {
+    colors['--color-primary'] = colors['primary']
+  }
+  if (colors['--color-primary'] && !colors['--menu-text-active']) {
+    colors['--menu-text-active'] = colors['--color-primary']
+  }
+  if (colors['--color-primary'] && !colors['--color-link']) {
+    colors['--color-link'] = colors['--color-primary']
+  }
+
   const white = 'ffffff'
   const black = '000000'
 
-  // 旧主题的 --menu-hover 是占位值，需要根据强调色生成浅色 hover 背景。
-  // 返回了完整菜单状态的新主题（如 deep_black）则直接使用 theme_info。
+  // Hover background generator
   const menuActiveTextColor = colors['--menu-text-active']
   const hasCompleteMenuState = colors['--menu-hover-bg'] || colors['--menu-active-bg']
   if (!hasCompleteMenuState && menuActiveTextColor) {
-    colors['--menu-hover'] = mix(white, menuActiveTextColor.replace(/#/g, ''), 90)
+    colors['--menu-hover'] = dark
+      ? 'rgba(255, 255, 255, 0.08)'
+      : mix(white, menuActiveTextColor.replace(/#/g, ''), 90)
   }
 
   const lights = [15, 40, 60, 90]
@@ -168,8 +251,8 @@ export function changeMenuColor(themeColors) {
         const color = mix(white, currentColor.replace(/#/g, ''), light)
         elementStyle.setProperty(key + '-light' + '-' + i, color)
       }
-      for (const [i, dark] of darken.entries()) {
-        const color = mix(black, currentColor.replace(/#/g, ''), dark)
+      for (const [i, darkVal] of darken.entries()) {
+        const color = mix(black, currentColor.replace(/#/g, ''), darkVal)
         elementStyle.setProperty(key + '-dark' + '-' + i, color)
       }
     }
@@ -180,5 +263,25 @@ export function changeMenuColor(themeColors) {
       elementStyle.setProperty(key + '-light', lightColor)
       elementStyle.setProperty(key + '-dark', darkColor)
     }
+  }
+
+  // Ensure element-plus surface variables align with dark/light mode
+  if (dark) {
+    elementStyle.setProperty('--el-bg-color', colors['--page-background-color'] || '#1e293b')
+    elementStyle.setProperty(
+      '--el-bg-color-page',
+      colors['--page-content-background-color'] || '#0f172a'
+    )
+    elementStyle.setProperty('--el-bg-color-overlay', '#1e293b')
+    elementStyle.setProperty('--el-card-bg-color', '#1e293b')
+    elementStyle.setProperty('--el-border-color', colors['--color-border'] || '#243044')
+    elementStyle.setProperty('--el-text-color-primary', colors['--color-text-primary'] || '#f8fafc')
+  } else {
+    elementStyle.setProperty('--el-bg-color', '#ffffff')
+    elementStyle.setProperty('--el-bg-color-page', '#f8fafc')
+    elementStyle.setProperty('--el-bg-color-overlay', '#ffffff')
+    elementStyle.setProperty('--el-card-bg-color', '#ffffff')
+    elementStyle.setProperty('--el-border-color', colors['--color-border'] || '#e2e8f0')
+    elementStyle.setProperty('--el-text-color-primary', colors['--color-text-primary'] || '#0f172a')
   }
 }

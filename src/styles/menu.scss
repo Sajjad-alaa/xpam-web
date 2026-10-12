@@ -7,17 +7,18 @@ $single-menu-height: 38px;
   position: relative;
   color: var(--menu-active-text, var(--menu-text-active));
   background: var(--menu-active-bg, var(--menu-hover));
+  border-radius: 6px;
   overflow: hidden;
 
   &::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: 6px;
     left: 0;
-    bottom: 0;
+    bottom: 6px;
     display: var(--menu-active-indicator-display, block);
     width: var(--menu-active-indicator-width, 3px);
-    border-radius: 0 2px 2px 0;
+    border-radius: 0 3px 3px 0;
     background-color: var(--menu-active-indicator, var(--menu-text-active));
   }
 }

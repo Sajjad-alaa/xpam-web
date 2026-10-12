@@ -31,10 +31,10 @@ export default {
   .title {
     font-weight: 500;
     font-size: 16px;
-    color: #1f2329;
+    color: var(--color-text-primary, #1f2329);
   }
   .icon {
-    color: #bbbfc4;
+    color: var(--color-text-secondary, #bbbfc4);
     font-size: 16px;
     cursor: pointer;
   }
@@ -43,7 +43,7 @@ export default {
     font-weight: 400;
     font-size: 10px;
     margin-left: 8px;
-    color: #8f959e;
+    color: var(--color-text-secondary, #8f959e);
   }
 }
 </style>

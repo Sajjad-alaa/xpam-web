@@ -36,24 +36,16 @@ export default {
   },
   computed: {
     supportedLangMapper() {
-      return this.supportLanguages.reduce((map, obj) => {
-        map[obj.code] = obj
-        return map
-      }, {})
+      return {
+        en: this.defaultLang
+      }
     },
     currentLang() {
-      const lang = getLangCode(true)
-      return this.supportedLangMapper[lang] || this.defaultLang
+      return this.defaultLang
     }
   },
   mounted() {
-    this.supportLanguages = store.getters.publicSettings['LANGUAGES'].map((item) => {
-      return {
-        title: item.name,
-        code: item.code,
-        cookieCode: item.code
-      }
-    })
+    this.supportLanguages = [this.defaultLang]
     this.changeMomentLang()
   },
   methods: {
@@ -63,7 +55,7 @@ export default {
       document.documentElement.lang = lang
     },
     changeLangTo(item) {
-      this.$axios.get(`/core/i18n/${item.cookieCode}/`).finally(() => {
+      this.$axios.get('/core/i18n/en/').finally(() => {
         window.location.reload()
       })
     }
