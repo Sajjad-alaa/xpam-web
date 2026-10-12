@@ -142,7 +142,7 @@ export default {
         },
         {
           key: this.$t('Corporation'),
-          value: this.licenseData?.corporation || 'JumpServer PAM'
+          value: this.licenseData?.corporation || 'XPAM'
         },
         {
           key: this.$t('Expired'),

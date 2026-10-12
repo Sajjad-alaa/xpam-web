@@ -118,7 +118,7 @@ export default {
       })
     },
     corporation() {
-      return this.publicSettings?.XPACK_LICENSE_INFO?.corporation || 'JumpServer PAM'
+      return this.publicSettings?.XPACK_LICENSE_INFO?.corporation || 'XPAM'
     },
     copyright() {
       return ''
