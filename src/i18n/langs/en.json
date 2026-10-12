@@ -2443,5 +2443,11 @@
   "VirtualAppCreate": "Create virtual app",
   "AppProviderCreate": "Create application provider",
   "AppProviderUpdate": "Update application provider",
-  "BatchPublish": "Batch publish"
+  "BatchPublish": "Batch publish",
+  "RemoteApp": "RemoteApp",
+  "RemoteAppProgram": "Program",
+  "RemoteAppProgramHelpText": "Published RemoteApp alias such as ||qgis-bin (recommended), or the full path of the program on the Windows server, e.g. C:\\Program Files\\App\\app.exe",
+  "RemoteAppWorkingDirectory": "Working directory",
+  "RemoteAppArguments": "Arguments",
+  "RemoteAppArgumentsPlaceholder": "Optional command-line arguments"
 }
