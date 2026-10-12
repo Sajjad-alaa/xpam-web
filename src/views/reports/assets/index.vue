@@ -242,7 +242,7 @@ export default {
       }
       this.component = chart.component
       this.componentKey = chart.key
-      this.url = appendQuery('/ui/#' + chart.path, chart.query || {})
+      this.url = appendQuery('/web/#' + chart.path, chart.query || {})
       reportDebugLog('assets.index.applyChart', {
         chartKey: chart.key,
         reportId: chart.reportId || '',

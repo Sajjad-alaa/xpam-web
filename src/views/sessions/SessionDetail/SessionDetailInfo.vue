@@ -69,7 +69,7 @@ export default {
           callbacks: {
             click: function () {
               // 跳转到luna页面
-              const joinUrl = '/luna/monitor/' + vm.session.id
+              const joinUrl = '/workspace/monitor/' + vm.session.id
               window.open(
                 joinUrl,
                 'height=600, width=800, top=400, left=400, toolbar=no, menubar=no, scrollbars=no, location=no, status=no'
@@ -92,7 +92,7 @@ export default {
           callbacks: {
             click: function () {
               const oid = vm.session.org_id || ''
-              const replayUrl = `/luna/replay/${vm.session.id}${oid ? `?oid=${encodeURIComponent(oid)}` : ''}`
+              const replayUrl = `/workspace/replay/${vm.session.id}${oid ? `?oid=${encodeURIComponent(oid)}` : ''}`
               window.open(replayUrl)
             }
           }

@@ -86,7 +86,7 @@ export default {
               callback: ({ row }) => {
                 const oid = this.$store.getters.currentOrg ? this.$store.getters.currentOrg.id : ''
                 const url = addBasePath(
-                  `/luna/session/${encodeURIComponent(row.id)}${oid ? `?org=${encodeURIComponent(oid)}` : ''}`
+                  `/workspace/session/${encodeURIComponent(row.id)}${oid ? `?org=${encodeURIComponent(oid)}` : ''}`
                 )
                 if (this.preference?.basic?.connect_default_open_method === 'new') {
                   openNewWindow(url)

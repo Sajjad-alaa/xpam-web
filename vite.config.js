@@ -23,7 +23,7 @@ function resolvePath(dir) {
 
 function normalizePublicPath(value) {
   if (!value) {
-    return '/ui/'
+    return '/web/'
   }
   return value.endsWith('/') ? value : `${value}/`
 }
@@ -84,7 +84,7 @@ function createCorsOptions() {
 
 export default defineConfig(({ mode }) => {
   const env = createClientEnv(mode)
-  const publicPath = normalizePublicPath(env.VITE_PUBLIC_PATH || '/ui/')
+  const publicPath = normalizePublicPath(env.VITE_PUBLIC_PATH || '/web/')
   const coreHost = env.VITE_CORE_HOST || 'http://127.0.0.1:8080'
   const kaelHost = env.VITE_KAEL_HOST || 'http://127.0.0.1:8083'
   const kokoHost = env.VITE_KOKO_HOST || 'http://127.0.0.1:5050'
@@ -145,7 +145,7 @@ export default defineConfig(({ mode }) => {
         '/koko/': createProxy(kokoHost, true),
         '/chen/': createProxy('http://127.0.0.1:9523', true),
         '/guacamole/': createProxy('http://127.0.0.1:8081', true),
-        '/luna/': createProxy('http://127.0.0.1:4200'),
+        '/workspace/': createProxy('http://127.0.0.1:4200'),
         '/facelive/': createProxy(coreHost, true),
         '/core/': createProxy(coreHost),
         '/static/': createProxy(coreHost),

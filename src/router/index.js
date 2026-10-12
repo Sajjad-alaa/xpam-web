@@ -109,7 +109,7 @@ const createRouterInstance = () =>
   createRouter({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ top: 0 }),
-    history: createWebHashHistory('/ui/'),
+    history: createWebHashHistory('/web/'),
     routes: constantRoutes
   })
 

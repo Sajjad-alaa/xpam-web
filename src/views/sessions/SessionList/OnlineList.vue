@@ -107,7 +107,7 @@ export default {
             return ''
           },
           callback: function ({ row, tableData }) {
-            const monitorUrl = '/luna/monitor/' + row.id
+            const monitorUrl = '/workspace/monitor/' + row.id
             window.open(
               monitorUrl,
               '_blank',

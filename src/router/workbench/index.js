@@ -76,7 +76,7 @@ export default {
           }
         },
         {
-          path: `${BASE_URL}/luna/files`,
+          path: `${BASE_URL}/workspace/files`,
           name: '',
           meta: {
             title: i18n.t('FileExplorer'),

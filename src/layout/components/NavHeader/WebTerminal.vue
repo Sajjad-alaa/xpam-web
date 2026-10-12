@@ -13,7 +13,7 @@ export default {
   computed: {
     webTerminalUrl() {
       const oid = this.$store.getters.currentOrg ? this.$store.getters.currentOrg.id : ''
-      let url = `${BASE_URL}/luna/?_=${Date.now()}${oid ? `&oid=${oid}` : ''}`
+      let url = `${BASE_URL}/workspace/?_=${Date.now()}${oid ? `&oid=${oid}` : ''}`
       if (!IS_PROD) {
         url = url.replace('9528', '3000')
       }

@@ -259,7 +259,7 @@ export default {
       if (!chart.component || !chart.path) {
         return
       }
-      const nextUrl = appendQuery('/ui/#' + chart.path, chart.query || {})
+      const nextUrl = appendQuery('/web/#' + chart.path, chart.query || {})
       if (
         this.component === chart.component &&
         this.componentKey === chart.key &&

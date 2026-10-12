@@ -32,13 +32,13 @@ export default [
     meta: { title: i18n.t('Commands'), permissions: [] }
   },
   {
-    path: `${BASE_URL}/luna/?_=${Date.now()}`,
+    path: `${BASE_URL}/workspace/?_=${Date.now()}`,
     name: 'WebTerminal',
     meta: { title: i18n.t('WebTerminal') }
     // hidden: true
   },
   {
-    path: `${BASE_URL}/luna/files`,
+    path: `${BASE_URL}/workspace/files`,
     name: 'FileManagement',
     meta: { title: i18n.t('FileManagement') }
   }

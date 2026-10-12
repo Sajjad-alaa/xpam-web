@@ -54,7 +54,7 @@ export default {
           can: () => true,
           getConnectUrl: (row, protocol, asset) => {
             const assetId = asset ? asset.id : row.asset.id
-            return `/luna/admin-connect/?
+            return `/workspace/admin-connect/?
               asset=${assetId}
               &account=${row.id}
               &protocol=${protocol}

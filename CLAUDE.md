@@ -32,11 +32,11 @@ yarn apply-i18n           # python apply across locales
 
 ## Dev environment / proxying
 
-`vite.config.js` proxies API/WS traffic to the backend during dev. `base` is `VITE_PUBLIC_PATH` (default `/ui/`). Key proxy prefixes → targets:
+`vite.config.js` proxies API/WS traffic to the backend during dev. `base` is `VITE_PUBLIC_PATH` (default `/web/`). Key proxy prefixes → targets:
 
 - `/api/`, `/core/`, `/static/`, `/media/` → `VITE_CORE_HOST` (the JumpServer API)
 - `/ws/` → `VITE_CORE_HOST` (websockets)
-- `/koko/` → `VITE_KOKO_HOST` (terminal service), `/luna/`, `/guacamole/`, `/facelive/`, `/chen/` → other JumpServer services
+- `/koko/` → `VITE_KOKO_HOST` (terminal service), `/workspace/`, `/guacamole/`, `/facelive/`, `/chen/` → other JumpServer services
 
 `@` is aliased to `src/`. Env vars must be prefixed `VITE_`.
 

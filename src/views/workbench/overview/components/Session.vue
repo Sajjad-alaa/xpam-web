@@ -87,7 +87,7 @@ export default {
                     const oid = this.$store.getters.currentOrg?.id
                     if (oid) params.set('org', oid)
                     const url = addBasePath(
-                      `/luna/session/${encodeURIComponent(row.asset_id)}?${params.toString()}`
+                      `/workspace/session/${encodeURIComponent(row.asset_id)}?${params.toString()}`
                     )
                     if (this.preference?.basic?.connect_default_open_method === 'new') {
                       openNewWindow(url)

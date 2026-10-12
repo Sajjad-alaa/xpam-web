@@ -164,7 +164,7 @@ export default {
         })
     },
     onMonitor() {
-      const joinUrl = `/luna/monitor/${this.session.id}?ticket_id=${this.object.id}`
+      const joinUrl = `/workspace/monitor/${this.session.id}?ticket_id=${this.object.id}`
       window.open(
         joinUrl,
         '_blank',

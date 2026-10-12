@@ -65,16 +65,16 @@
 <script>
     window.onload = function () {
         if (location.pathname === '/') {
-            location.pathname = '/ui/'
+            location.pathname = '/web/'
         }
         const pathname = window.location.pathname
         if (pathname.startsWith('/core')) {
             return
         }
-        if (pathname.indexOf('/ui') === -1) {
-            window.location.href = window.location.origin + '/ui/#' + pathname
+        if (pathname.indexOf('/web') === -1) {
+            window.location.href = window.location.origin + '/web/#' + pathname
         }
-        if (pathname.startsWith('/ui/#/chat')) {
+        if (pathname.startsWith('/web/#/chat')) {
             window.location.href = window.location.origin + pathname
         }
     }

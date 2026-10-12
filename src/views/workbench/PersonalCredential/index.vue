@@ -177,7 +177,7 @@ export default {
         return
       }
       const oid = this.currentOrgId
-      const url = `/luna/?login_to=${asset.id}${oid ? `&oid=${oid}` : ''}`
+      const url = `/workspace/?login_to=${asset.id}${oid ? `&oid=${oid}` : ''}`
       window.open(addBasePath(url), '_blank')
     }
   }

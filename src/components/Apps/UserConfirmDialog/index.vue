@@ -295,10 +295,10 @@ export default {
         .then((data) => {
           if (generation !== this.faceCaptureGeneration) return
           const token = data['token']
-          const uiIndex = window.location.pathname.indexOf('/ui/')
+          const uiIndex = window.location.pathname.indexOf('/web/')
           const sitePrefix = uiIndex > 0 ? window.location.pathname.slice(0, uiIndex) : ''
           this.faceToken = token
-          this.faceCaptureUrl = `${sitePrefix}/luna/facelive/capture?token=${encodeURIComponent(token)}`
+          this.faceCaptureUrl = `${sitePrefix}/workspace/facelive/capture?token=${encodeURIComponent(token)}`
           this.isFaceCaptureVisible = true
 
           this.faceStatusTimer = setInterval(() => {

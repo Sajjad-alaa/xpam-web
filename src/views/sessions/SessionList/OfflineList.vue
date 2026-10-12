@@ -37,7 +37,7 @@ export default {
             !(row.protocol === 'mongodb' && row.terminal.type === 'magnus'),
           callback: function ({ row, tableData }) {
             const oid = row.org_id || vm.$store.getters.currentOrg?.id || ''
-            const replayUrl = `/luna/replay/${row.id}${oid ? `?oid=${encodeURIComponent(oid)}` : ''}`
+            const replayUrl = `/workspace/replay/${row.id}${oid ? `?oid=${encodeURIComponent(oid)}` : ''}`
             window.open(addBasePath(replayUrl))
           }
         },
