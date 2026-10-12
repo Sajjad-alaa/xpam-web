@@ -57,15 +57,15 @@ const all_components = []
 const components_ce = [
   {
     title: 'Core',
-    components: ['core', 'jms_core']
+    components: ['core', 'xpam_core', 'jms_core']
   },
   {
     title: 'Web',
-    components: ['web', 'jms_web']
+    components: ['web', 'xpam_web', 'jms_web']
   },
   {
     title: 'SecureConnection',
-    components: ['koko', 'jms_koko']
+    components: ['koko', 'xpam_secureconnection', 'jms_koko']
   },
   {
     title: 'SecureConnection Desktop',
@@ -73,7 +73,7 @@ const components_ce = [
   },
   {
     title: 'WebConnector',
-    components: ['chen', 'jms_chen']
+    components: ['chen', 'xpam_webconnector', 'jms_chen']
   },
   {
     title: 'Magnus',
