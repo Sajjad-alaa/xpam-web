@@ -52,6 +52,11 @@ import { toSafeLocalDateStr } from '@/composables/useDateTime'
 import { riskActions } from './const'
 import IBox from '@/components/Common/IBox/index.vue'
 
+// These strings are rendered with v-html; comments, processor names and diffs gathered from
+// managed hosts must be escaped so they cannot inject markup.
+const HTML_ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }
+const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => HTML_ESCAPES[c])
+
 export default {
   name: 'ReviewDraw',
   components: { IBox },
@@ -172,13 +177,13 @@ export default {
     },
     handleProcess(row, detail) {
       const { action, processor, comment } = detail
-      let actionLabel = this.actionMap[action]?.label || action
+      let actionLabel = escapeHtml(this.actionMap[action]?.label || action)
       if (comment) {
-        actionLabel = `${actionLabel} (${comment})`
+        actionLabel = `${actionLabel} (${escapeHtml(comment)})`
       }
       return `
           <div>${actionLabel}</div>
-          <div class="processor"><i class="fa fa-user-o"></i> <span> ${processor}</span></div>
+          <div class="processor"><i class="fa fa-user-o"></i> <span> ${escapeHtml(processor)}</span></div>
       `
     },
     handleInit(row, detail) {
@@ -194,7 +199,7 @@ export default {
             this.$t('Diff') +
             `:
             <pre>
-              ${detail.diff}
+              ${escapeHtml(detail.diff)}
             </pre>
             `
           )

@@ -39,11 +39,13 @@ const options = {
   // 避免把页面样式过滤掉
   onTagAttr(tag, name, value, isWhiteAttr) {
     // 过滤掉标签上的事件
-    if (/^on/.test(name)) {
-      return name + '=' + '.'
+    if (/^on/i.test(name)) {
+      return ''
     }
+    // Quote and validate URLs: unquoted values allowed attribute injection, and the old
+    // lowercase-only replace let "JavaScript:" through. safeAttrValue blocks unsafe schemes.
     if (['src', 'href'].indexOf(name) !== -1) {
-      return name + '=' + value.replace('javascript:', 'java:').replace('data:', 'dt:')
+      return name + '="' + xss.safeAttrValue(tag, name, value) + '"'
     }
     return name + '="' + xss.escapeAttrValue(value) + '"'
   }
