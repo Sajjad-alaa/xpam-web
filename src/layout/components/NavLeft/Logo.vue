@@ -2,7 +2,7 @@
   <div :class="{ collapse: collapse }" class="sidebar-logo-container">
     <transition name="sidebarLogoFade">
       <a v-if="collapse" key="collapse" class="sidebar-logo-link" @click="handleClick">
-        <span v-if="isDefaultSymbol" role="img" aria-label="JumpServer">
+        <span v-if="isDefaultSymbol" role="img" aria-label="XPAM">
           <LogoSymbol class="sidebar-logo" />
         </span>
         <img v-else :src="logoSrc" alt="logo" class="sidebar-logo" />
