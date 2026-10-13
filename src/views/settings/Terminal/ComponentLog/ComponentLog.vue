@@ -60,8 +60,16 @@ const components_ce = [
     components: ['core', 'xpam_core', 'jms_core']
   },
   {
+    title: 'Gateway',
+    components: ['gateway', 'xpam_gateway']
+  },
+  {
     title: 'Web',
     components: ['web', 'xpam_web', 'jms_web']
+  },
+  {
+    title: 'Workspace',
+    components: ['workspace', 'xpam_workspace']
   },
   {
     title: 'SecureConnection',
