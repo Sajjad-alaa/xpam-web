@@ -106,7 +106,7 @@ export default {
         xrdp: 'Xrdp',
         razor: 'Razor',
         core: 'Core',
-        celery: 'Celery',
+        celery: 'Worker',
         magnus: 'Magnus',
         tinker: 'Tinker',
         chen: 'WebConnector',
