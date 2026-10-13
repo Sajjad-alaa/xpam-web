@@ -138,7 +138,7 @@ export default {
         },
         {
           key: this.$t('SerialNumber'),
-          value: this.licenseData?.serial_no || 'JMS-DEF-U2-A1-001'
+          value: this.licenseData?.serial_no || 'XPAM-DEF-TRIAL-U2-A1'
         },
         {
           key: this.$t('Corporation'),
