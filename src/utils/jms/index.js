@@ -26,7 +26,9 @@ function openTaskWindow(url, iWidth = 900, iHeight = 600) {
 export function openTaskPage(taskId, taskType, taskUrl) {
   taskType = taskType || 'celery'
   if (!taskUrl) {
-    taskUrl = `/core/ops/${taskType}/task/${taskId}/log/?type=${taskType}`
+    // The address says "worker"; the task type sent to the server is still "celery"
+    const segment = taskType === 'celery' ? 'worker' : taskType
+    taskUrl = `/core/ops/${segment}/task/${taskId}/log/?type=${taskType}`
   }
   openTaskWindow(taskUrl)
 }

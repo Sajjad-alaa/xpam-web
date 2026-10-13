@@ -6,7 +6,9 @@ import i18n from '@/i18n/i18n'
  */
 export default [
   {
-    path: '/ops/celery/task/:id/log/',
+    path: '/ops/worker/task/:id/log/',
+    // Address used before the rename
+    alias: '/ops/celery/task/:id/log/',
     component: () => import('@/views/settings/Task/CeleryTaskLog'),
     name: 'CeleryTaskLog',
     hidden: true,
