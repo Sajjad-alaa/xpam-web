@@ -11,6 +11,7 @@
 <script>
 import { GenericCreateUpdatePage } from '@/layout/components'
 import ResourceSelect from '@/components/Form/FormFields/ResourceSelect'
+import Select2 from '@/components/Form/FormFields/Select2'
 import NodeSelect from '@/components/Form/FormFields/NodeSelect'
 import AccountFormatter from './components/AccountFormatter'
 import { AllAccount } from '../const'
@@ -56,6 +57,7 @@ export default {
         [this.$t('User'), ['users', 'user_groups']],
         [this.$t('Asset'), ['assets', 'nodes']],
         [this.$t('Account'), ['accounts']],
+        [this.$t('JITAccess'), ['jit_policy']],
         [this.$t('Protocol'), ['protocols']],
         [this.$t('Action'), ['actions']],
         [this.$t('Other'), ['is_active', 'date_start', 'date_expired', 'comment']]
@@ -135,6 +137,20 @@ export default {
                 transformOption: (item) => {
                   return { label: item.label, value: item.value }
                 }
+              }
+            }
+          }
+        },
+        jit_policy: {
+          component: Select2,
+          helpText: this.$t('JITPermissionPolicyHelp'),
+          el: {
+            multiple: false,
+            clearable: true,
+            ajax: {
+              url: '/api/v1/accounts/jit-policies/?for_permission=1&is_active=true',
+              transformOption: (item) => {
+                return { label: `${item.name} (${item.mode?.label || ''})`, value: item.id }
               }
             }
           }

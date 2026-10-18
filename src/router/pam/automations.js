@@ -98,6 +98,52 @@ export default [
     ]
   },
   {
+    path: 'jit-accounts',
+    name: 'JITAccess',
+    component: empty,
+    redirect: {
+      name: 'JITAccessIndex'
+    },
+    meta: {
+      app: 'accounts',
+      name: 'JITAccess',
+      resource: 'jitpolicy',
+      icon: 'key'
+    },
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/accounts/JIT/index.vue'),
+        name: 'JITAccessIndex',
+        meta: {
+          title: i18n.t('JITAccess'),
+          menuTitle: i18n.t('JITAccess'),
+          permissions: ['accounts.view_jitpolicy']
+        }
+      },
+      {
+        path: 'create',
+        component: () => import('@/views/accounts/JIT/JITPolicyCreateUpdate.vue'),
+        name: 'JITPolicyCreate',
+        hidden: true,
+        meta: {
+          title: i18n.t('JITPolicyCreate'),
+          permissions: ['accounts.add_jitpolicy']
+        }
+      },
+      {
+        path: ':id/update',
+        component: () => import('@/views/accounts/JIT/JITPolicyCreateUpdate.vue'),
+        name: 'JITPolicyUpdate',
+        hidden: true,
+        meta: {
+          title: i18n.t('JITPolicyUpdate'),
+          permissions: ['accounts.change_jitpolicy']
+        }
+      }
+    ]
+  },
+  {
     path: 'account-push',
     name: 'AccountPush',
     component: empty,
