@@ -12,7 +12,7 @@ import Select2 from '@/components/Form/FormFields/Select2'
 import { GenericCreateUpdatePage } from '@/layout/components'
 import store from '@/store'
 import { getDaysFuture } from '@/utils/common/time'
-import AccountFormatter from '@/views/perms/AssetPermission/components/AccountFormatter'
+import RequestAccountField from './RequestAccountField.vue'
 import CcUsers from '@/views/tickets/components/CcUsers'
 import { getTicketFlowLabel } from '@/views/tickets/const'
 import { mapGetters, mapState } from 'vuex'
@@ -103,11 +103,12 @@ export default {
           }
         },
         apply_accounts: {
-          component: AccountFormatter,
+          // XPAM: servers covered by a just-in-time rule need no account choice
+          component: RequestAccountField,
           el: {
             nodes: [],
             assets: [],
-            showAddTemplate: false
+            oid: ''
           },
           hidden: (formValue) => {
             this.fieldsMeta.apply_accounts.el.assets = formValue.apply_assets
@@ -208,7 +209,7 @@ export default {
       value: item.id
     }))
 
-    const currentOrgId = this.currentOrg.id || ''
+    const currentOrgId = this.currentOrg?.id || ''
     const userAllOrgIds = this.workbenchOrgs.map((i) => i.id) || []
     if (userAllOrgIds.includes(currentOrgId)) {
       this.initial.org_id = currentOrgId

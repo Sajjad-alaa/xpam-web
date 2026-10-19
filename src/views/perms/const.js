@@ -133,7 +133,8 @@ export const AccountLabelMapper = {
   [NoneAccount]: t('None'),
   [SameAccount]: t('SameAccount'),
   [ManualAccount]: t('ManualAccount'),
-  [AnonymousAccount]: t('AnonymousAccount')
+  [AnonymousAccount]: t('AnonymousAccount'),
+  '@JIT': t('JITAccount')
 }
 
 export const virtualAccount = {

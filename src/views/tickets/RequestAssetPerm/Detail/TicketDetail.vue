@@ -29,8 +29,16 @@
           />
         </el-form-item>
         <el-form-item :label="$tc('Account')" :rules="isRequired">
+          <div v-if="jitRequested" class="jit-acc">
+            <el-tag type="success">{{ $t('JITAccount') }}</el-tag>
+            <span class="jit-acc-help">{{ $t('JITReqApproverHelp') }}</span>
+            <el-button link type="primary" size="small" @click="showOthers = !showOthers">
+              {{ showOthers ? $t('JITReqHideExisting') : $t('JITReqAddExisting') }}
+            </el-button>
+          </div>
           <AccountFormatter
-            v-model="requestForm.accounts"
+            v-if="!jitRequested || showOthers || otherAccounts.length"
+            v-model="otherAccounts"
             :assets="requestForm.assets"
             :nodes="requestForm.nodes"
             :oid="requestForm.oid"
@@ -122,6 +130,9 @@ export default {
         jit: this.object.apply_jit || 'auto'
       },
       jitPolicies: [],
+      jitRequested: (this.object.apply_accounts || []).includes('@JIT'),
+      otherAccounts: (this.object.apply_accounts || []).filter((a) => a !== '@JIT'),
+      showOthers: false,
       jitPreview: [],
       jitPreviewLimited: false,
       nodeSelect2: {
@@ -332,7 +343,7 @@ export default {
     handleApprove() {
       const nodes = this.requestForm.nodes
       const assets = this.requestForm.assets
-      const accounts = this.requestForm.accounts
+      const accounts = [...(this.jitRequested ? ['@JIT'] : []), ...(this.otherAccounts || [])]
       if (this.object.approval_step.value === this.object.process_map.length) {
         if (assets.length === 0 && nodes.length === 0) {
           this.$message.error(this.$tc('SelectAtLeastOneAssetOrNodeErrMsg'))
@@ -414,6 +425,19 @@ export default {
 
 .box {
   margin-bottom: 15px;
+}
+
+.jit-acc {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.jit-acc-help {
+  color: var(--el-text-color-secondary);
+  font-size: 12px;
 }
 
 .jit-preview {

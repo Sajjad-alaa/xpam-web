@@ -2649,5 +2649,15 @@
   "JITSlaRemind": "Remind approvers after (min)",
   "JITSlaEscalate": "Escalate to admins after (min)",
   "JITSlaExpire": "Close unanswered after (h)",
-  "JITSlaHelp": "Reminders and escalations go by e-mail and to the chat channels; a closed request is reported to the requester. 0 = off."
+  "JITSlaHelp": "Reminders and escalations go by e-mail and to the chat channels; a closed request is reported to the requester. 0 = off.",
+  "JITReqTitle": "Just-in-time account",
+  "JITReqAllCovered": "XPAM creates an account for you on these servers when you connect and removes it afterwards. Nothing to choose.",
+  "JITReqSomeCovered": "{assets}: XPAM creates an account for you when you connect and removes it afterwards.",
+  "JITReqUseExisting": "Use an existing account instead",
+  "JITReqOnlyJIT": "Your rule allows only just-in-time access on these servers.",
+  "JITReqChooseForRest": "Choose accounts for the other servers ({assets}):",
+  "JITReqBackToJIT": "Use the just-in-time account instead",
+  "JITReqApproverHelp": "created for the requester on the servers and removed afterwards",
+  "JITReqAddExisting": "Also allow existing accounts",
+  "JITReqHideExisting": "Only the just-in-time account"
 }
