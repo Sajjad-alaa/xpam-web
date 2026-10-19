@@ -47,6 +47,29 @@
         <el-form-item :label="$tc('Action')">
           <BasicTree v-model="requestForm.actions" :tree="treeNodes" style="width: 100%" />
         </el-form-item>
+        <el-form-item :label="$t('JITAccount')">
+          <el-select v-model="requestForm.jit" style="width: 50% !important">
+            <el-option :label="$t('JITAutomatic')" value="auto" />
+            <el-option :label="$t('JITNoAccount')" value="none" />
+            <el-option
+              v-for="p of jitPolicies"
+              :key="p.id"
+              :label="`${p.name} (${p.mode?.label || ''})`"
+              :value="p.id"
+            />
+          </el-select>
+          <div v-if="requestForm.jit === 'auto' && jitPreview.length" class="jit-preview">
+            <div v-for="(group, i) of jitPreviewGroups" :key="i">
+              <el-tag v-if="group.policy" size="small" type="success">{{ group.policy }}</el-tag>
+              <el-tag v-else size="small" type="info">{{ $t('JITNoAccount') }}</el-tag>
+              <span class="jit-preview-assets">{{ group.assets }}</span>
+              <span v-if="!group.policy" class="jit-preview-reason">— {{ group.reason }}</span>
+            </div>
+            <div v-if="jitPreviewLimited" class="jit-preview-reason">
+              {{ $t('JITCheckLimited') }}
+            </div>
+          </div>
+        </el-form-item>
       </el-form>
     </IBox>
   </GenericTicketDetail>
@@ -95,8 +118,12 @@ export default {
         actions: this.object.apply_actions,
         oid: this.object.org_id,
         apply_date_expired: this.object.apply_date_expired,
-        apply_date_start: this.object.apply_date_start
+        apply_date_start: this.object.apply_date_start,
+        jit: this.object.apply_jit || 'auto'
       },
+      jitPolicies: [],
+      jitPreview: [],
+      jitPreviewLimited: false,
       nodeSelect2: {
         multiple: true,
         options: (this.object.apply_nodes || []).map(toOption),
@@ -162,6 +189,10 @@ export default {
         {
           key: this.$tc('DateExpired'),
           value: object.apply_date_expired
+        },
+        {
+          key: this.$t('JITAccount'),
+          value: object.apply_jit_display
         }
       ]
     },
@@ -216,8 +247,23 @@ export default {
         {
           key: this.$tc('DateExpired'),
           value: object.apply_date_expired
+        },
+        {
+          key: this.$t('JITAccount'),
+          value: object.apply_jit_display
         }
       ]
+    },
+    jitPreviewGroups() {
+      const groups = {}
+      for (const r of this.jitPreview) {
+        const key = r.policy ? `p:${r.policy.id}` : `n:${r.reason}`
+        if (!groups[key]) {
+          groups[key] = { policy: r.policy?.name || '', reason: r.reason, assets: [] }
+        }
+        groups[key].assets.push(r.asset.name)
+      }
+      return Object.values(groups).map((g) => ({ ...g, assets: g.assets.join(', ') }))
     },
     hasActionPerm() {
       const approval_step = this.object.approval_step.value
@@ -229,7 +275,53 @@ export default {
       )
     }
   },
+  watch: {
+    'requestForm.assets'() {
+      this.loadJitPreview()
+    },
+    'requestForm.nodes'() {
+      this.loadJitPreview()
+    }
+  },
+  mounted() {
+    if (this.object.status.value !== 'closed' && this.$hasPerm('accounts.view_jitpolicy')) {
+      this.$axios
+        .get(`/api/v1/accounts/jit-policies/?is_active=true&oid=${this.object.org_id}`)
+        .then((res) => {
+          this.jitPolicies = Array.isArray(res) ? res : res.results || []
+        })
+        .catch(() => {})
+      this.loadJitPreview()
+    }
+  },
   methods: {
+    loadJitPreview() {
+      if (!this.$hasPerm('accounts.view_jitpolicy') || this.object.status.value === 'closed') return
+      const assets = this.requestForm.assets || []
+      const nodes = this.requestForm.nodes || []
+      if (!assets.length && !nodes.length) {
+        this.jitPreview = []
+        return
+      }
+      const params = new URLSearchParams({
+        ticket: this.object.id,
+        assets: assets.join(','),
+        nodes: nodes.join(','),
+        request: '1',
+        oid: this.object.org_id
+      })
+      this.$axios
+        .get(`/api/v1/accounts/jit-policies/match/?${params.toString()}`, {
+          disableFlashErrorMsg: true
+        })
+        .then((res) => {
+          this.jitPreview = res.results || []
+          this.jitPreviewLimited = !!res.limited
+        })
+        .catch(() => {
+          this.jitPreview = []
+        })
+    },
     reloadPage() {
       window.location.reload()
     },
@@ -255,7 +347,8 @@ export default {
           org_id: this.object.org_id,
           apply_actions: this.requestForm.actions,
           apply_date_start: this.requestForm.apply_date_start,
-          apply_date_expired: this.requestForm.apply_date_expired
+          apply_date_expired: this.requestForm.apply_date_expired,
+          apply_jit: this.requestForm.jit
         })
         .then(() => {
           this.$message.success(this.$tc('UpdateSuccessMsg'))
@@ -317,5 +410,20 @@ export default {
 
 .box {
   margin-bottom: 15px;
+}
+
+.jit-preview {
+  width: 100%;
+  margin-top: 6px;
+  line-height: 24px;
+}
+
+.jit-preview-assets {
+  margin-left: 6px;
+}
+
+.jit-preview-reason {
+  margin-left: 6px;
+  color: var(--el-text-color-secondary);
 }
 </style>

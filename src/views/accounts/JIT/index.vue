@@ -22,6 +22,12 @@ export default {
             component: () => import('@/views/accounts/JIT/JITPolicyList.vue')
           },
           {
+            title: this.$t('JITCheck'),
+            name: 'JITMatchCheck',
+            hidden: !this.$hasPerm('accounts.view_jitpolicy'),
+            component: () => import('@/views/accounts/JIT/JITMatchCheck.vue')
+          },
+          {
             title: this.$t('JITLiveAccounts'),
             name: 'JITLiveAccountList',
             hidden: !this.$hasPerm('accounts.view_jitaccount'),

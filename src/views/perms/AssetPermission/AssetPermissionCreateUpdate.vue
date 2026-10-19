@@ -57,7 +57,7 @@ export default {
         [this.$t('User'), ['users', 'user_groups']],
         [this.$t('Asset'), ['assets', 'nodes']],
         [this.$t('Account'), ['accounts']],
-        [this.$t('JITAccess'), ['jit_policy']],
+        [this.$t('JITAccess'), ['jit_disabled', 'jit_policy']],
         [this.$t('Protocol'), ['protocols']],
         [this.$t('Action'), ['actions']],
         [this.$t('Other'), ['is_active', 'date_start', 'date_expired', 'comment']]
@@ -141,8 +141,13 @@ export default {
             }
           }
         },
+        jit_disabled: {
+          label: this.$t('JITDisabled'),
+          helpText: this.$t('JITDisabledHelp')
+        },
         jit_policy: {
           component: Select2,
+          hidden: (form) => form.jit_disabled,
           helpText: this.$t('JITPermissionPolicyHelp'),
           el: {
             multiple: false,

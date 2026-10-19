@@ -5,6 +5,8 @@
 <script>
 import GenericCreateUpdatePage from '@/layout/components/GenericCreateUpdatePage'
 import { ResourceSelect } from '@/components/Form/FormFields'
+import { assetJSONSelectMeta } from '@/views/assets/const'
+import { userJSONSelectMeta } from '@/views/users/const'
 
 export default {
   name: 'JITPolicyCreateUpdate',
@@ -24,14 +26,17 @@ export default {
         linux_shell: '/bin/bash',
         windows_groups: 'Users,Remote Desktop Users',
         remove_home: true,
-        apply_to_requests: false,
+        scope: 'all',
+        users: { type: 'all' },
+        assets: { type: 'all' },
+        priority: 50,
         is_active: true,
         permissions: []
       },
       fields: [
-        [vm.$t('Basic'), ['name', 'is_active']],
+        [vm.$t('Basic'), ['name', 'priority', 'is_active']],
+        [vm.$t('JITRules'), ['scope', 'users', 'assets', 'permissions']],
         [vm.$t('JITLifetime'), ['mode']],
-        [vm.$t('JITAppliesTo'), ['apply_to_requests', 'permissions']],
         [vm.$t('JITAccountName'), ['username_mode', 'specific_username', 'username_prefix']],
         [vm.$t('JITRights'), ['privileged']],
         [vm.$t('JITLinux'), ['linux_shell', 'linux_groups']],
@@ -40,6 +45,39 @@ export default {
         [vm.$t('Other'), ['comment']]
       ],
       fieldsMeta: {
+        priority: {
+          helpText: vm.$t('JITPriorityHelp')
+        },
+        scope: {
+          type: 'radio-group',
+          options: [
+            { label: vm.$t('JITScopeAll'), value: 'all' },
+            { label: vm.$t('JITScopeRequests'), value: 'requests' },
+            { label: vm.$t('JITScopeLinked'), value: 'linked' }
+          ],
+          helpText: vm.$t('JITScopeHelp')
+        },
+        users: {
+          ...userJSONSelectMeta(vm),
+          label: vm.$t('JITWho'),
+          hidden: (form) => form.scope === 'linked'
+        },
+        assets: {
+          ...assetJSONSelectMeta(vm),
+          label: vm.$t('JITWhere'),
+          helpText: vm.$t('JITWhereHelp'),
+          hidden: (form) => form.scope === 'linked'
+        },
+        permissions: {
+          component: ResourceSelect,
+          label: vm.$t('JITLinkedPermissions'),
+          hidden: (form) => form.mode === 'approved_window',
+          helpText: vm.$t('JITPermissionsHelp'),
+          el: {
+            value: [],
+            url: '/api/v1/perms/asset-permissions/?fields_size=mini&from_ticket=false'
+          }
+        },
         mode: {
           type: 'radio-group',
           options: [
@@ -47,19 +85,13 @@ export default {
             { label: vm.$t('JITModeWhileGranted'), value: 'while_granted' },
             { label: vm.$t('JITModeApprovedWindow'), value: 'approved_window' }
           ],
-          helpText: vm.$t('JITModeHelp')
-        },
-        apply_to_requests: {
-          hidden: (form) => form.mode === 'approved_window',
-          helpText: vm.$t('JITApplyToRequestsHelp')
-        },
-        permissions: {
-          component: ResourceSelect,
-          hidden: (form) => form.mode === 'approved_window',
-          helpText: vm.$t('JITPermissionsHelp'),
-          el: {
-            value: [],
-            url: '/api/v1/perms/asset-permissions/?fields_size=mini&from_ticket=false'
+          helpText: vm.$t('JITModeHelp'),
+          on: {
+            change: ([value], updateForm) => {
+              if (value === 'approved_window') {
+                updateForm({ scope: 'requests' })
+              }
+            }
           }
         },
         username_mode: {
@@ -106,6 +138,7 @@ export default {
       cleanFormValue(value) {
         if (value.mode === 'approved_window') {
           value.permissions = []
+          if (value.scope === 'all') value.scope = 'requests'
         }
         if (value.username_mode !== 'specific') {
           value.specific_username = ''

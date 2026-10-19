@@ -30,6 +30,8 @@ export default {
         permissions: { app: 'accounts', resource: 'jitpolicy' },
         columns: [
           'name',
+          'priority',
+          'scope',
           'mode',
           'username_mode',
           'privileged',
@@ -43,10 +45,11 @@ export default {
           min: ['name', 'actions'],
           default: [
             'name',
+            'priority',
+            'scope',
             'mode',
             'username_mode',
             'privileged',
-            'permissions_amount',
             'live_accounts_amount',
             'is_active',
             'actions'
@@ -75,17 +78,30 @@ export default {
             width: '150px',
             formatterArgs: { showText: false, showFalse: false }
           },
-          permissions_amount: {
-            width: '200px',
+          priority: { width: '100px' },
+          scope: {
+            label: this.$t('JITAppliesTo'),
+            minWidth: '260px',
             formatter: (row) => {
-              const forRequests = row.apply_to_requests || row.mode?.value === 'approved_window'
-              if (!forRequests) return <span>{row.permissions_amount}</span>
-              return (
-                <span>
-                  {row.permissions_amount}{' '}
+              const scope = row.scope?.value
+              const linked = row.permissions_amount
+                ? ` + ${row.permissions_amount} ${this.$t('JITLinkedShort')}`
+                : ''
+              if (scope === 'linked') {
+                return <span>{`${row.permissions_amount} ${this.$t('JITLinkedShort')}`}</span>
+              }
+              const tag =
+                scope === 'requests' ? (
                   <el-tag size="small" type="success">
                     {this.$t('JITApprovedRequests')}
                   </el-tag>
+                ) : (
+                  <el-tag size="small">{this.$t('JITAllPermissions')}</el-tag>
+                )
+              return (
+                <span>
+                  {tag} {this.ruleText(row.users, 'users')} · {this.ruleText(row.assets, 'assets')}
+                  {linked}
                 </span>
               )
             }
@@ -107,9 +123,26 @@ export default {
         hasExport: false,
         hasMoreActions: false,
         searchConfig: {
-          exclude: ['mode', 'username_mode']
+          exclude: ['mode', 'username_mode', 'scope']
         }
       }
+    }
+  },
+  methods: {
+    ruleText(value, kind) {
+      const type = value?.type
+      if (type === 'all') {
+        return kind === 'users' ? this.$t('JITAllUsers') : this.$t('JITAllAssets')
+      }
+      if (type === 'ids') {
+        const n = value.ids?.length || 0
+        return `${n} ${kind === 'users' ? this.$t('Users') : this.$t('Assets')}`
+      }
+      if (type === 'attrs') {
+        const names = (value.attrs || []).map((a) => a.name).join(', ')
+        return `${kind === 'users' ? this.$t('Users') : this.$t('Assets')}: ${names}`
+      }
+      return '-'
     }
   }
 }
