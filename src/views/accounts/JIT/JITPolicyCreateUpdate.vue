@@ -5,6 +5,7 @@
 <script>
 import GenericCreateUpdatePage from '@/layout/components/GenericCreateUpdatePage'
 import { ResourceSelect } from '@/components/Form/FormFields'
+import WeekCronSelect from '@/components/Form/FormFields/WeekCronSelect.vue'
 import { assetJSONSelectMeta } from '@/views/assets/const'
 import { userJSONSelectMeta } from '@/views/users/const'
 
@@ -31,16 +32,56 @@ export default {
         assets: { type: 'all' },
         priority: 50,
         is_active: true,
-        permissions: []
+        permissions: [],
+        jit_only: false,
+        self_service: true,
+        max_hours: 8,
+        require_reason: true,
+        auto_approve: false,
+        auto_approve_max_hours: 4,
+        auto_approve_time_period: [],
+        approvals_required: 1,
+        require_mfa: false,
+        end_sessions_on_expiry: true,
+        expiry_warning_minutes: 15,
+        command_groups: [],
+        command_action: 'reject',
+        credential_type: 'password',
+        db_privilege: 'read_only'
       },
       fields: [
         [vm.$t('Basic'), ['name', 'priority', 'is_active']],
         [vm.$t('JITRules'), ['scope', 'users', 'assets', 'permissions']],
         [vm.$t('JITLifetime'), ['mode']],
+        [vm.$t('JITZeroStanding'), ['jit_only']],
+        [
+          vm.$t('JITRequestsApproval'),
+          [
+            'self_service',
+            'max_hours',
+            'require_reason',
+            'approvals_required',
+            'auto_approve',
+            'auto_approve_max_hours',
+            'auto_approve_time_period'
+          ]
+        ],
         [vm.$t('JITAccountName'), ['username_mode', 'specific_username', 'username_prefix']],
-        [vm.$t('JITRights'), ['privileged']],
+        [vm.$t('JITRights'), ['privileged', 'credential_type']],
+        [
+          vm.$t('JITSecurity'),
+          [
+            'require_mfa',
+            'end_sessions_on_expiry',
+            'expiry_warning_minutes',
+            'command_groups',
+            'command_action'
+          ]
+        ],
         [vm.$t('JITLinux'), ['linux_shell', 'linux_groups']],
         [vm.$t('JITWindows'), ['windows_groups']],
+        [vm.$t('JITDatabases'), ['db_privilege', 'db_custom_sql']],
+        [vm.$t('JITDevices'), ['device_create_commands', 'device_remove_commands']],
         [vm.$t('JITRemoval'), ['remove_home']],
         [vm.$t('Other'), ['comment']]
       ],
@@ -133,6 +174,120 @@ export default {
         },
         remove_home: {
           helpText: vm.$t('JITRemoveHomeHelp')
+        },
+        jit_only: {
+          helpText: vm.$t('JITOnlyHelp')
+        },
+        self_service: {
+          helpText: vm.$t('JITSelfServiceHelp')
+        },
+        max_hours: {
+          type: 'input-number',
+          el: { min: 1, max: 720 },
+          helpText: vm.$t('JITMaxHoursHelp')
+        },
+        require_reason: {
+          helpText: vm.$t('JITRequireReasonHelp')
+        },
+        approvals_required: {
+          type: 'radio-group',
+          options: [
+            { label: vm.$t('JITOneApprover'), value: 1 },
+            { label: vm.$t('JITTwoApprovers'), value: 2 }
+          ],
+          helpText: vm.$t('JITApprovalsHelp'),
+          on: {
+            change: ([value], updateForm) => {
+              if (value === 2) updateForm({ auto_approve: false })
+            }
+          }
+        },
+        auto_approve: {
+          hidden: (form) => form.approvals_required === 2,
+          helpText: vm.$t('JITAutoApproveHelp')
+        },
+        auto_approve_max_hours: {
+          type: 'input-number',
+          el: { min: 1, max: 720 },
+          hidden: (form) => !form.auto_approve || form.approvals_required === 2,
+          helpText: vm.$t('JITAutoApproveHoursHelp')
+        },
+        auto_approve_time_period: {
+          component: WeekCronSelect,
+          hidden: (form) => !form.auto_approve || form.approvals_required === 2,
+          helpText: vm.$t('JITAutoApproveWindowHelp')
+        },
+        credential_type: {
+          type: 'radio-group',
+          options: [
+            { label: vm.$t('Password'), value: 'password' },
+            { label: vm.$t('JITSSHKey'), value: 'ssh_key' }
+          ],
+          helpText: vm.$t('JITCredentialHelp')
+        },
+        require_mfa: {
+          helpText: vm.$t('JITRequireMFAHelp')
+        },
+        end_sessions_on_expiry: {
+          helpText: vm.$t('JITEndSessionsHelp')
+        },
+        expiry_warning_minutes: {
+          type: 'input-number',
+          el: { min: 0, max: 240 },
+          helpText: vm.$t('JITWarnHelp')
+        },
+        command_groups: {
+          component: ResourceSelect,
+          helpText: vm.$t('JITCommandGroupsHelp'),
+          el: {
+            value: [],
+            url: '/api/v1/acls/command-groups/?fields_size=mini'
+          }
+        },
+        command_action: {
+          type: 'radio-group',
+          options: [
+            { label: vm.$t('JITCommandReject'), value: 'reject' },
+            { label: vm.$t('JITCommandWarn'), value: 'warning' }
+          ],
+          hidden: (form) => !(form.command_groups || []).length
+        },
+        db_privilege: {
+          type: 'radio-group',
+          options: [
+            { label: vm.$t('JITDBReadOnly'), value: 'read_only' },
+            { label: vm.$t('JITDBReadWrite'), value: 'read_write' },
+            { label: vm.$t('JITDBAdmin'), value: 'admin' },
+            { label: vm.$t('JITDBCustom'), value: 'custom' }
+          ],
+          helpText: vm.$t('JITDBHelp')
+        },
+        db_custom_sql: {
+          el: {
+            type: 'textarea',
+            rows: 4,
+            placeholder: "GRANT SELECT ON app.* TO '{username}'@'%';"
+          },
+          hidden: (form) => form.db_privilege !== 'custom',
+          helpText: vm.$t('JITDBCustomHelp')
+        },
+        device_create_commands: {
+          el: {
+            type: 'textarea',
+            rows: 5,
+            placeholder:
+              'enable\n{login_password}\nconfigure terminal\nusername {username} privilege 15 secret {password}\nend\nwrite memory'
+          },
+          helpText: vm.$t('JITDeviceCreateHelp')
+        },
+        device_remove_commands: {
+          el: {
+            type: 'textarea',
+            rows: 4,
+            placeholder:
+              'enable\n{login_password}\nconfigure terminal\nno username {username}\nend\nwrite memory'
+          },
+          helpText: vm.$t('JITDeviceRemoveHelp')
         }
       },
       cleanFormValue(value) {
@@ -142,6 +297,15 @@ export default {
         }
         if (value.username_mode !== 'specific') {
           value.specific_username = ''
+        }
+        if (value.approvals_required === 2) {
+          value.auto_approve = false
+        }
+        if (
+          Array.isArray(value.auto_approve_time_period) &&
+          value.auto_approve_time_period.every((item) => item.value === '')
+        ) {
+          value.auto_approve_time_period = []
         }
         return value
       },

@@ -13,8 +13,14 @@ export default {
   data() {
     return {
       config: {
-        activeMenu: 'JITPolicyList',
+        activeMenu: this.$hasPerm('accounts.view_jitaccount') ? 'JITDashboard' : 'JITPolicyList',
         submenu: [
+          {
+            title: this.$t('ZSPOverview'),
+            name: 'JITDashboard',
+            hidden: !this.$hasPerm('accounts.view_jitaccount'),
+            component: () => import('@/views/accounts/JIT/JITDashboard.vue')
+          },
           {
             title: this.$t('JITPolicies'),
             name: 'JITPolicyList',

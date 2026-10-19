@@ -33,6 +33,7 @@ export default {
           'priority',
           'scope',
           'mode',
+          'features',
           'username_mode',
           'privileged',
           'permissions_amount',
@@ -48,6 +49,7 @@ export default {
             'priority',
             'scope',
             'mode',
+            'features',
             'username_mode',
             'privileged',
             'live_accounts_amount',
@@ -79,6 +81,37 @@ export default {
             formatterArgs: { showText: false, showFalse: false }
           },
           priority: { width: '100px' },
+          features: {
+            label: this.$t('JITFeatures'),
+            minWidth: '240px',
+            formatter: (row) => {
+              const tags = []
+              if (row.jit_only) tags.push(['danger', this.$t('JITOnlyShort')])
+              if (row.auto_approve) {
+                tags.push(['success', this.$t('JITAutoShort', { h: row.auto_approve_max_hours })])
+              }
+              if (row.approvals_required > 1) {
+                tags.push(['warning', this.$t('JITTwoApproversShort')])
+              }
+              if (row.require_mfa) tags.push(['warning', 'MFA'])
+              if (row.credential_type?.value === 'ssh_key') {
+                tags.push(['info', this.$t('JITSSHKey')])
+              }
+              if ((row.command_groups || []).length) {
+                tags.push(['info', this.$t('JITCommandsShort')])
+              }
+              if (row.self_service) tags.push(['', this.$t('JITSelfServiceShort')])
+              return (
+                <span>
+                  {tags.map(([type, text]) => (
+                    <el-tag size="small" type={type} style="margin: 0 4px 2px 0">
+                      {text}
+                    </el-tag>
+                  ))}
+                </span>
+              )
+            }
+          },
           scope: {
             label: this.$t('JITAppliesTo'),
             minWidth: '260px',

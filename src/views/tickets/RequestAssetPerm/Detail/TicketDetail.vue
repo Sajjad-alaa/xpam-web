@@ -192,7 +192,9 @@ export default {
         },
         {
           key: this.$t('JITAccount'),
-          value: object.apply_jit_display
+          value: object.apply_jit_auto
+            ? `${object.apply_jit_display} · ${this.$t('JITApprovedAutomaticallyBy', { policy: object.apply_jit_auto })}`
+            : object.apply_jit_display
         }
       ]
     },
@@ -250,7 +252,9 @@ export default {
         },
         {
           key: this.$t('JITAccount'),
-          value: object.apply_jit_display
+          value: object.apply_jit_auto
+            ? `${object.apply_jit_display} · ${this.$t('JITApprovedAutomaticallyBy', { policy: object.apply_jit_auto })}`
+            : object.apply_jit_display
         }
       ]
     },
