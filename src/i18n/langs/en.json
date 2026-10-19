@@ -2624,8 +2624,8 @@
   "JITTplBlankSub": "Choose everything yourself",
   "JITTest": "Test",
   "JITTestRule": "Which rule applies?",
-  "JITChannelsButton": "Approval channels",
-  "JITChannelsTitle": "Approval requests in Teams, Slack and Telegram",
+  "JITChannelsButton": "Approval settings",
+  "JITChannelsTitle": "Approval settings",
   "JITChannelsIntro": "Approvers always get an e-mail with an \"Approve\" link. You can also send each request to a team channel; the button opens the approval page at {url} (set it in Settings → Basic if it is wrong). In a channel, the approver signs in and must be an approver of the request.",
   "JITChannelsKeep": "Saved — leave empty to keep, \"-\" to remove",
   "JITChannelsTeamsHelp": "Teams channel → Workflows → \"Post to a channel when a webhook request is received\" → copy the URL.",
@@ -2639,5 +2639,15 @@
   "JITChannelsDirectHelp": "Only for personal e-mail links (each link belongs to one approver). Chat links always need a sign-in. Leave off for the highest security.",
   "JITChannelsSent": "sent",
   "JITChannelsTest": "Send test message",
-  "JITWizBroadWarning": "This rule covers all users or all assets. With \"just-in-time account only\", everyone it covers loses the shared accounts on these assets and gets only time-boxed access. Check that this is what you want."
+  "JITWizBroadWarning": "This rule covers all users or all assets. With \"just-in-time account only\", everyone it covers loses the shared accounts on these assets and gets only time-boxed access. Check that this is what you want.",
+  "JITWizWhoApproves": "Who approves?",
+  "JITWizApproverFlow": "The approvers of the approval flow (Tickets → Flow setup)",
+  "JITWizApproverPeople": "These people",
+  "JITApprovers": "Approvers",
+  "JITApproversHelp": "Who approves requests for the assets of this rule (for example the database team). Leave \"Specific users\" empty to use the approval flow of Tickets → Flow setup. When a request covers assets of several rules, each rule's approvers approve their part in turn. Nobody approves their own request.",
+  "JITSlaTitle": "Waiting requests",
+  "JITSlaRemind": "Remind approvers after (min)",
+  "JITSlaEscalate": "Escalate to admins after (min)",
+  "JITSlaExpire": "Close unanswered after (h)",
+  "JITSlaHelp": "Reminders and escalations go by e-mail and to the chat channels; a closed request is reported to the requester. 0 = off."
 }

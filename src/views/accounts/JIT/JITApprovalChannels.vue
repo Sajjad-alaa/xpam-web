@@ -53,6 +53,19 @@
           </div>
           <div class="ch-help">{{ $t('JITChannelsTelegramHelp') }}</div>
         </el-form-item>
+        <el-divider content-position="left">{{ $t('JITSlaTitle') }}</el-divider>
+        <div class="ch-sla">
+          <el-form-item :label="$t('JITSlaRemind')">
+            <el-input-number v-model="form.remind_minutes" :min="0" :max="1440" />
+          </el-form-item>
+          <el-form-item :label="$t('JITSlaEscalate')">
+            <el-input-number v-model="form.escalate_minutes" :min="0" :max="10080" />
+          </el-form-item>
+          <el-form-item :label="$t('JITSlaExpire')">
+            <el-input-number v-model="form.expire_hours" :min="0" :max="720" />
+          </el-form-item>
+        </div>
+        <div class="ch-help ch-sla-help">{{ $t('JITSlaHelp') }}</div>
         <el-form-item :label="$t('JITChannelsLinkHours')">
           <el-input-number v-model="form.link_hours" :min="1" :max="168" />
           <div class="ch-help">{{ $t('JITChannelsLinkHoursHelp') }}</div>
@@ -108,6 +121,9 @@ export default {
         telegram_token: '',
         telegram_chat: '',
         link_hours: 24,
+        remind_minutes: 30,
+        escalate_minutes: 120,
+        expire_hours: 24,
         direct_approve: false
       }
     },
@@ -122,6 +138,9 @@ export default {
             ...this.emptyForm(),
             telegram_chat: res.telegram_chat,
             link_hours: res.link_hours,
+            remind_minutes: res.remind_minutes,
+            escalate_minutes: res.escalate_minutes,
+            expire_hours: res.expire_hours,
             direct_approve: res.direct_approve
           }
         })
@@ -177,6 +196,16 @@ export default {
 
 .ch-chat {
   width: 200px;
+}
+
+.ch-sla {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.ch-sla-help {
+  margin: -8px 0 16px;
 }
 
 .ch-test {

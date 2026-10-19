@@ -70,6 +70,20 @@
           <div class="wiz-card-sub">{{ o.sub }}</div>
         </div>
       </div>
+      <div v-if="approval !== 'instant'" class="wiz-approvers">
+        <p class="wiz-q">{{ $t('JITWizWhoApproves') }}</p>
+        <el-radio-group v-model="approverMode">
+          <el-radio value="flow">{{ $t('JITWizApproverFlow') }}</el-radio>
+          <el-radio value="people">{{ $t('JITWizApproverPeople') }}</el-radio>
+        </el-radio-group>
+        <JSONManyToManySelect
+          v-if="approverMode === 'people'"
+          v-bind="approverMeta.el"
+          :value="form.approvers"
+          class="wiz-approver-select"
+          @input="(v) => (form.approvers = v)"
+        />
+      </div>
       <div class="wiz-switches">
         <el-switch v-model="form.privileged" :active-text="$t('JITWizAdminRights')" />
         <el-switch v-model="form.require_mfa" :active-text="$t('JITWizMFA')" />
@@ -134,6 +148,8 @@ export default {
       template: 'dev',
       approval: 'instant',
       userMeta: userJSONSelectMeta(vm),
+      approverMeta: userJSONSelectMeta(vm),
+      approverMode: 'flow',
       assetMeta: assetJSONSelectMeta(vm),
       form: {
         name: '',
@@ -141,7 +157,8 @@ export default {
         assets: { type: 'ids', ids: [] },
         privileged: false,
         require_mfa: false,
-        max_hours: 2
+        max_hours: 2,
+        approvers: { type: 'ids', ids: [] }
       },
       templates: [
         {
@@ -199,6 +216,9 @@ export default {
     canNext() {
       if (this.step === 1) return this.chosen(this.form.users)
       if (this.step === 2) return this.chosen(this.form.assets)
+      if (this.step === 3 && this.approval !== 'instant' && this.approverMode === 'people') {
+        return this.chosen(this.form.approvers)
+      }
       return true
     },
     broad() {
@@ -230,13 +250,15 @@ export default {
       this.step = 0
       this.template = 'dev'
       this.approval = 'instant'
+      this.approverMode = 'flow'
       this.form = {
         name: '',
         users: { type: 'ids', ids: [] },
         assets: { type: 'ids', ids: [] },
         privileged: false,
         require_mfa: false,
-        max_hours: 2
+        max_hours: 2,
+        approvers: { type: 'ids', ids: [] }
       }
     },
     pick(t) {
@@ -254,7 +276,11 @@ export default {
         scope: 'all',
         users: this.form.users,
         assets: this.form.assets,
-        priority: 50,
+        // specific users and servers win over broad rules
+        priority:
+          20 +
+          (this.form.users?.type === 'all' ? 20 : 0) +
+          (this.form.assets?.type === 'all' ? 20 : 0),
         mode: 'per_session',
         username_mode: 'same_as_user',
         username_prefix: 'xpam-',
@@ -267,6 +293,8 @@ export default {
         auto_approve: auto,
         auto_approve_max_hours: this.form.max_hours,
         approvals_required: this.approval === 'two' ? 2 : 1,
+        approvers:
+          this.approval !== 'instant' && this.approverMode === 'people' ? this.form.approvers : {},
         end_sessions_on_expiry: true,
         expiry_warning_minutes: 15,
         is_active: true
@@ -356,6 +384,14 @@ export default {
   display: flex;
   gap: 24px;
   margin-top: 18px;
+}
+
+.wiz-approvers {
+  margin-top: 16px;
+}
+
+.wiz-approver-select {
+  margin-top: 8px;
 }
 
 .wiz-custom {

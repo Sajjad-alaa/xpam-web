@@ -30,6 +30,7 @@ export default {
         scope: 'all',
         users: { type: 'ids', ids: [] },
         assets: { type: 'ids', ids: [] },
+        approvers: { type: 'ids', ids: [] },
         priority: 50,
         is_active: true,
         permissions: [],
@@ -59,6 +60,7 @@ export default {
             'max_hours',
             'require_reason',
             'approvals_required',
+            'approvers',
             'auto_approve',
             'auto_approve_max_hours',
             'auto_approve_time_period'
@@ -201,6 +203,11 @@ export default {
               if (value === 2) updateForm({ auto_approve: false })
             }
           }
+        },
+        approvers: {
+          ...userJSONSelectMeta(vm),
+          label: vm.$t('JITApprovers'),
+          helpText: vm.$t('JITApproversHelp')
         },
         auto_approve: {
           hidden: (form) => form.approvals_required === 2,
