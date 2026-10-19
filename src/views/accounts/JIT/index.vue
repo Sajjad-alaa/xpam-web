@@ -28,22 +28,10 @@ export default {
             component: () => import('@/views/accounts/JIT/JITPolicyList.vue')
           },
           {
-            title: this.$t('JITCheck'),
-            name: 'JITMatchCheck',
-            hidden: !this.$hasPerm('accounts.view_jitpolicy'),
-            component: () => import('@/views/accounts/JIT/JITMatchCheck.vue')
-          },
-          {
-            title: this.$t('JITLiveAccounts'),
-            name: 'JITLiveAccountList',
+            title: this.$t('JITAccountsTab'),
+            name: 'JITAccounts',
             hidden: !this.$hasPerm('accounts.view_jitaccount'),
-            component: () => import('@/views/accounts/JIT/JITLiveAccountList.vue')
-          },
-          {
-            title: this.$t('JITHistory'),
-            name: 'JITHistoryAccountList',
-            hidden: !this.$hasPerm('accounts.view_jitaccount'),
-            component: () => import('@/views/accounts/JIT/JITHistoryAccountList.vue')
+            component: () => import('@/views/accounts/JIT/JITAccounts.vue')
           }
         ]
       }

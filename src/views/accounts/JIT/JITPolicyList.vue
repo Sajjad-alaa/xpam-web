@@ -10,20 +10,40 @@
       :resource="$t('JITPolicy')"
       :table-config="tableConfig"
     />
+    <JITRuleWizard v-model:visible="wizardVisible" @created="reload" @advanced="openAdvanced" />
+    <JITApprovalChannels v-model:visible="channelsVisible" />
+    <el-dialog
+      v-model="testVisible"
+      :title="$t('JITTestRule')"
+      width="880px"
+      append-to-body
+      destroy-on-close
+    >
+      <JITMatchCheck />
+    </el-dialog>
   </div>
 </template>
 
 <script lang="jsx">
 import { ActionsFormatter } from '@/components/Table/TableFormatters'
 import { GenericListTable } from '@/layout/components'
+import JITApprovalChannels from './JITApprovalChannels.vue'
+import JITMatchCheck from './JITMatchCheck.vue'
+import JITRuleWizard from './JITRuleWizard.vue'
 
 export default {
   name: 'JITPolicyList',
   components: {
-    GenericListTable
+    GenericListTable,
+    JITApprovalChannels,
+    JITMatchCheck,
+    JITRuleWizard
   },
   data() {
     return {
+      wizardVisible: false,
+      channelsVisible: false,
+      testVisible: false,
       createDrawer: () => import('@/views/accounts/JIT/JITPolicyCreateUpdate.vue'),
       tableConfig: {
         url: '/api/v1/accounts/jit-policies/',
@@ -145,7 +165,18 @@ export default {
             formatterArgs: {
               hasUpdate: true,
               hasDelete: true,
-              hasClone: false
+              hasClone: false,
+              extraActions: [
+                {
+                  name: 'TestRule',
+                  title: this.$t('JITTest'),
+                  type: 'primary',
+                  can: () => true,
+                  callback: () => {
+                    this.testVisible = true
+                  }
+                }
+              ]
             }
           }
         }
@@ -155,6 +186,21 @@ export default {
         hasImport: false,
         hasExport: false,
         hasMoreActions: false,
+        onCreate: () => {
+          this.wizardVisible = true
+        },
+        extraActions: [
+          {
+            name: 'ApprovalChannels',
+            title: this.$t('JITChannelsButton'),
+            type: 'default',
+            has: () => this.$hasPerm('accounts.view_jitpolicy'),
+            can: true,
+            callback: () => {
+              this.channelsVisible = true
+            }
+          }
+        ],
         searchConfig: {
           exclude: ['mode', 'username_mode', 'scope']
         }
@@ -162,6 +208,12 @@ export default {
     }
   },
   methods: {
+    reload() {
+      this.$refs.listTable?.reloadTable?.()
+    },
+    openAdvanced() {
+      this.$refs.listTable?.onCreate?.({})
+    },
     ruleText(value, kind) {
       const type = value?.type
       if (type === 'all') {

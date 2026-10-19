@@ -28,12 +28,12 @@ export default {
         windows_groups: 'Users,Remote Desktop Users',
         remove_home: true,
         scope: 'all',
-        users: { type: 'all' },
-        assets: { type: 'all' },
+        users: { type: 'ids', ids: [] },
+        assets: { type: 'ids', ids: [] },
         priority: 50,
         is_active: true,
         permissions: [],
-        jit_only: false,
+        jit_only: true,
         self_service: true,
         max_hours: 8,
         require_reason: true,
@@ -52,8 +52,6 @@ export default {
       fields: [
         [vm.$t('Basic'), ['name', 'priority', 'is_active']],
         [vm.$t('JITRules'), ['scope', 'users', 'assets', 'permissions']],
-        [vm.$t('JITLifetime'), ['mode']],
-        [vm.$t('JITZeroStanding'), ['jit_only']],
         [
           vm.$t('JITRequestsApproval'),
           [
@@ -66,7 +64,6 @@ export default {
             'auto_approve_time_period'
           ]
         ],
-        [vm.$t('JITAccountName'), ['username_mode', 'specific_username', 'username_prefix']],
         [vm.$t('JITRights'), ['privileged', 'credential_type']],
         [
           vm.$t('JITSecurity'),
@@ -78,6 +75,9 @@ export default {
             'command_action'
           ]
         ],
+        [vm.$t('JITLifetime'), ['mode']],
+        [vm.$t('JITZeroStanding'), ['jit_only']],
+        [vm.$t('JITAccountName'), ['username_mode', 'specific_username', 'username_prefix']],
         [vm.$t('JITLinux'), ['linux_shell', 'linux_groups']],
         [vm.$t('JITWindows'), ['windows_groups']],
         [vm.$t('JITDatabases'), ['db_privilege', 'db_custom_sql']],
