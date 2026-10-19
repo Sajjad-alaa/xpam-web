@@ -24,13 +24,14 @@ export default {
         linux_shell: '/bin/bash',
         windows_groups: 'Users,Remote Desktop Users',
         remove_home: true,
+        apply_to_requests: false,
         is_active: true,
         permissions: []
       },
       fields: [
         [vm.$t('Basic'), ['name', 'is_active']],
         [vm.$t('JITLifetime'), ['mode']],
-        [vm.$t('JITAppliesTo'), ['permissions']],
+        [vm.$t('JITAppliesTo'), ['apply_to_requests', 'permissions']],
         [vm.$t('JITAccountName'), ['username_mode', 'specific_username', 'username_prefix']],
         [vm.$t('JITRights'), ['privileged']],
         [vm.$t('JITLinux'), ['linux_shell', 'linux_groups']],
@@ -47,6 +48,10 @@ export default {
             { label: vm.$t('JITModeApprovedWindow'), value: 'approved_window' }
           ],
           helpText: vm.$t('JITModeHelp')
+        },
+        apply_to_requests: {
+          hidden: (form) => form.mode === 'approved_window',
+          helpText: vm.$t('JITApplyToRequestsHelp')
         },
         permissions: {
           component: ResourceSelect,

@@ -76,14 +76,19 @@ export default {
             formatterArgs: { showText: false, showFalse: false }
           },
           permissions_amount: {
-            width: '120px',
-            formatter: (row) => (
-              <span>
-                {row.mode?.value === 'approved_window'
-                  ? this.$t('JITApprovedRequests')
-                  : row.permissions_amount}
-              </span>
-            )
+            width: '200px',
+            formatter: (row) => {
+              const forRequests = row.apply_to_requests || row.mode?.value === 'approved_window'
+              if (!forRequests) return <span>{row.permissions_amount}</span>
+              return (
+                <span>
+                  {row.permissions_amount}{' '}
+                  <el-tag size="small" type="success">
+                    {this.$t('JITApprovedRequests')}
+                  </el-tag>
+                </span>
+              )
+            }
           },
           live_accounts_amount: { width: '130px' },
           actions: {

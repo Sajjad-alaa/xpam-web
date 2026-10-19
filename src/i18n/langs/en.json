@@ -2485,5 +2485,6 @@
   "JITRemoveConfirm": "Remove the account {name} from {asset} now? Open sessions of this account are ended.",
   "JITRemoving": "The account is being removed",
   "JITPermissionPolicyHelp": "Users of this permission can connect with an account that XPAM creates on the asset for them and removes again, as set by the policy.",
-  "JITPolicy": "Just-in-time policy"
+  "JITPolicy": "Just-in-time policy",
+  "JITApplyToRequestsHelp": "Turn on to make this policy apply by itself to every approved access request: the permission created on approval uses it, so the user can connect with a just-in-time account right away. Requests approved earlier and still valid get it too. One policy per organization."
 }
