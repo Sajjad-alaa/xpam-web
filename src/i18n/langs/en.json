@@ -2673,5 +2673,20 @@
   "WebVerifyCertHelp": "Remote browser refuses the site when its certificate is not trusted, so the stored account is never sent to an impostor. Turn off only for internal sites with a self-signed certificate.",
   "JITReadyCount": "{ready} of {total} chosen assets can get just-in-time accounts",
   "WebSignInOptional": "Sign-in (optional: found automatically)",
-  "DeviceAccountsHelp": "Add the device's admin account and turn on \"Privileged\": XPAM uses it to create, change and remove accounts on the device (account push, discovery, just-in-time accounts). Its password is also used as the enable/super password unless the platform says otherwise."
+  "DeviceAccountsHelp": "Add the device's admin account and turn on \"Privileged\": XPAM uses it to create, change and remove accounts on the device (account push, discovery, just-in-time accounts). Its password is also used as the enable/super password unless the platform says otherwise.",
+  "AssetBulkAdd": "Add many",
+  "AssetBulkAddLines": "Addresses (one asset per line)",
+  "AssetBulkAddLinesHelp": "10.0.0.5\ncore-sw-01 10.0.0.1\nfw-01, 192.168.1.1\n(name and address, or just the address)",
+  "AssetBulkAddCount": "{n} asset(s)",
+  "AssetBulkAddAccount": "Account for all of them (optional)",
+  "AssetBulkAddAccountHelp": "Turn on \"Privileged\" for the admin/root account: account push, password changes, discovery and just-in-time accounts sign in with it.",
+  "AssetBulkAddButton": "Add {n} asset(s)",
+  "AssetBulkAddResult": "{created} added, {failed} failed",
+  "AssetAttention": "Needs attention",
+  "AssetAttentionNone": "All {n} assets look fine.",
+  "AssetAttentionMore": "and {n} more",
+  "DeviceDetectPlatform": "Detect platform",
+  "DeviceDetecting": "Signing in to the devices…",
+  "DeviceDetectChanged": "Platform corrected",
+  "DeviceDetectSame": "Platform was already right"
 }

@@ -38,6 +38,17 @@
       v-model:visible="discoveryDialog.visible"
       :asset="discoveryDialog.asset"
     />
+    <AssetBulkAddDialog
+      v-model:visible="showBulkAdd"
+      :category="category"
+      @done="$refs.ListTable.reloadTable()"
+    />
+    <AssetAttentionDialog v-model:visible="showAttention" />
+    <DeviceDetectDialog
+      v-model:visible="detectDialog.visible"
+      :assets="detectDialog.assets"
+      @done="$refs.ListTable.reloadTable()"
+    />
     <AccountCreateUpdate
       v-if="showAddDialog"
       v-model:visible="showAddDialog"
@@ -53,6 +64,9 @@ import AssetBulkUpdateDialog from './AssetBulkUpdateDialog'
 import PlatformDialog from '../components/PlatformDialog'
 import GatewayDialog from '@/components/Apps/GatewayTestDialog'
 import AccountDiscoverDialog from './AccountDiscoverDialog.vue'
+import AssetBulkAddDialog from './AssetBulkAddDialog.vue'
+import AssetAttentionDialog from './AssetAttentionDialog.vue'
+import DeviceDetectDialog from './DeviceDetectDialog.vue'
 import AccountCreateUpdate from '@/components/Apps/AccountListTable/AccountCreateUpdate.vue'
 import { getDefaultConfig } from './const'
 import { getSelectedAssetNodeId } from '@/utils/common/index'
@@ -69,7 +83,10 @@ export default {
     PlatformDialog,
     AccountCreateUpdate,
     AccountDiscoverDialog,
-    AssetBulkUpdateDialog
+    AssetBulkUpdateDialog,
+    AssetBulkAddDialog,
+    AssetAttentionDialog,
+    DeviceDetectDialog
   },
   props: {
     url: {
@@ -162,6 +179,9 @@ export default {
       createProps: {},
       showPlatform: false,
       showAddDialog: false,
+      showBulkAdd: false,
+      showAttention: false,
+      detectDialog: { visible: false, assets: [] },
       recentPlatforms: recentPlatforms,
       createAction: createAction,
       gatewayPort: 0,
@@ -204,7 +224,41 @@ export default {
         return item
       })
       const extraActions = actions.extraActions || []
-      actions.extraActions = [create, ...extraActions]
+      // XPAM: many assets at once, and the assets that need attention
+      const bulkAdd = {
+        name: 'bulkAdd',
+        title: this.$t('AssetBulkAdd'),
+        has: this.headerActions.hasCreate !== false,
+        can: !this.$store.getters.currentOrgIsRoot && this.$hasPerm('assets.add_asset'),
+        callback: () => {
+          this.showBulkAdd = true
+        }
+      }
+      const attention = {
+        name: 'attention',
+        title: this.$t('AssetAttention'),
+        can: !this.$store.getters.currentOrgIsRoot,
+        callback: () => {
+          this.showAttention = true
+        }
+      }
+      actions.extraActions = [create, bulkAdd, attention, ...extraActions]
+      if (this.category === 'device') {
+        actions.extraMoreActions = [
+          ...(actions.extraMoreActions || []),
+          {
+            name: 'DetectPlatform',
+            title: this.$t('DeviceDetectPlatform'),
+            can: ({ selectedRows }) =>
+              selectedRows.length > 0 &&
+              this.$hasPerm('assets.change_asset') &&
+              !this.$store.getters.currentOrgIsRoot,
+            callback: ({ selectedRows }) => {
+              this.detectDialog = { visible: true, assets: selectedRows.map((r) => r.id) }
+            }
+          }
+        ]
+      }
       // actions.extraActions[0].dropdown = platforms
       return actions
     }
