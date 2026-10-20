@@ -87,8 +87,10 @@
       </div>
     </div>
     <template #footer>
-      <el-button :loading="testing" @click="test">{{ $t('JITChannelsTest') }}</el-button>
-      <el-button type="primary" :loading="saving" @click="save">{{ $t('Save') }}</el-button>
+      <template v-if="canChange">
+        <el-button :loading="testing" @click="test">{{ $t('JITChannelsTest') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="save">{{ $t('Save') }}</el-button>
+      </template>
     </template>
   </el-dialog>
 </template>
@@ -101,6 +103,8 @@ export default {
   data() {
     return {
       loading: false,
+      // system-wide settings: only for system administrators (ticket settings permission)
+      canChange: this.$hasPerm('settings.change_ticket'),
       saving: false,
       testing: false,
       testResult: null,

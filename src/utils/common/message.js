@@ -73,8 +73,8 @@ export function toPlainTextMessage(message) {
     return extractErrorSummaryFromText(bodyText)
   }
 
-  const container = document.createElement('div')
-  container.innerHTML = normalized
-
-  return extractErrorSummaryFromText(container.textContent || container.innerText || '')
+  // DOMParser documents are inert: no image loads and no event handlers run (an element made with
+  // createElement + innerHTML runs <img onerror> even when it is never attached)
+  const doc = new DOMParser().parseFromString(normalized, 'text/html')
+  return extractErrorSummaryFromText(doc.body?.textContent || '')
 }

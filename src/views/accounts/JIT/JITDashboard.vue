@@ -230,8 +230,8 @@ export default {
           const data = err?.response?.data
           if (data?.code === 'no_policy') {
             this.convert(row, true)
-          } else if (data?.detail) {
-            this.$message.error(data.detail)
+          } else {
+            this.$message.error(data?.detail || this.$t('Failed'))
           }
         })
     }

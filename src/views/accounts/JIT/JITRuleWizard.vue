@@ -96,7 +96,13 @@
       <el-radio-group v-model="form.max_hours" class="wiz-hours">
         <el-radio-button v-for="h of [1, 2, 4, 8]" :key="h" :value="h">{{ h }} h</el-radio-button>
       </el-radio-group>
-      <el-input-number v-model="form.max_hours" :min="1" :max="720" class="wiz-custom" />
+      <el-input-number
+        v-model="form.max_hours"
+        :min="1"
+        :max="720"
+        :value-on-clear="2"
+        class="wiz-custom"
+      />
       <p class="wiz-q wiz-name-q">{{ $t('JITWizName') }}</p>
       <el-input v-model="form.name" :placeholder="$t('Name')" maxlength="128" />
       <el-alert type="success" :closable="false" class="wiz-summary" :title="summary" />
@@ -284,7 +290,21 @@ export default {
     pick(t) {
       this.template = t.key
       const { approval, ...rest } = t.set
-      if (approval) this.approval = approval
+      // start from the defaults: going back and choosing another template must not keep the old values
+      const keep = {
+        users: this.form.users,
+        assets: this.form.assets,
+        approvers: this.form.approvers
+      }
+      this.form = {
+        name: '',
+        privileged: false,
+        require_mfa: false,
+        device_role: 'read_only',
+        max_hours: 2,
+        ...keep
+      }
+      this.approval = approval || 'instant'
       Object.assign(this.form, rest)
       if (t.key !== 'blank') this.form.name = t.title
       this.step = 1

@@ -196,10 +196,13 @@ export default {
         }
       )
         .then(() => {
-          this.$axios.post(`/api/v1/accounts/jit-accounts/${row.id}/remove/`).then((res) => {
-            this.$message.success(res?.msg || this.$t('JITRemoving'))
-            setTimeout(() => this.$refs.listTable?.reloadTable?.(), 1500)
-          })
+          this.$axios
+            .post(`/api/v1/accounts/jit-accounts/${row.id}/remove/`)
+            .then((res) => {
+              this.$message.success(res?.msg || this.$t('JITRemoving'))
+              setTimeout(() => this.$refs.listTable?.reloadTable?.(), 1500)
+            })
+            .catch(() => {}) // (the request layer already shows the error)
         })
         .catch(() => {})
     }

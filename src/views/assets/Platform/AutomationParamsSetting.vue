@@ -189,7 +189,7 @@ export default {
               component = Switcher
               break
             case 'text':
-              el['text'] = 'textarea'
+              el['type'] = 'textarea'
               break
           }
 

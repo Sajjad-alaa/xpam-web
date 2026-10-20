@@ -111,6 +111,8 @@ export default {
         this.emitValue()
         return
       }
+      // only the answer to the latest check counts (a slow older one must not win)
+      const seq = (this.checkSeq = (this.checkSeq || 0) + 1)
       const params = new URLSearchParams({ assets: assets.join(','), nodes: nodes.join(',') })
       if (this.oid) params.set('oid', this.oid)
       this.$axios
@@ -118,13 +120,17 @@ export default {
           disableFlashErrorMsg: true
         })
         .then((res) => {
+          if (seq !== this.checkSeq) return
           this.coverage = res
           if (res.jit_only) this.useExisting = false
         })
         .catch(() => {
+          if (seq !== this.checkSeq) return
           this.coverage = { covered: [], uncovered: [], jit_only: false }
         })
-        .finally(() => this.emitValue())
+        .finally(() => {
+          if (seq === this.checkSeq) this.emitValue()
+        })
     },
     setExisting(v) {
       this.useExisting = v

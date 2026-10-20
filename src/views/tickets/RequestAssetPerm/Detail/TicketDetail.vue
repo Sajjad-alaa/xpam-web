@@ -343,7 +343,9 @@ export default {
     handleApprove() {
       const nodes = this.requestForm.nodes
       const assets = this.requestForm.assets
-      const accounts = [...(this.jitRequested ? ['@JIT'] : []), ...(this.otherAccounts || [])]
+      // "No just-in-time account" chosen: the @JIT account would never work, so it is not granted
+      const withJit = this.jitRequested && this.requestForm.jit !== 'none'
+      const accounts = [...(withJit ? ['@JIT'] : []), ...(this.otherAccounts || [])]
       if (this.object.approval_step.value === this.object.process_map.length) {
         if (assets.length === 0 && nodes.length === 0) {
           this.$message.error(this.$tc('SelectAtLeastOneAssetOrNodeErrMsg'))

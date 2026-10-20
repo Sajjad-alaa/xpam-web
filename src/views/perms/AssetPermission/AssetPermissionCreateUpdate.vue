@@ -192,6 +192,8 @@ export default {
         if (!Array.isArray(value.accounts)) {
           value.accounts = value.accounts ? value.accounts.split(',') : []
         }
+        // a hidden just-in-time policy is not kept when just-in-time accounts are turned off
+        if (value.jit_disabled) value.jit_policy = null
         return value
       }
     }
