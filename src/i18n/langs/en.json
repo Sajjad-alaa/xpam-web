@@ -2668,5 +2668,7 @@
   "JITDeviceRoleHelp": "FortiGate, Palo Alto, Cisco IOS/ASA/NX-OS, Juniper, Huawei and H3C. Read only = FortiGate profile xpam_read_only, PAN-OS superreader, Cisco privilege 1 (ASA 5), NX-OS network-operator, Junos read-only, Huawei level 1. Administrator = super_admin, superuser, privilege 15, network-admin, super-user, level 15.",
   "JITDeviceCustomRole": "Custom role",
   "JITDeviceCustomHelp": "FortiGate admin profile, PAN-OS role profile, Cisco/Huawei privilege level (0-15), NX-OS role, Junos login class or H3C user role.",
-  "JITDeviceCommands": "Other SSH devices (optional commands)"
+  "JITDeviceCommands": "Other SSH devices (optional commands)",
+  "WebVerifyCert": "Verify the certificate",
+  "WebVerifyCertHelp": "Remote browser refuses the site when its certificate is not trusted, so the stored account is never sent to an impostor. Turn off only for internal sites with a self-signed certificate."
 }

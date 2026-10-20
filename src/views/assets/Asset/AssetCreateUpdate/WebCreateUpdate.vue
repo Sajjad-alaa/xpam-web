@@ -12,7 +12,7 @@ export default {
     return {
       url: '/api/v1/assets/webs/',
       addFields: [
-        [this.$t('Basic'), ['allowed_urls']],
+        [this.$t('Basic'), ['allowed_urls', 'verify_cert']],
         [
           this.$t('Selector'),
           [
@@ -28,6 +28,10 @@ export default {
         ]
       ],
       addFieldsMeta: {
+        verify_cert: {
+          label: this.$t('WebVerifyCert'),
+          helpText: this.$t('WebVerifyCertHelp')
+        },
         allowed_urls: {
           hidden: () => !this.$hasLicense(),
           label: this.$t('WebAllowedSites'),
