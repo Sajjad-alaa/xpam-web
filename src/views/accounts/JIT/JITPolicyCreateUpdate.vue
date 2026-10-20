@@ -48,7 +48,8 @@ export default {
         command_groups: [],
         command_action: 'reject',
         credential_type: 'password',
-        db_privilege: 'read_only'
+        db_privilege: 'read_only',
+        device_role: 'read_only'
       },
       fields: [
         [vm.$t('Basic'), ['name', 'priority', 'is_active']],
@@ -83,7 +84,8 @@ export default {
         [vm.$t('JITLinux'), ['linux_shell', 'linux_groups']],
         [vm.$t('JITWindows'), ['windows_groups']],
         [vm.$t('JITDatabases'), ['db_privilege', 'db_custom_sql']],
-        [vm.$t('JITDevices'), ['device_create_commands', 'device_remove_commands']],
+        [vm.$t('JITDevices'), ['device_role', 'device_custom_role']],
+        [vm.$t('JITDeviceCommands'), ['device_create_commands', 'device_remove_commands']],
         [vm.$t('JITRemoval'), ['remove_home']],
         [vm.$t('Other'), ['comment']]
       ],
@@ -277,6 +279,23 @@ export default {
           },
           hidden: (form) => form.db_privilege !== 'custom',
           helpText: vm.$t('JITDBCustomHelp')
+        },
+        device_role: {
+          label: vm.$t('JITDeviceRole'),
+          type: 'radio-group',
+          options: [
+            { label: vm.$t('JITDeviceReadOnly'), value: 'read_only' },
+            { label: vm.$t('JITDeviceOperator'), value: 'operator' },
+            { label: vm.$t('JITDeviceAdmin'), value: 'admin' },
+            { label: vm.$t('JITDeviceCustom'), value: 'custom' }
+          ],
+          helpText: vm.$t('JITDeviceRoleHelp')
+        },
+        device_custom_role: {
+          label: vm.$t('JITDeviceCustomRole'),
+          el: { placeholder: 'prof_readonly / 5 / network-operator' },
+          hidden: (form) => form.device_role !== 'custom',
+          helpText: vm.$t('JITDeviceCustomHelp')
         },
         device_create_commands: {
           el: {

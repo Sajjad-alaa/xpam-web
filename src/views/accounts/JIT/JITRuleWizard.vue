@@ -157,6 +157,7 @@ export default {
         assets: { type: 'ids', ids: [] },
         privileged: false,
         require_mfa: false,
+        device_role: 'read_only',
         max_hours: 2,
         approvers: { type: 'ids', ids: [] }
       },
@@ -166,21 +167,39 @@ export default {
           icon: markRaw(Lightning),
           title: vm.$t('JITTplDev'),
           sub: vm.$t('JITTplDevSub'),
-          set: { approval: 'instant', max_hours: 2, privileged: false, require_mfa: false }
+          set: {
+            approval: 'instant',
+            max_hours: 2,
+            privileged: false,
+            require_mfa: false,
+            device_role: 'read_only'
+          }
         },
         {
           key: 'ops',
           icon: markRaw(Stamp),
           title: vm.$t('JITTplOps'),
           sub: vm.$t('JITTplOpsSub'),
-          set: { approval: 'one', max_hours: 8, privileged: true, require_mfa: false }
+          set: {
+            approval: 'one',
+            max_hours: 8,
+            privileged: true,
+            require_mfa: false,
+            device_role: 'operator'
+          }
         },
         {
           key: 'admin',
           icon: markRaw(Lock),
           title: vm.$t('JITTplAdmin'),
           sub: vm.$t('JITTplAdminSub'),
-          set: { approval: 'two', max_hours: 1, privileged: true, require_mfa: true }
+          set: {
+            approval: 'two',
+            max_hours: 1,
+            privileged: true,
+            require_mfa: true,
+            device_role: 'admin'
+          }
         },
         {
           key: 'blank',
@@ -257,6 +276,7 @@ export default {
         assets: { type: 'ids', ids: [] },
         privileged: false,
         require_mfa: false,
+        device_role: 'read_only',
         max_hours: 2,
         approvers: { type: 'ids', ids: [] }
       }
@@ -285,6 +305,8 @@ export default {
         username_mode: 'same_as_user',
         username_prefix: 'xpam-',
         privileged: this.form.privileged,
+        // network devices: Developers read only, Operations operator, Administrators administrator
+        device_role: this.form.device_role,
         require_mfa: this.form.require_mfa,
         jit_only: true,
         self_service: true,

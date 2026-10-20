@@ -2543,8 +2543,8 @@
   "JITDBCustom": "Custom SQL",
   "JITDBHelp": "Rights of the database login on MySQL, MariaDB, PostgreSQL, SQL Server and Oracle. XPAM uses the privileged account of the database to create and drop the login and ends its database sessions when it is removed.",
   "JITDBCustomHelp": "One statement per line, ending with \";\". Placeholders: {'{'}username{'}'}, {'{'}database{'}'}.",
-  "JITDeviceCreateHelp": "Commands run in an SSH shell with the privileged account of the device (Cisco, Huawei, H3C, Fortinet, ...). Placeholders: {'{'}username{'}'}, {'{'}password{'}'}, {'{'}login_password{'}'}.",
-  "JITDeviceRemoveHelp": "Commands that remove the account again. Placeholders: {'{'}username{'}'}, {'{'}login_password{'}'}.",
+  "JITDeviceCreateHelp": "Only for other SSH devices: leave empty for FortiGate, Palo Alto, Cisco, Juniper, Huawei and H3C (built in). Commands run in an SSH shell with the privileged account. Placeholders: {'{'}username{'}'}, {'{'}password{'}'}, {'{'}login_password{'}'}.",
+  "JITDeviceRemoveHelp": "Only for other SSH devices (with commands above). Commands that remove the account again. Placeholders: {'{'}username{'}'}, {'{'}login_password{'}'}.",
   "JITTarget": "Target",
   "JITTargetHost": "Host",
   "JITTargetDatabase": "Database",
@@ -2659,5 +2659,14 @@
   "JITReqBackToJIT": "Use the just-in-time account instead",
   "JITReqApproverHelp": "created for the requester on the servers and removed afterwards",
   "JITReqAddExisting": "Also allow existing accounts",
-  "JITReqHideExisting": "Only the just-in-time account"
+  "JITReqHideExisting": "Only the just-in-time account",
+  "JITDeviceRole": "Role on the device",
+  "JITDeviceReadOnly": "Read only",
+  "JITDeviceOperator": "Operator",
+  "JITDeviceAdmin": "Administrator",
+  "JITDeviceCustom": "Custom",
+  "JITDeviceRoleHelp": "FortiGate, Palo Alto, Cisco IOS/ASA/NX-OS, Juniper, Huawei and H3C. Read only = FortiGate profile xpam_read_only, PAN-OS superreader, Cisco privilege 1 (ASA 5), NX-OS network-operator, Junos read-only, Huawei level 1. Administrator = super_admin, superuser, privilege 15, network-admin, super-user, level 15.",
+  "JITDeviceCustomRole": "Custom role",
+  "JITDeviceCustomHelp": "FortiGate admin profile, PAN-OS role profile, Cisco/Huawei privilege level (0-15), NX-OS role, Junos login class or H3C user role.",
+  "JITDeviceCommands": "Other SSH devices (optional commands)"
 }
