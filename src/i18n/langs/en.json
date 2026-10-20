@@ -2493,7 +2493,7 @@
   "JITScopeHelp": "With the first two choices the policy applies by itself to the users and assets below; nothing has to be linked by hand.",
   "JITWho": "Who",
   "JITWhere": "Where",
-  "JITWhereHelp": "Only Linux/Unix and Windows assets whose platform allows account push can get just-in-time accounts.",
+  "JITWhereHelp": "Linux/Unix and Windows servers, databases (MySQL, MariaDB, PostgreSQL, SQL Server, Oracle) and network devices can get just-in-time accounts. The check below shows what to fix on the others.",
   "JITLinkedPermissions": "Linked permissions",
   "JITLinkedShort": "linked",
   "JITAllPermissions": "All permissions",
@@ -2670,5 +2670,8 @@
   "JITDeviceCustomHelp": "FortiGate admin profile, PAN-OS role profile, Cisco/Huawei privilege level (0-15), NX-OS role, Junos login class or H3C user role.",
   "JITDeviceCommands": "Other SSH devices (optional commands)",
   "WebVerifyCert": "Verify the certificate",
-  "WebVerifyCertHelp": "Remote browser refuses the site when its certificate is not trusted, so the stored account is never sent to an impostor. Turn off only for internal sites with a self-signed certificate."
+  "WebVerifyCertHelp": "Remote browser refuses the site when its certificate is not trusted, so the stored account is never sent to an impostor. Turn off only for internal sites with a self-signed certificate.",
+  "JITReadyCount": "{ready} of {total} chosen assets can get just-in-time accounts",
+  "WebSignInOptional": "Sign-in (optional: found automatically)",
+  "DeviceAccountsHelp": "Add the device's admin account and turn on \"Privileged\": XPAM uses it to create, change and remove accounts on the device (account push, discovery, just-in-time accounts). Its password is also used as the enable/super password unless the platform says otherwise."
 }

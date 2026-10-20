@@ -10,7 +10,13 @@ export default {
   components: { BaseAssetCreateUpdate },
   data() {
     return {
-      url: '/api/v1/assets/devices/'
+      url: '/api/v1/assets/devices/',
+      addFieldsMeta: {
+        accounts: {
+          // XPAM: account push, discovery and just-in-time accounts sign in with the device's admin account
+          helpText: this.$t('DeviceAccountsHelp')
+        }
+      }
     }
   }
 }

@@ -52,6 +52,22 @@
         @input="(v) => (form.assets = v)"
       />
       <p class="wiz-hint">{{ $t('JITWhereHelp') }}</p>
+      <div v-if="readiness" v-loading="checking" class="wiz-ready">
+        <el-alert
+          :type="readiness.problems.length ? 'warning' : 'success'"
+          :closable="false"
+          show-icon
+          :title="$t('JITReadyCount', { ready: readiness.ready, total: readiness.total })"
+        >
+          <div v-for="p of readiness.problems" :key="p.reason" class="wiz-problem">
+            <b>{{ p.count }} × {{ p.reason }}</b>
+            <div class="wiz-problem-assets">
+              {{ p.assets.map((a) => a.name).join(', ')
+              }}<span v-if="p.count > p.assets.length"> …</span>
+            </div>
+          </div>
+        </el-alert>
+      </div>
     </div>
 
     <!-- 3: how do they get in -->
@@ -107,6 +123,14 @@
       <el-input v-model="form.name" :placeholder="$t('Name')" maxlength="128" />
       <el-alert type="success" :closable="false" class="wiz-summary" :title="summary" />
       <el-alert
+        v-if="readiness && readiness.problems.length"
+        type="warning"
+        :closable="false"
+        show-icon
+        class="wiz-summary"
+        :title="$t('JITReadyCount', { ready: readiness.ready, total: readiness.total })"
+      />
+      <el-alert
         v-if="broad"
         type="warning"
         :closable="false"
@@ -151,6 +175,9 @@ export default {
     return {
       step: 0,
       saving: false,
+      readiness: null,
+      checking: false,
+      readinessSeq: 0,
       template: 'dev',
       approval: 'instant',
       userMeta: userJSONSelectMeta(vm),
@@ -262,6 +289,13 @@ export default {
   watch: {
     visible(v) {
       if (v) this.reset()
+    },
+    'form.assets': {
+      deep: true,
+      handler() {
+        clearTimeout(this.readinessTimer)
+        this.readinessTimer = setTimeout(() => this.checkReadiness(), 400)
+      }
     }
   },
   methods: {
@@ -271,7 +305,28 @@ export default {
       if (value.type === 'ids') return (value.ids || []).length > 0
       return (value.attrs || []).length > 0
     },
+    checkReadiness() {
+      // which chosen servers/devices can get just-in-time accounts, and what to fix on the others
+      if (!this.chosen(this.form.assets)) {
+        this.readiness = null
+        return
+      }
+      const seq = ++this.readinessSeq
+      this.checking = true
+      this.$axios
+        .post('/api/v1/accounts/jit-policies/readiness/', { assets: this.form.assets })
+        .then((data) => {
+          if (seq === this.readinessSeq) this.readiness = data
+        })
+        .catch(() => {
+          if (seq === this.readinessSeq) this.readiness = null
+        })
+        .finally(() => {
+          if (seq === this.readinessSeq) this.checking = false
+        })
+    },
     reset() {
+      this.readiness = null
       this.step = 0
       this.template = 'dev'
       this.approval = 'instant'
@@ -434,6 +489,19 @@ export default {
 
 .wiz-approver-select {
   margin-top: 8px;
+}
+
+.wiz-ready {
+  margin-top: 12px;
+}
+
+.wiz-problem {
+  margin-top: 6px;
+}
+
+.wiz-problem-assets {
+  color: var(--el-text-color-secondary);
+  font-size: 12px;
 }
 
 .wiz-custom {

@@ -14,7 +14,7 @@ export default {
       addFields: [
         [this.$t('Basic'), ['allowed_urls', 'verify_cert']],
         [
-          this.$t('Selector'),
+          this.$t('WebSignInOptional'),
           [
             'autofill',
             'username_selector',
@@ -43,7 +43,8 @@ export default {
           hidden: (formValue) => {
             const address = formValue['address']
             if (!address) return
-            let port = address.startsWith('https://') ? 443 : 80
+            // no scheme means https:// (the server adds it)
+            let port = address.startsWith('http://') ? 80 : 443
             try {
               const url = new URL(address)
               if (url.port) {
