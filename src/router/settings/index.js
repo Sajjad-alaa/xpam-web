@@ -241,6 +241,17 @@ export default {
       }
     },
     {
+      path: '/settings/high-availability',
+      name: 'HighAvailability',
+      component: () => import('@/views/settings/HA'),
+      meta: {
+        title: i18n.t('HighAvailability'),
+        icon: 'device',
+        disableGoBack: true,
+        permissions: ['settings.view_setting']
+      }
+    },
+    {
       path: '/settings/auth',
       name: 'Auth',
       component: () => import('@/views/settings/Auth'),
