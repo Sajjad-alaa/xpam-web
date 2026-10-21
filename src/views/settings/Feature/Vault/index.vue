@@ -16,6 +16,7 @@
 import { GenericCreateUpdateForm } from '@/layout/components'
 import IBox from '@/components/Common/IBox/index.vue'
 import { openTaskPage } from '@/utils/jms/index'
+import { Select2 } from '@/components/Form/FormFields'
 import store from '@/store'
 import OpenBaoKV from './OpenBao.vue'
 import HashiCorpKV from './HCP.vue'
@@ -65,7 +66,10 @@ export default {
         }
       ],
       fields: [
-        [this.$t('Basic'), ['VAULT_ENABLED', 'VAULT_BACKEND', 'HISTORY_ACCOUNT_CLEAN_LIMIT']],
+        [
+          this.$t('Basic'),
+          ['VAULT_ENABLED', 'VAULT_BACKEND', 'VAULT_MIRROR', 'HISTORY_ACCOUNT_CLEAN_LIMIT']
+        ],
         [this.$t('Provider'), ['OPENBAO', 'HCP', 'AZURE', 'AWS', 'CYBERARK', 'DELINEA', 'GCP']]
       ],
       fieldsMeta: {
@@ -76,6 +80,18 @@ export default {
         },
         VAULT_ENABLED: {
           disabled: true
+        },
+        VAULT_MIRROR: {
+          label: this.$t('VaultMirror'),
+          helpText: this.$t('VaultMirrorHelp'),
+          component: Select2,
+          el: {
+            multiple: false,
+            clearable: true,
+            url: '/api/v1/accounts/vault-connections/?is_active=true',
+            ajax: { transformOption: (item) => ({ label: item.name, value: item.id }) }
+          },
+          hidden: (formValue) => !formValue.VAULT_ENABLED
         },
         VAULT_BACKEND: {
           label: this.$t('Provider'),

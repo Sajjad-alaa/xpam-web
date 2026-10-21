@@ -11,11 +11,74 @@
 
 <script>
 import AutoDataForm from '@/components/Form/AutoDataForm/index.vue'
+import { Select2 } from '@/components/Form/FormFields'
 import { encryptPassword } from '@/utils/session-encrypt'
 import {
   accountFieldsMeta,
   getSecretTypeOptions
 } from '@/components/Apps/AccountCreateUpdateForm/const'
+
+// XPAM: "read from an existing vault" — the password stays in the customer's vault
+const externalRefForm = (account) => {
+  const ref = (account && account.secret_ref) || {}
+  const source = account && account.secret_source
+  return {
+    secret_source: (source && (source.value || source)) || 'xpam',
+    ref_connection: ref.connection || '',
+    ref_path: ref.path || '',
+    ref_field: ref.field || ''
+  }
+}
+
+const withExternalSecret = (vm, meta) => {
+  const external = (formValue) =>
+    (formValue.secret_source?.value || formValue.secret_source) === 'external'
+  for (const name of [
+    'password',
+    'ssh_key',
+    'token',
+    'access_key',
+    'passphrase',
+    'api_key',
+    'secret_reset',
+    'push_now'
+  ]) {
+    const field = meta[name] || (meta[name] = {})
+    const original = field.hidden
+    field.hidden = (formValue) =>
+      external(formValue) || (typeof original === 'function' ? original(formValue) : !!original)
+  }
+  meta.secret_source = {
+    label: vm.$t('Secret'),
+    type: 'radio-group',
+    options: [
+      { label: vm.$t('Kept by XPAM'), value: 'xpam' },
+      { label: vm.$t('SecretSourceExternal'), value: 'external' }
+    ]
+  }
+  meta.ref_connection = {
+    label: vm.$t('VaultConnection'),
+    component: Select2,
+    el: {
+      multiple: false,
+      url: '/api/v1/accounts/vault-connections/?is_active=true',
+      ajax: { transformOption: (item) => ({ label: item.name, value: item.id }) }
+    },
+    hidden: (formValue) => !external(formValue)
+  }
+  meta.ref_path = {
+    label: vm.$t('Path'),
+    type: 'input',
+    helpText: vm.$t('SecretRefHelp'),
+    hidden: (formValue) => !external(formValue)
+  }
+  meta.ref_field = {
+    label: vm.$t('Field'),
+    type: 'input',
+    hidden: (formValue) => !external(formValue)
+  }
+  return meta
+}
 
 export default {
   name: 'AccountCreateForm',
@@ -69,7 +132,11 @@ export default {
         ]
       },
       url: '/api/v1/accounts/accounts/',
-      form: Object.assign({ on_invalid: 'error' }, this.account || {}),
+      form: Object.assign(
+        { on_invalid: 'error', secret_source: 'xpam' },
+        this.account || {},
+        externalRefForm(this.account)
+      ),
       encryptedFields: ['secret'],
       fields: [
         [
@@ -80,6 +147,10 @@ export default {
         [
           this.$t('Secret'),
           [
+            'secret_source',
+            'ref_connection',
+            'ref_path',
+            'ref_field',
             'secret_type',
             'password',
             'ssh_key',
@@ -92,7 +163,7 @@ export default {
         ],
         [this.$t('Other'), ['push_now', 'params', 'on_invalid', 'is_active', 'comment']]
       ],
-      fieldsMeta: accountFieldsMeta(this),
+      fieldsMeta: withExternalSecret(this, accountFieldsMeta(this)),
       hasSaveContinue: false
     }
   },
@@ -146,6 +217,22 @@ export default {
       })
     },
     confirm(form) {
+      // XPAM: a password read from an existing vault — nothing to send but where it is
+      if (form.secret_source === 'external') {
+        form.secret_ref = {
+          connection: form.ref_connection,
+          path: form.ref_path,
+          field: form.ref_field || ''
+        }
+        form.secret_reset = false
+        form.push_now = false
+      }
+      delete form.ref_connection
+      delete form.ref_path
+      delete form.ref_field
+      if (typeof form.secret_source === 'object' && form.secret_source) {
+        form.secret_source = form.secret_source.value
+      }
       const secretType = form.secret_type || 'password'
       form.secret = form[secretType]
       form.secret = this.encryptPassword ? encryptPassword(form.secret) : form.secret
