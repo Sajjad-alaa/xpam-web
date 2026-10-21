@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-alert v-if="locked" type="warning" :closable="false" :title="$t('VaultLockedText')" />
     <el-alert type="info">
       <template #default>
         <div v-sanitize="helpText" />
@@ -20,6 +21,9 @@ import OpenBaoKV from './OpenBao.vue'
 import HashiCorpKV from './HCP.vue'
 import AzureKV from './Azure.vue'
 import AwsSM from './Aws.vue'
+import CyberArk from './CyberArk.vue'
+import Delinea from './Delinea.vue'
+import GoogleSM from './GCP.vue'
 
 export default {
   components: {
@@ -29,6 +33,7 @@ export default {
   data() {
     const vm = this
     return {
+      locked: false,
       url: '/api/v1/settings/setting/?category=vault',
       hasReset: false,
       helpText: this.$t('VaultHelpText'),
@@ -47,6 +52,7 @@ export default {
           plain: true,
           loading: false,
           disabled: !store.getters.publicSettings['VAULT_ENABLED'],
+          hidden: () => vm.locked,
           callback: function (value, form, btn) {
             vm.$confirm(vm.$t('RestoreVaultConfirm'), vm.$t('RestoreToDatabase'), {
               confirmButtonText: vm.$t('Confirm'),
@@ -60,7 +66,7 @@ export default {
       ],
       fields: [
         [this.$t('Basic'), ['VAULT_ENABLED', 'VAULT_BACKEND', 'HISTORY_ACCOUNT_CLEAN_LIMIT']],
-        [this.$t('Provider'), ['OPENBAO', 'HCP', 'AZURE', 'AWS']]
+        [this.$t('Provider'), ['OPENBAO', 'HCP', 'AZURE', 'AWS', 'CYBERARK', 'DELINEA', 'GCP']]
       ],
       fieldsMeta: {
         HISTORY_ACCOUNT_CLEAN_LIMIT: {
@@ -105,12 +111,38 @@ export default {
           hidden: (formValue) => {
             return !formValue.VAULT_ENABLED || formValue['VAULT_BACKEND'] !== 'aws'
           }
+        },
+        CYBERARK: {
+          label: this.$t('CyberArkConjur'),
+          component: CyberArk,
+          hidden: (formValue) => {
+            return !formValue.VAULT_ENABLED || formValue['VAULT_BACKEND'] !== 'cyberark'
+          }
+        },
+        DELINEA: {
+          label: this.$t('DelineaSecretServer'),
+          component: Delinea,
+          hidden: (formValue) => {
+            return !formValue.VAULT_ENABLED || formValue['VAULT_BACKEND'] !== 'delinea'
+          }
+        },
+        GCP: {
+          label: this.$t('GoogleSecretManager'),
+          component: GoogleSM,
+          hidden: (formValue) => {
+            return !formValue.VAULT_ENABLED || formValue['VAULT_BACKEND'] !== 'gcp'
+          }
         }
       },
       submitMethod() {
         return 'patch'
       }
     }
+  },
+  mounted() {
+    this.$axios.get('/api/v1/settings/setting/?category=vault').then((res) => {
+      this.locked = !!res['VAULT_LOCKED']
+    })
   },
   methods: {
     runVaultTask(url, value, btn) {

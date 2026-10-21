@@ -38,9 +38,34 @@ export default {
       ],
       encryptedFields: ['VAULT_HCP_TOKEN'],
       fields: [
-        [this.$t('AccountStorage'), ['VAULT_HCP_HOST', 'VAULT_HCP_TOKEN', 'VAULT_HCP_MOUNT_POINT']]
+        [
+          this.$t('AccountStorage'),
+          [
+            'VAULT_HCP_HOST',
+            'VAULT_HCP_AUTH',
+            'VAULT_HCP_TOKEN',
+            'VAULT_HCP_CERT_ROLE',
+            'VAULT_HCP_CA_FILE',
+            'VAULT_HCP_CLIENT_CERT_FILE',
+            'VAULT_HCP_CLIENT_KEY_FILE',
+            'VAULT_HCP_NAMESPACE',
+            'VAULT_HCP_MOUNT_POINT'
+          ]
+        ]
       ],
       fieldsMeta: {
+        VAULT_HCP_TOKEN: {
+          hidden: (formValue) => formValue.VAULT_HCP_AUTH === 'cert'
+        },
+        VAULT_HCP_CERT_ROLE: {
+          hidden: (formValue) => formValue.VAULT_HCP_AUTH !== 'cert'
+        },
+        VAULT_HCP_CLIENT_CERT_FILE: {
+          hidden: (formValue) => formValue.VAULT_HCP_AUTH !== 'cert'
+        },
+        VAULT_HCP_CLIENT_KEY_FILE: {
+          hidden: (formValue) => formValue.VAULT_HCP_AUTH !== 'cert'
+        },
         VAULT_HCP_MOUNT_POINT: {
           helpText: this.$t('VaultHCPMountPoint'),
           helpTextAsTip: true
