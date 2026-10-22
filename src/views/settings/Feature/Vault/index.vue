@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ProtectionStatus :link="false" class="protection-status" />
     <el-alert v-if="locked" type="warning" :closable="false" :title="$t('VaultLockedText')" />
     <el-alert v-if="dataKey.provider" type="success" :closable="false" class="data-key">
       <template #title>
@@ -23,6 +24,7 @@
 <script>
 import { GenericCreateUpdateForm } from '@/layout/components'
 import IBox from '@/components/Common/IBox/index.vue'
+import ProtectionStatus from '@/views/settings/HA/ProtectionStatus.vue'
 import { openTaskPage } from '@/utils/jms/index'
 import { Select2 } from '@/components/Form/FormFields'
 import store from '@/store'
@@ -37,7 +39,8 @@ import GoogleSM from './GCP.vue'
 export default {
   components: {
     IBox,
-    GenericCreateUpdateForm
+    GenericCreateUpdateForm,
+    ProtectionStatus
   },
   data() {
     const vm = this
@@ -206,4 +209,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.protection-status {
+  margin-bottom: 12px;
+}
+</style>

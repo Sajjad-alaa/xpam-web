@@ -1,6 +1,7 @@
 <template>
   <Page>
     <div v-loading="loading && !data" class="ha">
+      <ProtectionStatus :link="false" />
       <el-alert v-if="data && !data.enabled" type="info" :closable="false" show-icon>
         <template #title>{{ $t('HANotEnabled') }}</template>
         <p class="ha-help">{{ $t('HANotEnabledHelp') }}</p>
@@ -103,10 +104,11 @@ xpamctl ha init &lt;this-server-ip&gt; &lt;second-server-ip&gt; &lt;witness-ip&g
 
 <script>
 import Page from '@/layout/components/Page'
+import ProtectionStatus from './ProtectionStatus.vue'
 
 export default {
   name: 'HighAvailability',
-  components: { Page },
+  components: { Page, ProtectionStatus },
   data() {
     return { data: null, loading: false, switching: false, now: Math.floor(Date.now() / 1000) }
   },
