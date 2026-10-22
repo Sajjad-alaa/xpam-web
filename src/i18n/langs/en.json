@@ -2796,5 +2796,7 @@
   "JITAllowedProtocolsHelp": "The protocols a request through this rule can ask for (for example SSH and HTTP only). Connecting with another protocol is refused while the access lasts.",
   "JITAllowedActions": "Allowed actions",
   "JITAllowedActionsHelp": "What a request through this rule can ask for besides connecting: file upload/download, clipboard, delete, share.",
-  "RequestProtocolsHelp": "Only these protocols can be used with the access (all: every protocol of the assets)."
+  "RequestProtocolsHelp": "Only these protocols can be used with the access (all: every protocol of the assets).",
+  "ProtectionDbCopy": "Database copy",
+  "ProtectionDbCopyOn": "Account secrets also kept in the database (read when Vault does not answer)"
 }

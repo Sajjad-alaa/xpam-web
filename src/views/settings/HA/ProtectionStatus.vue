@@ -72,6 +72,10 @@
           </span>
           <span v-else>{{ $t('ProtectionInDatabase') }}</span>
         </div>
+        <div v-if="vault.keep_db_copy" class="protection-row">
+          <span>{{ $t('ProtectionDbCopy') }}</span
+          ><span>{{ $t('ProtectionDbCopyOn') }}</span>
+        </div>
         <div class="protection-row">
           <span>{{ $t('ProtectionDataKey') }}</span
           ><span>{{ dataKeyText }}</span>
