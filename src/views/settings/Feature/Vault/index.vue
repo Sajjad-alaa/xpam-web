@@ -1,6 +1,14 @@
 <template>
   <div>
     <el-alert v-if="locked" type="warning" :closable="false" :title="$t('VaultLockedText')" />
+    <el-alert v-if="dataKey.provider" type="success" :closable="false" class="data-key">
+      <template #title>
+        {{ $t('DataKey') }}: {{ dataKeyLabel }}
+        <span v-if="dataKey.version"> · v{{ dataKey.version }}</span>
+        <span> · {{ $t('DataKeyRotation') }}: {{ dataKey.rotation }}</span>
+        <span v-if="dataKey.values"> · {{ $t('DataKeyValues') }}: {{ valuesText }}</span>
+      </template>
+    </el-alert>
     <el-alert type="info">
       <template #default>
         <div v-sanitize="helpText" />
@@ -35,6 +43,7 @@ export default {
     const vm = this
     return {
       locked: false,
+      dataKey: {},
       url: '/api/v1/settings/setting/?category=vault',
       hasReset: false,
       helpText: this.$t('VaultHelpText'),
@@ -155,9 +164,27 @@ export default {
       }
     }
   },
+  computed: {
+    dataKeyLabel() {
+      const labels = {
+        transit: this.$t('DataKeyTransit'),
+        local: this.$t('DataKeyLocal'),
+        legacy: this.$t('DataKeyLegacy')
+      }
+      return labels[this.dataKey.provider] || this.dataKey.provider
+    },
+    valuesText() {
+      return Object.entries(this.dataKey.values || {})
+        .map(([version, count]) => `${version === 'legacy' ? version : 'v' + version}: ${count}`)
+        .join(', ')
+    }
+  },
   mounted() {
     this.$axios.get('/api/v1/settings/setting/?category=vault').then((res) => {
       this.locked = !!res['VAULT_LOCKED']
+    })
+    this.$axios.get('/api/v1/settings/vault/data-key/').then((res) => {
+      this.dataKey = res || {}
     })
   },
   methods: {
