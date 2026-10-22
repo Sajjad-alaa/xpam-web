@@ -26,6 +26,12 @@ export default {
       createDrawer: () => import('./ConnectionCreateUpdate.vue'),
       tableConfig: {
         url: '/api/v1/accounts/vault-connections/',
+        permissions: {
+          add: 'settings.change_vault',
+          change: 'settings.change_vault',
+          delete: 'settings.change_vault',
+          view: 'settings.view_setting'
+        },
         columns: ['name', 'type', 'managed', 'is_active', 'comment', 'actions'],
         columnsShow: {
           min: ['name', 'actions'],

@@ -1948,7 +1948,7 @@
   "VaultConnections": "Vault connections",
   "VaultConnectionsHelp": "The vaults XPAM may use besides the configured one. Connections added on the server (xpamctl vault add-connection) are managed there: shown here, not changeable.",
   "VaultHCPMountPoint": "The mount point of the Vault server, default is pam",
-  "VaultHelpText": "1. For security reasons, enable Vault storage in the configuration file; the default backend is OpenBao.<br>2. After enabling it, complete the provider configuration and test the connection.<br>3. Sync migrates secrets from the local database to the remote Vault. After synchronization, the local database no longer stores the secrets. Use Restore to database to write synchronized secrets back locally; copies in Vault are retained.<br>4. Restart the service after changing the Vault configuration.",
+  "VaultHelpText": "1. Recommended: choose Vault when installing, or run xpamctl vault connect on the XPAM server. The vault is then managed there and this page only shows it.<br>2. Otherwise choose a provider here, fill in its settings and test the connection.<br>3. Sync moves account secrets from the database to the vault; the database then keeps none. Restore to database writes them back (not possible while the vault is managed on the server).<br>4. Restart XPAM after changing the vault settings.",
   "VaultLockedText": "The vault is managed on the XPAM server (xpamctl vault connect): its settings come from the server's configuration, cannot be changed here, and secrets cannot be restored into the database from the console.",
   "VaultMirror": "Mirror",
   "VaultMirrorHelp": "Optional: another vault that receives a copy of every secret and is read from when the vault fails.",

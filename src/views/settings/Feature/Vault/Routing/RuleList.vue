@@ -23,8 +23,15 @@ export default {
       createDrawer: () => import('./RuleCreateUpdate.vue'),
       tableConfig: {
         url: '/api/v1/accounts/vault-rules/',
+        permissions: {
+          add: 'settings.change_vault',
+          change: 'settings.change_vault',
+          delete: 'settings.change_vault',
+          view: 'settings.view_setting'
+        },
         columns: [
           'name',
+          'org_name',
           'priority',
           'username',
           'connection',
@@ -35,7 +42,16 @@ export default {
         ],
         columnsShow: {
           min: ['name', 'actions'],
-          default: ['name', 'priority', 'username', 'connection', 'mirror', 'is_active', 'actions']
+          default: [
+            'name',
+            'org_name',
+            'priority',
+            'username',
+            'connection',
+            'mirror',
+            'is_active',
+            'actions'
+          ]
         },
         columnsMeta: {
           connection: { formatter: (row) => name(row.connection) },
