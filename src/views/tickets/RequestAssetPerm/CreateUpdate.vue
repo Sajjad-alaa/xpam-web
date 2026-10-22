@@ -14,6 +14,7 @@ import { GenericCreateUpdatePage } from '@/layout/components'
 import store from '@/store'
 import { getDaysFuture } from '@/utils/common/time'
 import RequestAccountField from './RequestAccountField.vue'
+import ApprovalPreview from './ApprovalPreview.vue'
 import CcUsers from '@/views/tickets/components/CcUsers'
 import { getTicketFlowLabel } from '@/views/tickets/const'
 import { mapGetters, mapState } from 'vuex'
@@ -59,7 +60,7 @@ export default {
             'apply_date_expired'
           ]
         ],
-        [this.$t('Other'), ['comment']]
+        [this.$t('Other'), ['comment', 'jit_route']]
       ],
       fieldsMeta: {
         title: {
@@ -178,6 +179,32 @@ export default {
             }
           }
         },
+        // XPAM: before sending — approved at once by a just-in-time rule, or why it waits and who approves
+        jit_route: {
+          label: this.$t('JITPreviewLabel'),
+          component: ApprovalPreview,
+          el: {
+            assets: [],
+            nodes: [],
+            accounts: [],
+            dateStart: '',
+            dateExpired: '',
+            reason: '',
+            flowId: ''
+          },
+          hidden: (form) => {
+            Object.assign(this.fieldsMeta.jit_route.el, {
+              assets: form.apply_assets || [],
+              nodes: form.apply_nodes || [],
+              accounts: form.apply_accounts || [],
+              dateStart: form.apply_date_start || '',
+              dateExpired: form.apply_date_expired || '',
+              reason: form.comment || '',
+              flowId: form.flow_id || ''
+            })
+            return false
+          }
+        },
         cc_users: {
           component: CcUsers,
           label: this.$t('CcUsers'),
@@ -205,6 +232,7 @@ export default {
           delete value.flow_id
         }
         delete value.cc_users
+        delete value.jit_route
         return value
       },
       url: '/api/v1/tickets/apply-asset-tickets/?state=pending',

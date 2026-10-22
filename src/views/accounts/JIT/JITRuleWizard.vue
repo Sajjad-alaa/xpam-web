@@ -390,6 +390,8 @@ export default {
         auto_approve: auto,
         auto_approve_max_hours: this.form.max_hours,
         approvals_required: this.approval === 'two' ? 2 : 1,
+        approval_route:
+          this.approval !== 'instant' && this.approverMode === 'people' ? 'approvers' : 'flow',
         approvers:
           this.approval !== 'instant' && this.approverMode === 'people' ? this.form.approvers : {},
         end_sessions_on_expiry: true,

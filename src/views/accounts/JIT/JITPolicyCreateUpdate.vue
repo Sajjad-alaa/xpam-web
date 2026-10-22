@@ -7,6 +7,7 @@ import GenericCreateUpdatePage from '@/layout/components/GenericCreateUpdatePage
 import { ResourceSelect } from '@/components/Form/FormFields'
 import WeekCronSelect from '@/components/Form/FormFields/WeekCronSelect.vue'
 import ProtocolsSelect from '@/components/Form/FormFields/AllOrSpec.vue'
+import JITApprovalFlowSelect from './JITApprovalFlowSelect.vue'
 import { assetJSONSelectMeta } from '@/views/assets/const'
 import { userJSONSelectMeta } from '@/views/users/const'
 
@@ -32,6 +33,8 @@ export default {
         users: { type: 'ids', ids: [] },
         assets: { type: 'ids', ids: [] },
         approvers: { type: 'ids', ids: [] },
+        approval_route: 'flow',
+        approval_flow: null,
         priority: 50,
         is_active: true,
         permissions: [],
@@ -63,11 +66,13 @@ export default {
             'self_service',
             'max_hours',
             'require_reason',
-            'approvals_required',
-            'approvers',
             'auto_approve',
             'auto_approve_max_hours',
-            'auto_approve_time_period'
+            'auto_approve_time_period',
+            'approval_route',
+            'approval_flow',
+            'approvers',
+            'approvals_required'
           ]
         ],
         // XPAM: what an access through the rule may allow; a request picks among them
@@ -228,9 +233,26 @@ export default {
             }
           }
         },
+        // XPAM: who approves what the rule does not approve by itself — an approval flow, or people
+        approval_route: {
+          type: 'radio-group',
+          label: vm.$t('JITApprovalRoute'),
+          options: [
+            { label: vm.$t('JITRouteFlow'), value: 'flow' },
+            { label: vm.$t('JITRouteApprovers'), value: 'approvers' }
+          ],
+          helpText: vm.$t('JITApprovalRouteHelp')
+        },
+        approval_flow: {
+          label: vm.$t('JITApprovalFlow'),
+          component: JITApprovalFlowSelect,
+          hidden: (form) => form.approval_route !== 'flow',
+          helpText: vm.$t('JITApprovalFlowHelp')
+        },
         approvers: {
           ...userJSONSelectMeta(vm),
           label: vm.$t('JITApprovers'),
+          hidden: (form) => form.approval_route !== 'approvers',
           helpText: vm.$t('JITApproversHelp')
         },
         auto_approve: {
@@ -348,6 +370,11 @@ export default {
         }
         if (value.approvals_required === 2) {
           value.auto_approve = false
+        }
+        if (value.approval_route === 'approvers') {
+          value.approval_flow = null
+        } else if (value.approval_flow && typeof value.approval_flow === 'object') {
+          value.approval_flow = value.approval_flow.id
         }
         if (
           Array.isArray(value.auto_approve_time_period) &&
