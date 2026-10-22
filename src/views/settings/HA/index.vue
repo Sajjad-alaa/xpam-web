@@ -44,6 +44,14 @@ xpamctl ha init &lt;this-server-ip&gt; &lt;second-server-ip&gt; &lt;witness-ip&g
               <span>{{ $t('HALag') }}</span
               ><span>{{ lagText(m.lag) }}</span>
             </div>
+            <div v-if="m.version" class="ha-row">
+              <span>{{ $t('Version') }}</span
+              ><span>{{ m.version }}</span>
+            </div>
+            <div v-if="m.server_id" class="ha-row">
+              <span>{{ $t('LicenseServerId') }}</span
+              ><code>{{ m.server_id }}</code>
+            </div>
           </el-card>
         </div>
 
@@ -85,6 +93,13 @@ xpamctl ha init &lt;this-server-ip&gt; &lt;second-server-ip&gt; &lt;witness-ip&g
             {{ $t('HAAgentStale', { n: agent.age }) }}
           </div>
         </el-card>
+
+        <el-alert v-if="data.cluster_id" type="info" :closable="false" show-icon>
+          <template #title>
+            {{ $t('LicenseClusterId') }}: <code>{{ data.cluster_id }}</code>
+          </template>
+          <p class="ha-help">{{ $t('LicenseClusterHelp') }}</p>
+        </el-alert>
 
         <div class="ha-actions">
           <el-button

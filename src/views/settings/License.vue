@@ -123,6 +123,22 @@ export default {
             'Auto-detecting...'
         },
         {
+          key: this.$t('LicenseClusterId'),
+          value: this.licenseData?.current_cluster_id || '-'
+        },
+        {
+          key: this.$t('LicenseServerId'),
+          value: this.licenseData?.current_server_id || '-'
+        },
+        ...(this.licenseData?.servers
+          ? [
+              {
+                key: this.$t('LicenseServers'),
+                value: `${this.licenseData.servers.join(', ')} (${this.licenseData.servers.length} / ${this.licenseData.max_servers})`
+              }
+            ]
+          : []),
+        {
           key: this.$t('Users'),
           value: String(userLimit)
         },

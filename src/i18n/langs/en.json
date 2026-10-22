@@ -2763,5 +2763,9 @@
   "ProtectionDataKeyLegacy": "SECRET_KEY",
   "ProtectionSettings": "Vault settings",
   "ProtectionManagedOnServer": "Managed on the XPAM server",
-  "ProtectionVaultOffHelp": "XPAM's secrets (SECRET_KEY, database password) are in a file on this server. Vault keeps them off the disk. Turn it on on the server:"
+  "ProtectionVaultOffHelp": "XPAM's secrets (SECRET_KEY, database password) are in a file on this server. Vault keeps them off the disk. Turn it on on the server:",
+  "LicenseClusterId": "Cluster ID",
+  "LicenseServerId": "Server ID",
+  "LicenseServers": "Licensed servers",
+  "LicenseClusterHelp": "One licence covers this cluster: send the cluster ID and every server's ID to your vendor. A server that is not in the licence works with trial limits only until the licence lists it."
 }
