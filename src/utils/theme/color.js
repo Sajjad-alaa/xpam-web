@@ -143,6 +143,38 @@ export function getSavedThemeMode() {
   return localStorage.getItem('lina-theme-mode') || 'auto'
 }
 
+// 主题自带的配色是否为深色（看页面/侧栏背景），与当前生效的明暗模式无关
+function isDarkPalette(themeColors = {}) {
+  const bg =
+    themeColors['--page-background-color'] || themeColors['sidebarBg'] || themeColors['--menu-bg']
+  return Boolean(
+    bg &&
+    (bg === '#0f172a' ||
+      bg === '#090d16' ||
+      bg === '#0b1318' ||
+      bg === '#120e1f' ||
+      bg === '#1e293b' ||
+      bg === '#131b2e' ||
+      bg === '#111f26' ||
+      bg === '#1d1730' ||
+      bg.startsWith('#0') ||
+      bg.startsWith('#1'))
+  )
+}
+
+// 与明暗模式无关的品牌色，任何模式下都可以直接写到 :root
+const MODE_INDEPENDENT_KEYS = [
+  '--color-primary',
+  '--color-success',
+  '--color-info',
+  '--color-warning',
+  '--color-danger',
+  '--color-link',
+  '--menu-text-active',
+  '--menu-active-bg',
+  '--banner-bg'
+]
+
 export function isDarkMode(themeColors = {}) {
   if (themeColors && typeof themeColors === 'object') {
     if (themeColors.is_dark === true || themeColors.theme_mode === 'dark') {
@@ -151,21 +183,7 @@ export function isDarkMode(themeColors = {}) {
     if (themeColors.is_dark === false || themeColors.theme_mode === 'light') {
       return false
     }
-    const bg =
-      themeColors['--page-background-color'] || themeColors['sidebarBg'] || themeColors['--menu-bg']
-    if (
-      bg &&
-      (bg === '#0f172a' ||
-        bg === '#090d16' ||
-        bg === '#0b1318' ||
-        bg === '#120e1f' ||
-        bg === '#1e293b' ||
-        bg === '#131b2e' ||
-        bg === '#111f26' ||
-        bg === '#1d1730' ||
-        bg.startsWith('#0') ||
-        bg.startsWith('#1'))
-    ) {
+    if (isDarkPalette(themeColors)) {
       return true
     }
   }
@@ -210,6 +228,24 @@ export function changeMenuColor(themeColors = {}) {
 
   const dark = isDarkMode(colors)
   setDarkMode(dark)
+
+  // 主题配色与生效模式不一致（如默认的 midnight_dark + 明亮模式）时只保留品牌色，
+  // 表面/文字变量交给 default-theme.scss 里 :root / html.dark 的定义；否则深色主题的
+  // --color-text-primary (#f8fafc) 会以内联样式压在白色表格上（反之亦然）
+  const themeKeys = Object.keys(colors)
+  if (dark !== isDarkPalette(colors)) {
+    for (const key of themeKeys) {
+      if (key.startsWith('--') && !MODE_INDEPENDENT_KEYS.includes(key)) {
+        delete colors[key]
+      }
+    }
+  }
+  // 清掉本次不再提供的内联变量（包括 setRootColors 写入的明亮默认值），让样式表按模式生效
+  for (const key of new Set([...Object.keys(defaultThemeConfig), ...themeKeys])) {
+    if (!(key in colors) && !MODE_INDEPENDENT_KEYS.includes(key)) {
+      elementStyle.removeProperty(key)
+    }
+  }
 
   if (colors['primary'] && !colors['--color-primary']) {
     colors['--color-primary'] = colors['primary']
