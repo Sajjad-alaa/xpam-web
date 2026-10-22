@@ -1,7 +1,7 @@
 <template>
   <Page>
     <div v-loading="loading && !data" class="ha">
-      <ProtectionStatus :link="false" />
+      <ProtectionStatus :link="false" :show-ha="false" />
       <el-alert v-if="data && !data.enabled" type="info" :closable="false" show-icon>
         <template #title>{{ $t('HANotEnabled') }}</template>
         <p class="ha-help">{{ $t('HANotEnabledHelp') }}</p>
@@ -162,12 +162,17 @@ export default {
   },
   methods: {
     load() {
+      if (document.hidden && this.data) return // (not while the browser tab is in the background)
       this.loading = true
       this.$axios
         .get('/api/v1/settings/ha/status/')
         .then((data) => {
           this.data = data
           this.now = Math.floor(Date.now() / 1000)
+          if (!data.enabled) {
+            clearInterval(this.timer) // (nothing changes until 'xpamctl ha init' on the server)
+            this.timer = null
+          }
         })
         .finally(() => {
           this.loading = false

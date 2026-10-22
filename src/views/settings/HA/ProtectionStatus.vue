@@ -1,7 +1,7 @@
 <template>
   <el-card v-if="data" shadow="never" class="protection">
     <div class="protection-grid">
-      <div class="protection-item">
+      <div v-if="showHa" class="protection-item">
         <div class="protection-head">
           <b>{{ $t('HighAvailability') }}</b>
           <el-tag :type="haType" effect="dark" size="small">{{ haText }}</el-tag>
@@ -46,7 +46,7 @@
         </el-link>
       </div>
 
-      <div class="protection-item">
+      <div v-if="showVault" class="protection-item">
         <div class="protection-head">
           <b>Vault</b>
           <el-tag :type="vaultType" effect="dark" size="small">{{ vaultText }}</el-tag>
@@ -62,7 +62,7 @@
           <span v-if="vault.account_storage">
             {{ vault.account_storage_name }}
             <el-tag
-              v-if="vault.check"
+              v-if="vault.check && vault.check.ok !== null"
               :type="vault.check.ok ? 'success' : 'danger'"
               size="small"
               :title="vault.check.error"
@@ -84,7 +84,11 @@
           {{ $t('ProtectionVaultOffHelp') }}
           <code>xpamctl vault local</code> · <code>xpamctl vault connect &lt;bundle&gt;</code>
         </p>
-        <el-link v-if="link" type="primary" @click="go('/settings/features?tab=Vault')">
+        <el-link
+          v-if="link && $hasPerm('settings.change_vault')"
+          type="primary"
+          @click="go('/settings/features?tab=Vault')"
+        >
           {{ vault.enabled ? $t('ProtectionDetails') : $t('ProtectionHowToEnable') }}
         </el-link>
       </div>
@@ -98,7 +102,10 @@ export default {
   name: 'ProtectionStatus',
   props: {
     // show the links to the settings pages
-    link: { type: Boolean, default: true }
+    link: { type: Boolean, default: true },
+    // (a page that shows one of them in detail leaves it out)
+    showHa: { type: Boolean, default: true },
+    showVault: { type: Boolean, default: true }
   },
   data() {
     return { data: null }
@@ -122,20 +129,16 @@ export default {
     },
     vaultText() {
       if (!this.vault.enabled) return this.$t('ProtectionOff')
-      return this.vault.check && !this.vault.check.ok
+      return this.vault.check?.ok === false
         ? this.$t('ProtectionAttention')
         : this.$t('ProtectionOn')
     },
     vaultType() {
       if (!this.vault.enabled) return 'warning'
-      return this.vault.check && !this.vault.check.ok ? 'danger' : 'success'
+      return this.vault.check?.ok === false ? 'danger' : 'success'
     },
     roleText() {
-      return (
-        { primary: this.$t('HAPrimary'), standby: this.$t('HAStandby') }[this.ha.role] ||
-        this.ha.role ||
-        '-'
-      )
+      return { primary: this.$t('HAPrimary'), standby: this.$t('HAStandby') }[this.ha.role] || '-'
     },
     dataKeyText() {
       return (
@@ -143,7 +146,7 @@ export default {
           transit: this.$t('ProtectionDataKeyTransit'),
           local: this.$t('ProtectionDataKeyLocal'),
           legacy: this.$t('ProtectionDataKeyLegacy')
-        }[this.vault.data_key] || this.vault.data_key
+        }[this.vault.data_key] || '-'
       )
     }
   },
@@ -152,9 +155,12 @@ export default {
   },
   methods: {
     load() {
-      this.$axios.get('/api/v1/settings/protection/').then((data) => {
-        this.data = data
-      })
+      this.$axios
+        .get('/api/v1/settings/protection/')
+        .then((data) => {
+          this.data = data
+        })
+        .catch(() => {}) // (the card stays hidden)
     },
     go(path) {
       this.$router.push(path)

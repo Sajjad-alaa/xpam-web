@@ -46,7 +46,7 @@ export default {
         org_id: {
           label: this.$t('Organization'),
           component: Select2,
-          rules: [{ required: true, message: this.$t('Required'), trigger: 'change' }],
+          rules: [{ required: true, message: this.$t('FieldRequiredError'), trigger: 'change' }],
           el: {
             multiple: false,
             clearable: false,
@@ -66,6 +66,8 @@ export default {
         nodes: {
           label: this.$t('Nodes'),
           component: Select2,
+          // (shown once an organization is chosen: its asset groups, searched page by page)
+          hidden: (form) => !form.org_id,
           el: {
             multiple: true,
             value: [],

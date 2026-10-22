@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProtectionStatus :link="false" class="protection-status" />
+    <ProtectionStatus :link="false" :show-ha="false" class="protection-status" />
     <el-alert v-if="locked" type="warning" :closable="false" :title="$t('VaultLockedText')" />
     <el-alert v-if="dataKey.provider" type="success" :closable="false" class="data-key">
       <template #title>
