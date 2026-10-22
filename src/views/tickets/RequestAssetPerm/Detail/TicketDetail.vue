@@ -194,6 +194,12 @@ export default {
           value: object.apply_actions.map((item) => item.label).join(', ')
         },
         {
+          key: this.$t('Protocols'),
+          value: object.apply_protocols?.length
+            ? object.apply_protocols.join(', ')
+            : this.$t('AllProtocols')
+        },
+        {
           key: this.$tc('DateStart'),
           value: object.apply_date_start
         },
@@ -252,6 +258,12 @@ export default {
         {
           key: this.$tc('Action'),
           value: object.apply_actions.map((item) => item.label).join(', ')
+        },
+        {
+          key: this.$t('Protocols'),
+          value: object.apply_protocols?.length
+            ? object.apply_protocols.join(', ')
+            : this.$t('AllProtocols')
         },
         {
           key: this.$tc('DateStart'),

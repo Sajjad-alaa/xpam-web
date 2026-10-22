@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import ProtocolsSelect from '@/components/Form/FormFields/AllOrSpec.vue'
 import Select2 from '@/components/Form/FormFields/Select2'
 import { GenericCreateUpdatePage } from '@/layout/components'
 import store from '@/store'
@@ -41,7 +42,8 @@ export default {
         org_id: '',
         flow_id: '',
         cc_users: [],
-        apply_actions: [this.$t('All')]
+        apply_actions: [this.$t('All')],
+        apply_protocols: ['all']
       },
       fields: [
         [this.$t('Basic'), ['title', 'org_id', 'flow_id', 'cc_users']],
@@ -52,6 +54,7 @@ export default {
             'apply_assets',
             'apply_accounts',
             'apply_actions',
+            'apply_protocols',
             'apply_date_start',
             'apply_date_expired'
           ]
@@ -73,6 +76,19 @@ export default {
         apply_actions: {
           label: this.$t('Actions'),
           helpText: this.$t('ActionsTips')
+        },
+        // XPAM: the protocols asked for (the granted access is limited to them)
+        apply_protocols: {
+          label: this.$t('Protocols'),
+          helpText: this.$t('RequestProtocolsHelp'),
+          component: ProtocolsSelect,
+          el: {
+            resource: this.$t('Protocols'),
+            select2: {
+              url: '/api/v1/assets/protocols/',
+              ajax: { transformOption: (item) => ({ label: item.label, value: item.value }) }
+            }
+          }
         },
         apply_nodes: {
           label: this.$t('Node'),

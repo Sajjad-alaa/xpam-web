@@ -11,11 +11,13 @@
 <script>
 import { GenericDetailPage, TabPage } from '@/layout/components'
 import TicketDetail from './TicketDetail'
+import AccessTab from './AccessTab.vue'
 
 export default {
   components: {
     GenericDetailPage,
     TicketDetail,
+    AccessTab,
     TabPage
   },
   data() {
@@ -35,6 +37,11 @@ export default {
           {
             title: this.$t('TicketDetail'),
             name: 'TicketDetail'
+          },
+          {
+            // XPAM: the access the request gave (state, accounts, sessions; end, extend, revoke)
+            title: this.$t('TicketAccess'),
+            name: 'AccessTab'
           }
         ],
         actions: {

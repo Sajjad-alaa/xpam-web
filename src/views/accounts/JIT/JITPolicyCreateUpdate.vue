@@ -6,6 +6,7 @@
 import GenericCreateUpdatePage from '@/layout/components/GenericCreateUpdatePage'
 import { ResourceSelect } from '@/components/Form/FormFields'
 import WeekCronSelect from '@/components/Form/FormFields/WeekCronSelect.vue'
+import ProtocolsSelect from '@/components/Form/FormFields/AllOrSpec.vue'
 import { assetJSONSelectMeta } from '@/views/assets/const'
 import { userJSONSelectMeta } from '@/views/users/const'
 
@@ -49,7 +50,9 @@ export default {
         command_action: 'reject',
         credential_type: 'password',
         db_privilege: 'read_only',
-        device_role: 'read_only'
+        device_role: 'read_only',
+        protocols: ['all'],
+        actions: ['all']
       },
       fields: [
         [vm.$t('Basic'), ['name', 'priority', 'is_active']],
@@ -67,6 +70,8 @@ export default {
             'auto_approve_time_period'
           ]
         ],
+        // XPAM: what an access through the rule may allow; a request picks among them
+        [vm.$t('JITAccessAllows'), ['protocols', 'actions']],
         [vm.$t('JITRights'), ['privileged', 'credential_type']],
         [
           vm.$t('JITSecurity'),
@@ -90,6 +95,23 @@ export default {
         [vm.$t('Other'), ['comment']]
       ],
       fieldsMeta: {
+        protocols: {
+          label: vm.$t('JITAllowedProtocols'),
+          helpText: vm.$t('JITAllowedProtocolsHelp'),
+          component: ProtocolsSelect,
+          el: {
+            resource: vm.$t('Protocols'),
+            select2: {
+              url: '/api/v1/assets/protocols/',
+              ajax: { transformOption: (item) => ({ label: item.label, value: item.value }) }
+            }
+          }
+        },
+        actions: {
+          label: vm.$t('JITAllowedActions'),
+          helpText: vm.$t('JITAllowedActionsHelp'),
+          el: { expandAll: true }
+        },
         priority: {
           helpText: vm.$t('JITPriorityHelp')
         },

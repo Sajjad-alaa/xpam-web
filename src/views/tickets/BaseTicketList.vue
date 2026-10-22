@@ -116,7 +116,7 @@ export default {
         columnsExclude: ['process_map', 'rel_snapshot', 'cc_users'],
         columnsShow: {
           min: ['title', 'serial_num', 'type', 'state', 'date_created'],
-          default: ['title', 'serial_num', 'type', 'state', 'date_created']
+          default: ['title', 'serial_num', 'type', 'state', 'access_state', 'date_created']
         },
         columnsMeta: {
           serial_num: {
@@ -194,6 +194,34 @@ export default {
               },
               getTagLabel({ row }) {
                 return getTicketStateLabel(row.state, vm.$t) || vm.$t('Pending')
+              }
+            }
+          },
+          // XPAM: for an approved access request, the access it gave
+          access_state: {
+            label: this.$t('TicketAccess'),
+            align: 'center',
+            formatter: TagChoicesFormatter,
+            formatterArgs: {
+              getTagType({ row }) {
+                return (
+                  { active: 'success', scheduled: 'primary', ended: 'warning', expired: 'info' }[
+                    row.access_state?.state
+                  ] || 'info'
+                )
+              },
+              getTagLabel({ row }) {
+                const s = row.access_state
+                if (!s) return '-'
+                const label = {
+                  active: vm.$t('TicketAccessActive'),
+                  scheduled: vm.$t('TicketAccessScheduled'),
+                  ended: vm.$t('TicketAccessEnded'),
+                  expired: vm.$t('TicketAccessExpired')
+                }[s.state]
+                return s.state === 'active'
+                  ? `${label} · ${toSafeLocalDateStr(s.date_expired)}`
+                  : label
               }
             }
           },
