@@ -5,7 +5,7 @@
         <template #title>{{ $t('HANotEnabled') }}</template>
         <p class="ha-help">{{ $t('HANotEnabledHelp') }}</p>
         <pre class="ha-cmd">
-xpamctl ha init &lt;this-server-ip&gt; &lt;second-server-ip&gt; &lt;witness-ip&gt;</pre>
+xpamctl ha init &lt;this-server-ip&gt; &lt;second-server-ip&gt; &lt;witness-ip&gt; --vault-bundle &lt;xpam-vault-SECOND.enc&gt;</pre>
       </el-alert>
 
       <template v-if="data && data.enabled">
@@ -61,6 +61,16 @@ xpamctl ha init &lt;this-server-ip&gt; &lt;second-server-ip&gt; &lt;witness-ip&g
             <span>{{ $t('HAWitness') }} ({{ agent.witness_ip }})</span>
             <el-tag :type="agent.witness_reachable ? 'success' : 'danger'" size="small">
               {{ agent.witness_reachable ? $t('HAReachable') : $t('HANotReachable') }}
+            </el-tag>
+          </div>
+          <div
+            v-for="node in (agent.vault && agent.vault.nodes) || []"
+            :key="node.addr"
+            class="ha-row"
+          >
+            <span>Vault ({{ node.addr.replace('https://', '') }})</span>
+            <el-tag :type="node.state === 'ok' ? 'success' : 'danger'" size="small">
+              {{ node.state === 'ok' ? $t('HAReachable') : node.state }}
             </el-tag>
           </div>
           <div v-if="agent.file_sync && agent.file_sync.time" class="ha-row">
