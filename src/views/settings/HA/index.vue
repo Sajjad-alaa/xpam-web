@@ -6,7 +6,9 @@
         <template #title>{{ $t('HANotEnabled') }}</template>
         <p class="ha-help">{{ $t('HANotEnabledHelp') }}</p>
         <pre class="ha-cmd">
-xpamctl ha init &lt;this-server-ip&gt; &lt;second-server-ip&gt; &lt;witness-ip&gt; --vault-bundle &lt;xpam-vault-SECOND.enc&gt;</pre>
+xpamctl ha init
+xpamctl ha init --topology active-passive --servers &lt;this-ip&gt;,&lt;ip-2&gt; --witness &lt;witness-ip&gt; --vault-bundle &lt;xpam-vault-IP-2.enc&gt;
+xpamctl ha init --topology active-active --servers &lt;this-ip&gt;,&lt;ip-2&gt;,&lt;ip-3&gt; --vault-bundle &lt;xpam-vault-IP-2.enc&gt;,&lt;xpam-vault-IP-3.enc&gt;</pre>
       </el-alert>
 
       <template v-if="data && data.enabled">
@@ -57,16 +59,20 @@ xpamctl ha init &lt;this-server-ip&gt; &lt;second-server-ip&gt; &lt;witness-ip&g
 
         <el-card v-if="agent" shadow="never" class="ha-agent">
           <div class="ha-row">
+            <span>{{ $t('HATopology') }}</span>
+            <el-tag size="small" type="primary">{{ topologyText }}</el-tag>
+          </div>
+          <div class="ha-row">
             <span>{{ $t('HAServices') }}</span>
             <span>{{ agent.app_running ? $t('HARunning') : $t('HAStopped') }}</span>
           </div>
-          <div class="ha-row">
-            <span>{{ $t('HAOtherServer') }}</span>
-            <el-tag :type="agent.peer_reachable ? 'success' : 'danger'" size="small">
-              {{ agent.peer_reachable ? $t('HAReachable') : $t('HANotReachable') }}
+          <div v-for="(ok, ip) in peers" :key="ip" class="ha-row">
+            <span>{{ $t('HAOtherServer') }} ({{ ip }})</span>
+            <el-tag :type="ok ? 'success' : 'danger'" size="small">
+              {{ ok ? $t('HAReachable') : $t('HANotReachable') }}
             </el-tag>
           </div>
-          <div class="ha-row">
+          <div v-if="agent.witness_ip" class="ha-row">
             <span>{{ $t('HAWitness') }} ({{ agent.witness_ip }})</span>
             <el-tag :type="agent.witness_reachable ? 'success' : 'danger'" size="small">
               {{ agent.witness_reachable ? $t('HAReachable') : $t('HANotReachable') }}
@@ -130,6 +136,16 @@ export default {
   computed: {
     agent() {
       return this.data?.agent
+    },
+    peers() {
+      // every other server: {ip: reachable} (two-server agents of earlier versions: one flag)
+      const a = this.agent || {}
+      if (a.peers && Object.keys(a.peers).length) return a.peers
+      return a.peer_ip ? { [a.peer_ip]: a.peer_reachable } : {}
+    },
+    topologyText() {
+      const t = this.agent?.topology || 'active-passive'
+      return t === 'active-active' ? this.$t('HAActiveActive') : this.$t('HAActivePassive')
     },
     hasSyncStandby() {
       return (this.data?.members || []).some(

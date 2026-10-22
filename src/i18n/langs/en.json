@@ -2721,7 +2721,7 @@
   "DeviceDetectSame": "Platform was already right",
   "HighAvailability": "High availability",
   "HANotEnabled": "High availability is not enabled",
-  "HANotEnabledHelp": "Two XPAM servers (primary and standby) and a small witness machine: if the primary fails, the standby takes over by itself, with XPAM running there again within about a minute and no data lost. Install the same XPAM version on the second server, then run on this server:",
+  "HANotEnabledHelp": "Choose active-passive (one server serves users, the others take over by themselves; 2 to 5 servers, with a small witness machine for 2 or 4) or active-active (every server serves users behind a load balancer; 3 or 5 servers). Install the same XPAM version on the other servers, then run on this server (it asks which):",
   "HANoSyncStandby": "No standby is in sync: if the primary fails now, XPAM does not switch by itself (xpamctl ha status on the servers).",
   "HAHealthy": "Protected: the standby is in sync and takes over by itself if the primary fails.",
   "HAThisServer": "this server",
@@ -2767,5 +2767,8 @@
   "LicenseClusterId": "Cluster ID",
   "LicenseServerId": "Server ID",
   "LicenseServers": "Licensed servers",
-  "LicenseClusterHelp": "One licence covers this cluster: send the cluster ID and every server's ID to your vendor. A server that is not in the licence works with trial limits only until the licence lists it."
+  "LicenseClusterHelp": "One licence covers this cluster: send the cluster ID and every server's ID to your vendor. A server that is not in the licence works with trial limits only until the licence lists it.",
+  "HATopology": "Topology",
+  "HAActiveActive": "Active-active (every server serves users)",
+  "HAActivePassive": "Active-passive (the primary serves users)"
 }

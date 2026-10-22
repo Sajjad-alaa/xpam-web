@@ -8,6 +8,15 @@
         </div>
         <template v-if="ha.enabled">
           <div class="protection-row">
+            <span>{{ $t('HATopology') }}</span>
+            <span
+              >{{
+                ha.topology === 'active-active' ? $t('HAActiveActive') : $t('HAActivePassive')
+              }}
+              · {{ ha.servers }}</span
+            >
+          </div>
+          <div class="protection-row">
             <span>{{ $t('HAPrimary') }}</span
             ><span>{{ ha.primary || '-' }}</span>
           </div>
@@ -21,7 +30,10 @@
               {{ ha.standby_in_sync ? $t('Yes') : $t('No') }}
             </el-tag>
           </div>
-          <div class="protection-row">
+          <div
+            v-if="ha.witness_reachable !== null && ha.witness_reachable !== undefined"
+            class="protection-row"
+          >
             <span>{{ $t('HAWitness') }}</span>
             <el-tag :type="ha.witness_reachable ? 'success' : 'danger'" size="small">
               {{ ha.witness_reachable ? $t('HAReachable') : $t('HANotReachable') }}
