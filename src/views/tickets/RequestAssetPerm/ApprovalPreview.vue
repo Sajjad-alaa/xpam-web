@@ -31,6 +31,8 @@ export default {
     assets: { type: Array, default: () => [] },
     nodes: { type: Array, default: () => [] },
     accounts: { type: Array, default: () => [] },
+    protocols: { type: Array, default: null },
+    actions: { type: Array, default: null },
     dateStart: { type: String, default: '' },
     dateExpired: { type: String, default: '' },
     reason: { type: String, default: '' },
@@ -41,7 +43,7 @@ export default {
   },
   computed: {
     request() {
-      return {
+      const req = {
         assets: this.assets || [],
         nodes: this.nodes || [],
         accounts: this.accounts && this.accounts.length ? this.accounts : ['@JIT'],
@@ -50,6 +52,10 @@ export default {
         reason: this.reason || '',
         flow_id: this.flowId || ''
       }
+      if (this.protocols && this.protocols.length) req.protocols = this.protocols
+      // (the actions too: a rule that limits them does not approve "All" by itself)
+      if (this.actions && this.actions.length) req.actions = this.actions
+      return req
     }
   },
   watch: {
