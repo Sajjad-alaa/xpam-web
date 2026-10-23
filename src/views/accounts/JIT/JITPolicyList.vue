@@ -110,6 +110,12 @@ export default {
               if (row.auto_approve) {
                 tags.push(['success', this.$t('JITAutoShort', { h: row.auto_approve_max_hours })])
               }
+              if (row.approval_route?.value === 'approvers') {
+                tags.push(['warning', 'Custom Approvers'])
+              } else if (row.self_service) {
+                const flowName = row.approval_flow?.name || 'Default Flow'
+                tags.push(['primary', `Flow: ${flowName}`])
+              }
               if (row.approvals_required > 1) {
                 tags.push(['warning', this.$t('JITTwoApproversShort')])
               }

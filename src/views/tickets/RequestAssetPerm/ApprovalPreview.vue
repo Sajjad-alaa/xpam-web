@@ -8,7 +8,20 @@
       </span>
     </template>
     <template v-else>
-      <el-tag type="warning" size="small">{{ $t('JITPreviewApproval') }}</el-tag>
+      <div class="approval-preview-badges">
+        <el-tag type="warning" size="small">{{ $t('JITPreviewApproval') }}</el-tag>
+        <el-tag
+          v-if="preview.policies && preview.policies.length"
+          type="primary"
+          effect="plain"
+          size="small"
+        >
+          JIT Rule: {{ preview.policies.join(', ') }}
+        </el-tag>
+        <el-tag v-if="preview.flow" type="info" effect="plain" size="small">
+          Flow: {{ preview.flow }}
+        </el-tag>
+      </div>
       <div v-if="preview.why" class="approval-preview-text">
         {{ $t('JITPreviewWhy', { why: preview.why }) }}
       </div>
@@ -36,7 +49,8 @@ export default {
     dateStart: { type: String, default: '' },
     dateExpired: { type: String, default: '' },
     reason: { type: String, default: '' },
-    flowId: { type: String, default: '' }
+    flowId: { type: String, default: '' },
+    onPreview: { type: Function, default: null }
   },
   data() {
     return { preview: null, timer: null, seq: 0 }
@@ -76,6 +90,7 @@ export default {
       const req = this.request
       if (!req.assets.length && !req.nodes.length) {
         this.preview = null
+        if (this.onPreview) this.onPreview(null)
         return
       }
       const seq = ++this.seq
@@ -83,9 +98,15 @@ export default {
         const res = await this.$axios.post('/api/v1/accounts/jit-access/preview/', req, {
           disableFlashErrorMsg: true
         })
-        if (seq === this.seq) this.preview = res && (res.instant || res.route?.length) ? res : null
+        if (seq === this.seq) {
+          this.preview = res && (res.instant || res.route?.length) ? res : null
+          if (this.onPreview) this.onPreview(this.preview)
+        }
       } catch (e) {
-        if (seq === this.seq) this.preview = null
+        if (seq === this.seq) {
+          this.preview = null
+          if (this.onPreview) this.onPreview(null)
+        }
       }
     }
   }
@@ -96,6 +117,12 @@ export default {
 .approval-preview {
   line-height: 1.8;
   font-size: 13px;
+}
+.approval-preview-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 .approval-preview-muted {
   color: var(--el-text-color-secondary);

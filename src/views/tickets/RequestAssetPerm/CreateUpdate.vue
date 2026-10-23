@@ -166,6 +166,7 @@ export default {
         flow_id: {
           component: Select2,
           label: this.$t('TicketFlow'),
+          helpText: '',
           el: {
             multiple: false,
             clearable: false,
@@ -192,9 +193,11 @@ export default {
             dateStart: '',
             dateExpired: '',
             reason: '',
-            flowId: ''
+            flowId: '',
+            onPreview: (preview) => this.handleJitPreview(preview)
           },
           hidden: (form) => {
+            this.currentFormRef = form
             Object.assign(this.fieldsMeta.jit_route.el, {
               assets: form.apply_assets || [],
               nodes: form.apply_nodes || [],
@@ -292,6 +295,29 @@ export default {
         return flows[0] || null
       } catch (error) {
         return null
+      }
+    },
+    handleJitPreview(preview) {
+      if (preview && preview.policy_locks_flow) {
+        if (
+          preview.policy_flow_id &&
+          this.currentFormRef &&
+          this.currentFormRef.flow_id !== preview.policy_flow_id
+        ) {
+          this.currentFormRef.flow_id = preview.policy_flow_id
+          const matched = this.flowOptions.find((f) => f.id === preview.policy_flow_id)
+          if (matched) {
+            this.currentFormRef.cc_users = matched.cc_users || []
+          }
+        }
+        this.fieldsMeta.flow_id.el.disabled = true
+        const rules = (preview.policies || preview.rules || []).join(', ')
+        this.fieldsMeta.flow_id.helpText = rules
+          ? `Automatically selected by JIT Policy: ${rules}`
+          : ''
+      } else {
+        this.fieldsMeta.flow_id.el.disabled = this.flowOptions.length <= 1
+        this.fieldsMeta.flow_id.helpText = ''
       }
     },
     performSubmit(validValues) {

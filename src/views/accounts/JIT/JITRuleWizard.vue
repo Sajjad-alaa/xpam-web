@@ -92,6 +92,11 @@
           <el-radio value="flow">{{ $t('JITWizApproverFlow') }}</el-radio>
           <el-radio value="people">{{ $t('JITWizApproverPeople') }}</el-radio>
         </el-radio-group>
+        <JITApprovalFlowSelect
+          v-if="approverMode === 'flow'"
+          v-model="form.approval_flow"
+          class="wiz-approver-select"
+        />
         <JSONManyToManySelect
           v-if="approverMode === 'people'"
           v-bind="approverMeta.el"
@@ -162,12 +167,13 @@
 import { markRaw } from 'vue'
 import { Lightning, Stamp, Lock, EditPen, Avatar, UserFilled } from '@element-plus/icons-vue'
 import JSONManyToManySelect from '@/components/Form/FormFields/JSONManyToManySelect/index.vue'
+import JITApprovalFlowSelect from './JITApprovalFlowSelect.vue'
 import { assetJSONSelectMeta } from '@/views/assets/const'
 import { userJSONSelectMeta } from '@/views/users/const'
 
 export default {
   name: 'JITRuleWizard',
-  components: { JSONManyToManySelect },
+  components: { JSONManyToManySelect, JITApprovalFlowSelect },
   props: { visible: { type: Boolean, default: false } },
   emits: ['update:visible', 'created', 'advanced'],
   data() {
@@ -339,6 +345,7 @@ export default {
         require_mfa: false,
         device_role: 'read_only',
         max_hours: 2,
+        approval_flow: null,
         approvers: { type: 'ids', ids: [] }
       }
     },
@@ -349,6 +356,7 @@ export default {
       const keep = {
         users: this.form.users,
         assets: this.form.assets,
+        approval_flow: this.form.approval_flow,
         approvers: this.form.approvers
       }
       this.form = {
@@ -392,6 +400,10 @@ export default {
         approvals_required: this.approval === 'two' ? 2 : 1,
         approval_route:
           this.approval !== 'instant' && this.approverMode === 'people' ? 'approvers' : 'flow',
+        approval_flow:
+          this.approval !== 'instant' && this.approverMode === 'flow'
+            ? this.form.approval_flow
+            : null,
         approvers:
           this.approval !== 'instant' && this.approverMode === 'people' ? this.form.approvers : {},
         end_sessions_on_expiry: true,
