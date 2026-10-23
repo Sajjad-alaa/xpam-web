@@ -108,7 +108,9 @@ export default [
       app: 'accounts',
       name: 'JITAccess',
       resource: 'jitpolicy',
-      icon: 'key'
+      icon: 'key',
+      licenseRequired: true,
+      hidden: ({ settings }) => !settings['TICKETS_ENABLED']
     },
     children: [
       {
@@ -118,6 +120,8 @@ export default [
         meta: {
           title: i18n.t('JITAccess'),
           menuTitle: i18n.t('JITAccess'),
+          licenseRequired: true,
+          hidden: ({ settings }) => !settings['TICKETS_ENABLED'],
           permissions: ['accounts.view_jitpolicy']
         }
       },

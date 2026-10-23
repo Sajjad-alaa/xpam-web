@@ -16,6 +16,7 @@ export default {
     showNavSwitcher: false,
     resource: 'ticket',
     licenseRequired: true,
+    hidden: ({ settings }) => !settings['TICKETS_ENABLED'],
     permissions: ['tickets.view_ticket']
   },
   children: [

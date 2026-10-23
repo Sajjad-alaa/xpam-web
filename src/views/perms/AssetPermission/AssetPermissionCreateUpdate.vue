@@ -45,6 +45,11 @@ export default {
     if (this.$route.query['asset_id']) {
       assetsInitial.push(this.$route.query.asset_id)
     }
+    const jitEnabled = Boolean(
+      this.$hasTicketLicense &&
+      this.$hasTicketLicense() &&
+      this.$store?.getters?.publicSettings?.['TICKETS_ENABLED']
+    )
     return {
       initial: {
         nodes: nodesInitial,
@@ -57,7 +62,7 @@ export default {
         [this.$t('User'), ['users', 'user_groups']],
         [this.$t('Asset'), ['assets', 'nodes']],
         [this.$t('Account'), ['accounts']],
-        [this.$t('JITAccess'), ['jit_disabled', 'jit_policy']],
+        ...(jitEnabled ? [[this.$t('JITAccess'), ['jit_disabled', 'jit_policy']]] : []),
         [this.$t('Protocol'), ['protocols']],
         [this.$t('Action'), ['actions']],
         [this.$t('Other'), ['is_active', 'date_start', 'date_expired', 'comment']]

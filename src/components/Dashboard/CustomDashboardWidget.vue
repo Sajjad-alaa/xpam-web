@@ -5,6 +5,11 @@
       <span>{{ $t('NoPermission') || 'You do not have permission to view this widget' }}</span>
     </div>
 
+    <div v-else-if="isJitWidget && !jitEnabled" class="cd-widget-denied">
+      <i class="fa fa-ticket" />
+      <span>Tickets must be enabled and licensed to view Just-in-Time widgets</span>
+    </div>
+
     <ProtectionStatus v-else-if="widget === 'protection_status'" :key="renderKey" />
 
     <RealTimeSummary
@@ -139,6 +144,16 @@ export default {
   computed: {
     renderKey() {
       return `${this.widget}_${this.days}_${this.refreshKey}`
+    },
+    isJitWidget() {
+      return String(this.widget || '').startsWith('jit_')
+    },
+    jitEnabled() {
+      return Boolean(
+        this.$hasTicketLicense &&
+        this.$hasTicketLicense() &&
+        this.$store?.getters?.publicSettings?.['TICKETS_ENABLED']
+      )
     }
   }
 }

@@ -265,7 +265,9 @@
         <el-radio-group v-model="galleryCategory" size="small" style="margin-bottom: 14px">
           <el-radio-button value="all">All</el-radio-button>
           <el-radio-button value="console">Console</el-radio-button>
-          <el-radio-button value="jit">JIT &amp; ZSP</el-radio-button>
+          <el-radio-button v-if="catalog.some((w) => w.category === 'jit')" value="jit">
+            JIT &amp; ZSP
+          </el-radio-button>
           <el-radio-button value="pam">PAM &amp; Vault</el-radio-button>
           <el-radio-button value="audit">SOC &amp; Audit</el-radio-button>
         </el-radio-group>

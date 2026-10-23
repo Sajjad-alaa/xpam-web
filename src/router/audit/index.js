@@ -89,6 +89,7 @@ export default {
         title: i18n.t('TicketsAudit'),
         icon: 'job',
         licenseRequired: true,
+        hidden: ({ settings }) => !settings['TICKETS_ENABLED'],
         permissions: ['tickets.view_ticket']
       },
       children: TicketRoutes
