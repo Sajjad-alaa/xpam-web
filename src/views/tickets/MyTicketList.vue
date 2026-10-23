@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     url() {
-      return `/api/v1/tickets/tickets/?applicant=${this.currentUser.id}&state=pending`
+      return `/api/v1/tickets/tickets/?applicant=${this.currentUser.id}`
     },
     ...mapGetters(['currentUser'])
   }

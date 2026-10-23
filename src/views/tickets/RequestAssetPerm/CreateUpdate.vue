@@ -35,6 +35,8 @@ export default {
       hasDetailInMsg: false,
       loading: true,
       flowOptions: [],
+      latestJitPreview: null,
+      jitSelectionKey: '',
       initial: {
         ips_or_not: true,
         apply_date_expired: date_expired,
@@ -194,7 +196,7 @@ export default {
             dateExpired: '',
             reason: '',
             flowId: '',
-            onPreview: (preview) => this.handleJitPreview(preview)
+            onPreview: (preview, updateForm) => this.handleJitPreview(preview, updateForm)
           },
           hidden: (form) => {
             this.currentFormRef = form
@@ -206,7 +208,7 @@ export default {
               actions: (form.apply_actions || []).map((a) => (a === this.$t('All') ? 'all' : a)),
               dateStart: form.apply_date_start || '',
               dateExpired: form.apply_date_expired || '',
-              reason: form.comment || '',
+              reason: (form.comment || '').trim(),
               flowId: form.flow_id || ''
             })
             return false
@@ -227,6 +229,13 @@ export default {
             apply_actions[index] = 'all'
           }
         })
+        if (
+          this.latestJitPreview &&
+          this.latestJitPreview.covered &&
+          (!value.apply_accounts || value.apply_accounts.length < 1)
+        ) {
+          value.apply_accounts = ['@JIT']
+        }
 
         Object.keys(value).forEach((item, index, arr) => {
           if (['apply_accounts', 'apply_assets', 'apply_nodes'].includes(item)) {
@@ -297,17 +306,26 @@ export default {
         return null
       }
     },
-    handleJitPreview(preview) {
-      if (preview && preview.policy_locks_flow) {
-        if (
-          preview.policy_flow_id &&
-          this.currentFormRef &&
-          this.currentFormRef.flow_id !== preview.policy_flow_id
-        ) {
-          this.currentFormRef.flow_id = preview.policy_flow_id
+    handleJitPreview(preview, updateForm) {
+      this.latestJitPreview = preview
+      const form = this.currentFormRef
+      const selectionKey = form
+        ? [...(form.apply_assets || []), ...(form.apply_nodes || [])].sort().join(',')
+        : ''
+      if (!selectionKey || !preview || !preview.covered) {
+        if (!selectionKey) this.jitSelectionKey = ''
+        this.fieldsMeta.flow_id.el.disabled = this.flowOptions.length <= 1
+        this.fieldsMeta.flow_id.helpText = ''
+        return
+      }
+
+      const patch = {}
+      if (preview.policy_locks_flow) {
+        if (preview.policy_flow_id && form && form.flow_id !== preview.policy_flow_id) {
+          patch.flow_id = preview.policy_flow_id
           const matched = this.flowOptions.find((f) => f.id === preview.policy_flow_id)
           if (matched) {
-            this.currentFormRef.cc_users = matched.cc_users || []
+            patch.cc_users = matched.cc_users || []
           }
         }
         this.fieldsMeta.flow_id.el.disabled = true
@@ -319,9 +337,104 @@ export default {
         this.fieldsMeta.flow_id.el.disabled = this.flowOptions.length <= 1
         this.fieldsMeta.flow_id.helpText = ''
       }
+
+      if (form) {
+        const targetHours = preview.auto_approve_hours || preview.max_hours || 0
+        const startMs = new Date(form.apply_date_start || Date.now()).getTime()
+        const endMs = new Date(form.apply_date_expired || Date.now()).getTime()
+        const askedHours = (endMs - startMs) / 3600000
+        const exceedsMax = preview.max_hours > 0 && askedHours > preview.max_hours + 0.02
+        if (targetHours > 0 && (this.jitSelectionKey !== selectionKey || exceedsMax)) {
+          this.jitSelectionKey = selectionKey
+          const now = new Date()
+          const end = new Date(now.getTime() + targetHours * 3600 * 1000)
+          patch.apply_date_start = now.toISOString()
+          patch.apply_date_expired = end.toISOString()
+        } else if (this.jitSelectionKey !== selectionKey) {
+          this.jitSelectionKey = selectionKey
+        }
+        if (
+          Array.isArray(preview.allowed_actions) &&
+          preview.allowed_actions.length &&
+          !preview.allowed_actions.includes('all')
+        ) {
+          const curActions = form.apply_actions || []
+          if (curActions.includes('all') || curActions.includes(this.$t('All'))) {
+            patch.apply_actions = [...preview.allowed_actions]
+          }
+        }
+        if (
+          Array.isArray(preview.allowed_protocols) &&
+          preview.allowed_protocols.length &&
+          !preview.allowed_protocols.includes('all')
+        ) {
+          const curProtos = form.apply_protocols || []
+          if (curProtos.includes('all')) {
+            patch.apply_protocols = [...preview.allowed_protocols]
+          }
+        }
+      }
+
+      if (Object.keys(patch).length > 0) {
+        if (form) Object.assign(form, patch)
+        if (typeof updateForm === 'function') updateForm(patch)
+      }
     },
-    performSubmit(validValues) {
-      return this.$axios['post'](`/api/v1/tickets/apply-asset-tickets/open/`, validValues)
+    async performSubmit(validValues) {
+      let preview = this.latestJitPreview
+      if (
+        !preview &&
+        ((validValues.apply_assets && validValues.apply_assets.length) ||
+          (validValues.apply_nodes && validValues.apply_nodes.length))
+      ) {
+        try {
+          preview = await this.$axios.post(
+            '/api/v1/accounts/jit-access/preview/',
+            {
+              assets: validValues.apply_assets || [],
+              nodes: validValues.apply_nodes || [],
+              accounts:
+                validValues.apply_accounts && validValues.apply_accounts.length
+                  ? validValues.apply_accounts
+                  : ['@JIT'],
+              date_start: validValues.apply_date_start,
+              date_expired: validValues.apply_date_expired,
+              reason: validValues.comment || ''
+            },
+            { disableFlashErrorMsg: true }
+          )
+        } catch (e) {
+          preview = null
+        }
+      }
+      if (preview && preview.covered) {
+        if (!validValues.apply_accounts || !validValues.apply_accounts.length) {
+          validValues.apply_accounts = ['@JIT']
+        }
+        if (preview.policy_locks_flow && preview.policy_flow_id) {
+          validValues.flow_id = preview.policy_flow_id
+        }
+        const targetHours = preview.auto_approve_hours || preview.max_hours || 0
+        const startMs = new Date(validValues.apply_date_start || Date.now()).getTime()
+        const endMs = new Date(validValues.apply_date_expired || Date.now()).getTime()
+        const askedHours = (endMs - startMs) / 3600000
+        if (targetHours > 0 && preview.max_hours > 0 && askedHours > preview.max_hours + 0.02) {
+          const start = new Date()
+          const end = new Date(start.getTime() + targetHours * 3600 * 1000)
+          validValues.apply_date_start = start.toISOString()
+          validValues.apply_date_expired = end.toISOString()
+        }
+      }
+      const res = await this.$axios['post'](
+        `/api/v1/tickets/apply-asset-tickets/open/`,
+        validValues
+      )
+      if (res && res.apply_jit_auto) {
+        this.$message.success(
+          `Approved automatically by JIT Policy "${res.apply_jit_auto}" — access is active now!`
+        )
+      }
+      return res
     }
   }
 }
