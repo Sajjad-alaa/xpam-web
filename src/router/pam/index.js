@@ -35,6 +35,16 @@ export default {
       }
     },
     {
+      path: '/pam/custom-dashboards',
+      component: () => import('@/views/dashboard/Custom/index.vue'),
+      name: 'PamCustomDashboards',
+      meta: {
+        icon: 'dashboard',
+        title: 'Custom Dashboards',
+        permissions: []
+      }
+    },
+    {
       path: '/pam/accounts',
       name: 'PamAccounts',
       component: () => import('@/views/accounts/PAM/index.vue'),

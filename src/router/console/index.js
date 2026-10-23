@@ -37,6 +37,16 @@ export default {
       }
     },
     {
+      path: '/console/custom-dashboards',
+      component: () => import('@/views/dashboard/Custom/index.vue'),
+      name: 'ConsoleCustomDashboards',
+      meta: {
+        icon: 'dashboard',
+        title: 'Custom Dashboards',
+        permissions: []
+      }
+    },
+    {
       path: '/console/users',
       component: empty,
       name: 'Users',

@@ -2,7 +2,9 @@
   <Page>
     <div v-if="$hasPerm('rbac.view_audit')">
       <Announcement />
-      <AuditReport :only-charts="true" :nav="false" />
+      <MultiDashboardHost section-scope="audit" :builtin-title="$t('AuditsDashboard')">
+        <AuditReport :only-charts="true" :nav="false" />
+      </MultiDashboardHost>
     </div>
     <Page403 v-else />
   </Page>
@@ -13,6 +15,7 @@ import { Announcement } from '@/components'
 import { Page } from '@/layout/components'
 import Page403 from '@/views/403'
 import AuditReport from '@/views/reports/audits/Dashboard.vue'
+import MultiDashboardHost from '@/components/Dashboard/MultiDashboardHost.vue'
 import { scopedLocalStorage as localStorage } from '@/utils/storage'
 
 export default {
@@ -20,7 +23,8 @@ export default {
     Page,
     Announcement,
     Page403,
-    AuditReport
+    AuditReport,
+    MultiDashboardHost
   },
   data() {
     return {

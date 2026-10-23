@@ -2,7 +2,9 @@
   <Page>
     <div v-if="$hasPerm('rbac.view_pam')">
       <Announcement />
-      <PamReport :nav="false" :only-charts="true" />
+      <MultiDashboardHost section-scope="pam" :builtin-title="$t('PamDashboard')">
+        <PamReport :nav="false" :only-charts="true" />
+      </MultiDashboardHost>
     </div>
     <Page403 v-else />
   </Page>
@@ -13,6 +15,7 @@ import { Page } from '@/layout/components'
 import { Announcement } from '@/components'
 import Page403 from '@/views/403'
 import PamReport from '@/views/reports/pam/Dashboard/index.vue'
+import MultiDashboardHost from '@/components/Dashboard/MultiDashboardHost.vue'
 
 export default {
   name: 'Dashboard',
@@ -20,7 +23,8 @@ export default {
     Page,
     Page403,
     Announcement,
-    PamReport
+    PamReport,
+    MultiDashboardHost
   },
   data() {
     return {

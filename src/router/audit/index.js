@@ -35,6 +35,16 @@ export default {
       }
     },
     {
+      path: '/audit/custom-dashboards',
+      component: () => import('@/views/dashboard/Custom/index.vue'),
+      name: 'AuditCustomDashboards',
+      meta: {
+        icon: 'dashboard',
+        title: 'Custom Dashboards',
+        permissions: []
+      }
+    },
+    {
       path: '/audit/sessions',
       component: empty,
       name: 'AuditSessions',
