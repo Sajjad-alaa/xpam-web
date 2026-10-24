@@ -124,6 +124,23 @@
         :value-on-clear="2"
         class="wiz-custom"
       />
+      <div class="wiz-switches" style="margin-top: 12px">
+        <el-switch v-model="form.allow_extension" active-text="Allow session / access extensions" />
+      </div>
+      <div
+        v-if="form.allow_extension"
+        style="margin-top: 8px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center"
+      >
+        <el-radio-group v-model="form.extension_approval" size="small">
+          <el-radio-button value="same">Same as initial request</el-radio-button>
+          <el-radio-button value="auto">Auto-approve extensions</el-radio-button>
+          <el-radio-button value="manual">Manual approval for extensions</el-radio-button>
+        </el-radio-group>
+        <span style="font-size: 12px; color: var(--el-text-color-secondary)">
+          Max extensions (0 = unlimited):
+        </span>
+        <el-input-number v-model="form.max_extensions" size="small" :min="0" :max="50" />
+      </div>
       <p class="wiz-q wiz-name-q">{{ $t('JITWizName') }}</p>
       <el-input v-model="form.name" :placeholder="$t('Name')" maxlength="128" />
       <el-alert type="success" :closable="false" class="wiz-summary" :title="summary" />
@@ -345,6 +362,9 @@ export default {
         require_mfa: false,
         device_role: 'read_only',
         max_hours: 2,
+        allow_extension: true,
+        extension_approval: 'same',
+        max_extensions: 0,
         approval_flow: null,
         approvers: { type: 'ids', ids: [] }
       }
@@ -365,6 +385,9 @@ export default {
         require_mfa: false,
         device_role: 'read_only',
         max_hours: 2,
+        allow_extension: true,
+        extension_approval: 'same',
+        max_extensions: 0,
         ...keep
       }
       this.approval = approval || 'instant'
@@ -397,6 +420,10 @@ export default {
         max_hours: this.form.max_hours,
         auto_approve: auto,
         auto_approve_max_hours: this.form.max_hours,
+        allow_extension: this.form.allow_extension,
+        extension_approval: this.form.extension_approval || 'same',
+        extension_max_hours: this.form.max_hours,
+        max_extensions: this.form.max_extensions || 0,
         approvals_required: this.approval === 'two' ? 2 : 1,
         approval_route:
           this.approval !== 'instant' && this.approverMode === 'people' ? 'approvers' : 'flow',

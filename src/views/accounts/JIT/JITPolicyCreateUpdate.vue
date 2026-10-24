@@ -46,6 +46,10 @@ export default {
         auto_approve_max_hours: 4,
         auto_approve_time_period: [],
         approvals_required: 1,
+        allow_extension: true,
+        extension_approval: 'same',
+        extension_max_hours: 0,
+        max_extensions: 0,
         require_mfa: false,
         end_sessions_on_expiry: true,
         expiry_warning_minutes: 15,
@@ -74,6 +78,10 @@ export default {
             'approvers',
             'approvals_required'
           ]
+        ],
+        [
+          'Session & Access Extensions',
+          ['allow_extension', 'extension_approval', 'extension_max_hours', 'max_extensions']
         ],
         // XPAM: what an access through the rule may allow; a request picks among them
         [vm.$t('JITAccessAllows'), ['protocols', 'actions']],
@@ -269,6 +277,38 @@ export default {
           component: WeekCronSelect,
           hidden: (form) => !form.auto_approve || form.approvals_required === 2,
           helpText: vm.$t('JITAutoApproveWindowHelp')
+        },
+        allow_extension: {
+          label: 'Allow session / access extensions',
+          helpText:
+            'Allow users to request additional time before their active JIT access window expires'
+        },
+        extension_approval: {
+          type: 'radio-group',
+          label: 'Extension approval policy',
+          options: [
+            { label: 'Same as initial request', value: 'same' },
+            { label: 'Approve extensions automatically', value: 'auto' },
+            { label: 'Always require manual approval', value: 'manual' }
+          ],
+          hidden: (form) => !form.allow_extension,
+          helpText:
+            'Choose whether extension requests follow the rule’s initial approval policy, auto-approve, or always require manual approval via the configured Flow/Approvers'
+        },
+        extension_max_hours: {
+          type: 'input-number',
+          label: 'Longest single extension (hours)',
+          el: { min: 0, max: 720 },
+          hidden: (form) => !form.allow_extension,
+          helpText: '0 = use Longest access (max_hours) limit'
+        },
+        max_extensions: {
+          type: 'input-number',
+          label: 'Max extensions per access',
+          el: { min: 0, max: 50 },
+          hidden: (form) => !form.allow_extension,
+          helpText:
+            '0 = unlimited extensions; set e.g. 1 or 2 to cap how many times a user can extend'
         },
         credential_type: {
           type: 'radio-group',

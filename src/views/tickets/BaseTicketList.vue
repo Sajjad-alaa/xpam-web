@@ -115,8 +115,16 @@ export default {
         extraQuery: this.extraQuery,
         columnsExclude: ['process_map', 'rel_snapshot', 'cc_users'],
         columnsShow: {
-          min: ['title', 'serial_num', 'type', 'state', 'date_created'],
-          default: ['title', 'serial_num', 'type', 'state', 'access_state', 'date_created']
+          min: ['title', 'serial_num', 'applicant', 'type', 'state', 'date_created'],
+          default: [
+            'title',
+            'serial_num',
+            'applicant',
+            'type',
+            'state',
+            'access_state',
+            'date_created'
+          ]
         },
         columnsMeta: {
           serial_num: {

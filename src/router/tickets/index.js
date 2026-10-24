@@ -21,6 +21,17 @@ export default {
   },
   children: [
     {
+      path: '/tickets/all-tickets',
+      name: 'AllTicketList',
+      component: () => import('@/views/tickets/AllTicketList'),
+      meta: {
+        title: 'All Submitted Tickets',
+        icon: 'ticket-list',
+        showOrganization: false,
+        permissions: []
+      }
+    },
+    {
       path: '/tickets/my-tickets',
       name: 'MyTicketList',
       component: () => import('@/views/tickets/MyTicketList'),

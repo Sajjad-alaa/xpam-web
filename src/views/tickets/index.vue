@@ -19,6 +19,7 @@
 import { TabPage } from '@/layout/components'
 import { mapGetters } from 'vuex'
 import { getTicketOpenCount } from '@/api/ticket'
+import AllTicketList from './AllTicketList'
 import AssignedTicketList from './AssignedTicketList'
 import MyTicketList from './MyTicketList'
 import i18n from '@/i18n/i18n'
@@ -27,6 +28,7 @@ export default {
   name: 'Index',
   components: {
     TabPage,
+    AllTicketList,
     AssignedTicketList,
     MyTicketList
   },
@@ -36,6 +38,13 @@ export default {
       config: {
         activeMenu: 'MyTicketList',
         submenu: [
+          {
+            title: 'All Submitted Tickets',
+            name: 'AllTicketList',
+            // (administrators: every ticket of the organizations they administer)
+            hidden: () =>
+              !(this.$store.state.users.isSuperAdmin || this.$hasPerm('tickets.change_ticketflow'))
+          },
           {
             title: i18n.global.t('MyTickets'),
             name: 'MyTicketList'
