@@ -69,11 +69,18 @@ $menu-hover: #f1f5f9;
   --el-border-radius-base: 6px;
   --el-border-radius-small: 4px;
   --el-border-radius-round: 20px;
-  --el-card-border-radius: 8px;
-  --jms-border-radius: 6px;
-  --jms-card-radius: 8px;
-  --jms-card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
-  --jms-card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --el-card-border-radius: 10px;
+  --jms-border-radius: 7px;
+  --jms-card-radius: 10px;
+  --jms-card-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  --jms-card-shadow-hover:
+    0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 4px 10px -3px rgba(15, 23, 42, 0.04);
+
+  /* 奢华轻质感与玻璃态 Token */
+  --luxury-glass-bg: rgba(255, 255, 255, 0.88);
+  --luxury-glass-border: rgba(226, 232, 240, 0.85);
+  --luxury-primary-glow: rgba(56, 189, 248, 0.24);
+  --luxury-focus-ring: 0 0 0 3px rgba(56, 189, 248, 0.16);
 
   /* Element Plus CSS 变量覆盖 */
   --el-color-primary: #{$color-primary};
@@ -115,9 +122,14 @@ html.dark {
   --menu-hover: #1e293b;
   --menu-hover-bg: #1e293b;
 
-  /* 现代卡片阴影 (深色) */
-  --jms-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.35), 0 2px 4px -2px rgba(0, 0, 0, 0.25);
-  --jms-card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.45), 0 4px 6px -4px rgba(0, 0, 0, 0.35);
+  /* 现代卡片阴影 (深色) 与奢华 Token */
+  --jms-card-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.45), 0 2px 6px -1px rgba(0, 0, 0, 0.35);
+  --jms-card-shadow-hover:
+    0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(56, 189, 248, 0.08);
+  --luxury-glass-bg: rgba(30, 41, 59, 0.88);
+  --luxury-glass-border: rgba(51, 65, 85, 0.75);
+  --luxury-primary-glow: rgba(56, 189, 248, 0.32);
+  --luxury-focus-ring: 0 0 0 3px rgba(56, 189, 248, 0.22);
 
   /* Element Plus 深色覆盖适配 */
   --el-bg-color: #1e293b;

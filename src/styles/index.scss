@@ -14,9 +14,11 @@ body {
   overflow: hidden;
   background-color: var(--page-background-color, #fff);
   -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: auto;
+  -webkit-font-smoothing: antialiased;
   color: var(--color-text-primary);
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Open Sans', 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
   font-size: 13px;
   line-height: 1.428;
 }
@@ -87,7 +89,10 @@ div:focus {
   border-radius: var(--jms-card-radius, 8px) !important;
   background-color: var(--page-background-color, #fff) !important;
   box-shadow: var(--jms-card-shadow) !important;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease,
+    transform 0.2s ease;
   color: var(--color-text-primary);
 }
 
@@ -332,6 +337,10 @@ input[type='file'] {
 .el-table__body {
   width: 100%;
   table-layout: fixed !important;
+
+  tr.el-table__row {
+    transition: background-color 0.15s ease;
+  }
 }
 
 .view-switcher {
@@ -421,7 +430,7 @@ input[type='file'] {
 
   th {
     padding: 8px 0;
-    border-bottom: 1px solid #e7e7e7 !important;
+    border-bottom: 1px solid var(--panel-border-color, #e2e8f0) !important;
 
     .caret-wrapper {
       height: 21px;
@@ -480,7 +489,7 @@ input[type='file'] {
       white-space: nowrap;
 
       &:hover {
-        border-right: 2px solid #ebeef5;
+        border-right: 2px solid var(--panel-border-color, #e2e8f0);
       }
     }
 
@@ -491,7 +500,7 @@ input[type='file'] {
     }
 
     &:last-child {
-      border-right: 1px solid #ebeef5 !important;
+      border-right: 1px solid var(--panel-border-color, #e2e8f0) !important;
 
       .cell {
         border-right: none;
@@ -530,7 +539,7 @@ input[type='file'] {
 
       &:last-child {
         padding: 0;
-        border-right: 1px solid #ebeef5 !important;
+        border-right: 1px solid var(--panel-border-color, #e2e8f0) !important;
 
         .cell {
           vertical-align: unset;
@@ -785,8 +794,9 @@ li.rmenu i.fa {
 }
 
 .el-table__header thead > tr > th {
-  background-color: white;
+  background-color: var(--el-table-header-bg-color, #f8fafc);
   font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .el-card.no-border {
@@ -860,6 +870,18 @@ li.rmenu i.fa {
  * 不对 el-dialog 强加 flex-column / max-height / body overflow —— 那会破坏部分弹窗自身
  * 的内容布局，导致内容溢出。
  */
+.v-modal,
+.el-overlay {
+  backdrop-filter: blur(4px);
+}
+
+.el-dialog {
+  border-radius: 12px !important;
+  border: 1px solid var(--panel-border-color, rgba(226, 232, 240, 0.8));
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.22) !important;
+  overflow: hidden;
+}
+
 .el-overlay-dialog {
   display: flex;
 }
@@ -883,7 +905,7 @@ li.rmenu i.fa {
   min-height: 56px;
   margin-bottom: 0;
   padding: 15px 20px;
-  border-bottom: 1px solid #ebeef5;
+  border-bottom: 1px solid var(--panel-border-color, #e2e8f0);
   font-size: 16px;
   font-weight: 500;
   color: var(--color-text-primary);
@@ -925,6 +947,14 @@ li.rmenu i.fa {
 .el-button--primary:active,
 .el-button--primary:active > span {
   color: #fff;
+}
+
+.el-button--primary:not(.is-plain):not(.is-disabled):not(.is-text):not(.is-link) {
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px var(--luxury-primary-glow, rgba(56, 189, 248, 0.25));
+  }
 }
 
 .el-button--primary.is-plain {

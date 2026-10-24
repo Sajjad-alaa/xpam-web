@@ -181,6 +181,9 @@
   .el-cascader .el-input__wrapper {
     box-shadow: none !important;
     border: 1px solid var(--el-border-color) !important;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
 
     &:hover {
       border-color: var(--el-border-color-hover) !important;
@@ -188,7 +191,7 @@
 
     &.is-focus,
     &.is-focused {
-      box-shadow: none !important;
+      box-shadow: var(--luxury-focus-ring, 0 0 0 3px rgba(56, 189, 248, 0.16)) !important;
       border-color: var(--el-color-primary) !important;
     }
   }

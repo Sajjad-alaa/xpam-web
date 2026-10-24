@@ -6,9 +6,20 @@ $single-menu-height: 38px;
 @mixin only_active {
   position: relative;
   color: var(--menu-active-text, var(--menu-text-active));
+  // (a plain background first: browsers without color-mix() keep the highlight)
   background: var(--menu-active-bg, var(--menu-hover));
+  background: linear-gradient(
+    90deg,
+    color-mix(
+      in srgb,
+      var(--menu-active-indicator, var(--menu-text-active)) 14%,
+      var(--menu-active-bg, var(--menu-hover))
+    ),
+    var(--menu-active-bg, var(--menu-hover))
+  );
   border-radius: 6px;
   overflow: hidden;
+  font-weight: 600;
 
   &::before {
     content: '';
@@ -20,6 +31,8 @@ $single-menu-height: 38px;
     width: var(--menu-active-indicator-width, 3px);
     border-radius: 0 3px 3px 0;
     background-color: var(--menu-active-indicator, var(--menu-text-active));
+    box-shadow: 0 0 8px
+      color-mix(in srgb, var(--menu-active-indicator, var(--menu-text-active)) 65%, transparent);
   }
 }
 
@@ -81,6 +94,9 @@ $single-menu-height: 38px;
     height: $single-menu-height;
     line-height: $single-menu-height;
     color: var(--menu-text);
+    transition:
+      background-color 0.18s ease,
+      color 0.18s ease;
 
     &:focus {
       color: var(--menu-text);
@@ -106,6 +122,9 @@ $single-menu-height: 38px;
     letter-spacing: 0.02em;
     font-size: 12px;
     min-width: 200px;
+    transition:
+      background-color 0.18s ease,
+      color 0.18s ease;
 
     &:focus:not(.is-active) {
       color: var(--menu-text);

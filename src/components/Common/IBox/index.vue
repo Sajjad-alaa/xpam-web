@@ -96,11 +96,13 @@ export default {
 
 .ibox-title h5 {
   display: inline-block;
-  font-size: 13px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--color-text-primary);
   margin: 0;
   padding: 0;
   text-overflow: ellipsis;
-  font-weight: 500;
 }
 
 .ibox-tools a {
