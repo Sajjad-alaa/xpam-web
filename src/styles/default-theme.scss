@@ -63,6 +63,31 @@ $menu-hover: #f1f5f9;
   --menu-hover: #{$menu-hover};
   --menu-hover-bg: #{$menu-hover};
 
+  /* 正文(regular)文字、开关关闭态、半透明悬停/按下叠加层、禁用遮罩 */
+  --color-text-regular: #606266;
+  --switch-off-color: #dcdfe6;
+  --form-control-border-color: var(--el-border-color);
+  --form-control-border-color-hover: var(--el-border-color-hover);
+  --overlay-hover-bg: rgba(0, 0, 0, 0.05);
+  --overlay-active-bg: rgba(0, 0, 0, 0.08);
+  --overlay-strong-bg: rgba(0, 0, 0, 0.16);
+  --content-mask-bg: rgba(255, 255, 255, 0.2);
+
+  /* 状态色浅底提示块 (success / warning / danger / info)：背景 + 边框 + 文字 */
+  --tint-success-bg: #eff9f6;
+  --tint-success-border: #cfe8df;
+  --tint-success-text: #2f7463;
+  --tint-warning-bg: #fff8e9;
+  --tint-warning-bg-strong: #fff0d1;
+  --tint-warning-border: #f0d6aa;
+  --tint-warning-text: #7c5b31;
+  --tint-danger-bg: #fff0f2;
+  --tint-danger-border: #f0c9ce;
+  --tint-danger-text: #b84f5e;
+  --tint-info-bg: #eff6ff;
+  --tint-info-border: #cfe0f7;
+  --tint-info-text: #2f5f9a;
+
   /* 现代圆角与阴影体系 */
   --el-font-size-base: 13px;
   --el-input-height: 32px;
@@ -122,6 +147,31 @@ html.dark {
   --menu-hover: #1e293b;
   --menu-hover-bg: #1e293b;
 
+  /* 正文文字、开关关闭态、叠加层 */
+  --color-text-regular: #cbd5e1;
+  --switch-off-color: #64748b;
+  --form-control-border-color: #64748b;
+  --form-control-border-color-hover: #94a3b8;
+  --overlay-hover-bg: rgba(255, 255, 255, 0.06);
+  --overlay-active-bg: rgba(255, 255, 255, 0.1);
+  --overlay-strong-bg: rgba(255, 255, 255, 0.18);
+  --content-mask-bg: rgba(15, 23, 42, 0.35);
+
+  /* 状态色提示块：深色下使用强调色的半透明底 + 亮色文字 */
+  --tint-success-bg: rgba(16, 185, 129, 0.12);
+  --tint-success-border: rgba(16, 185, 129, 0.35);
+  --tint-success-text: #34d399;
+  --tint-warning-bg: rgba(245, 158, 11, 0.12);
+  --tint-warning-bg-strong: rgba(245, 158, 11, 0.2);
+  --tint-warning-border: rgba(245, 158, 11, 0.35);
+  --tint-warning-text: #fbbf24;
+  --tint-danger-bg: rgba(239, 68, 68, 0.12);
+  --tint-danger-border: rgba(239, 68, 68, 0.35);
+  --tint-danger-text: #f87171;
+  --tint-info-bg: rgba(59, 130, 246, 0.12);
+  --tint-info-border: rgba(59, 130, 246, 0.35);
+  --tint-info-text: #60a5fa;
+
   /* 现代卡片阴影 (深色) 与奢华 Token */
   --jms-card-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.45), 0 2px 6px -1px rgba(0, 0, 0, 0.35);
   --jms-card-shadow-hover:
@@ -141,7 +191,7 @@ html.dark {
   --el-text-color-placeholder: #64748b;
   --el-border-color: #334155;
   --el-border-color-light: #243044;
-  --el-border-color-lighter: #1e293b;
+  --el-border-color-lighter: #243044;
   --el-border-color-extra-light: #161f2e;
   --el-fill-color: #1e293b;
   --el-fill-color-light: #243044;

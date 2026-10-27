@@ -401,7 +401,7 @@ export default {
     padding: 0 10px;
     color: var(--color-text-primary) !important;
     border-color: var(--color-border);
-    background-color: #fff;
+    background-color: var(--page-background-color, #fff);
 
     > span {
       display: flex;
@@ -418,7 +418,7 @@ export default {
     &:active {
       color: var(--color-text-primary) !important;
       border-color: var(--color-border);
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: var(--overlay-hover-bg, rgba(0, 0, 0, 0.05));
 
       .el-icon {
         color: var(--el-text-color-secondary);

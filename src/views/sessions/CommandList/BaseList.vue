@@ -469,7 +469,7 @@ export default {
 
 <style lang="scss" scoped>
 .command-list-table :deep(.risk-command) {
-  background-color: oldlace;
+  background-color: var(--el-color-warning-light-9, oldlace);
 
   tr {
     color: white;

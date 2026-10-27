@@ -58,6 +58,6 @@ export default {
 }
 
 .drawer :deep(.el-drawer__body) {
-  background: #f3f3f3;
+  background: var(--page-content-background-color, #f3f3f3);
 }
 </style>

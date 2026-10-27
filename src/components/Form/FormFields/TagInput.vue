@@ -252,15 +252,15 @@ export default {
   // 边框由当前容器承担，输入文字的水平留白统一交由内部 wrapper（11px）处理。
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid #dcdee2;
+  border: 1px solid var(--panel-border-color, #dcdee2);
   border-radius: 1px;
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
   cursor: text;
   line-height: 1.4;
   overflow: hidden;
 
   &:hover {
-    border-color: #c0c4cc;
+    border-color: var(--color-border, #c0c4cc);
   }
 
   .filter-field__content {
@@ -359,7 +359,7 @@ export default {
   cursor: pointer;
 
   &:hover {
-    color: #999999;
+    color: var(--el-text-color-secondary, #999999);
   }
 }
 
@@ -367,10 +367,10 @@ export default {
   display: inherit;
   padding-right: 6px;
   cursor: pointer;
-  color: #c0c4cc;
+  color: var(--el-text-color-disabled, #c0c4cc);
 
   &:hover {
-    color: #606164;
+    color: var(--el-text-color-regular, #606164);
   }
 }
 </style>

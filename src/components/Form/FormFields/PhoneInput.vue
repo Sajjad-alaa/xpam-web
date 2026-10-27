@@ -141,7 +141,7 @@ export default {
     z-index: 1;
     left: -1px;
     width: 86px;
-    border: 1px solid var(--el-border-color);
+    border: 1px solid var(--form-control-border-color, var(--el-border-color));
     border-right-color: var(--el-color-primary);
   }
 }

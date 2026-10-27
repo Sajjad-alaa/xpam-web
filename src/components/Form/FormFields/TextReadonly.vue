@@ -37,6 +37,6 @@ export default {
   font-size: 13px;
 }
 .bolder {
-  border: solid 1px #dcdfe6;
+  border: solid 1px var(--panel-border-color, #dcdfe6);
 }
 </style>

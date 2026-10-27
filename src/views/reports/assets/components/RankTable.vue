@@ -61,7 +61,7 @@ export default {
 .box {
   margin-top: 16px;
   padding: 20px;
-  background: #fff;
+  background: var(--page-background-color, #fff);
 
   .head {
     display: flex;
@@ -77,7 +77,7 @@ export default {
 
 :deep(.el-table th),
 .el-table tr {
-  background-color: #f5f6f7 !important;
+  background-color: var(--el-table-header-bg-color, #f5f6f7) !important;
 }
 
 :deep(.el-table .cell) {

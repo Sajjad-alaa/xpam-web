@@ -51,8 +51,8 @@ export default {
               fontSize: 13,
               rightClickSelectsWord: true,
               theme: {
-                background: '#fff',
-                foreground: '#000',
+                background: getCssVar('--page-background-color', '#fff'),
+                foreground: getCssVar('--color-text-primary', '#000'),
                 selectionBackground: selectionColor,
                 selectionInactiveBackground: selectionColor
               }
@@ -129,12 +129,12 @@ export default {
 .xterm {
   overflow: auto;
   padding-left: 5px;
-  background-color: #ffffff;
+  background-color: var(--page-background-color, #ffffff);
 }
 
 .actions {
   text-align: right;
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
   padding-right: 5px;
   padding-top: 2px;
 }
@@ -145,7 +145,7 @@ export default {
   font-size: 14px;
   width: 26px;
   height: 26px;
-  color: #888;
+  color: var(--el-text-color-secondary, #888);
   background-color: transparent;
   margin-left: 2px;
 }

@@ -429,7 +429,7 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #606266;
+  color: var(--color-text-secondary, #606266);
   height: 24px;
   line-height: 24px;
   box-sizing: border-box;
@@ -438,13 +438,13 @@ export default {
 
 .rmenu > a:hover,
 .dropdown-menu > a:focus {
-  color: #262626;
+  color: var(--color-text-primary, #262626);
   text-decoration: none;
-  background-color: #f5f5f5;
+  background-color: var(--menu-hover, #f5f5f5);
 }
 
 .rmenu:hover {
-  background-color: #f5f7fa;
+  background-color: var(--menu-hover, #f5f7fa);
 }
 
 .icon {

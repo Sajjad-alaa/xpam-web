@@ -223,7 +223,7 @@ export default {
     position: absolute;
     right: 15px;
     top: 0;
-    color: #909399;
+    color: var(--color-help-text, #909399);
     font-size: 12px;
     font-weight: 400;
   }
@@ -233,7 +233,7 @@ export default {
     height: 30px;
     line-height: 30px;
     padding: 6px 15px 0;
-    color: #909399;
+    color: var(--color-help-text, #909399);
     text-align: center;
   }
   .vip-footer {
@@ -241,7 +241,7 @@ export default {
     margin: 0;
     padding: 5px 0;
     text-align: center;
-    border-top: 1px solid #ebeef5;
+    border-top: 1px solid var(--panel-border-color, #ebeef5);
   }
 }
 </style>

@@ -799,12 +799,12 @@ export default {
     padding: 0;
     border: 1px solid var(--color-border);
     border-radius: 4px;
-    background: #fff;
+    background: var(--page-background-color, #fff);
     color: var(--color-text-primary) !important;
 
     &:hover,
     &:focus-visible {
-      background: rgba(0, 0, 0, 0.05);
+      background: var(--menu-hover, rgba(0, 0, 0, 0.05));
       color: var(--color-text-primary) !important;
     }
 
@@ -824,7 +824,7 @@ export default {
     right: 4px;
     width: 5px;
     height: 5px;
-    border: 1px solid #fff;
+    border: 1px solid var(--page-background-color, #fff);
     border-radius: 50%;
     background: var(--el-color-primary);
   }
@@ -876,7 +876,7 @@ export default {
   .node-search-panel {
     min-width: 0;
     border-radius: var(--node-search-border-radius);
-    background: var(--el-bg-color-overlay, #fff);
+    background: var(--el-bg-color-overlay, var(--page-background-color, #fff));
   }
 
   .node-search-panel__header {

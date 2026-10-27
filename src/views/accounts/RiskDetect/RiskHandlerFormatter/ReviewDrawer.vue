@@ -231,11 +231,11 @@ export default {
       color: var(--color-text-primary);
       font-weight: 500;
       font-size: 16px;
-      background: #fff;
+      background: var(--page-background-color, #fff);
     }
 
     .el-drawer__body {
-      background: #f3f3f3;
+      background: var(--page-content-background-color, #f3f3f3);
       height: 100%;
       padding: 0;
       overflow: hidden;
@@ -271,7 +271,7 @@ export default {
   overflow-y: auto;
 
   .risk-item {
-    background: #fff;
+    background: var(--page-background-color, #fff);
     margin: 16px;
     border-radius: 8px;
     box-shadow: 0 1px 2px rgba(208, 153, 153, 0.06);
@@ -294,7 +294,7 @@ export default {
 }
 
 .drawer-footer {
-  background: #fff;
+  background: var(--page-background-color, #fff);
   padding: 15px 20px;
   border-top: 1px solid var(--color-border);
 

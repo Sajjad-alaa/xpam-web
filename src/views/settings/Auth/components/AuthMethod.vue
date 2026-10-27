@@ -23,7 +23,7 @@
             <el-switch
               v-model="isEnabled"
               active-color="#148f76"
-              inactive-color="#e5e6e7"
+              inactive-color="var(--switch-off-color, #e5e6e7)"
               @change="onChangeStatus"
             />
           </div>
@@ -124,7 +124,7 @@ export default {
 
         .auth-item-header-description {
           font-size: 12px;
-          color: #999;
+          color: var(--el-text-color-secondary, #999);
           display: flex;
           flex-direction: column;
           justify-content: flex-end;

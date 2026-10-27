@@ -258,7 +258,7 @@ onBeforeUnmount(() => {
   overflow: hidden;
   border: 1px solid rgb(213 150 53 / 23%);
   border-radius: var(--ai-radius-lg, 12px);
-  background: #fffaf2;
+  background: var(--tint-warning-bg, #fffaf2);
   box-shadow: 0 4px 14px rgb(121 82 30 / 6%);
 
   &__header {
@@ -277,8 +277,8 @@ onBeforeUnmount(() => {
   place-items: center;
   border: 1px solid rgb(255 255 255 / 80%);
   border-radius: 9px;
-  color: #a96815;
-  background: #fff0d1;
+  color: var(--tint-warning-text, #a96815);
+  background: var(--tint-warning-bg-strong, #fff0d1);
   font-size: 15px;
 }
 
@@ -289,14 +289,14 @@ onBeforeUnmount(() => {
   gap: 2px;
 
   strong {
-    color: #55401f;
+    color: var(--tint-warning-text, #55401f);
     font-size: 13px;
     font-weight: 720;
   }
 }
 
 .approval-eyebrow {
-  color: #bd8a41;
+  color: var(--tint-warning-text, #bd8a41);
   font-size: 10px;
   font-weight: 750;
   letter-spacing: 0.11em;
@@ -305,31 +305,31 @@ onBeforeUnmount(() => {
 
 .risk-badge {
   padding: 4px 7px;
-  border: 1px solid #f0d6a8;
+  border: 1px solid var(--tint-warning-border, #f0d6a8);
   border-radius: 999px;
-  color: #a56c1b;
-  background: #fff5df;
+  color: var(--tint-warning-text, #a56c1b);
+  background: var(--tint-warning-bg, #fff5df);
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
 
   &.risk-read {
-    border-color: #cfe8df;
-    color: #2f7463;
-    background: #eff9f6;
+    border-color: var(--tint-success-border, #cfe8df);
+    color: var(--tint-success-text, #2f7463);
+    background: var(--tint-success-bg, #eff9f6);
   }
 
   &.risk-dangerous {
-    border-color: #f0c9ce;
-    color: #b84f5e;
-    background: #fff0f2;
+    border-color: var(--tint-danger-border, #f0c9ce);
+    color: var(--tint-danger-text, #b84f5e);
+    background: var(--tint-danger-bg, #fff0f2);
   }
 }
 
 .approval-description {
   position: relative;
   margin: 12px 0;
-  color: #79684e;
+  color: var(--tint-warning-text, #79684e);
   font-size: 11px;
   line-height: 1.65;
 }
@@ -338,7 +338,7 @@ onBeforeUnmount(() => {
   overflow: hidden;
   border: 1px solid rgb(151 111 48 / 13%);
   border-radius: var(--ai-radius-sm, 8px);
-  background: rgb(255 255 255 / 82%);
+  background: var(--page-background-color, rgb(255 255 255 / 82%));
 
   &__header {
     display: flex;
@@ -346,8 +346,8 @@ onBeforeUnmount(() => {
     align-items: center;
     padding: 0 11px;
     border-bottom: 1px solid rgb(151 111 48 / 10%);
-    color: #5c4b31;
-    background: rgb(255 249 237 / 76%);
+    color: var(--tint-warning-text, #5c4b31);
+    background: var(--tint-warning-bg, rgb(255 249 237 / 76%));
     font-size: 11px;
     font-weight: 700;
 
@@ -368,7 +368,7 @@ onBeforeUnmount(() => {
 
   h3 {
     margin: 0 0 7px;
-    color: #a17636;
+    color: var(--tint-warning-text, #a17636);
     font-size: 10px;
     font-weight: 700;
   }
@@ -389,14 +389,14 @@ onBeforeUnmount(() => {
 
   dt {
     overflow: hidden;
-    color: #8d806e;
+    color: var(--color-text-secondary, #8d806e);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   dd {
     margin: 0;
-    color: #453d33;
+    color: var(--color-text-primary, #453d33);
     overflow-wrap: anywhere;
     white-space: pre-wrap;
   }
@@ -404,7 +404,7 @@ onBeforeUnmount(() => {
   small {
     display: block;
     margin-top: 7px;
-    color: #a08d70;
+    color: var(--tint-warning-text, #a08d70);
     font-size: 9px;
   }
 }
@@ -414,8 +414,8 @@ onBeforeUnmount(() => {
   padding: 10px 11px;
   border: 1px solid rgb(213 150 53 / 22%);
   border-radius: var(--ai-radius-sm, 8px);
-  color: #8d652a;
-  background: rgb(255 244 222 / 78%);
+  color: var(--tint-warning-text, #8d652a);
+  background: var(--tint-warning-bg, rgb(255 244 222 / 78%));
   font-size: 10px;
   line-height: 1.55;
 }
@@ -425,7 +425,7 @@ onBeforeUnmount(() => {
   padding: 10px 11px;
   border: 1px solid rgb(92 75 48 / 8%);
   border-radius: var(--ai-radius-sm, 8px);
-  background: rgb(255 255 255 / 74%);
+  background: var(--page-background-color, rgb(255 255 255 / 74%));
 
   &__route {
     display: flex;
@@ -434,7 +434,7 @@ onBeforeUnmount(() => {
 
     code {
       overflow: hidden;
-      color: #5d5549;
+      color: var(--color-text-secondary, #5d5549);
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 10px;
       text-overflow: ellipsis;
@@ -446,8 +446,8 @@ onBeforeUnmount(() => {
 .method {
   padding: 3px 6px;
   border-radius: 5px;
-  color: #7f5a1d;
-  background: #fce7be;
+  color: var(--tint-warning-text, #7f5a1d);
+  background: var(--el-color-warning-light-8, #fce7be);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10px;
   font-weight: 800;
@@ -456,7 +456,7 @@ onBeforeUnmount(() => {
 .operation-id {
   margin-top: 7px;
   overflow: hidden;
-  color: #a29a8d;
+  color: var(--color-text-secondary, #a29a8d);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10px;
   text-overflow: ellipsis;
@@ -468,7 +468,7 @@ onBeforeUnmount(() => {
   overflow: hidden;
   border: 1px solid rgb(92 75 48 / 8%);
   border-radius: var(--ai-radius-sm, 8px);
-  background: rgb(255 255 255 / 62%);
+  background: var(--page-background-color, rgb(255 255 255 / 62%));
 
   summary {
     display: flex;
@@ -476,7 +476,7 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: space-between;
     padding: 0 11px;
-    color: #7c6d58;
+    color: var(--color-text-secondary, #7c6d58);
     cursor: pointer;
     font-size: 10px;
     font-weight: 650;
@@ -505,7 +505,7 @@ onBeforeUnmount(() => {
   &__body {
     padding: 9px;
     border-top: 1px solid rgb(92 75 48 / 7%);
-    background: rgb(246 240 228 / 38%);
+    background: var(--tint-warning-bg, rgb(246 240 228 / 38%));
   }
 
   pre {
@@ -515,8 +515,8 @@ onBeforeUnmount(() => {
     overflow: auto;
     border: 1px solid rgb(92 75 48 / 7%);
     border-radius: var(--ai-radius-xs, 6px);
-    color: #675e51;
-    background: rgb(255 255 255 / 72%);
+    color: var(--color-text-secondary, #675e51);
+    background: var(--page-background-color, rgb(255 255 255 / 72%));
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 10px;
     line-height: 1.6;
@@ -529,7 +529,7 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
   gap: 12px;
   margin: 11px 2px 0;
-  color: #aa9575;
+  color: var(--tint-warning-text, #aa9575);
   font-size: 10px;
 
   span {
@@ -570,12 +570,12 @@ onBeforeUnmount(() => {
   }
 
   &.secondary {
-    border: 1px solid #ead9bd;
-    color: #7f6d52;
-    background: rgb(255 255 255 / 75%);
+    border: 1px solid var(--panel-border-color, #ead9bd);
+    color: var(--color-text-secondary, #7f6d52);
+    background: var(--page-background-color, rgb(255 255 255 / 75%));
 
     &:hover:not(:disabled) {
-      background: #fff;
+      background: var(--menu-hover, #fff);
     }
   }
 

@@ -430,7 +430,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$origin-color: #ffffff;
+$origin-color: var(--page-background-color, #ffffff);
 
 .tree-table-content {
   display: flex;

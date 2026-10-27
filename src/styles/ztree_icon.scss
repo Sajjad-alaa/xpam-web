@@ -212,7 +212,7 @@
 
   &.chk.checkbox_false_full_focus::before {
     content: '\f096';
-    color: #676a6c;
+    color: var(--el-text-color-regular, #676a6c);
   }
 
   &.chk.checkbox_false_part_focus::before {
@@ -239,12 +239,12 @@
 
   &.chk.checkbox_true_part_focus::before {
     content: '\f14a';
-    color: #676a6c;
+    color: var(--el-text-color-regular, #676a6c);
   }
 
   &.chk.checkbox_true_full_focus::before {
     content: '\f046';
-    color: #676a6c;
+    color: var(--el-text-color-regular, #676a6c);
   }
 
   &.chk.checkbox_true_part::before {
@@ -268,7 +268,7 @@
 
   &.chk.radio_false_full_focus::before {
     content: '\f10c';
-    color: #676a6c;
+    color: var(--el-text-color-regular, #676a6c);
   }
 
   &.chk.radio_false_part::before {
@@ -278,7 +278,7 @@
 
   &.chk.radio_false_part_focus::before {
     content: '\f10c';
-    color: #676a6c;
+    color: var(--el-text-color-regular, #676a6c);
   }
 
   &.chk.radio_false_disable::before {
@@ -292,7 +292,7 @@
 
   &.chk.radio_true_full_focus::before {
     content: '\f192';
-    color: #676a6c;
+    color: var(--el-text-color-regular, #676a6c);
   }
 
   &.chk.radio_true_part::before {

@@ -126,7 +126,7 @@ export default {
 <style lang="scss" scoped>
 .el-dropdown-menu {
   padding: 6px 0;
-  border: 1px solid #ebeef5;
+  border: 1px solid var(--el-border-color-lighter, #ebeef5);
   border-radius: 4px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 

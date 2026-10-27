@@ -108,7 +108,7 @@ export default {
 .code-markdown {
   min-height: 210px;
   padding: 10px 20px;
-  border: 1px solid #dcdfe6;
+  border: 1px solid var(--panel-border-color, #dcdfe6);
 
   :deep(.table) {
     border-collapse: collapse;
@@ -117,13 +117,13 @@ export default {
 
     th,
     td {
-      border: 1px solid #ebeef5;
+      border: 1px solid var(--panel-border-color, #ebeef5);
       padding: 10px;
       text-align: left;
     }
 
     th {
-      background-color: #f5f7fa;
+      background-color: var(--page-content-background-color, #f5f7fa);
     }
   }
 }
@@ -131,7 +131,7 @@ export default {
 .code-demo {
   min-height: 210px;
   padding: 10px 20px;
-  border: 1px solid #dcdfe6;
+  border: 1px solid var(--panel-border-color, #dcdfe6);
 }
 
 .copy-btn {

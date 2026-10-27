@@ -405,7 +405,7 @@ tr td {
 }
 
 tr.item td {
-  border-top: 1px dashed #ebeef5;
+  border-top: 1px dashed var(--panel-border-color, #ebeef5);
 }
 
 .box-margin {

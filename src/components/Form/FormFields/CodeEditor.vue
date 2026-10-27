@@ -433,7 +433,7 @@ export default {
     :deep(.cm-editor) {
       border: 1px solid var(--color-border);
       border-radius: 4px;
-      background: #fff;
+      background: var(--page-background-color, #fff);
     }
 
     // 去掉 CodeMirror 聚焦时的默认虚线 outline(CM6 默认 outline:1px dotted)
@@ -442,7 +442,7 @@ export default {
     }
 
     :deep(.cm-gutters) {
-      background: #fff;
+      background: var(--page-background-color, #fff);
       border-right: 1px solid var(--color-border);
       color: var(--color-text-secondary);
     }

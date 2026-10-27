@@ -245,7 +245,7 @@ export default {
     background-color: transparent;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: var(--overlay-hover-bg, rgba(0, 0, 0, 0.05));
     }
   }
 

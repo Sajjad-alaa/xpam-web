@@ -213,7 +213,10 @@ export default {
       const inst = this.$refs.echarts?.echartsInstance
       if (!inst) return
       try {
-        this.dataUrl = inst.getDataURL({ pixelRatio: 2, backgroundColor: '#ffffff' })
+        this.dataUrl = inst.getDataURL({
+          pixelRatio: 2,
+          backgroundColor: getCssVar('--page-background-color', '#ffffff')
+        })
       } catch (e) {
         this.dataUrl = ''
       }

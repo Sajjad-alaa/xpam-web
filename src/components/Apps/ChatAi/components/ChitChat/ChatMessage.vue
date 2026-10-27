@@ -387,14 +387,14 @@ function formatFileSize(size) {
     min-height: 22px;
     align-items: center;
     gap: 6px;
-    color: #68707c;
+    color: var(--color-text-secondary, #68707c);
     font-size: 11px;
   }
 
   &__content {
     position: relative;
     min-width: 0;
-    color: #303544;
+    color: var(--color-text-primary, #303544);
   }
 
   &.is-user {
@@ -469,7 +469,7 @@ function formatFileSize(size) {
 }
 
 .assistant-name {
-  color: #444b5d;
+  color: var(--color-text-primary, #444b5d);
   font-size: 11px;
   font-weight: 720;
 }
@@ -484,7 +484,7 @@ function formatFileSize(size) {
     display: block;
     width: 100%;
     max-height: 220px;
-    border: 1px solid #e4e8e6;
+    border: 1px solid var(--panel-border-color, #e4e8e6);
     border-radius: var(--ai-radius-md, 10px);
     object-fit: cover;
   }
@@ -502,10 +502,10 @@ function formatFileSize(size) {
     align-items: center;
     gap: 9px;
     padding: 8px 10px;
-    border: 1px solid #e1e4ea;
+    border: 1px solid var(--panel-border-color, #e1e4ea);
     border-radius: var(--ai-radius-sm, 8px);
-    color: #555d70;
-    background: #f8f9fb;
+    color: var(--color-text-secondary, #555d70);
+    background: var(--page-content-background-color, #f8f9fb);
     text-decoration: none;
 
     > .el-icon {
@@ -534,7 +534,7 @@ function formatFileSize(size) {
     }
 
     small {
-      color: #737b87;
+      color: var(--color-text-secondary, #737b87);
       font-size: 11px;
     }
   }
@@ -555,8 +555,8 @@ function formatFileSize(size) {
     border: 1px solid rgb(255 255 255 / 45%);
     border-radius: var(--ai-radius-sm, 8px);
     outline: none;
-    color: #35394b;
-    background: #fff;
+    color: var(--color-text-primary, #35394b);
+    background: var(--page-background-color, #fff);
     font: inherit;
     line-height: 1.65;
     resize: vertical;
@@ -582,10 +582,10 @@ function formatFileSize(size) {
     button {
       height: 28px;
       padding: 0 10px;
-      border: 1px solid #fff;
+      border: 1px solid var(--panel-border-color, #fff);
       border-radius: var(--ai-radius-xs, 6px);
       color: var(--ai-primary-dark, #148f76);
-      background: #fff;
+      background: var(--page-background-color, #fff);
       cursor: pointer;
       font-size: 10px;
       font-weight: 600;
@@ -615,7 +615,7 @@ function formatFileSize(size) {
 }
 
 .message-time {
-  color: #8f959e;
+  color: var(--el-text-color-secondary, #8f959e);
 }
 
 .live-indicator {
@@ -635,7 +635,7 @@ function formatFileSize(size) {
 }
 
 .queued-indicator {
-  color: #9298a7;
+  color: var(--color-text-secondary, #9298a7);
   font-weight: 600;
 }
 
@@ -646,10 +646,10 @@ function formatFileSize(size) {
   flex: 0 0 28px;
   margin-top: 2px;
   place-items: center;
-  border: 1px solid #e6e8ef;
+  border: 1px solid var(--panel-border-color, #e6e8ef);
   border-radius: 9px;
-  color: #777e94;
-  background: #f8faf9;
+  color: var(--color-text-secondary, #777e94);
+  background: var(--page-content-background-color, #f8faf9);
 }
 
 .thinking-state {
@@ -657,7 +657,7 @@ function formatFileSize(size) {
   align-items: center;
   gap: 12px;
   min-height: 52px;
-  color: #777d91;
+  color: var(--color-text-secondary, #777d91);
 
   > span:last-child {
     display: flex;
@@ -666,13 +666,13 @@ function formatFileSize(size) {
   }
 
   strong {
-    color: #565c72;
+    color: var(--color-text-secondary, #565c72);
     font-size: 11px;
     font-weight: 650;
   }
 
   small {
-    color: #a1a6b6;
+    color: var(--color-text-secondary, #a1a6b6);
     font-size: 10px;
   }
 }
@@ -722,7 +722,7 @@ function formatFileSize(size) {
     padding: 0;
     border: 0;
     border-radius: 7px;
-    color: #737c89;
+    color: var(--color-text-secondary, #737c89);
     background: transparent;
     cursor: pointer;
     font-size: 15px;
@@ -771,7 +771,7 @@ function formatFileSize(size) {
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  color: #8f959e;
+  color: var(--el-text-color-secondary, #8f959e);
   font-size: 10px;
 
   button {
@@ -792,7 +792,7 @@ function formatFileSize(size) {
   align-items: center;
   gap: 4px 6px;
   margin-bottom: 8px;
-  color: #65756f;
+  color: var(--color-text-secondary, #65756f);
   font-size: 11px;
   line-height: 1.5;
 

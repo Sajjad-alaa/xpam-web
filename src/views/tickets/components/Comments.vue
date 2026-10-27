@@ -296,7 +296,7 @@ export default {
 }
 
 .feed-activity-list .feed-element {
-  border-bottom: 1px solid #e7eaec;
+  border-bottom: 1px solid var(--panel-border-color, #e7eaec);
 }
 
 .feed-element:first-child {
@@ -323,7 +323,7 @@ export default {
 }
 
 .text-muted {
-  color: #888888;
+  color: var(--el-text-color-secondary, #888888);
 }
 
 :deep(.markdown-body) {

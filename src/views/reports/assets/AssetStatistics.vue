@@ -122,6 +122,7 @@ import BaseReport from '../base/BaseReport.vue'
 import SummaryCountCard from '@/components/Dashboard/SummaryCountCard.vue'
 import * as echarts from 'echarts'
 import Echart from '@/components/Dashboard/Echart.vue'
+import { getCssVar } from '@/utils/theme/color'
 import { getReportChartTheme, mixColors } from '@/views/reports/const'
 import reportPageMixin from '@/views/reports/base/reportPageMixin'
 import ReportToolbar from '@/views/reports/base/ReportToolbar.vue'
@@ -355,7 +356,7 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: '#fff'
+                color: getCssVar('--page-background-color', '#fff')
               }
             },
             axisLabel: {
@@ -369,7 +370,7 @@ export default {
             splitLine: {
               show: true,
               lineStyle: {
-                color: '#EFF0F1'
+                color: getCssVar('--color-border', '#EFF0F1')
               }
             }
           }

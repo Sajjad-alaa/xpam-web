@@ -15,6 +15,8 @@
 import Title from '@/components/Dashboard/Title.vue'
 import * as echarts from 'echarts'
 import Echart from '@/components/Dashboard/Echart.vue'
+import { getCssVar } from '@/utils/theme/color'
+import { applyChartTheme } from '@/utils/theme/chart'
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/title'
@@ -123,7 +125,7 @@ export default {
                   tooltip: { show: false },
                   label: { show: false },
                   labelLine: { show: false },
-                  itemStyle: { color: '#e5e7eb' },
+                  itemStyle: { color: getCssVar('--color-border', '#e5e7eb') },
                   data: [{ value: 1, name: '' }]
                 }
               ])
@@ -167,11 +169,11 @@ export default {
     },
     initChart() {
       this.chart = echarts.init(this.$refs.chartRef)
-      this.chart.setOption(this.chartOption)
+      this.chart.setOption(applyChartTheme(this.chartOption))
     },
     updateChart() {
       if (this.chart) {
-        this.chart.setOption(this.chartOption)
+        this.chart.setOption(applyChartTheme(this.chartOption))
       }
     },
     resizeChart() {
@@ -188,7 +190,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #fff;
+  background: var(--page-background-color, #fff);
   border-radius: 4px;
 
   .header {

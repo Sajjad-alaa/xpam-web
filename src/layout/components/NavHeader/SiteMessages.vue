@@ -460,7 +460,7 @@ export default {
     overflow-y: auto;
     font-size: 13px;
     line-height: 22px;
-    color: var(--N900, #1f2329);
+    color: var(--color-text-primary, #1f2329);
 
     // 时间浮到正文右上角，与首行标题同行，不再单独占一行
     .msg-detail-time {
@@ -483,7 +483,7 @@ export default {
       margin: 16px 0 4px;
       padding: 0;
       border: 0;
-      color: var(--neutral-900, #1f2329);
+      color: var(--color-text-primary, #1f2329);
       font-weight: 600;
       line-height: 1.4;
     }
@@ -591,7 +591,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   min-height: 56px;
-  border-bottom: solid 1px rgb(231, 234, 239);
+  border-bottom: solid 1px var(--panel-border-color, rgb(231, 234, 239));
   margin-bottom: 0;
   padding: 10px 20px;
   box-sizing: border-box;
@@ -613,7 +613,7 @@ export default {
     align-items: center;
     font-size: 12px;
     line-height: 1;
-    color: #72767b;
+    color: var(--color-text-secondary, #72767b);
     cursor: pointer;
 
     &:hover {
@@ -628,7 +628,7 @@ export default {
     width: 16px;
     height: 16px;
     font-size: 16px;
-    color: #909399 !important;
+    color: var(--el-text-color-secondary, #909399) !important;
     cursor: pointer;
 
     svg {

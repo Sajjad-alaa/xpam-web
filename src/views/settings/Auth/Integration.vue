@@ -127,7 +127,7 @@ export default {
 }
 
 .auth-column {
-  border-right: 1px solid #e6e6e6;
+  border-right: 1px solid var(--panel-border-color, #e6e6e6);
   padding-right: 20px;
 
   &:last-child {
@@ -140,13 +140,13 @@ export default {
 .column-header {
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--panel-border-color, #f0f0f0);
 
   h3 {
     margin: 0;
     font-size: 16px;
     font-weight: 600;
-    color: #333;
+    color: var(--color-text-primary, #333);
   }
 }
 
@@ -162,12 +162,12 @@ export default {
   }
 
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--page-content-background-color, #f1f1f1);
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: var(--color-disabled, #c1c1c1);
     border-radius: 3px;
 
     &:hover {
@@ -192,7 +192,7 @@ h4.auth-method-type {
   margin-top: 15px;
   font-size: 13px;
   font-weight: 500;
-  color: #666;
+  color: var(--color-text-secondary, #666);
   border-left: 3px solid #148f76;
   padding-left: 12px;
 }
@@ -203,7 +203,7 @@ h4.auth-method-type {
   align-items: center;
   justify-content: center;
   min-height: 200px;
-  color: #999;
+  color: var(--el-text-color-secondary, #999);
 }
 
 .auth-container {
@@ -219,7 +219,7 @@ h4.auth-method-type {
   .auth-layout {
     .auth-column {
       border-right: none;
-      border-bottom: 1px solid #e6e6e6;
+      border-bottom: 1px solid var(--panel-border-color, #e6e6e6);
       padding-right: 0;
       padding-left: 0;
       padding-bottom: 20px;

@@ -73,7 +73,7 @@ export default {
 .markdown-editor {
   width: 100%;
   min-width: 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--panel-border-color, #ccc);
   box-sizing: border-box;
   padding: 10px;
 }

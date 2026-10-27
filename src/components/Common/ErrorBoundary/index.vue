@@ -104,7 +104,7 @@ export default {
 
 .error-message {
   font-size: 16px;
-  color: #606266;
+  color: var(--el-text-color-regular, #606266);
   margin-bottom: 24px;
   word-break: break-word;
 }
@@ -122,21 +122,21 @@ export default {
 
   summary {
     cursor: pointer;
-    color: #909399;
+    color: var(--el-text-color-secondary, #909399);
     margin-bottom: 8px;
 
     &:hover {
-      color: #606266;
+      color: var(--el-text-color-regular, #606266);
     }
   }
 
   pre {
-    background: #f5f7fa;
+    background: var(--el-fill-color-light, #f5f7fa);
     padding: 12px;
     border-radius: 4px;
     overflow-x: auto;
     font-size: 12px;
-    color: #606266;
+    color: var(--el-text-color-regular, #606266);
     max-height: 300px;
     overflow-y: auto;
   }

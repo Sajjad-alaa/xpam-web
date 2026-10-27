@@ -233,7 +233,7 @@ export default {
   padding: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--list-corner-radius, 4px);
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
   cursor: pointer;
 
   &:hover {

@@ -112,7 +112,7 @@ html:lang(pt-br) {
 
 .datepicker {
   margin-left: 10px;
-  border: 1px solid #dcdee2;
+  border: 1px solid var(--panel-border-color, #dcdee2);
   border-radius: 2px;
   width: 243px !important;
   min-width: 243px !important;
@@ -125,7 +125,7 @@ html:lang(pt-br) {
   min-height: 32px !important;
   max-height: 32px !important;
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
 
   :deep(.el-range-separator),
   :deep(.el-range__icon),

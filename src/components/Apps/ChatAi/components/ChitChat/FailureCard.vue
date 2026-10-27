@@ -104,17 +104,17 @@ function stepLabel(step) {
   gap: 9px;
   margin-top: 12px;
   padding: 12px 14px;
-  border: 1px solid #ecd7bc;
+  border: 1px solid var(--el-color-warning-light-7, #ecd7bc);
   border-radius: 10px;
-  color: #705538;
-  background: #fffaf3;
+  color: var(--el-color-warning-dark-2, #705538);
+  background: var(--el-color-warning-light-9, #fffaf3);
   font-size: 12px;
   line-height: 1.6;
 
   &.is-cancelled {
-    border-color: #e2e5e9;
-    color: #606a76;
-    background: #f8fafb;
+    border-color: var(--panel-border-color, #e2e5e9);
+    color: var(--color-text-secondary, #606a76);
+    background: var(--page-content-background-color, #f8fafb);
   }
 
   header,

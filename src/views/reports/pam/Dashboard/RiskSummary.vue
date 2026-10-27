@@ -13,6 +13,7 @@
 import * as echarts from 'echarts'
 import Title from '@/components/Dashboard/Title.vue'
 import { colorRgbToHex, getCssVar, mix } from '@/utils/theme/color'
+import { applyChartTheme } from '@/utils/theme/chart'
 
 export default {
   components: { Title },
@@ -138,11 +139,11 @@ export default {
           splitLine: {
             show: true,
             lineStyle: {
-              color: '#E5E6EB'
+              color: getCssVar('--panel-border-color', '#E5E6EB')
             }
           },
           axisLabel: {
-            color: '#646A73',
+            color: getCssVar('--color-text-secondary', '#646A73'),
             fontSize: 12
           }
         },
@@ -152,7 +153,7 @@ export default {
           axisLine: { show: false },
           axisTick: { show: false },
           axisLabel: {
-            color: '#646A73',
+            color: getCssVar('--color-text-secondary', '#646A73'),
             fontSize: 12,
             margin: 20,
             width: 90,
@@ -181,7 +182,7 @@ export default {
               valueAnimation: true,
               formatter: '{c}',
               fontSize: 12,
-              color: '#1F2329',
+              color: getCssVar('--color-text-primary', '#1F2329'),
               distance: 10
             },
             itemStyle: {
@@ -265,7 +266,7 @@ export default {
     },
     initChart() {
       this.chart = echarts.init(this.$refs.chartRef)
-      this.chart.setOption(this.chartOption)
+      this.chart.setOption(applyChartTheme(this.chartOption))
 
       if (this.$hasPerm('accounts.view_accountrisk')) {
         this.chart.on('click', (params) => {
@@ -282,7 +283,7 @@ export default {
     },
     updateChart() {
       if (this.chart) {
-        this.chart.setOption(this.chartOption)
+        this.chart.setOption(applyChartTheme(this.chartOption))
       }
     },
     resizeChart() {
@@ -302,7 +303,7 @@ export default {
   width: 100%;
   height: 100%;
   padding: 1.25rem;
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
   overflow: hidden;
 
   .metrics-section {
@@ -317,7 +318,7 @@ export default {
 
       :deep(.summary-header) {
         .title {
-          color: #646a73;
+          color: var(--color-text-secondary, #646a73);
           font-size: 0.9rem;
           font-weight: 400;
           line-height: 1.4rem;

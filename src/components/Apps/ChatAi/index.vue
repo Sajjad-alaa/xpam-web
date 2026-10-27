@@ -1114,10 +1114,11 @@ onBeforeUnmount(() => {
   border: 1px solid color-mix(in srgb, var(--ai-primary) 24%, transparent);
   border-radius: 16px;
   color: var(--ai-text);
+  background: var(--page-background-color, #fff);
   background: linear-gradient(
     145deg,
-    #fff 10%,
-    color-mix(in srgb, var(--ai-primary) 10%, white) 100%
+    var(--page-background-color, #fff) 10%,
+    color-mix(in srgb, var(--ai-primary) 10%, var(--page-background-color, white)) 100%
   );
   box-shadow:
     0 8px 18px color-mix(in srgb, var(--ai-primary) 20%, transparent),
@@ -1170,7 +1171,7 @@ onBeforeUnmount(() => {
     border-radius: 50%;
     opacity: 0;
     color: var(--ai-text-secondary);
-    background: rgb(255 255 255 / 96%);
+    background: var(--page-background-color, rgb(255 255 255 / 96%));
     box-shadow: 0 1px 5px rgb(24 43 38 / 20%);
     cursor: pointer;
     pointer-events: none;
@@ -1237,7 +1238,7 @@ onBeforeUnmount(() => {
     border-right: 0;
     border-radius: 10px 0 0 10px;
     opacity: 0.55;
-    background: #fff;
+    background: var(--page-background-color, #fff);
     box-shadow: 0 5px 16px rgb(24 43 38 / 16%);
     justify-content: flex-start;
     transition:
@@ -1294,7 +1295,7 @@ onBeforeUnmount(() => {
   box-sizing: border-box;
   border: 1px solid var(--ai-border);
   border-radius: 12px;
-  background: #fff;
+  background: var(--page-background-color, #fff);
   box-shadow: 0 20px 56px rgb(23 43 38 / 22%);
   pointer-events: auto;
   transition:
@@ -1316,7 +1317,7 @@ onBeforeUnmount(() => {
   min-height: 0;
   overflow: hidden;
   color: var(--ai-text);
-  background: #fff;
+  background: var(--page-background-color, #fff);
   flex-direction: column;
 
   &__header {
@@ -1330,7 +1331,7 @@ onBeforeUnmount(() => {
     gap: 12px;
     padding: 0 12px;
     border-bottom: 1px solid var(--ai-border);
-    background: #fff;
+    background: var(--page-background-color, #fff);
     cursor: grab;
     touch-action: none;
     user-select: none;
@@ -1415,7 +1416,7 @@ onBeforeUnmount(() => {
     min-height: 0;
     flex: 1;
     border: 0;
-    background: #fff;
+    background: var(--page-background-color, #fff);
   }
 
   &__frame--standalone {

@@ -137,7 +137,7 @@ onBeforeUnmount(() => {
   &:deep(h3),
   &:deep(h4) {
     margin: 17px 0 8px;
-    color: #282c3d;
+    color: var(--color-text-primary, #282c3d);
     font-weight: 720;
     line-height: 1.35;
   }
@@ -181,7 +181,7 @@ onBeforeUnmount(() => {
     padding: 8px 12px;
     border-left: 3px solid var(--ai-primary, #1ab394);
     border-radius: 0 8px 8px 0;
-    color: #666b7f;
+    color: var(--color-text-secondary, #666b7f);
     background: var(--ai-primary-light, #e8f7f3);
   }
 
@@ -206,13 +206,13 @@ onBeforeUnmount(() => {
     th,
     td {
       padding: 7px 9px;
-      border: 1px solid #e5e7ee;
+      border: 1px solid var(--panel-border-color, #e5e7ee);
       text-align: left;
     }
 
     th {
-      color: #555a6d;
-      background: #f7f8fb;
+      color: var(--color-text-secondary, #555a6d);
+      background: var(--page-content-background-color, #f7f8fb);
     }
   }
 
@@ -263,6 +263,7 @@ onBeforeUnmount(() => {
       margin: 0;
       padding: 0;
       overflow: auto;
+      border: 0;
       background: transparent;
     }
 
@@ -272,6 +273,7 @@ onBeforeUnmount(() => {
       width: max-content;
       min-width: 100%;
       padding: 12px 14px;
+      border: 0;
       background: transparent;
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 11px;

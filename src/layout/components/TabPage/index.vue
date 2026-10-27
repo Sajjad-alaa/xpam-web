@@ -434,7 +434,7 @@ export default {
     cursor: not-allowed;
 
     &:hover {
-      color: #c0c4cc;
+      color: var(--el-text-color-disabled, #c0c4cc);
     }
   }
 }

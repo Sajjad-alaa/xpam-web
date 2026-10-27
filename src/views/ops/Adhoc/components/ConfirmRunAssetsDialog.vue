@@ -149,7 +149,7 @@ export default {
     font-weight: bold;
     margin-bottom: 8px;
     font-size: 15px;
-    background: #fbfbfd;
+    background: var(--page-content-background-color, #fbfbfd);
     padding: 10px;
   }
 
@@ -175,7 +175,7 @@ export default {
       grid-template-columns: 1fr 1fr;
       justify-content: space-between;
       width: 100%;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid var(--panel-border-color, #eee);
 
       .icon {
         color: #ed5565;

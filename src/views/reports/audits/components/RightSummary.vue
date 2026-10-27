@@ -114,7 +114,7 @@ export default {
 }
 
 .box {
-  background: #fff;
+  background: var(--page-background-color, #fff);
   padding: 30px;
 
   .head {

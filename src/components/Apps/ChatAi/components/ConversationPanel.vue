@@ -342,7 +342,7 @@ defineExpose({ focusSearch })
   place-items: center;
   border: 0;
   border-radius: 9px;
-  color: #757c94;
+  color: var(--color-text-secondary, #757c94);
   background: transparent;
   cursor: pointer;
 }
@@ -354,10 +354,10 @@ defineExpose({ focusSearch })
   align-items: center;
   gap: 8px;
   padding: 0 8px;
-  border: 1px solid #d5e5e0;
+  border: 1px solid var(--tint-success-border, #d5e5e0);
   border-radius: var(--ai-radius-sm, 8px);
   color: var(--ai-primary-dark, #148f76);
-  background: #fff;
+  background: var(--page-background-color, #fff);
   cursor: pointer;
   font-size: 11px;
   font-weight: 650;
@@ -369,9 +369,9 @@ defineExpose({ focusSearch })
   }
 
   &:disabled {
-    border-color: #e1e8e6;
-    color: #96aaa5;
-    background: #f6f8f7;
+    border-color: var(--panel-border-color, #e1e8e6);
+    color: var(--color-text-secondary, #96aaa5);
+    background: var(--page-content-background-color, #f6f8f7);
     box-shadow: none;
     cursor: not-allowed;
   }
@@ -388,7 +388,7 @@ defineExpose({ focusSearch })
 
   &__hint {
     margin-left: auto;
-    color: #9aa5a2;
+    color: var(--color-text-secondary, #9aa5a2);
     font-size: 9px;
     font-weight: 500;
   }
@@ -403,13 +403,13 @@ defineExpose({ focusSearch })
   padding: 0 9px;
   border: 1px solid var(--ai-border, #e9ecef);
   border-radius: var(--ai-radius-sm, 8px);
-  color: #8f959e;
-  background: #fff;
+  color: var(--color-text-secondary, #8f959e);
+  background: var(--page-background-color, #fff);
   transition: all 0.2s ease;
 
   &:focus-within {
     border-color: var(--ai-primary, #1ab394);
-    background: #fff;
+    background: var(--page-background-color, #fff);
     box-shadow: var(--ai-focus-ring, 0 0 0 3px rgb(26 179 148 / 16%));
   }
 
@@ -422,7 +422,7 @@ defineExpose({ focusSearch })
     font-size: 12px;
 
     &::placeholder {
-      color: #8f959e;
+      color: var(--color-text-secondary, #8f959e);
     }
 
     &::-webkit-search-cancel-button {
@@ -439,7 +439,7 @@ defineExpose({ focusSearch })
     place-items: center;
     border: 0;
     border-radius: 6px;
-    color: #969ca9;
+    color: var(--color-text-secondary, #969ca9);
     background: transparent;
     cursor: pointer;
 
@@ -457,7 +457,7 @@ defineExpose({ focusSearch })
 
   &__title {
     padding: 0 8px 5px;
-    color: #8f959e;
+    color: var(--color-text-secondary, #8f959e);
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -474,7 +474,7 @@ defineExpose({ focusSearch })
   padding: 0 5px 0 0;
   border: 0;
   border-radius: var(--ai-radius-sm, 8px);
-  color: #606266;
+  color: var(--color-text-secondary, #606266);
   background: transparent;
   text-align: left;
   transition: all 0.18s ease;
@@ -492,7 +492,7 @@ defineExpose({ focusSearch })
   }
 
   &:hover {
-    background: rgb(255 255 255 / 82%);
+    background: var(--page-background-color, rgb(255 255 255 / 82%));
 
     .conversation-item__actions {
       opacity: 1;
@@ -533,7 +533,7 @@ defineExpose({ focusSearch })
     }
 
     small {
-      color: #a2a7b8;
+      color: var(--color-text-secondary, #a2a7b8);
       font-size: 9px;
     }
 
@@ -545,7 +545,7 @@ defineExpose({ focusSearch })
       border-radius: 6px;
       outline: 0;
       color: var(--ai-text, #292827);
-      background: #fff;
+      background: var(--page-background-color, #fff);
       box-shadow: var(--ai-focus-ring, 0 0 0 3px rgb(26 179 148 / 16%));
       font: inherit;
       font-size: 12px;
@@ -574,7 +574,7 @@ defineExpose({ focusSearch })
     }
 
     &:disabled {
-      color: #9299a6;
+      color: var(--color-text-secondary, #9299a6);
       cursor: not-allowed;
       opacity: 0.68;
     }
@@ -595,7 +595,7 @@ defineExpose({ focusSearch })
     place-items: center;
     border: 0;
     border-radius: 7px;
-    color: #a0a5b7;
+    color: var(--color-text-secondary, #a0a5b7);
     background: transparent;
     cursor: pointer;
 
@@ -607,8 +607,8 @@ defineExpose({ focusSearch })
 
   &__delete {
     &:hover {
-      color: #d95b69;
-      background: #fff0f2;
+      color: var(--tint-danger-text, #d95b69);
+      background: var(--tint-danger-bg, #fff0f2);
     }
   }
 }
@@ -623,7 +623,7 @@ defineExpose({ focusSearch })
   display: flex;
   align-items: center;
   padding: 48px 18px;
-  color: #a0a5b7;
+  color: var(--color-text-secondary, #a0a5b7);
   text-align: center;
   flex-direction: column;
 
@@ -640,7 +640,7 @@ defineExpose({ focusSearch })
   }
 
   strong {
-    color: #6c7184;
+    color: var(--color-text-secondary, #6c7184);
     font-size: 12px;
   }
 
@@ -659,7 +659,12 @@ defineExpose({ focusSearch })
     display: block;
     height: 8px;
     border-radius: 6px;
-    background: linear-gradient(90deg, #e9ebf2, #f6f7fa, #e9ebf2);
+    background: linear-gradient(
+      90deg,
+      var(--el-fill-color, #e9ebf2),
+      var(--menu-hover, #f6f7fa),
+      var(--el-fill-color, #e9ebf2)
+    );
     background-size: 220% 100%;
     animation: skeleton 1.5s linear infinite;
 

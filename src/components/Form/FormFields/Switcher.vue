@@ -3,7 +3,7 @@
     v-bind="switchAttrs"
     :model-value="iValue"
     :class="type"
-    inactive-color="#dcdfe6"
+    inactive-color="var(--switch-off-color, #dcdfe6)"
     @update:model-value="onInput"
   />
 </template>

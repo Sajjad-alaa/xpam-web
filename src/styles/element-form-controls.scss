@@ -180,13 +180,13 @@
   .el-select__wrapper,
   .el-cascader .el-input__wrapper {
     box-shadow: none !important;
-    border: 1px solid var(--el-border-color) !important;
+    border: 1px solid var(--form-control-border-color, var(--el-border-color)) !important;
     transition:
       border-color 0.2s ease,
       box-shadow 0.2s ease;
 
     &:hover {
-      border-color: var(--el-border-color-hover) !important;
+      border-color: var(--form-control-border-color-hover, var(--el-border-color-hover)) !important;
     }
 
     &.is-focus,
@@ -245,13 +245,13 @@
     width: 100%;
     height: 30px;
     box-sizing: border-box;
-    border: 1px solid var(--el-border-color);
+    border: 1px solid var(--form-control-border-color, var(--el-border-color));
     background-color: var(--el-bg-color, var(--page-background-color, #fff));
     border-radius: var(--jms-border-radius, 6px);
     overflow: hidden;
 
     &:hover {
-      border-color: var(--el-border-color-hover) !important;
+      border-color: var(--form-control-border-color-hover, var(--el-border-color-hover)) !important;
     }
 
     &:focus-within {
@@ -259,7 +259,7 @@
     }
 
     > *:not(:last-child) {
-      border-right: 1px solid var(--el-border-color);
+      border-right: 1px solid var(--form-control-border-color, var(--el-border-color));
     }
 
     .el-select__wrapper,
@@ -589,4 +589,49 @@
   .el-input-number__increase {
     line-height: 26px;
   }
+}
+
+// 表单控件边框 / 未选中态轮廓统一走 --form-control-border-color（default-theme.scss 里 :root 与 html.dark
+// 各有定义）。changeMenuColor 会在 <html> 上内联写 --el-border-color（深色下约 #243044），样式表里
+// 改 --el-border-color 不会生效，所以这里把 Element Plus 各控件自己的边框变量指向专用 token。
+// 明亮模式下该 token 就是 var(--el-border-color)，渲染与之前一致。
+.el-input,
+.el-textarea,
+.el-date-editor,
+.el-autocomplete,
+.el-input-number {
+  --el-input-border-color: var(--form-control-border-color, var(--el-border-color));
+  --el-input-hover-border-color: var(
+    --form-control-border-color-hover,
+    var(--el-border-color-hover)
+  );
+  --el-input-hover-border: var(--form-control-border-color-hover, var(--el-border-color-hover));
+}
+
+.el-select {
+  --el-select-border-color-hover: var(
+    --form-control-border-color-hover,
+    var(--el-border-color-hover)
+  );
+}
+
+.el-radio {
+  --el-radio-input-border-color: var(--form-control-border-color, var(--el-border-color));
+  --el-radio-input-border: var(--el-border-width, 1px) var(--el-border-style, solid)
+    var(--form-control-border-color, var(--el-border-color));
+}
+
+.el-checkbox {
+  --el-checkbox-input-border: var(--el-border-width, 1px) var(--el-border-style, solid)
+    var(--form-control-border-color, var(--el-border-color));
+}
+
+.el-radio-button,
+.el-checkbox-button {
+  --el-border: var(--el-border-width, 1px) var(--el-border-style, solid)
+    var(--form-control-border-color, var(--el-border-color));
+}
+
+.el-switch {
+  --el-switch-off-color: var(--form-control-border-color, var(--el-border-color));
 }

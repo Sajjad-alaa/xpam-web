@@ -524,7 +524,7 @@ export default {
   align-items: center;
   gap: 12px;
   padding-top: 16px;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid var(--panel-border-color, #dee2e6);
 
   // 按钮在 dialog body 内,吃不到 .dialog-footer 的全站规范,这里对齐同款 30px 高度
   :deep(.el-button) {

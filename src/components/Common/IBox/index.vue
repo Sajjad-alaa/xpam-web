@@ -108,7 +108,7 @@ export default {
 .ibox-tools a {
   cursor: pointer;
   margin-left: 5px;
-  color: #c4c4c4;
+  color: var(--color-icon-primary, #c4c4c4);
 }
 
 .ibox-tools {

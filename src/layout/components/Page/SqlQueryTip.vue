@@ -65,7 +65,9 @@ export default {
   min-height: 28px;
   padding: 4px 12px;
   box-sizing: border-box;
-  background-color: #f3f3f4;
+  background-color: var(--page-content-background-color, #f3f3f4);
+  border: 1px solid var(--panel-border-color, transparent);
+  border-radius: var(--jms-border-radius, 4px);
 }
 
 .sql-query-tip__tags {
@@ -80,7 +82,7 @@ export default {
 .sql-query-tip__close {
   flex: 0 0 auto;
   font-size: 14px;
-  color: #909399;
+  color: var(--color-icon-primary, #909399);
   cursor: pointer;
 
   &:hover {

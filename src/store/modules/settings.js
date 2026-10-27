@@ -2,7 +2,7 @@ import defaultSettings from '@/settings'
 import { getPublicSettings } from '@/api/settings'
 import request from '@/utils/request'
 import { changeMenuColor } from '@/utils/theme/color'
-import { changeElementColor, changeThemeColors } from '@/utils/theme/index'
+import { changeElementColor, changeThemeColors, initSystemThemeListener } from '@/utils/theme/index'
 
 const { fixedHeader, sidebarLogo, tagsView } = defaultSettings
 
@@ -78,6 +78,7 @@ const actions = {
           commit('SET_PUBLIC_SETTINGS', data)
           commit('SET_VENDOR', vendor)
           changeThemeColors(themeColors)
+          initSystemThemeListener(() => state.themeColors)
           resolve(response)
         })
         .catch((error) => {
@@ -90,10 +91,11 @@ const actions = {
         })
     })
   },
-  changeThemeStyle({ commit }, themeColors) {
+  changeThemeStyle({ commit, state }, themeColors) {
     changeMenuColor(themeColors)
     changeElementColor(themeColors)
     commit('setTheme', themeColors)
+    initSystemThemeListener(() => state.themeColors)
   },
   updateAuthItemStatus({ commit }, payload) {
     const [key, value] = payload

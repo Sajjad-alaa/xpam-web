@@ -369,7 +369,7 @@ export default {
 <style lang="scss" scoped>
 .perm-tree {
   :deep(.ztree) {
-    background: white !important;
+    background: var(--page-background-color, white) !important;
 
     .checkbox_false_disable,
     .checkbox_true_disable {
@@ -378,7 +378,7 @@ export default {
 
     .checkbox_true_disable:before,
     .checkbox_false_disable:before {
-      color: #aaaaaa !important;
+      color: var(--color-disabled, #aaaaaa) !important;
     }
   }
 }

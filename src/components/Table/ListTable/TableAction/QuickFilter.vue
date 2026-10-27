@@ -211,7 +211,7 @@ export default {
   justify-content: center;
   border: 1px solid var(--panel-border-color, var(--el-border-color));
   border-radius: 4px;
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
   box-shadow: none;
 
   &.shrink {
@@ -270,7 +270,7 @@ export default {
       .item {
         display: inline-block;
         margin-right: 8px;
-        color: #303133;
+        color: var(--color-text-primary, #303133);
         font-size: 12px;
         cursor: pointer;
 

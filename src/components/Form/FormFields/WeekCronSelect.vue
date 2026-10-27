@@ -384,7 +384,7 @@ export default {
   td,
   th {
     user-select: none;
-    border: 1px solid #dee4f5;
+    border: 1px solid var(--panel-border-color, #dee4f5);
     text-align: center;
     min-width: 10px;
     line-height: 1.6em;
@@ -420,7 +420,7 @@ export default {
     td {
       &.weektime-atom-item {
         user-select: unset;
-        background-color: #f5f5f5;
+        background-color: var(--el-fill-color-light, #f5f5f5);
         width: calc((100% - var(--week-label-width)) / var(--week-cols));
         min-width: calc((100% - var(--week-label-width)) / var(--week-cols));
         max-width: calc((100% - var(--week-label-width)) / var(--week-cols));
@@ -509,6 +509,6 @@ export default {
 }
 
 .g-tip-text {
-  color: #999;
+  color: var(--color-help-text, #999);
 }
 </style>

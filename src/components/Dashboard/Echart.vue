@@ -12,6 +12,7 @@
 
 <script>
 import 'echarts'
+import { applyChartTheme } from '@/utils/theme/chart'
 
 export default {
   components: {},
@@ -45,7 +46,7 @@ export default {
     },
     iOptions() {
       return {
-        ...this.options,
+        ...applyChartTheme(this.options),
         animation: !this.isExport
       }
     }

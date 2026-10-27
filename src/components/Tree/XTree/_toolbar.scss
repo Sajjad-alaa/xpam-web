@@ -80,11 +80,11 @@
     border: none !important;
     box-shadow: none !important;
     color: var(--color-text-primary);
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--menu-hover, rgba(0, 0, 0, 0.05));
   }
 
   &.is-active {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--menu-hover, rgba(0, 0, 0, 0.05));
   }
 }
 

@@ -158,12 +158,17 @@ export default {
     margin: 0 8px;
     padding: 1px 8px !important;
     border-radius: 5px;
-    border-color: $color-primary;
-    background-color: white;
-    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
     cursor: pointer;
     transition: 0.2s;
-    opacity: 0.7;
+    opacity: 0.85;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      opacity: 1;
+    }
   }
 
   .navbar-left {

@@ -165,7 +165,7 @@ export default {
 
   .el-table__row {
     &.selected-row {
-      background-color: #f5f7fa;
+      background-color: var(--el-table-row-hover-bg-color, #f5f7fa);
     }
 
     & > td {
@@ -192,7 +192,7 @@ export default {
 
   .el-table__header > thead > tr > th {
     padding: 6px 0;
-    background-color: #ffffff;
+    background-color: var(--el-table-header-bg-color, #ffffff);
     font-size: 13px;
     line-height: 1.5;
     border-right: none;
@@ -203,7 +203,7 @@ export default {
       text-overflow: ellipsis;
 
       &:hover {
-        border-right: 2px solid #ebeef5;
+        border-right: 2px solid var(--panel-border-color, #ebeef5);
       }
     }
   }

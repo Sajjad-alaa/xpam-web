@@ -195,13 +195,13 @@ div.info-panel {
           width: 100%;
           overflow: hidden;
           font-size: 1.1em;
-          color: #555555;
+          color: var(--color-text-primary, #555555);
           text-overflow: ellipsis;
           white-space: nowrap;
         }
 
         .comment {
-          color: #62686c;
+          color: var(--color-text-secondary, #62686c);
           font-weight: 300;
           font-size: 0.8em;
         }
@@ -209,7 +209,7 @@ div.info-panel {
 
       :deep(.el-avatar) {
         flex-shrink: 0;
-        background: #fff;
+        background: var(--page-background-color, #fff);
       }
     }
 

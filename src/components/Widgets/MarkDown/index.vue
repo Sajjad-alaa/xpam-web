@@ -137,7 +137,7 @@ export default {
 }
 
 .markdown-body * {
-  color: #1a1a1a;
+  color: var(--color-text-primary, #1a1a1a);
   font-size: 13px;
 }
 
@@ -163,7 +163,7 @@ export default {
   min-height: 210px;
   margin-left: 4px;
   padding: 5px 10px;
-  border: 1px solid #dcdfe6;
+  border: 1px solid var(--panel-border-color, #dcdfe6);
 }
 
 .action-bar {
@@ -179,10 +179,10 @@ export default {
     width: 28px;
     height: 28px;
     padding: 0;
-    color: #606266;
+    color: var(--color-text-secondary, #606266);
     cursor: pointer;
-    background: rgb(255 255 255 / 90%);
-    border: 1px solid #dcdfe6;
+    background: var(--page-background-color, rgb(255 255 255 / 90%));
+    border: 1px solid var(--panel-border-color, #dcdfe6);
     border-radius: 4px;
 
     &:hover {

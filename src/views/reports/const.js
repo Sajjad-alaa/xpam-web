@@ -82,7 +82,7 @@ export const getDistributionOptions = (data, totalLabel) => {
         radius: ['54%', '72%'],
         avoidLabelOverlap: false,
         itemStyle: {
-          borderColor: '#fff',
+          borderColor: getCssVar('--page-background-color', '#fff'),
           borderWidth: 2
         },
         label: {

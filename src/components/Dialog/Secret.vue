@@ -80,7 +80,7 @@ export default {
 
 <style lang="scss" scoped>
 .secret {
-  color: #2b2f3a;
+  color: var(--color-text-primary, #2b2f3a);
   margin-top: 20px;
 }
 

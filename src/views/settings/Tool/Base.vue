@@ -46,7 +46,7 @@
           ref="xterm"
           class="tool-output"
           :xterm-config="xtermConfig"
-          style="border: solid 1px #dddddd"
+          style="border: solid 1px var(--panel-border-color, #dddddd)"
         />
       </el-form-item>
       <el-form-item class="tool-actions">

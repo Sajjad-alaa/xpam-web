@@ -182,7 +182,7 @@ export default {
     left: -17px;
     top: -13px;
     bottom: 13px;
-    border-left: 1px dashed #d8dce5;
+    border-left: 1px dashed var(--panel-border-color, #d8dce5);
   }
 
   :deep(.el-tree-node__children .el-tree-node)::after {
@@ -191,7 +191,7 @@ export default {
     left: -17px;
     top: 13px;
     width: 24px;
-    border-top: 1px dashed #d8dce5;
+    border-top: 1px dashed var(--panel-border-color, #d8dce5);
   }
 
   :deep(.el-tree-node__children .el-tree-node:first-child)::before {

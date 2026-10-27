@@ -41,6 +41,7 @@
 import * as echarts from 'echarts'
 import Title from '@/components/Dashboard/Title.vue'
 import { colorToRgba, getCssVar } from '@/utils/theme/color'
+import { applyChartTheme } from '@/utils/theme/chart'
 
 export default {
   components: {
@@ -186,7 +187,7 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$refs.chartRef)
-      this.chart.setOption(this.chartOption)
+      this.chart.setOption(applyChartTheme(this.chartOption))
     },
     resizeChart() {
       if (this.chart) {
@@ -214,7 +215,7 @@ $text-color: #646a73;
   width: 100%;
   height: 100%;
   padding: 1.25rem;
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
   overflow: hidden;
   border-radius: 0.25rem;
 
@@ -235,18 +236,18 @@ $text-color: #646a73;
 
         .total-title {
           font-size: 0.875rem;
-          color: #646a73;
+          color: var(--color-text-secondary, #646a73);
           font-weight: 400;
         }
 
         .sub-title {
-          color: #646a73;
+          color: var(--color-text-secondary, #646a73);
           font-size: 0.9rem;
           font-weight: 400;
         }
 
         .total-account {
-          color: #1f2329;
+          color: var(--color-text-primary, #1f2329);
           font-size: 2rem;
           font-weight: 500;
           line-height: 2.5rem;
@@ -255,7 +256,7 @@ $text-color: #646a73;
         .week-add {
           display: flex;
           gap: 0.5rem;
-          color: #1f2329;
+          color: var(--color-text-primary, #1f2329);
           font-weight: 400;
           line-height: 1.4rem;
 
@@ -293,14 +294,14 @@ $text-color: #646a73;
       transition: all 0.3s ease-in-out;
 
       .metric-label {
-        color: #646a73;
+        color: var(--color-text-secondary, #646a73);
         font-weight: 400;
         line-height: 1.4rem;
         font-size: 0.9rem;
       }
 
       .metric-value {
-        color: #1f2329;
+        color: var(--color-text-primary, #1f2329);
         line-height: 2rem;
         font-size: 1.5rem;
         font-weight: 500;

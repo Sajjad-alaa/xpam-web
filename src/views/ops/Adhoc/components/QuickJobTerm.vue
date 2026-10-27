@@ -89,8 +89,8 @@ export default {
               scrollback: 9999999,
               rightClickSelectsWord: true,
               theme: {
-                background: '#fff',
-                foreground: '#000',
+                background: getCssVar('--page-background-color', '#fff'),
+                foreground: getCssVar('--color-text-primary', '#000'),
                 selectionBackground: selectionColor,
                 selectionInactiveBackground: selectionColor
               }
@@ -253,7 +253,7 @@ export default {
   .xterm {
     overflow: auto;
     padding: 10px 0 0 20px;
-    background-color: #fff;
+    background-color: var(--page-background-color, #fff);
   }
 }
 </style>

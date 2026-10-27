@@ -32,7 +32,7 @@ export default {
 
 <style scoped>
 .ibox-heading {
-  background-color: #f3f6fb;
+  background-color: var(--page-content-background-color, #f3f6fb);
   border-bottom: none;
   margin: -15px -20px 20px -20px;
   padding: 20px;
@@ -44,9 +44,10 @@ export default {
   margin-top: 5px;
   margin-bottom: 10px;
   line-height: 1.1;
+  color: var(--color-text-primary);
 }
 
 .ibox .el-card__body {
-  background-color: #f3f6fb;
+  background-color: var(--page-content-background-color, #f3f6fb);
 }
 </style>

@@ -70,9 +70,9 @@ export default {
 }
 
 .hr-line-dashed {
-  border-top: 1px dashed #e7eaec;
-  color: #ffffff;
-  background-color: #ffffff;
+  border-top: 1px dashed var(--panel-border-color, #e7eaec);
+  color: var(--page-background-color, #ffffff);
+  background-color: var(--page-background-color, #ffffff);
   height: 1px;
   margin: 6px 0 0;
 }

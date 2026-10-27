@@ -571,7 +571,7 @@ export default {
     // 编辑器区套一层白色面板，避免直接露出内容区灰底（AppMain #f3f3f4）
     :deep(.code-editor) {
       padding: 14px 16px;
-      background: #fff;
+      background: var(--page-background-color, #fff);
       border: 1px solid var(--color-border);
       border-radius: 4px;
     }

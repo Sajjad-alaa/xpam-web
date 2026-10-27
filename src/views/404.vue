@@ -56,7 +56,7 @@ export default {
 .error-404-subtitle {
   font-size: 18px;
   margin-top: 10px;
-  color: #646464;
+  color: var(--color-text-secondary, #646464);
   line-height: 1.4;
 }
 

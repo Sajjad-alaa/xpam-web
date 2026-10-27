@@ -66,7 +66,7 @@ export default {
 .box {
   margin-top: 16px;
   padding: 20px;
-  background: #fff;
+  background: var(--page-background-color, #fff);
   .head {
     display: flex;
     justify-content: space-between;

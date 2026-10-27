@@ -99,7 +99,7 @@ export default {
 
 <style scoped>
 .button-text {
-  color: #676a6c;
+  color: var(--color-text-secondary, #676a6c);
   padding: 5px !important;
 }
 
@@ -114,6 +114,6 @@ export default {
 }
 
 .icon {
-  color: #676a6c !important;
+  color: var(--color-icon-primary, #676a6c) !important;
 }
 </style>

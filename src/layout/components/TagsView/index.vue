@@ -234,9 +234,9 @@ export default {
       cursor: pointer;
       height: 26px;
       line-height: 26px;
-      border: 1px solid #d8dce5;
-      color: #495060;
-      background: #fff;
+      border: 1px solid var(--panel-border-color, #d8dce5);
+      color: var(--color-text-secondary, #495060);
+      background: var(--page-background-color, #fff);
       padding: 0 8px;
       font-size: 12px;
       margin-left: 5px;
@@ -247,9 +247,9 @@ export default {
         margin-right: 15px;
       }
       &.active {
-        background-color: $color-primary;
+        background-color: var(--color-primary, $color-primary);
         color: #fff;
-        border-color: $color-primary;
+        border-color: var(--color-primary, $color-primary);
         &::before {
           content: '';
           background: #fff;
@@ -265,7 +265,8 @@ export default {
   }
   .contextmenu {
     margin: 0;
-    background: #fff;
+    background: var(--el-bg-color-overlay, var(--page-background-color, #fff));
+    border: 1px solid var(--panel-border-color, transparent);
     z-index: 3000;
     position: absolute;
     list-style-type: none;
@@ -273,14 +274,14 @@ export default {
     border-radius: 4px;
     font-size: 12px;
     font-weight: 400;
-    color: #333;
-    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
+    color: var(--color-text-primary, #333);
+    box-shadow: var(--jms-card-shadow, 2px 2px 3px 0 rgba(0, 0, 0, 0.3));
     li {
       margin: 0;
       padding: 7px 16px;
       cursor: pointer;
       &:hover {
-        background: #eee;
+        background: var(--menu-hover, #eee);
       }
     }
   }

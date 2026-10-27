@@ -132,12 +132,12 @@ export default {
   overflow-y: auto;
 }
 .detail-item {
-  border-bottom: 1px solid #ebeef5;
+  border-bottom: 1px solid var(--el-border-color-lighter, #ebeef5);
   padding: 5px 0;
   margin-bottom: 0;
 
   &:hover {
-    background-color: #f5f7fa;
+    background-color: var(--el-fill-color-light, #f5f7fa);
   }
 }
 </style>

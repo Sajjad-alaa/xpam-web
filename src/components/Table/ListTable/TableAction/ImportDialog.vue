@@ -421,7 +421,7 @@ export default {
 }
 
 .error-msg.error-results {
-  background-color: #f3f3f4;
+  background-color: var(--page-content-background-color, #f3f3f4);
   max-height: 200px;
   overflow: auto;
 }

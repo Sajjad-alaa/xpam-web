@@ -385,7 +385,7 @@ export default {
 .popup-main {
   position: relative;
   margin: 0;
-  background: #fff;
+  background: var(--page-background-color, #fff);
   font-size: 13px;
   overflow: hidden;
 }
@@ -394,7 +394,7 @@ export default {
   overflow: hidden;
   line-height: 34px;
   padding-top: 6px;
-  background: #f2f2f2;
+  background: var(--el-fill-color-light, #f2f2f2);
 }
 
 .popup-result {
@@ -404,7 +404,7 @@ export default {
   margin: 24px auto 0;
   padding: 18px 16px 14px;
   border: 1px solid var(--el-border-color);
-  background: #fff;
+  background: var(--page-background-color, #fff);
 }
 
 .popup-result .title {
@@ -416,7 +416,7 @@ export default {
   margin-left: -70px;
   text-align: center;
   line-height: 30px;
-  background: #fff;
+  background: var(--page-background-color, #fff);
 }
 
 .cron-expression-grid {
@@ -526,7 +526,7 @@ export default {
   margin: 0 auto;
   padding: 12px 16px 14px;
   border: 1px solid var(--el-border-color);
-  background: #fff;
+  background: var(--page-background-color, #fff);
 }
 
 .pop_btn :deep(.el-button) {
@@ -554,7 +554,7 @@ export default {
   border-radius: 0;
   overflow: hidden;
   box-shadow: none !important;
-  background: #fff;
+  background: var(--el-bg-color, #fff);
 }
 
 .crontab-root :deep(.cron-tab-form__number.el-input-number:hover),
@@ -581,7 +581,7 @@ export default {
   border-right: 0 !important;
   top: 1px;
   bottom: 1px;
-  background: #f5f7fa;
+  background: var(--el-fill-color-light, #f5f7fa);
 }
 
 .crontab-root :deep(.cron-tab-form__number .el-input-number__decrease) {
@@ -597,7 +597,7 @@ export default {
 }
 
 :deep(.el-tabs__header) {
-  background-color: white;
+  background-color: var(--page-background-color, white);
   margin-top: -10px;
   padding: 0 30px;
   margin-bottom: 5px;

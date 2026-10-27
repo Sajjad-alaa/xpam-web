@@ -191,7 +191,7 @@ export default {
   transition: transform 0.25s cubic-bezier(0.7, 0.3, 0.1, 1);
   box-shadow: 0 0 8px 4px #00000014;
   transform: translate(100%);
-  background: #ffffff;
+  background: var(--page-background-color, #ffffff);
   z-index: 1200;
 }
 
@@ -232,8 +232,8 @@ export default {
   border-radius: 20px 0 0 20px;
   z-index: 0;
   pointer-events: auto;
-  color: #fff;
-  background-color: #ffffff;
+  color: var(--color-icon-primary, #fff);
+  background-color: var(--page-background-color, #ffffff);
   opacity: 0.9;
   box-shadow: 0 0 8px 4px #00000014;
   cursor: pointer;

@@ -94,7 +94,7 @@ export default {
 }
 .el-input-group__append .el-button {
   font-size: 14px;
-  color: #1a1a1a;
+  color: var(--color-text-primary, #1a1a1a);
   padding: 9px 20px;
 }
 </style>

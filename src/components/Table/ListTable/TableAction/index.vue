@@ -911,12 +911,12 @@ $color-drop-menu-border: #e4e7ed;
 
       &:hover {
         color: var(--color-text-primary) !important;
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: var(--overlay-hover-bg, rgba(0, 0, 0, 0.05));
       }
 
       &.is-active {
         color: var(--color-text-primary) !important;
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: var(--overlay-hover-bg, rgba(0, 0, 0, 0.05));
       }
     }
   }
@@ -999,7 +999,7 @@ $color-drop-menu-border: #e4e7ed;
   padding: 8px 10px;
   border: 1px solid var(--panel-border-color, var(--el-border-color));
   border-radius: var(--list-corner-radius, 4px);
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
 
   &__active,
   &__saved {
@@ -1071,11 +1071,11 @@ $color-drop-menu-border: #e4e7ed;
     color: var(--el-text-color-primary) !important;
     font-size: 10px;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: var(--overlay-active-bg, rgba(0, 0, 0, 0.08));
 
     &:hover {
-      color: #000 !important;
-      background-color: rgba(0, 0, 0, 0.16);
+      color: var(--color-text-primary, #000) !important;
+      background-color: var(--overlay-strong-bg, rgba(0, 0, 0, 0.16));
     }
   }
 }
@@ -1182,7 +1182,7 @@ $color-drop-menu-border: #e4e7ed;
       font-size: 12px;
       white-space: nowrap;
       border-bottom: 1px solid var(--el-border-color-lighter);
-      background-color: #fff;
+      background-color: var(--el-bg-color-overlay, var(--page-background-color, #fff));
     }
 
     &__item {

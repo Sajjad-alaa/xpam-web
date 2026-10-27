@@ -243,7 +243,7 @@ function itemDescription(item) {
     gap: 10px;
     padding: 5px 0;
     border: 0;
-    color: #4b5067;
+    color: var(--color-text-secondary, #4b5067);
     background: transparent;
     cursor: pointer;
     text-align: left;
@@ -298,7 +298,7 @@ function itemDescription(item) {
 
   small {
     overflow: hidden;
-    color: #7c7c7c;
+    color: var(--color-text-secondary, #7c7c7c);
     font-size: 10px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -311,13 +311,13 @@ function itemDescription(item) {
   height: 20px;
   place-items: center;
   border-radius: 999px;
-  color: #767c91;
+  color: var(--color-text-secondary, #767c91);
   background: rgb(83 88 118 / 7%);
   font-size: 10px;
 }
 
 .summary-arrow {
-  color: #999eb0;
+  color: var(--color-text-secondary, #999eb0);
   transition: transform 0.2s ease;
 }
 
@@ -345,10 +345,10 @@ function itemDescription(item) {
     width: 20px;
     height: 20px;
     place-items: center;
-    border: 1px solid #dfe2eb;
+    border: 1px solid var(--panel-border-color, #dfe2eb);
     border-radius: 50%;
-    color: #5ca998;
-    background: #fff;
+    color: var(--color-text-secondary, #5ca998);
+    background: var(--page-background-color, #fff);
     font-size: 10px;
   }
 
@@ -359,7 +359,7 @@ function itemDescription(item) {
     bottom: -12px;
     left: 9px;
     width: 1px;
-    background: #e3e5ec;
+    background: var(--panel-border-color, #e3e5ec);
   }
 
   &__content {
@@ -375,14 +375,14 @@ function itemDescription(item) {
     }
 
     strong {
-      color: #5c6175;
+      color: var(--color-text-secondary, #5c6175);
       font-size: 11px;
       font-weight: 650;
     }
 
     small {
       overflow: hidden;
-      color: #7c7c7c;
+      color: var(--color-text-secondary, #7c7c7c);
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 10px;
       text-overflow: ellipsis;
@@ -397,7 +397,7 @@ function itemDescription(item) {
   }
 
   &__count {
-    color: #999eb0;
+    color: var(--color-text-secondary, #999eb0);
     font-size: 10px;
   }
 
@@ -414,15 +414,15 @@ function itemDescription(item) {
   }
 
   &.is-failed .trace-item__dot {
-    color: #d65c69;
-    border-color: #f1cdd2;
-    background: #fff1f2;
+    color: var(--tint-danger-text, #d65c69);
+    border-color: var(--el-color-danger-light-7, #f1cdd2);
+    background: var(--el-color-danger-light-9, #fff1f2);
   }
 
   &.is-approval .trace-item__dot {
-    color: #bd7a27;
-    border-color: #f0d4ab;
-    background: #fff7e8;
+    color: var(--tint-warning-text, #bd7a27);
+    border-color: var(--el-color-warning-light-7, #f0d4ab);
+    background: var(--el-color-warning-light-9, #fff7e8);
   }
 
   &.is-progress {
@@ -442,7 +442,7 @@ function itemDescription(item) {
     }
 
     .trace-item__content strong {
-      color: #454a5e;
+      color: var(--color-text-primary, #454a5e);
       font-size: 12px;
       font-weight: 500;
       line-height: 1.65;

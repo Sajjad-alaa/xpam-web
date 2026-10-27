@@ -225,7 +225,7 @@ export default {
 }
 
 .el-form-item {
-  border-bottom: 1px solid #ebeef5;
+  border-bottom: 1px solid var(--panel-border-color, #ebeef5);
   padding: 5px 0;
   margin-bottom: 0;
 
@@ -266,7 +266,7 @@ li {
   text-overflow: ellipsis;
 
   .title {
-    color: #303133;
+    color: var(--color-text-primary, #303133);
     font-weight: 500;
   }
 }

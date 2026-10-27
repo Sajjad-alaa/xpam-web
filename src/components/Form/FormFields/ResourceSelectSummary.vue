@@ -241,7 +241,7 @@ export default {
   height: auto;
   overflow: hidden;
   padding: 0;
-  border: 1px solid var(--el-border-color);
+  border: 1px solid var(--form-control-border-color, var(--el-border-color));
   border-radius: 0;
   outline: none;
   background: var(--el-fill-color-blank);
@@ -254,7 +254,7 @@ export default {
   transition: border-color var(--el-transition-duration-fast);
 
   &:hover:not(.is-disabled) {
-    border-color: var(--el-border-color-hover);
+    border-color: var(--form-control-border-color-hover, var(--el-border-color-hover));
   }
 
   &:focus,
@@ -351,9 +351,9 @@ export default {
   height: 22px;
   margin: 2px 0 2px 6px;
   padding: 0 8px;
-  border: 1px solid #e5e6e7;
+  border: 1px solid var(--panel-border-color, #e5e6e7);
   border-radius: 4px;
-  background: #f1f1f1;
+  background: var(--page-content-background-color, #f1f1f1);
   color: var(--el-text-color-regular);
   line-height: 18px;
   white-space: normal;
@@ -417,7 +417,7 @@ export default {
   outline: none;
   opacity: 0;
   background: transparent;
-  color: #c0c4cc;
+  color: var(--el-text-color-disabled, #c0c4cc);
   cursor: pointer;
   font-size: 14px;
   pointer-events: none;
@@ -428,7 +428,7 @@ export default {
 
   &:hover,
   &:focus-visible {
-    color: #606164;
+    color: var(--el-text-color-regular, #606164);
   }
 }
 

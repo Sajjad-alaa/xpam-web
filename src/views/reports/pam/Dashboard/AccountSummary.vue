@@ -89,12 +89,12 @@ export default {
 <style lang="scss" scoped>
 .box {
   padding: 20px;
-  background: #ffffff;
+  background: var(--page-background-color, #ffffff);
 
   .content {
     .el-col {
       padding-left: 16px;
-      border-left: 1px solid #eff0f1;
+      border-left: 1px solid var(--panel-border-color, #eff0f1);
 
       &:first-child {
         padding-left: 0;
@@ -107,7 +107,7 @@ export default {
       font-weight: 400;
       font-size: 12px;
       line-height: 20px;
-      color: #646a73;
+      color: var(--color-text-secondary, #646a73);
     }
 
     .num {

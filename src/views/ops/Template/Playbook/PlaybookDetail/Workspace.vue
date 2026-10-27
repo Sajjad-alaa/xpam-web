@@ -366,18 +366,18 @@ export default {
 .vue-codemirror-wrap :deep(.CodeMirror) {
   width: 600px;
   height: 100px;
-  border: 1px solid #eee;
+  border: 1px solid var(--panel-border-color, #eee);
 }
 
 .tree-box {
   margin-right: 2px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--panel-border-color, #e0e0e0);
 }
 
 .output {
   padding-left: 30px;
-  background-color: rgb(247 247 247);
-  border: solid 1px #f3f3f3;
+  background-color: var(--page-content-background-color, rgb(247 247 247));
+  border: solid 1px var(--panel-border-color, #f3f3f3);
 }
 
 .status_success {
@@ -399,7 +399,7 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #606266;
+  color: var(--color-text-secondary, #606266);
   height: 24px;
   line-height: 24px;
   box-sizing: border-box;

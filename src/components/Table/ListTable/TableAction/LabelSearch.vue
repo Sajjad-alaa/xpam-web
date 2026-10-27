@@ -326,11 +326,11 @@ export default {
     color: var(--color-text-primary) !important;
     border: 1px solid var(--color-border);
     border-radius: 4px;
-    background-color: #fff;
+    background-color: var(--page-background-color, #fff);
 
     &:hover {
       color: var(--color-text-primary) !important;
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: var(--menu-hover, rgba(0, 0, 0, 0.05));
     }
   }
 
@@ -374,7 +374,7 @@ export default {
       min-width: 0;
       min-height: 0;
       flex-direction: column;
-      background-color: #fff;
+      background-color: var(--el-bg-color-overlay, var(--page-background-color, #fff));
     }
 
     &__keys {

@@ -442,7 +442,7 @@ export default {
         localStorage.setItem('lina-theme-mode', 'light')
         setDarkMode(false)
       } else {
-        localStorage.removeItem('lina-theme-mode')
+        localStorage.setItem('lina-theme-mode', 'auto')
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
         setDarkMode(systemDark)
       }
@@ -485,7 +485,11 @@ export default {
         baseColors['primary'] = this.customPrimary
       }
       baseColors['theme_mode'] = this.selectedMode
-      baseColors['is_dark'] = this.selectedMode === 'dark'
+      if (this.selectedMode === 'auto') {
+        delete baseColors['is_dark']
+      } else {
+        baseColors['is_dark'] = this.selectedMode === 'dark'
+      }
       this.$store.dispatch('settings/changeThemeStyle', baseColors)
     },
     handleFileChange(field, file) {
@@ -648,6 +652,25 @@ export default {
     }
   }
 
+  html.dark & {
+    .mode-icon-wrapper {
+      &.light {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fbbf24;
+      }
+
+      &.auto {
+        background: rgba(255, 255, 255, 0.06);
+        color: #94a3b8;
+      }
+
+      &.dark {
+        background: #0f172a;
+        color: #38bdf8;
+      }
+    }
+  }
+
   .mode-info {
     flex: 1 1 auto;
     min-width: 0;
@@ -741,6 +764,20 @@ export default {
         background: #f1f5f9;
         color: #059669;
         border: 1px solid #e2e8f0;
+      }
+    }
+
+    html.dark & {
+      .theme-tag.tag-light {
+        background: rgba(16, 185, 129, 0.15);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+
+      .theme-tag.tag-dark {
+        background: rgba(56, 189, 248, 0.12);
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.25);
       }
     }
   }

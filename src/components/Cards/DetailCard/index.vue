@@ -79,7 +79,7 @@ export default {
   line-height: 2;
 
   :deep(.el-form-item) {
-    border-bottom: 1px dashed #f4f4f4;
+    border-bottom: 1px solid var(--panel-border-color, #f4f4f4);
     padding: 1px 0;
     margin-bottom: 0;
     display: flex;
@@ -96,11 +96,11 @@ export default {
       border-bottom: none;
 
       :deep(.el-form-item__content) {
-        border-bottom: 1px dashed #ebeef5;
+        border-bottom: 1px dashed var(--panel-border-color, #ebeef5);
       }
 
       :deep(.el-form-item__label:last-child) {
-        border: 1px dashed #ebeef5;
+        border: 1px dashed var(--panel-border-color, #ebeef5);
       }
     }
 

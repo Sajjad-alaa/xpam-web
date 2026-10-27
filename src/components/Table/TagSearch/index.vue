@@ -1579,8 +1579,8 @@ export default {
 
 <style lang="scss" scoped>
 $borderColor-neutral-muted: #afb8c133;
-$bgColor-muted: #f6f8fa;
-$origin-white-color: #ffffff;
+$bgColor-muted: var(--el-fill-color-light, #f6f8fa);
+$origin-white-color: var(--page-background-color, #ffffff);
 
 .filter-field {
   position: relative;
@@ -1805,7 +1805,7 @@ $origin-white-color: #ffffff;
 
     &:hover {
       color: var(--el-text-color-primary);
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: var(--overlay-hover-bg, rgba(0, 0, 0, 0.05));
     }
   }
 }
@@ -1816,7 +1816,7 @@ $origin-white-color: #ffffff;
 }
 
 a {
-  color: #000;
+  color: var(--color-text-primary, #000);
 }
 </style>
 

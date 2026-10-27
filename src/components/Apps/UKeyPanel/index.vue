@@ -46,7 +46,15 @@
               </tr>
             </tbody>
           </table>
-          <div v-else style="color: #909399; font-size: 13px; padding: 12px 0; text-align: center">
+          <div
+            v-else
+            style="
+              color: var(--el-text-color-secondary, #909399);
+              font-size: 13px;
+              padding: 12px 0;
+              text-align: center;
+            "
+          >
             {{ $t('NoAvailableActions') }}
           </div>
         </IBox>
@@ -1139,7 +1147,7 @@ export default {
   border-collapse: collapse;
 
   tr {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--panel-border-color, #f0f0f0);
     &:last-child {
       border-bottom: none;
     }
@@ -1152,7 +1160,7 @@ export default {
   }
 
   .cp-label {
-    color: #909399;
+    color: var(--color-help-text, #909399);
     white-space: nowrap;
     padding-right: 12px;
   }
@@ -1163,7 +1171,7 @@ export default {
   }
 
   .cp-text {
-    color: #303133;
+    color: var(--color-text-primary, #303133);
     display: inline-block;
     max-width: 100%;
     overflow: hidden;
@@ -1190,7 +1198,7 @@ export default {
   gap: 8px;
   padding: 20px 0;
   justify-content: center;
-  color: #909399;
+  color: var(--color-help-text, #909399);
   font-size: 13px;
 
   .el-icon-loading {
@@ -1204,7 +1212,7 @@ export default {
   border-collapse: collapse;
 
   tr {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--panel-border-color, #f0f0f0);
     &:last-child {
       border-bottom: none;
     }
@@ -1220,12 +1228,12 @@ export default {
 
     .cp-action-title {
       font-size: 13px;
-      color: #303133;
+      color: var(--color-text-primary, #303133);
       line-height: 1.4;
     }
     .cp-action-hint {
       font-size: 12px;
-      color: #909399;
+      color: var(--color-help-text, #909399);
       margin-top: 2px;
       line-height: 1.4;
     }

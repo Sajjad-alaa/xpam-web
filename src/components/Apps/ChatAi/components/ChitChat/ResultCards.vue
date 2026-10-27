@@ -296,13 +296,13 @@ function formatFieldValue(key, value) {
 
 .result-card {
   overflow: hidden;
-  border: 1px solid #e1e5eb;
+  border: 1px solid var(--panel-border-color, #e1e5eb);
   border-radius: var(--ai-radius-md, 10px);
-  background: #fff;
+  background: var(--page-background-color, #fff);
   box-shadow: 0 2px 8px rgb(31 49 43 / 4%);
 
   &[open] .result-card__header {
-    border-bottom-color: #edf0f4;
+    border-bottom-color: var(--panel-border-color, #edf0f4);
   }
 
   &[open] .result-card__source .el-icon {
@@ -317,7 +317,7 @@ function formatFieldValue(key, value) {
     gap: 12px;
     padding: 8px 11px;
     border-bottom: 1px solid transparent;
-    background: #f8faf9;
+    background: var(--page-content-background-color, #f8faf9);
     cursor: pointer;
     list-style: none;
     transition: background 0.16s ease;
@@ -337,7 +337,7 @@ function formatFieldValue(key, value) {
 
     strong {
       overflow: hidden;
-      color: #454b5c;
+      color: var(--color-text-primary, #454b5c);
       font-size: 12px;
       font-weight: 650;
       text-overflow: ellipsis;
@@ -353,7 +353,7 @@ function formatFieldValue(key, value) {
 
     small {
       overflow: hidden;
-      color: #737b87;
+      color: var(--color-text-secondary, #737b87);
       font-size: 11px;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -361,7 +361,7 @@ function formatFieldValue(key, value) {
 
     .el-icon {
       flex: 0 0 auto;
-      color: #747c89;
+      color: var(--color-text-secondary, #747c89);
       font-size: 14px;
       transition: transform 0.18s ease;
     }
@@ -427,15 +427,15 @@ function formatFieldValue(key, value) {
   }
 
   th {
-    color: #737b8d;
-    background: #f7f9f8;
+    color: var(--color-text-secondary, #737b8d);
+    background: var(--page-content-background-color, #f7f9f8);
     font-weight: 650;
     white-space: nowrap;
   }
 
   td {
-    border-top: 1px solid #f0f2f5;
-    color: #4d5364;
+    border-top: 1px solid var(--panel-border-color, #f0f2f5);
+    color: var(--color-text-primary, #4d5364);
   }
 }
 
@@ -448,7 +448,7 @@ function formatFieldValue(key, value) {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px 16px;
   padding: 12px 14px;
-  border-bottom: 1px solid #edf1f3;
+  border-bottom: 1px solid var(--panel-border-color, #edf1f3);
   transition: background-color 0.15s ease;
 
   &:last-of-type {
@@ -456,7 +456,7 @@ function formatFieldValue(key, value) {
   }
 
   &:hover {
-    background: #fbfdfd;
+    background: var(--menu-hover, #fbfdfd);
   }
 
   &__identity {
@@ -493,13 +493,13 @@ function formatFieldValue(key, value) {
     }
 
     strong {
-      color: #343a46;
+      color: var(--color-text-primary, #343a46);
       font-size: 12px;
       font-weight: 650;
     }
 
     code {
-      color: #747d8c;
+      color: var(--color-text-secondary, #747d8c);
       font-family: inherit;
       font-size: 11px;
     }
@@ -516,8 +516,8 @@ function formatFieldValue(key, value) {
     gap: 5px;
     padding: 3px 7px;
     border-radius: 999px;
-    color: #8a5b2d;
-    background: #fff6e8;
+    color: var(--tint-warning-text, #8a5b2d);
+    background: var(--el-color-warning-light-9, #fff6e8);
     font-size: 11px;
     font-weight: 600;
 
@@ -529,8 +529,8 @@ function formatFieldValue(key, value) {
     }
 
     &.is-active {
-      color: #217a67;
-      background: #eaf7f3;
+      color: var(--tint-success-text, #217a67);
+      background: var(--el-color-success-light-9, #eaf7f3);
 
       i {
         background: #2fb496;
@@ -545,16 +545,16 @@ function formatFieldValue(key, value) {
     align-items: center;
     gap: 7px;
     padding-left: 40px;
-    color: #7f8795;
+    color: var(--color-text-secondary, #7f8795);
     font-size: 11px;
 
     > span:not(.asset-result__verified) {
       max-width: 160px;
       padding: 2px 6px;
       overflow: hidden;
-      border: 1px solid #e7eaee;
+      border: 1px solid var(--panel-border-color, #e7eaee);
       border-radius: 6px;
-      background: #fafbfc;
+      background: var(--page-content-background-color, #fafbfc);
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -582,7 +582,7 @@ function formatFieldValue(key, value) {
 .result-total {
   display: block;
   padding: 6px 9px 8px;
-  color: #737b87;
+  color: var(--color-text-secondary, #737b87);
   font-size: 11px;
 }
 
@@ -597,17 +597,17 @@ function formatFieldValue(key, value) {
   dd {
     margin: 0;
     padding: 5px 0;
-    border-bottom: 1px solid #f1f3f5;
+    border-bottom: 1px solid var(--panel-border-color, #f1f3f5);
     overflow-wrap: anywhere;
   }
 
   dt {
     padding-right: 10px;
-    color: #858c9d;
+    color: var(--color-text-secondary, #858c9d);
   }
 
   dd {
-    color: #4d5364;
+    color: var(--color-text-primary, #4d5364);
   }
 }
 
@@ -615,8 +615,8 @@ function formatFieldValue(key, value) {
   margin: 0;
   padding: 10px;
   overflow: auto;
-  color: #4d5364;
-  background: #fff;
+  color: var(--color-text-primary, #4d5364);
+  background: var(--page-background-color, #fff);
   font-family: inherit;
   font-size: 11px;
   white-space: pre-wrap;

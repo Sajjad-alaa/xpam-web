@@ -183,7 +183,7 @@ export default {
 
 .recent {
   font-weight: 500;
-  color: #303133;
+  color: var(--color-text-primary, #303133);
 }
 
 :deep(.el-collapse) {

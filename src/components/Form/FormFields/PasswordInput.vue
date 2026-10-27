@@ -215,14 +215,14 @@ export default {
   width: 100%;
   height: 6px;
   margin: 0;
-  background: #ebeef5;
+  background: var(--panel-border-color, #ebeef5);
   border-radius: 2px;
 }
 
 .password-input__meter-wrap :deep(.Password__strength-meter:before),
 .password-input__meter-wrap :deep(.Password__strength-meter:after) {
   height: 100%;
-  border-color: #fff;
+  border-color: var(--page-background-color, #fff);
   border-width: 0 4px;
 }
 

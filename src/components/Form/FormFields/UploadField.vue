@@ -163,7 +163,7 @@ export default {
   align-self: flex-start;
   min-height: 32px;
   border-radius: 2px;
-  background: #fff;
+  background: var(--page-background-color, #fff);
   box-sizing: content-box;
 
   img {

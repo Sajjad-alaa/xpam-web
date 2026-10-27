@@ -69,7 +69,7 @@ export default {
 
 <style lang="scss" scoped>
 .cloud-select-wrap {
-  background: #f3f3f3;
+  background: var(--page-content-background-color, #f3f3f3);
 }
 
 .provider-grid {

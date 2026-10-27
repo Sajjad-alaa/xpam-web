@@ -4,7 +4,9 @@
       <el-row :gutter="10">
         <el-col :md="19" :sm="24" style="padding-right: 15px">
           <div>
-            <div style="text-align: left; font-weight: 350; color: #000000">
+            <div
+              style="text-align: left; font-weight: 350; color: var(--color-text-primary, #000000)"
+            >
               <span class="name">{{ componentName }}</span>
             </div>
             <div class="type">
@@ -12,7 +14,7 @@
                 <el-icon v-if="item.icon" :style="{ color: item.color }"
                   ><component :is="iconComponent(item.icon)"
                 /></el-icon>
-                <span style="color: #a3a3a4">{{ item.name }}</span>
+                <span style="color: var(--color-text-secondary, #a3a3a4)">{{ item.name }}</span>
                 <el-popover
                   v-if="componentMetric[item.key].length > 0"
                   placement="bottom"
@@ -263,7 +265,7 @@ export default {
   display: inline-block;
   margin-bottom: 8px;
   font-size: 18px;
-  color: #000000;
+  color: var(--color-text-primary, #000000);
 }
 
 .type {
@@ -320,11 +322,11 @@ export default {
 
 .session {
   margin-top: 13px;
-  border-left: 1px solid #f3f3f3;
+  border-left: 1px solid var(--panel-border-color, #f3f3f3);
 
   .session-title {
     margin-bottom: 8px;
-    color: #a3a3a4;
+    color: var(--color-text-secondary, #a3a3a4);
     text-align: center;
     font-weight: 350;
     font-size: 14px;

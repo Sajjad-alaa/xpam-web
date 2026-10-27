@@ -383,7 +383,7 @@ export default {
 
 .help-text {
   font-size: 12px;
-  color: #999999;
+  color: var(--el-text-color-secondary, #999999);
 }
 
 .group-title {

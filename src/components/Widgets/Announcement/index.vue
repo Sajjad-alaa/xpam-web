@@ -207,7 +207,7 @@ export default {
   padding: 10px 20px 10px 20px;
 
   .el-dialog__title {
-    color: black;
+    color: var(--color-text-primary, black);
   }
 }
 
@@ -221,7 +221,7 @@ export default {
   .link-section {
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 1px solid #e4e7ed;
+    border-top: 1px solid var(--panel-border-color, #e4e7ed);
     text-align: center;
   }
 }
@@ -251,7 +251,7 @@ export default {
   background-color: transparent !important;
   font-size: 14px;
   line-height: 1.8;
-  color: #2c3e50;
+  color: var(--color-text-primary, #2c3e50);
 
   .link-more {
     font-size: 13px;
@@ -275,7 +275,7 @@ export default {
   h5,
   h6 {
     margin: 0 0 15px 0;
-    color: #303133;
+    color: var(--color-text-primary, #303133);
     font-weight: 600;
     line-height: 1.4;
   }
@@ -301,7 +301,7 @@ export default {
   p {
     margin-bottom: 16px;
     line-height: 1.8;
-    color: #4b5563;
+    color: var(--color-text-secondary, #4b5563);
   }
 }
 </style>

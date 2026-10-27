@@ -147,7 +147,7 @@ tr.item {
   // 纳入行高计算，按钮溢出贴到 border-bottom。flex 居中后按钮垂直居中，padding 在上下
   // 各留出与 border 的间距。
   padding: 6px 8px;
-  border-bottom: 1px solid #e7eaec;
+  border-bottom: 1px solid var(--panel-border-color, #e7eaec);
 
   &:last-child {
     border-bottom: 0;

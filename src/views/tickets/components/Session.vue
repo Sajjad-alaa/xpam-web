@@ -208,14 +208,14 @@ export default {
 .content {
   line-height: 2.5;
   font-size: 13px;
-  color: #676a6c;
+  color: var(--color-text-secondary, #676a6c);
 
   .item-label {
     font-weight: 700;
   }
 
   .item-value {
-    color: #676a6c;
+    color: var(--color-text-secondary, #676a6c);
   }
 
   & :deep(.el-col) {

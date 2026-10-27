@@ -261,12 +261,12 @@ export default {
 <style scoped>
 .form-help-text {
   margin-top: 6px;
-  color: #909399;
+  color: var(--color-help-text, #909399);
   font-size: 12px;
   line-height: 1.4;
 }
 
 :deep(.el-input__count) {
-  color: #909399;
+  color: var(--el-text-color-secondary, #909399);
 }
 </style>

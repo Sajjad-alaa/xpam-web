@@ -117,11 +117,11 @@ onBeforeUnmount(() => {
 <style scoped>
 img {
   aspect-ratio: 4 / 3;
-  background: #f2f4f6;
+  background: var(--el-fill-color-light, #f2f4f6);
 }
 
 img.is-loading,
 img.is-unavailable {
-  color: #8a919e;
+  color: var(--el-text-color-secondary, #8a919e);
 }
 </style>

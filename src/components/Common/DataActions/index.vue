@@ -329,7 +329,7 @@ $color-drop-menu-border: #e4e7ed;
     --el-button-hover-bg-color: var(--color-primary-light-3, #e8f7f4) !important;
     --el-button-hover-border-color: var(--color-primary-light, #bae8df) !important;
     --el-button-active-text-color: var(--color-primary) !important;
-    --el-button-active-bg-color: var(--color-primary-light-10, #e8f7f4) !important;
+    --el-button-active-bg-color: var(--color-primary-light-3, #e8f7f4) !important;
     --el-button-active-border-color: var(--color-primary-light, #bae8df) !important;
   }
 
@@ -340,7 +340,7 @@ $color-drop-menu-border: #e4e7ed;
     --el-button-hover-bg-color: var(--color-primary-light-3, #e8f7f4);
     --el-button-hover-border-color: var(--color-primary-light, #bae8df);
     --el-button-active-text-color: var(--color-primary);
-    --el-button-active-bg-color: var(--color-primary-light-10, #e8f7f4);
+    --el-button-active-bg-color: var(--color-primary-light-3, #e8f7f4);
     --el-button-active-border-color: var(--color-primary-light, #bae8df);
 
     &:hover,
@@ -454,7 +454,7 @@ $color-drop-menu-border: #e4e7ed;
   padding: 0 20px;
   font-size: 12px;
   color: var(--color-text-secondary, #909399);
-  border-top: 1px solid #e4e7ed;
+  border-top: 1px solid var(--panel-border-color, #e4e7ed);
 }
 
 :global(.action-dropdown.el-dropdown__popper .dropdown-menu-title:first-child) {
@@ -541,7 +541,7 @@ $color-drop-menu-border: #e4e7ed;
   color: var(--color-text-primary);
   cursor: default;
   font-size: 12px;
-  border-bottom: 1px solid #e4e7ed;
+  border-bottom: 1px solid var(--panel-border-color, #e4e7ed);
 }
 
 :global(.action-dropdown.el-dropdown__popper .more-batch-processing:hover) {

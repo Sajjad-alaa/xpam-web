@@ -408,7 +408,7 @@ export default {
     width: 100%;
     overflow: auto;
     height: 648px;
-    background-color: #ffffff;
+    background-color: var(--page-background-color, #ffffff);
 
     .level0 {
       .node_name {
@@ -475,7 +475,7 @@ div.rMenu li {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #606266;
+  color: var(--color-text-secondary, #606266);
   height: 24px;
   line-height: 24px;
   box-sizing: border-box;
@@ -489,7 +489,7 @@ div.rMenu li {
 .dropdown-menu {
   border: medium none;
   min-width: 160px;
-  background-color: #fff;
+  background-color: var(--el-bg-color-overlay, #fff);
   border-radius: 2px;
   box-shadow: 0 0 3px rgba(86, 96, 117, 0.7);
   display: block;
@@ -511,7 +511,7 @@ div.rMenu li {
 }
 
 .dropdown a:hover {
-  background-color: #f1f1f1;
+  background-color: var(--menu-hover, #f1f1f1);
 }
 
 .dropdown-menu > li > a {
@@ -530,9 +530,9 @@ div.rMenu li {
 
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-  color: #262626;
+  color: var(--color-text-primary, #262626);
   text-decoration: none;
-  background-color: #f5f5f5;
+  background-color: var(--menu-hover, #f5f5f5);
 }
 
 :deep(.tree-banner-icon-zone) {
@@ -542,10 +542,10 @@ div.rMenu li {
   overflow: hidden;
 
   .fa {
-    color: #838385 !important;
+    color: var(--color-icon-primary, #838385) !important;
 
     &:hover {
-      color: #606266 !important;
+      color: var(--color-text-primary, #606266) !important;
     }
   }
 }
@@ -585,7 +585,7 @@ div.rMenu li {
 
 :deep(.tree-search.active) {
   width: 160px;
-  background-color: #ffffff !important;
+  background-color: var(--page-background-color, #ffffff) !important;
 }
 
 :deep(.tree-search.active:hover) {
@@ -597,8 +597,8 @@ div.rMenu li {
   left: 20px;
   width: 133px;
   height: 100%;
-  background-color: #ffffff !important;
-  color: #606266;
+  background-color: var(--page-background-color, #ffffff) !important;
+  color: var(--color-text-primary, #606266);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -624,13 +624,13 @@ div.rMenu li {
   .content {
     height: 30px;
     line-height: 30px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--panel-border-color, #e0e0e0);
     border-radius: 2px;
     padding: 0 5px;
     box-sizing: border-box;
     overflow: hidden;
     cursor: pointer;
-    background-color: #d7d8dc;
+    background-color: var(--el-fill-color-light, #d7d8dc);
 
     .rotate {
       transition: all 0.8s ease-in-out;
@@ -658,7 +658,7 @@ div.rMenu li {
 
   & :deep(.el-input__inner) {
     border-radius: 4px;
-    background: #fafafa;
+    background: var(--page-background-color, #fafafa);
     color: var(--color-text-primary);
   }
 
@@ -692,7 +692,7 @@ div.rMenu li {
   justify-content: center;
   width: 14px;
   height: 14px;
-  color: var(--N500);
+  color: var(--color-text-secondary);
   font-size: 12px;
   line-height: 1;
 }
@@ -704,9 +704,9 @@ div.rMenu li {
 
   &:hover {
     cursor: pointer;
-    color: #606266;
-    border-color: #d2d2d2;
-    background-color: #e6e6e6;
+    color: var(--color-text-primary, #606266);
+    border-color: var(--color-border, #d2d2d2);
+    background-color: var(--menu-hover, #e6e6e6);
   }
 }
 
@@ -727,5 +727,9 @@ div.rMenu li {
   height: 20px;
   gap: 4px;
   white-space: nowrap;
+}
+
+:deep(.ztree li a:hover) {
+  background-color: var(--menu-hover, transparent);
 }
 </style>

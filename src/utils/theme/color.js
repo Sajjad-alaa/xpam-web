@@ -122,18 +122,64 @@ export function setRootColors() {
   }
 }
 
-function syncElementPlusColorVars(elementStyle, colorName, currentColor) {
+function syncElementPlusColorVars(
+  elementStyle,
+  colorName,
+  currentColor,
+  dark = false,
+  darkBaseHex = '0f172a'
+) {
   const white = 'ffffff'
   const black = '000000'
   const elColorKey = `--el-color-${colorName}`
 
   elementStyle.setProperty(elColorKey, currentColor)
-  elementStyle.setProperty(`${elColorKey}-light-3`, mix(white, currentColor.replace(/#/g, ''), 30))
-  elementStyle.setProperty(`${elColorKey}-light-5`, mix(white, currentColor.replace(/#/g, ''), 50))
-  elementStyle.setProperty(`${elColorKey}-light-7`, mix(white, currentColor.replace(/#/g, ''), 70))
-  elementStyle.setProperty(`${elColorKey}-light-8`, mix(white, currentColor.replace(/#/g, ''), 80))
-  elementStyle.setProperty(`${elColorKey}-light-9`, mix(white, currentColor.replace(/#/g, ''), 90))
-  elementStyle.setProperty(`${elColorKey}-dark-2`, mix(black, currentColor.replace(/#/g, ''), 20))
+
+  if (dark) {
+    elementStyle.setProperty(
+      `${elColorKey}-light-3`,
+      mix(darkBaseHex, currentColor.replace(/#/g, ''), 30)
+    )
+    elementStyle.setProperty(
+      `${elColorKey}-light-5`,
+      mix(darkBaseHex, currentColor.replace(/#/g, ''), 50)
+    )
+    elementStyle.setProperty(
+      `${elColorKey}-light-7`,
+      mix(darkBaseHex, currentColor.replace(/#/g, ''), 70)
+    )
+    elementStyle.setProperty(
+      `${elColorKey}-light-8`,
+      mix(darkBaseHex, currentColor.replace(/#/g, ''), 80)
+    )
+    elementStyle.setProperty(
+      `${elColorKey}-light-9`,
+      mix(darkBaseHex, currentColor.replace(/#/g, ''), 90)
+    )
+    elementStyle.setProperty(`${elColorKey}-dark-2`, mix(white, currentColor.replace(/#/g, ''), 20))
+  } else {
+    elementStyle.setProperty(
+      `${elColorKey}-light-3`,
+      mix(white, currentColor.replace(/#/g, ''), 30)
+    )
+    elementStyle.setProperty(
+      `${elColorKey}-light-5`,
+      mix(white, currentColor.replace(/#/g, ''), 50)
+    )
+    elementStyle.setProperty(
+      `${elColorKey}-light-7`,
+      mix(white, currentColor.replace(/#/g, ''), 70)
+    )
+    elementStyle.setProperty(
+      `${elColorKey}-light-8`,
+      mix(white, currentColor.replace(/#/g, ''), 80)
+    )
+    elementStyle.setProperty(
+      `${elColorKey}-light-9`,
+      mix(white, currentColor.replace(/#/g, ''), 90)
+    )
+    elementStyle.setProperty(`${elColorKey}-dark-2`, mix(black, currentColor.replace(/#/g, ''), 20))
+  }
 }
 
 export function getSavedThemeMode() {
@@ -177,6 +223,12 @@ const MODE_INDEPENDENT_KEYS = [
 
 export function isDarkMode(themeColors = {}) {
   if (themeColors && typeof themeColors === 'object') {
+    if (themeColors.theme_mode === 'auto') {
+      if (typeof window !== 'undefined' && window.matchMedia) {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches
+      }
+      return false
+    }
     if (themeColors.is_dark === true || themeColors.theme_mode === 'dark') {
       return true
     }
@@ -208,6 +260,12 @@ export function setDarkMode(isDark) {
   }
 }
 
+let onThemeModeChange = null
+
+export function setOnThemeModeChange(fn) {
+  onThemeModeChange = fn
+}
+
 export function toggleDarkMode(currentThemeColors = {}) {
   const currentDark =
     typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
@@ -217,6 +275,9 @@ export function toggleDarkMode(currentThemeColors = {}) {
   }
   setDarkMode(!currentDark)
   changeMenuColor(currentThemeColors)
+  if (typeof onThemeModeChange === 'function') {
+    onThemeModeChange(currentThemeColors)
+  }
   return !currentDark
 }
 
@@ -260,6 +321,11 @@ export function changeMenuColor(themeColors = {}) {
   const white = 'ffffff'
   const black = '000000'
 
+  const pageContentBgVal = colors['--page-content-background-color']
+  const darkBaseHex = (
+    /^#[0-9a-fA-F]{6}$/.test(pageContentBgVal) ? pageContentBgVal : '#0f172a'
+  ).replace(/#/g, '')
+
   // Hover background generator
   const menuActiveTextColor = colors['--menu-text-active']
   const hasCompleteMenuState = colors['--menu-hover-bg'] || colors['--menu-active-bg']
@@ -279,12 +345,13 @@ export function changeMenuColor(themeColors = {}) {
 
     if (/^--color-(primary|success|info|warning|danger)$/.test(key)) {
       const colorName = key.replace('--color-', '')
-      syncElementPlusColorVars(elementStyle, colorName, currentColor)
+      syncElementPlusColorVars(elementStyle, colorName, currentColor, dark, darkBaseHex)
     }
 
     if (colorsGenMore.includes(key)) {
+      const mixBase = dark ? darkBaseHex : white
       for (const [i, light] of lights.entries()) {
-        const color = mix(white, currentColor.replace(/#/g, ''), light)
+        const color = mix(mixBase, currentColor.replace(/#/g, ''), light)
         elementStyle.setProperty(key + '-light' + '-' + i, color)
       }
       for (const [i, darkVal] of darken.entries()) {
@@ -294,7 +361,8 @@ export function changeMenuColor(themeColors = {}) {
     }
 
     if (key.includes('--color')) {
-      const lightColor = mix(white, currentColor.replace(/#/g, ''), 70)
+      const lightMixBase = dark ? darkBaseHex : white
+      const lightColor = mix(lightMixBase, currentColor.replace(/#/g, ''), 70)
       const darkColor = mix(black, currentColor.replace(/#/g, ''), 70)
       elementStyle.setProperty(key + '-light', lightColor)
       elementStyle.setProperty(key + '-dark', darkColor)
@@ -303,16 +371,43 @@ export function changeMenuColor(themeColors = {}) {
 
   // Ensure element-plus surface variables align with dark/light mode
   if (dark) {
-    elementStyle.setProperty('--el-bg-color', colors['--page-background-color'] || '#1e293b')
-    elementStyle.setProperty(
-      '--el-bg-color-page',
-      colors['--page-content-background-color'] || '#0f172a'
-    )
-    elementStyle.setProperty('--el-bg-color-overlay', '#1e293b')
-    elementStyle.setProperty('--el-card-bg-color', '#1e293b')
-    elementStyle.setProperty('--el-border-color', colors['--color-border'] || '#243044')
-    elementStyle.setProperty('--el-text-color-primary', colors['--color-text-primary'] || '#f8fafc')
+    const pageBg = colors['--page-background-color'] || '#1e293b'
+    const pageContentBg = colors['--page-content-background-color'] || '#0f172a'
+    const borderColor = colors['--color-border'] || '#243044'
+    const panelBorder = colors['--panel-border-color'] || borderColor
+    const textPrimary = colors['--color-text-primary'] || '#f8fafc'
+    const textRegular = colors['--color-text-secondary'] || '#cbd5e1'
+
+    elementStyle.setProperty('--el-bg-color', pageBg)
+    elementStyle.setProperty('--el-bg-color-page', pageContentBg)
+    elementStyle.setProperty('--el-bg-color-overlay', pageBg)
+    elementStyle.setProperty('--el-card-bg-color', pageBg)
+    elementStyle.setProperty('--el-fill-color-blank', pageBg)
+    elementStyle.setProperty('--el-dialog-bg-color', pageBg)
+    elementStyle.setProperty('--el-popover-bg-color', pageBg)
+    elementStyle.setProperty('--el-table-tr-bg-color', pageBg)
+    elementStyle.setProperty('--el-table-bg-color', pageBg)
+    elementStyle.setProperty('--el-table-header-bg-color', pageContentBg)
+    elementStyle.setProperty('--el-border-color', borderColor)
+    elementStyle.setProperty('--el-border-color-light', panelBorder)
+    elementStyle.setProperty('--el-border-color-lighter', panelBorder)
+    elementStyle.setProperty('--el-text-color-primary', textPrimary)
+    elementStyle.setProperty('--el-text-color-regular', textRegular)
   } else {
+    const extraDarkKeys = [
+      '--el-fill-color-blank',
+      '--el-dialog-bg-color',
+      '--el-popover-bg-color',
+      '--el-table-tr-bg-color',
+      '--el-table-bg-color',
+      '--el-table-header-bg-color',
+      '--el-border-color-light',
+      '--el-border-color-lighter',
+      '--el-text-color-regular'
+    ]
+    for (const extraKey of extraDarkKeys) {
+      elementStyle.removeProperty(extraKey)
+    }
     elementStyle.setProperty('--el-bg-color', '#ffffff')
     elementStyle.setProperty('--el-bg-color-page', '#f8fafc')
     elementStyle.setProperty('--el-bg-color-overlay', '#ffffff')

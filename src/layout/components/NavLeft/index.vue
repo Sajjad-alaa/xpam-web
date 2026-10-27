@@ -339,7 +339,8 @@ $origin-color: #ffffff;
     width: 100%;
     height: 100%;
     padding-top: 10px;
-    background: #fff;
+    background: var(--menu-bg, var(--page-background-color, #fff));
+    color: var(--menu-text, var(--color-text-primary));
     z-index: 100;
   }
 

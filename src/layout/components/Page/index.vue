@@ -292,7 +292,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--content-mask-bg, rgba(255, 255, 255, 0.2));
   backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;
@@ -313,7 +313,7 @@ export default {
 
       i {
         font-size: 40px;
-        color: #909399;
+        color: var(--color-icon-primary, #909399);
       }
     }
 

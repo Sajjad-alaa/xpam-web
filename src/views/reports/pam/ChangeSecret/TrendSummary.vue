@@ -55,6 +55,6 @@ export default {
 .box {
   margin-top: 16px;
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
 }
 </style>

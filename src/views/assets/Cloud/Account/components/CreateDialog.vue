@@ -132,7 +132,7 @@ export default {
   grid-template-columns: 220px minmax(0, 1fr);
   gap: 0;
   padding: 10px;
-  background: #f3f3f3;
+  background: var(--page-content-background-color, #f3f3f3);
   align-items: start;
 }
 
@@ -151,7 +151,7 @@ export default {
 
   :deep(.el-form) {
     padding: 20px 20px 20px 10px;
-    background: #fff;
+    background: var(--page-background-color, #fff);
   }
 
   :deep(.form-buttons),

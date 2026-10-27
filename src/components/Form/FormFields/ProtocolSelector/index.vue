@@ -391,7 +391,7 @@ export default {
 
   :deep(.el-select__wrapper) {
     width: 120px;
-    background-color: #f5f7fa;
+    background-color: var(--el-fill-color-light, #f5f7fa);
     box-shadow: none !important;
 
     .el-select__selected-item,
@@ -426,7 +426,7 @@ export default {
   min-width: 0;
 
   :deep(.el-input-group__prepend) {
-    background-color: #f5f7fa;
+    background-color: var(--el-fill-color-light, #f5f7fa);
     border-right: 0;
   }
 
@@ -443,7 +443,7 @@ export default {
     display: flex;
     align-items: stretch;
     padding: 0;
-    background-color: #f5f7fa;
+    background-color: var(--el-fill-color-light, #f5f7fa);
     border-top: 1px solid var(--el-border-color) !important;
     border-right: 1px solid var(--el-border-color) !important;
     border-bottom: 1px solid var(--el-border-color) !important;
@@ -458,7 +458,7 @@ export default {
     width: 57px;
     min-width: 57px;
     height: 100%;
-    background-color: #f5f7fa;
+    background-color: var(--el-fill-color-light, #f5f7fa);
   }
 
   :deep(.protocol-setting-button) {
@@ -472,10 +472,10 @@ export default {
     margin: 0;
     padding: 0;
     font-size: 14px;
-    color: #1a1a1a;
+    color: var(--color-text-primary, #1a1a1a);
     border: 0 !important;
     border-radius: 0;
-    background-color: #f5f7fa !important;
+    background-color: var(--el-fill-color-light, #f5f7fa) !important;
     box-shadow: none !important;
   }
 

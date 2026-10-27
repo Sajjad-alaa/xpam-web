@@ -78,7 +78,7 @@ export default {
 .help-table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--panel-border-color, #dee2e6);
 }
 
 :deep(.help-table th),

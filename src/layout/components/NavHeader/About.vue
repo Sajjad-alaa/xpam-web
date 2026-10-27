@@ -166,7 +166,7 @@ export default {
   .text {
     line-height: 2;
     font-size: 14px;
-    color: #666;
+    color: var(--el-text-color-regular, #666);
 
     .title {
       font-weight: 600;

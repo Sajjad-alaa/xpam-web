@@ -166,7 +166,7 @@ export default {
   // 交叉轴不拉伸，容器需显式占满宽度，否则 CodeMirror 编辑器宽度会塌缩。
   width: 100%;
   // 工具栏与编辑器组合为一体：外层统一出边框，内部子元素不再各自描边。
-  border: 1px solid #e5e6e7;
+  border: 1px solid var(--panel-border-color, #e5e6e7);
   border-radius: 4px;
   overflow: hidden;
 
@@ -180,8 +180,8 @@ export default {
     align-items: center;
     height: 32px;
     padding: 0 8px;
-    background-color: #f5f6f7;
-    border-bottom: 1px solid #e5e6e7;
+    background-color: var(--el-fill-color-light, #f5f6f7);
+    border-bottom: 1px solid var(--panel-border-color, #e5e6e7);
 
     .format-btn {
       display: inline-flex;
@@ -195,10 +195,10 @@ export default {
       background: transparent;
       cursor: pointer;
       // 用具体色值而非 CSS 变量，避免变量未解析导致图标“透明”只在 hover 才显形。
-      color: #606266;
+      color: var(--color-text-secondary, #606266);
 
       &:hover {
-        background-color: #e9eaec;
+        background-color: var(--menu-hover, #e9eaec);
         color: var(--color-primary);
       }
 

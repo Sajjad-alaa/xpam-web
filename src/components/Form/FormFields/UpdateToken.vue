@@ -94,9 +94,9 @@ export default {
   &.compound-field {
     height: 30px;
     box-sizing: border-box;
-    border: 1px solid var(--el-border-color);
+    border: 1px solid var(--form-control-border-color, var(--el-border-color));
     border-radius: 0;
-    background-color: #fff;
+    background-color: var(--page-background-color, #fff);
     overflow: hidden;
 
     &:hover {

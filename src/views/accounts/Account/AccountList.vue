@@ -90,7 +90,7 @@ export default {
 
 <style lang="scss" scoped>
 .asset-table :deep(.row-clicked, .asset-user-table .row-background-color) {
-  background-color: #f5f7fa;
+  background-color: var(--el-table-row-hover-bg-color, #f5f7fa);
 }
 
 .asset-table {

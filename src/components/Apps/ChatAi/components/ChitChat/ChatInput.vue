@@ -722,9 +722,9 @@ defineExpose({ focus, setValue, clear, discardDraft })
   min-height: 64px;
   margin: 0 auto;
   padding: 7px 9px 6px;
-  border: 1px solid #d9dfdd;
+  border: 1px solid var(--panel-border-color, #d9dfdd);
   border-radius: 14px;
-  background: #fff;
+  background: var(--page-background-color, #fff);
   box-shadow: 0 2px 10px rgb(31 49 43 / 5%);
   transition:
     border-color 0.2s ease,
@@ -745,7 +745,7 @@ defineExpose({ focus, setValue, clear, discardDraft })
   }
 
   &.is-disabled:not(.is-recording) {
-    background: #fafbfb;
+    background: var(--page-content-background-color, #fafbfb);
   }
 
   textarea {
@@ -765,7 +765,7 @@ defineExpose({ focus, setValue, clear, discardDraft })
     resize: none;
 
     &::placeholder {
-      color: #737b87;
+      color: var(--color-text-secondary, #737b87);
     }
 
     &:disabled {
@@ -810,7 +810,7 @@ defineExpose({ focus, setValue, clear, discardDraft })
     display: block;
     width: 100%;
     height: 100%;
-    border: 1px solid #e1e4ea;
+    border: 1px solid var(--panel-border-color, #e1e4ea);
     border-radius: var(--ai-radius-sm, 8px);
     object-fit: cover;
   }
@@ -829,7 +829,7 @@ defineExpose({ focus, setValue, clear, discardDraft })
     height: 18px;
     padding: 0;
     place-items: center;
-    border: 1px solid #fff;
+    border: 1px solid var(--panel-border-color, #fff);
     border-radius: 50%;
     color: #fff;
     background: #606675;
@@ -845,10 +845,10 @@ defineExpose({ focus, setValue, clear, discardDraft })
   align-items: center;
   gap: 9px;
   padding: 9px 10px;
-  border: 1px solid #e1e4ea;
+  border: 1px solid var(--panel-border-color, #e1e4ea);
   border-radius: var(--ai-radius-sm, 8px);
-  color: #5d6475;
-  background: #f8f9fb;
+  color: var(--color-text-secondary, #5d6475);
+  background: var(--page-content-background-color, #f8f9fb);
 
   > .el-icon {
     flex: 0 0 auto;
@@ -876,7 +876,7 @@ defineExpose({ focus, setValue, clear, discardDraft })
   }
 
   small {
-    color: #9298a7;
+    color: var(--color-text-secondary, #9298a7);
     font-size: 9px;
   }
 }
@@ -889,7 +889,7 @@ defineExpose({ focus, setValue, clear, discardDraft })
   place-items: center;
   border: 1px solid transparent;
   border-radius: var(--ai-radius-sm, 8px);
-  color: #5f6878;
+  color: var(--color-text-secondary, #5f6878);
   background: transparent;
   cursor: pointer;
   font-size: 15px;
@@ -934,13 +934,13 @@ defineExpose({ focus, setValue, clear, discardDraft })
 }
 
 :global(.chat-ai-tool-dropdown .tool-menu-copy strong) {
-  color: #343944;
+  color: var(--color-text-primary, #343944);
   font-size: 12px;
   font-weight: 600;
 }
 
 :global(.chat-ai-tool-dropdown .tool-menu-copy small) {
-  color: #969ba6;
+  color: var(--color-text-secondary, #969ba6);
   font-size: 10px;
 }
 
@@ -977,14 +977,14 @@ defineExpose({ focus, setValue, clear, discardDraft })
       font-weight: 600;
     }
     small {
-      color: #65756f;
+      color: var(--color-text-secondary, #65756f);
     }
   }
 }
 
 .input-hint {
   overflow: hidden;
-  color: #737b87;
+  color: var(--color-text-secondary, #737b87);
   font-size: 11px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1032,21 +1032,21 @@ defineExpose({ focus, setValue, clear, discardDraft })
   }
 
   &:disabled {
-    border-color: #dcdfe6;
-    color: #8f959e;
-    background: #f1f2f5;
+    border-color: var(--el-border-color, #dcdfe6);
+    color: var(--el-text-color-secondary, #8f959e);
+    background: var(--el-fill-color, #f1f2f5);
     box-shadow: none;
     cursor: not-allowed;
   }
 }
 
 .stop-button {
-  border: 1px solid #ead5d8;
-  color: #a34f5a;
-  background: #fff4f5;
+  border: 1px solid var(--el-color-danger-light-7, #ead5d8);
+  color: var(--tint-danger-text, #a34f5a);
+  background: var(--el-color-danger-light-9, #fff4f5);
 
   &:hover:not(:disabled) {
-    background: #ffecef;
+    background: var(--el-color-danger-light-8, #ffecef);
   }
 }
 
@@ -1081,13 +1081,13 @@ defineExpose({ focus, setValue, clear, discardDraft })
   flex-direction: column;
 
   strong {
-    color: #5f6375;
+    color: var(--color-text-secondary, #5f6375);
     font-size: 10px;
   }
 
   small {
     margin-top: 2px;
-    color: #9ba0b0;
+    color: var(--color-text-secondary, #9ba0b0);
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 10px;
   }
@@ -1123,9 +1123,9 @@ defineExpose({ focus, setValue, clear, discardDraft })
 }
 
 .recording-cancel {
-  border: 1px solid #e6e7ec;
-  color: #7e8497;
-  background: #fff;
+  border: 1px solid var(--panel-border-color, #e6e7ec);
+  color: var(--color-text-secondary, #7e8497);
+  background: var(--page-background-color, #fff);
 }
 
 .recording-finish {

@@ -25,7 +25,7 @@
           </ul>
         </div>
       </el-col>
-      <el-col :span="20" style="background-color: #fff" class="chart">
+      <el-col :span="20" style="background-color: var(--page-background-color, #fff)" class="chart">
         <component :is="component" :key="componentKey" :nav="false" :url="url" />
       </el-col>
     </el-row>
@@ -328,7 +328,7 @@ h5 {
 }
 
 .child-link {
-  color: #606266;
+  color: var(--color-text-secondary, #606266);
   font-size: 12px;
 }
 
@@ -340,7 +340,7 @@ h5 {
   padding: 10px;
 
   :deep(.content) {
-    background-color: #fff;
+    background-color: var(--page-background-color, #fff);
     overflow: hidden;
     height: 100%;
   }

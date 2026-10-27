@@ -406,7 +406,7 @@ export default {
   .arrow {
     width: 1.25em;
     height: 1.25em;
-    color: #888888;
+    color: var(--el-text-color-secondary, #888888);
   }
 
   @media screen and (max-width: 992px) {

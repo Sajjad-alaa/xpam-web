@@ -452,7 +452,7 @@ export default {
     .export-btn,
     .export-btn.el-button--text,
     .el-dropdown-link {
-      color: #333;
+      color: var(--color-text-primary, #333);
     }
 
     .export-btn,
@@ -466,8 +466,8 @@ export default {
     }
 
     .export-btn:hover {
-      background: rgba(0, 0, 0, 0.06);
-      color: #333;
+      background: var(--menu-hover, rgba(0, 0, 0, 0.06));
+      color: var(--color-text-primary, #333);
     }
   }
 }

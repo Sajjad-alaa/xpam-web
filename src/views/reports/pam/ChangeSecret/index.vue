@@ -73,7 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 %card-common {
-  background: #fff;
+  background: var(--page-background-color, #fff);
   padding: 1.25rem;
   height: 100%;
   border: 1px solid var(--panel-border-color, var(--el-border-color));

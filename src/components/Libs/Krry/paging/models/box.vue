@@ -280,7 +280,7 @@ export default {
   box-sizing: border-box;
   vertical-align: middle;
   overflow: hidden;
-  background: #fff;
+  background: var(--page-background-color, #fff);
   border: 1px solid var(--el-border-color, #dcdfe6);
   border-radius: 4px;
 
@@ -371,14 +371,14 @@ export default {
         right: 10px;
         top: 0;
         text-align: center;
-        color: #c0c4cc;
+        color: var(--el-text-color-disabled, #c0c4cc);
         transition: all 0.3s;
         line-height: 33px;
         visibility: hidden;
         opacity: 0;
 
         &:hover {
-          color: #909399;
+          color: var(--color-help-text, #909399);
         }
       }
 
@@ -420,7 +420,7 @@ export default {
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #909399;
+    color: var(--color-help-text, #909399);
     font-size: 12px;
     font-weight: 400;
   }
@@ -431,7 +431,7 @@ export default {
     height: 30px;
     line-height: 30px;
     padding: 6px 15px 0;
-    color: #909399;
+    color: var(--color-help-text, #909399);
     text-align: center;
   }
 
@@ -442,7 +442,7 @@ export default {
     box-sizing: border-box;
     margin: 0;
     text-align: center;
-    border-top: 1px solid #ebeef5;
+    border-top: 1px solid var(--panel-border-color, #ebeef5);
 
     .v-page {
       width: 50%;
@@ -455,7 +455,7 @@ export default {
       line-height: 1;
 
       &:first-child {
-        border-right: 1px solid #ebeef5;
+        border-right: 1px solid var(--panel-border-color, #ebeef5);
       }
     }
   }

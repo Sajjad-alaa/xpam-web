@@ -45,8 +45,9 @@ export default {
   right: 0;
   z-index: 1000;
   padding: 0 24px;
-  background: white;
-  border-top: 1px solid #e7eaec;
+  background: var(--page-background-color, white);
+  border-top: 1px solid var(--panel-border-color, #e7eaec);
+  color: var(--color-text-secondary, inherit);
   transition: margin-left 0.3s;
   height: 48px;
   line-height: 48px;

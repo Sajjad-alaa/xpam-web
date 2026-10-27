@@ -168,7 +168,7 @@ export default {
   margin-bottom: 0;
 
   &:hover {
-    background-color: #f5f7fa;
+    background-color: var(--el-fill-color-light, #f5f7fa);
   }
 }
 

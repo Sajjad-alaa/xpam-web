@@ -180,12 +180,13 @@ export default {
   height: 28px;
   line-height: 26px;
   box-sizing: border-box;
-  border: 1px solid #dcdfe6;
+  border: 1px solid var(--panel-border-color, #dcdfe6);
   border-radius: 2px;
   font-size: 12px;
   font-weight: 400;
-  /* 非当前页统一白底(覆盖 is-background 默认的浅灰填充),仅当前页保留主色填充 */
-  background-color: #fff;
+  /* 非当前页统一底色(覆盖 is-background 默认的浅灰填充),仅当前页保留主色填充 */
+  background-color: var(--page-background-color, #fff);
+  color: var(--color-text-primary);
 }
 
 :deep(.el-pagination.is-background .el-pager li.is-active) {
@@ -202,15 +203,18 @@ export default {
   height: 28px;
   line-height: 26px;
   box-sizing: border-box;
-  border: 1px solid #dcdfe6;
+  border: 1px solid var(--panel-border-color, #dcdfe6);
   border-radius: 2px;
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
+  color: var(--color-text-primary);
   font-size: 12px;
   font-weight: 400;
 }
 
 :deep(.el-pagination.is-background .btn-prev:disabled),
 :deep(.el-pagination.is-background .btn-next:disabled) {
-  background-color: #fff;
+  background-color: var(--page-background-color, #fff);
+  color: var(--color-disabled, #c0c4cc);
+  border-color: var(--panel-border-color, #e4e7ed);
 }
 </style>

@@ -425,7 +425,7 @@ export default {
 }
 
 .feed-activity-list .feed-element {
-  border-bottom: 1px solid #e7eaec;
+  border-bottom: 1px solid var(--panel-border-color, #e7eaec);
 }
 
 .feed-element > .pull-left {

@@ -670,14 +670,14 @@ export default {
     float: right;
 
     .export-btn.el-button--text {
-      color: #333;
+      color: var(--color-text-primary, #333);
       border: none;
       font-weight: 500;
       font-size: 13px;
       margin-left: 16px;
 
       &:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background: var(--overlay-active-bg, rgba(0, 0, 0, 0.1));
       }
     }
   }
@@ -716,7 +716,7 @@ export default {
   }
 
   .title-bar {
-    background-color: white;
+    background-color: var(--page-background-color, white);
     width: 100%;
   }
 }

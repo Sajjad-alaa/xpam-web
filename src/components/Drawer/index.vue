@@ -219,7 +219,7 @@ export default {
   .drawer__content {
     flex: 1 1 auto;
     min-height: 0;
-    background: rgb(243, 243, 243);
+    background: var(--page-content-background-color, rgb(243, 243, 243));
     overflow-y: auto;
     overflow-x: hidden;
     overscroll-behavior: contain;
@@ -229,7 +229,7 @@ export default {
     min-height: 56px;
     margin-bottom: 0 !important;
     padding: 15px 20px;
-    border-bottom: 1px solid #ebeef5;
+    border-bottom: 1px solid var(--panel-border-color, #ebeef5);
     box-sizing: border-box;
     font-size: 16px;
     font-weight: 500;
@@ -459,11 +459,11 @@ export default {
     .drawer__content,
     .tab-page-content {
       height: 100%;
-      background: #f3f3f3;
+      background: var(--page-content-background-color, #f3f3f3);
     }
 
     .drawer__footer {
-      border-top: solid 1px #f3f3f3;
+      border-top: solid 1px var(--panel-border-color, #f3f3f3);
     }
 
     //.el-drawer__header {

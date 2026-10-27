@@ -141,7 +141,7 @@
 <script>
 import BaseReport from '@/views/reports/base/BaseReport.vue'
 import * as echarts from 'echarts'
-import { colorToRgba } from '@/utils/theme/color'
+import { colorToRgba, getCssVar } from '@/utils/theme/color'
 import { getDistributionOptions, getReportChartTheme, mixColors } from '@/views/reports/const'
 import SummaryCountCard from '@/components/Dashboard/SummaryCountCard.vue'
 import Echart from '@/components/Dashboard/Echart.vue'
@@ -350,7 +350,7 @@ export default {
             axisLine: {
               show: false,
               lineStyle: {
-                color: '#fff'
+                color: getCssVar('--page-background-color', '#fff')
               }
             },
             axisLabel: {
@@ -365,7 +365,7 @@ export default {
             splitLine: {
               show: true,
               lineStyle: {
-                color: '#EFF0F1'
+                color: getCssVar('--color-border', '#EFF0F1')
               }
             }
           }

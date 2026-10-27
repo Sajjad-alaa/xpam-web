@@ -170,7 +170,7 @@ export default {
     position: relative;
     box-sizing: border-box;
     padding: 15px 22px !important;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--panel-border-color, #dee2e6);
   }
 
   .el-dialog__title {
@@ -211,7 +211,7 @@ export default {
     align-items: center;
     justify-content: flex-end;
     gap: 12px;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid var(--panel-border-color, #dee2e6);
     padding: 16px 25px !important;
   }
 }

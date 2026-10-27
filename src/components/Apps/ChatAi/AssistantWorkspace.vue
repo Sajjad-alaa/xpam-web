@@ -825,8 +825,8 @@ defineExpose({ init, focus, newConversation: handleNew })
   --ai-text: var(--color-text-primary, #292827);
   --ai-text-secondary: var(--color-text-secondary, #7c7c7c);
   --ai-border: var(--color-border, #e9ecef);
-  --ai-surface-muted: #f7f9f8;
-  --ai-surface-hover: #f1f7f5;
+  --ai-surface-muted: var(--page-content-background-color, #f7f9f8);
+  --ai-surface-hover: var(--menu-hover, #f1f7f5);
   --ai-radius-xs: 6px;
   --ai-radius-sm: 8px;
   --ai-radius-md: 10px;
@@ -839,7 +839,7 @@ defineExpose({ init, focus, newConversation: handleNew })
   min-height: 0;
   overflow: hidden;
   color: var(--ai-text);
-  background: #fff;
+  background: var(--page-background-color, #fff);
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
     'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
@@ -868,7 +868,7 @@ defineExpose({ init, focus, newConversation: handleNew })
   justify-content: space-between;
   padding: 0 12px;
   border-bottom: 1px solid var(--ai-border);
-  background: #fff;
+  background: var(--page-background-color, #fff);
 
   &__brand,
   &__actions {
@@ -977,7 +977,7 @@ defineExpose({ init, focus, newConversation: handleNew })
   min-width: 0;
   flex: 1;
   flex-direction: column;
-  background: #fff;
+  background: var(--page-background-color, #fff);
 }
 
 .chat-scroll {
@@ -1001,10 +1001,10 @@ defineExpose({ init, focus, newConversation: handleNew })
   gap: 8px;
   margin: -2px auto 10px;
   padding: 8px 10px;
-  border: 1px solid #f0d6aa;
+  border: 1px solid var(--tint-warning-border, #f0d6aa);
   border-radius: var(--ai-radius-sm);
-  color: #7c5b31;
-  background: #fff9ef;
+  color: var(--tint-warning-text, #7c5b31);
+  background: var(--tint-warning-bg, #fff9ef);
   font-size: 11px;
   line-height: 1.55;
   text-align: left;
@@ -1012,7 +1012,7 @@ defineExpose({ init, focus, newConversation: handleNew })
   &__icon {
     flex: 0 0 auto;
     margin-top: 1px;
-    color: #b8792c;
+    color: var(--tint-warning-text, #b8792c);
     font-size: 14px;
   }
 
@@ -1030,12 +1030,12 @@ defineExpose({ init, focus, newConversation: handleNew })
     place-items: center;
     border: 0;
     border-radius: var(--ai-radius-xs);
-    color: #967044;
+    color: var(--tint-warning-text, #967044);
     background: transparent;
     cursor: pointer;
 
     &:hover {
-      background: #f9ebd3;
+      background: var(--tint-warning-bg-strong, #f9ebd3);
     }
   }
 }
@@ -1049,7 +1049,7 @@ defineExpose({ init, focus, newConversation: handleNew })
   position: relative;
   z-index: 10;
   padding: 6px 14px 10px;
-  background: linear-gradient(180deg, rgb(255 255 255 / 72%), #fff 14px);
+  background: linear-gradient(180deg, transparent, var(--page-background-color, #fff) 14px);
 }
 
 .scroll-latest-button {
@@ -1064,8 +1064,8 @@ defineExpose({ init, focus, newConversation: handleNew })
   place-items: center;
   border: 1px solid var(--ai-border);
   border-radius: 50%;
-  color: #6f7687;
-  background: #fff;
+  color: var(--color-text-secondary, #6f7687);
+  background: var(--page-background-color, #fff);
   box-shadow: 0 6px 18px rgb(27 45 39 / 14%);
   cursor: pointer;
   transform: translateX(50%);
@@ -1099,10 +1099,10 @@ defineExpose({ init, focus, newConversation: handleNew })
   gap: 12px;
   margin: 0 auto 7px;
   padding: 6px 9px 6px 11px;
-  border: 1px solid #f0d6aa;
+  border: 1px solid var(--tint-warning-border, #f0d6aa);
   border-radius: 11px;
-  color: #91652a;
-  background: #fff8e9;
+  color: var(--tint-warning-text, #91652a);
+  background: var(--tint-warning-bg, #fff8e9);
   font-size: 11px;
 
   span {
@@ -1113,10 +1113,10 @@ defineExpose({ init, focus, newConversation: handleNew })
 
   button {
     padding: 4px 8px;
-    border: 1px solid #ead0a2;
+    border: 1px solid var(--tint-warning-border, #ead0a2);
     border-radius: var(--ai-radius-xs);
-    color: #966426;
-    background: #fff;
+    color: var(--tint-warning-text, #966426);
+    background: var(--page-background-color, #fff);
     cursor: pointer;
     font-size: 11px;
   }
@@ -1176,8 +1176,8 @@ defineExpose({ init, focus, newConversation: handleNew })
     padding: 9px 10px;
     border: 1px solid var(--ai-border);
     border-radius: var(--ai-radius-md);
-    color: #606266;
-    background: #fff;
+    color: var(--color-text-secondary, #606266);
+    background: var(--page-background-color, #fff);
     cursor: pointer;
     text-align: left;
     box-shadow: 0 2px 7px rgb(34 52 46 / 4%);
@@ -1247,13 +1247,13 @@ defineExpose({ init, focus, newConversation: handleNew })
   }
 
   &.tone-info {
-    color: #299f98;
-    background: #e6f7f4;
+    color: var(--tint-success-text, #299f98);
+    background: var(--tint-success-bg, #e6f7f4);
   }
 
   &.tone-warning {
-    color: #bd7a27;
-    background: #fff3dc;
+    color: var(--tint-warning-text, #bd7a27);
+    background: var(--tint-warning-bg, #fff3dc);
   }
 }
 
@@ -1280,7 +1280,7 @@ defineExpose({ init, focus, newConversation: handleNew })
     height: 28px;
     flex: 0 0 28px;
     border-radius: 10px;
-    background: #e8e9f0;
+    background: var(--el-fill-color, #e8e9f0);
   }
 
   &__lines {
@@ -1292,7 +1292,12 @@ defineExpose({ init, focus, newConversation: handleNew })
     i {
       height: 8px;
       border-radius: 8px;
-      background: linear-gradient(90deg, #e9eaf0, #f5f6f9, #e9eaf0);
+      background: linear-gradient(
+        90deg,
+        var(--el-fill-color, #e9eaf0),
+        var(--menu-hover, #f5f6f9),
+        var(--el-fill-color, #e9eaf0)
+      );
       background-size: 220% 100%;
       animation: skeleton 1.5s linear infinite;
 
@@ -1326,8 +1331,8 @@ defineExpose({ init, focus, newConversation: handleNew })
     margin-bottom: 13px;
     place-items: center;
     border-radius: var(--ai-radius-lg);
-    color: #bd6d2a;
-    background: #fff3e4;
+    color: var(--tint-warning-text, #bd6d2a);
+    background: var(--tint-warning-bg, #fff3e4);
     font-size: 20px;
   }
 
