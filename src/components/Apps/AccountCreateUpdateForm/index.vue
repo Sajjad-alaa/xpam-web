@@ -54,7 +54,10 @@ const withExternalSecret = (vm, meta) => {
     options: [
       { label: vm.$t('Kept by XPAM'), value: 'xpam' },
       { label: vm.$t('SecretSourceExternal'), value: 'external' }
-    ]
+    ],
+    // (reading from an existing vault is for the people who manage vault connections; an account that already
+    // does it still shows how)
+    hidden: (formValue) => !vm.$hasPerm('settings.change_vault') && !external(formValue)
   }
   meta.ref_connection = {
     label: vm.$t('VaultConnection'),

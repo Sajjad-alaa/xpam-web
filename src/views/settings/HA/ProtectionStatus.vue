@@ -155,7 +155,8 @@ export default {
     }
   },
   mounted() {
-    if (this.$hasPerm('settings.view_setting')) this.load()
+    // (platform infrastructure: system administrators only)
+    if (this.$hasPerm('settings.change_setting')) this.load()
   },
   methods: {
     load() {

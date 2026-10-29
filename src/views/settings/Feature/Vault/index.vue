@@ -186,9 +186,14 @@ export default {
     this.$axios.get('/api/v1/settings/setting/?category=vault').then((res) => {
       this.locked = !!res['VAULT_LOCKED']
     })
-    this.$axios.get('/api/v1/settings/vault/data-key/').then((res) => {
-      this.dataKey = res || {}
-    })
+    if (this.$hasPerm('settings.change_setting')) {
+      this.$axios
+        .get('/api/v1/settings/vault/data-key/')
+        .then((res) => {
+          this.dataKey = res || {}
+        })
+        .catch(() => {})
+    }
   },
   methods: {
     runVaultTask(url, value, btn) {
