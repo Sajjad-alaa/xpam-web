@@ -8,14 +8,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import ChatAI from '@/components/Apps/ChatAi'
+import { defineAsyncComponent } from 'vue'
 import CachedRouterView from '@/layout/components/CachedRouterView.vue'
 
 export default {
   name: 'AppMain',
   components: {
     CachedRouterView,
-    ChatAI
+    // (loaded when shown: the assistant brings markdown, code highlighting and its panels)
+    ChatAI: defineAsyncComponent(() => import('@/components/Apps/ChatAi'))
   },
   computed: {
     ...mapGetters(['publicSettings']),
