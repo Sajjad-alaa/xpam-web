@@ -96,8 +96,7 @@ export default {
             label: `${this.$t('Success')}/${this.$t('Total')}`,
             formatter: (row) => (
               <div>
-                <span class="text-primary">{row.summary.success || 0}</span>
-                /
+                <span class="text-primary">{row.summary.success || 0}</span>/
                 <span>{row.summary.total || 0}</span>
               </div>
             )
@@ -162,7 +161,9 @@ export default {
             title: this.$t('TaskMonitor'),
             type: 'primary',
             can: this.$hasPerm('ops.view_taskmonitor'),
-            has: () => this.vendor !== 'OSM',
+            // XPAM: the task monitor (Flower) runs on large servers only (core decides: FLOWER_ENABLED)
+            has: () =>
+              this.vendor !== 'OSM' && this.$store.getters.publicSettings?.FLOWER_ENABLED !== false,
             callback: () => {
               window.open(`${BASE_URL}/core/flower/?_=${Date.now()}`)
             }
