@@ -1615,6 +1615,7 @@
   "ServerError": "Server error",
   "ServerTime": "Server time",
   "Session": "Session",
+  "SessionRecordings": "Session recordings",
   "SessionCommands": "Session commands",
   "SessionConnectTrend": "Session connection trends",
   "SessionData": "Session data",

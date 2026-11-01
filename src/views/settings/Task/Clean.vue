@@ -32,6 +32,11 @@ export default {
             'ACTIVITY_LOG_KEEP_DAYS'
           ]
         ],
+        // XPAM: recordings on this server's disk (a full disk stops XPAM)
+        [
+          this.$t('SessionRecordings'),
+          ['TERMINAL_REPLAY_MAX_GB', 'TERMINAL_REPLAY_MIN_FREE_PERCENT']
+        ],
         [
           this.$t('Database'),
           [
