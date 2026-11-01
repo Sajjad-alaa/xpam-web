@@ -387,7 +387,7 @@ export default {
                   openTaskPage(res['task'])
                 })
                 .catch((err) => {
-                  this.$message.error(this.$tc('BulkVerifyErrorMsg' + ' ' + err))
+                  this.$message.error(this.$tc('BulkVerifyErrorMsg') + ' ' + err)
                 })
             }.bind(this)
           },
