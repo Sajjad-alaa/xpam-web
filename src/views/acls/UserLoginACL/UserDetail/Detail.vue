@@ -36,7 +36,7 @@ export default {
                   vm.$message.success(vm.$tc('UpdateSuccessMsg'))
                 })
                 .catch((err) => {
-                  vm.$message.error(vm.$tc('UpdateErrorMsg' + ' ' + err))
+                  vm.$message.error(vm.$tc('UpdateErrorMsg') + ' ' + err)
                 })
             }
           }

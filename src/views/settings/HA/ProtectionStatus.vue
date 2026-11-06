@@ -156,7 +156,7 @@ export default {
   },
   mounted() {
     // (platform infrastructure: system administrators only)
-    if (this.$hasPerm('settings.change_setting')) this.load()
+    if (this.$store.getters.currentUserIsSuperAdmin) this.load()
   },
   methods: {
     load() {

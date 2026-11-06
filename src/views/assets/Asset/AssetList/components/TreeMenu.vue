@@ -152,7 +152,7 @@ export default {
           openTaskPage(res['task'])
         })
         .catch((error) => {
-          this.$message.error(this.$tc('UpdateErrorMsg' + ' ' + error))
+          this.$message.error(this.$tc('UpdateErrorMsg') + ' ' + error)
         })
     },
     rMenuTestNodeAssetConnectivity() {
@@ -167,7 +167,7 @@ export default {
           openTaskPage(res['task'])
         })
         .catch((error) => {
-          this.$message.error(this.$tc('UpdateErrorMsg' + ' ' + error))
+          this.$message.error(this.$tc('UpdateErrorMsg') + ' ' + error)
         })
     },
     async rMenuShowNodeInfo() {
@@ -185,7 +185,7 @@ export default {
           { key: 'fullName', label: this.$t('FullName'), value: res.full_value }
         ]
       } catch (error) {
-        this.$message.error(this.$tc('ErrorMsg' + ' ' + error))
+        this.$message.error(this.$tc('ErrorMsg') + ' ' + error)
       }
     },
     hideMenu() {

@@ -222,7 +222,7 @@ export default {
         })
         .catch((error) => {
           this.$emit('hide-menu')
-          this.$message.error(this.$tc('UpdateErrorMsg' + ' ' + error))
+          this.$message.error(this.$tc('UpdateErrorMsg') + ' ' + error)
         })
     },
     getAffectedNodeIds(assetIds, assetRows, currentNode) {

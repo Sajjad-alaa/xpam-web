@@ -59,7 +59,7 @@ export default {
         })
         .catch((err) => {
           this.value = !val
-          this.$message.error(this.$t('UpdateErrorMsg' + ' ' + err))
+          this.$message.error(this.$t('UpdateErrorMsg') + ' ' + err)
         })
     }
   }

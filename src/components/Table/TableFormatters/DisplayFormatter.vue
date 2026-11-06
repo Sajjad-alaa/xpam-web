@@ -10,9 +10,9 @@ export default {
   props: {
     formatterArgsDefault: {
       type: Object,
-      default() {
+      default(props) {
         return {
-          displayKey: this.col.prop + '_display'
+          displayKey: props.col.prop + '_display'
         }
       }
     }

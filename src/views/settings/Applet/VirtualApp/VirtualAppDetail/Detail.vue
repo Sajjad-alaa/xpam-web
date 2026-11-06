@@ -98,7 +98,7 @@ export default {
                     vm.$message.success(vm.$t('UpdateSuccessMsg'))
                   })
                   .catch((err) => {
-                    vm.$message.error(vm.$t('UpdateErrorMsg' + ' ' + err))
+                    vm.$message.error(vm.$t('UpdateErrorMsg') + ' ' + err)
                   })
               }}
             />

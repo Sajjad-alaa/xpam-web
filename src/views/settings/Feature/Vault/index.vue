@@ -186,7 +186,7 @@ export default {
     this.$axios.get('/api/v1/settings/setting/?category=vault').then((res) => {
       this.locked = !!res['VAULT_LOCKED']
     })
-    if (this.$hasPerm('settings.change_setting')) {
+    if (this.$store.getters.currentUserIsSuperAdmin) {
       this.$axios
         .get('/api/v1/settings/vault/data-key/')
         .then((res) => {

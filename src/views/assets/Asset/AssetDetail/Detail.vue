@@ -70,7 +70,7 @@ export default {
                   this.$message.success(this.$tc('UpdateSuccessMsg'))
                 })
                 .catch((err) => {
-                  this.$message.error(this.$tc('UpdateErrorMsg' + ' ' + err))
+                  this.$message.error(this.$tc('UpdateErrorMsg') + ' ' + err)
                 })
             }.bind(this)
           }

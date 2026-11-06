@@ -579,7 +579,7 @@ export default {
         facility: 'user',
         severity: 'info',
         log_types: ['login_log', 'operation_log', 'session_command_log', 'host_session_log'],
-        verify_ssl: false,
+        verify_ssl: true,
         enabled: true
       },
       formRules: {
@@ -790,7 +790,7 @@ export default {
         facility: 'user',
         severity: 'info',
         log_types: ['login_log', 'operation_log', 'session_command_log', 'host_session_log'],
-        verify_ssl: false,
+        verify_ssl: true,
         enabled: true
       }
       this.dialogVisible = true

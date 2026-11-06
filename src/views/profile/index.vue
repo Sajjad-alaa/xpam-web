@@ -479,7 +479,7 @@ export default {
           this.$store.dispatch('users/getProfile', true)
         })
         .catch((err) => {
-          this.$message.error(this.$tc('UpdateErrorMsg' + ' ' + err))
+          this.$message.error(this.$tc('UpdateErrorMsg') + ' ' + err)
         })
     },
     getReceiveBackendList() {

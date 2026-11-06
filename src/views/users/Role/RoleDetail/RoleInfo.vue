@@ -172,7 +172,7 @@ export default {
         'settings.change_systemmsgsubscription': ['users.view_user'],
         'terminal.add_terminal': ['terminal.view_commandstorage', 'terminal.view_replaystorage'],
         'terminal.change_terminal': ['terminal.view_commandstorage', 'terminal.view_replaystorage'],
-        'terminal.view_commandstroage': ['settings.change_terminal'],
+        'terminal.view_commandstorage': ['settings.change_terminal'],
         'terminal.view_replaystorage': ['settings.change_terminal'],
         'terminal.view_status': ['settings.change_terminal'],
         'terminal.view_task': ['settings.change_terminal'],

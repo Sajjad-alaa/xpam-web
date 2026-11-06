@@ -73,7 +73,7 @@ export function getDefaultConfig(vm) {
               vm.$refs.ListTable.reloadTable()
             })
             .catch((err) => {
-              vm.$message.error(vm.$tc('UpdateErrorMsg' + ' ' + err))
+              vm.$message.error(vm.$tc('UpdateErrorMsg') + ' ' + err)
             })
         }
       },
@@ -96,7 +96,7 @@ export function getDefaultConfig(vm) {
               vm.$refs.ListTable.reloadTable()
             })
             .catch((err) => {
-              vm.$message.error(vm.$tc('UpdateErrorMsg' + ' ' + err))
+              vm.$message.error(vm.$tc('UpdateErrorMsg') + ' ' + err)
             })
         }
       },

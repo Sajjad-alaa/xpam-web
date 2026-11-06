@@ -7,6 +7,12 @@ import { getFirstAccessibleChildPath } from '@/utils/vue'
 const Setting = () => import('@/views/settings/index')
 const globalSubmenu = () => import('@/layout/globalOrg.vue')
 
+// Pages whose backend APIs only allow superusers: hide from the menu and block direct access
+const superAdminOnly = {
+  hidden: () => !store.getters.currentUserIsSuperAdmin
+}
+const superAdminOnlyGuard = () => (store.getters.currentUserIsSuperAdmin ? true : { name: '404' })
+
 function redirectAfterExternalAction(from, next) {
   if (from?.name) {
     next(false)
@@ -244,11 +250,13 @@ export default {
       path: '/settings/high-availability',
       name: 'HighAvailability',
       component: () => import('@/views/settings/HA'),
+      beforeEnter: superAdminOnlyGuard,
       meta: {
         title: i18n.t('HighAvailability'),
         icon: 'device',
         disableGoBack: true,
-        permissions: ['settings.view_setting']
+        permissions: ['settings.view_setting'],
+        ...superAdminOnly
       }
     },
     {
@@ -590,20 +598,24 @@ export default {
       path: '/settings/interface',
       name: 'Interface',
       component: () => import('@/views/settings/Interface'),
+      beforeEnter: superAdminOnlyGuard,
       meta: {
         title: i18n.t('InterfaceSettings'),
         icon: 'face',
-        permissions: ['settings.change_interface']
+        permissions: ['settings.change_interface'],
+        ...superAdminOnly
       }
     },
     {
       path: '/settings/log-shipment',
       name: 'LogShipment',
       component: () => import('@/views/settings/LogShipment/index.vue'),
+      beforeEnter: superAdminOnlyGuard,
       meta: {
         title: i18n.t('LogShipment') || 'Log Shipment',
         icon: 'log',
-        permissions: ['settings.view_setting']
+        permissions: ['settings.view_setting'],
+        ...superAdminOnly
       }
     },
     {

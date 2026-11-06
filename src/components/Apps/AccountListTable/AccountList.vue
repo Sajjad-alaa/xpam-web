@@ -413,7 +413,7 @@ export default {
                   this.$message.success(this.$tc('ClearSuccessMsg'))
                 })
                 .catch((err) => {
-                  this.$message.error(this.$tc('ClearErrorMsg' + ' ' + err))
+                  this.$message.error(this.$tc('ClearErrorMsg') + ' ' + err)
                 })
             }.bind(this)
           },

@@ -157,7 +157,7 @@ export const gatherAccountHeaderActions = (vm) => {
               vm.$message.success(vm.$tc('SyncSuccessMsg'))
             })
             .catch((err) => {
-              vm.$message.error(vm.$tc('SyncErrorMsg' + ' ' + err))
+              vm.$message.error(vm.$tc('SyncErrorMsg') + ' ' + err)
             })
         }
       },
