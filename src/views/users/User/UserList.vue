@@ -195,9 +195,6 @@ export default {
           email: {
             minWidth: '220px'
           },
-          wecom_id: {
-            width: '120px'
-          },
           username: {
             formatter: (row) => {
               return row['username'].replace(' ', '*')

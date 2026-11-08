@@ -200,15 +200,6 @@ export default {
         'ops.add_jobexecution': ['ops.view_celerytaskexecution'],
         'authentication.add_connectiontoken': ['rbac.view_webterminal'],
         'labels.view_labeledresource': ['rbac.view_contenttype'],
-        'xpack.add_syncinstancetask': [
-          'assets.view_asset',
-          'assets.view_node',
-          'assets.view_systemuser',
-          'xpack.view_cloudaccount'
-        ],
-        'xpack.view_syncinstancetask': ['xpack.view_cloudaccount'],
-        'xpack.view_syncinstancedetail': ['xpack.view_syncinstancetask'],
-        'xpack.view_syncinstancetaskexecution': ['xpack.view_syncinstancetask'],
         'xpack.view_changeauthplan': ['assets.view_asset'],
         'xpack.view_changeauthplantask': ['xpack.view_changeauthplan'],
         'xpack.view_changeauthplanexecution': ['xpack.view_changeauthplan'],

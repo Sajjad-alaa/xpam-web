@@ -84,7 +84,7 @@ const actions = {
         .catch((error) => {
           if (error.response && error.response.status === 400) {
             alert(
-              '自 v3.6 版本开始，要求配置可信任域名或主机，否则无法正常使用, 查看: https://github.com/jumpserver/jumpserver/releases/tag/v3.6.0'
+              'This address is not a trusted domain of XPAM. Add it to DOMAINS in the XPAM configuration (config.txt), then restart XPAM.'
             )
           }
           reject(error)

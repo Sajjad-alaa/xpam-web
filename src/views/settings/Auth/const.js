@@ -60,15 +60,6 @@ export function getAuthItems() {
       type: 'SSO',
       description: t('OAuth2Summary')
     },
-
-    {
-      name: 'Slack',
-      logo: getAssetUrl('img/auth/slack_logo.png'),
-      title: t('Slack'),
-      authKey: 'AUTH_SLACK',
-      type: 'IdP',
-      description: t('SlackSummary')
-    },
     {
       name: 'Radius',
       logo: getAssetUrl('img/auth/radius_logo.png'),
@@ -76,14 +67,6 @@ export function getAuthItems() {
       authKey: 'AUTH_RADIUS',
       type: 'common',
       description: t('RadiusSummary')
-    },
-    {
-      name: 'UKey',
-      logo: getAssetUrl('@/assets/img/auth/ukey_logo.png'),
-      title: t('UKey'),
-      authKey: 'AUTH_UKEY',
-      description: t('UKeySummary'),
-      type: 'device'
     }
   ]
 

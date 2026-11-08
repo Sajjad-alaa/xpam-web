@@ -137,9 +137,6 @@ export default {
         case 'download':
           window.open('/core/download/', '_blank')
           break
-        case 'github':
-          window.open('https://github.com/jumpserver/jumpserver', '_blank')
-          break
       }
     }
   }

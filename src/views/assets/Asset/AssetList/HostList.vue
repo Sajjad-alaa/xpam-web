@@ -18,7 +18,6 @@ export default {
     GatewayDialog
   },
   data() {
-    const vm = this
     return {
       GatewayPort: 0,
       GatewayCell: '',
@@ -27,18 +26,7 @@ export default {
         url: '/api/v1/assets/hosts/',
         category: 'host',
         optionInfo: {},
-        headerActions: {
-          extraActions: [
-            {
-              name: this.$t('CloudSync'),
-              title: this.$t('CloudSync'),
-              icon: 'cloud-provider',
-              has: () => vm.$hasPerm('xpack.view_cloudaccount') && vm.$hasLicense(),
-              callback: () =>
-                this.$router.push({ name: 'CloudAccountList', query: { category: 'host' } })
-            }
-          ]
-        },
+        // XPAM: no Cloud Sync button (that upstream enterprise feature has no API in XPAM)
         tableConfig: {
           columnsMeta: {
             actions: {

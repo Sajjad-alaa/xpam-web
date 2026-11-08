@@ -10,14 +10,12 @@
 import { GenericDetailPage } from '@/layout/components'
 import Password from './Password/Password.vue'
 import SSHKeyList from './SSHKey/SSHKeyList.vue'
-import UKey from './UKey/UKey.vue'
 
 export default {
   components: {
     GenericDetailPage,
     Password,
-    SSHKeyList,
-    UKey: UKey
+    SSHKeyList
   },
   data() {
     return {
@@ -62,11 +60,6 @@ export default {
           title: this.$t('LoginSSHKeySetting'),
           name: 'SSHKeyList',
           disabled: !this.$store.state.users.profile.can_public_key_auth
-        },
-        {
-          title: this.$t('LoginUKeySetting'),
-          name: 'UKey',
-          hidden: !this.$store.state.users.profile.can_ukey_auth
         }
       ]
     },

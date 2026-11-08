@@ -6,13 +6,12 @@
 
 <script>
 import GenericCreateUpdateForm from '@/layout/components/GenericCreateUpdateForm/index.vue'
-import SMSAlibaba from './SMSAlibaba.vue'
-import SMSTencent from './SMSTencent.vue'
-import SMSHuawei from './SMSHuawei.vue'
 import SMSCustom from './SMSCustom.vue'
 import SMSFileCustom from './SMSFileCustom.vue'
-import CMPP2 from './CMPP2.vue'
 import { IBox } from '@/components'
+
+// XPAM: only the custom providers are offered; the China-only ones (Alibaba Cloud, Tencent Cloud,
+// Huawei Cloud, CMPP v2.0) are not (the API offers the same list)
 
 export default {
   name: 'Auth',
@@ -25,40 +24,9 @@ export default {
       url: '/api/v1/settings/setting/?category=sms',
       fields: [
         [this.$t('Basic'), ['SMS_ENABLED', 'SMS_BACKEND', 'SMS_CODE_LENGTH']],
-        [
-          this.$t('Provider'),
-          ['ALIYUN', 'QCLOUD', 'HUAWEICLOUD', 'CMPP2', 'SMSCustom', 'SMSFileCustom']
-        ]
+        [this.$t('Provider'), ['SMSCustom', 'SMSFileCustom']]
       ],
       fieldsMeta: {
-        ALIYUN: {
-          label: this.$t('AlibabaCloud'),
-          component: SMSAlibaba,
-          hidden: (form) => {
-            return form['SMS_BACKEND'] !== 'alibaba'
-          }
-        },
-        QCLOUD: {
-          label: this.$t('TencentCloud'),
-          component: SMSTencent,
-          hidden: (form) => {
-            return form['SMS_BACKEND'] !== 'tencent'
-          }
-        },
-        HUAWEICLOUD: {
-          label: this.$t('HuaweiCloud'),
-          component: SMSHuawei,
-          hidden: (form) => {
-            return form['SMS_BACKEND'] !== 'huawei'
-          }
-        },
-        CMPP2: {
-          label: this.$t('CMPP2'),
-          component: CMPP2,
-          hidden: (form) => {
-            return form['SMS_BACKEND'] !== 'cmpp2'
-          }
-        },
         SMSCustom: {
           label: this.$t('Custom'),
           component: SMSCustom,

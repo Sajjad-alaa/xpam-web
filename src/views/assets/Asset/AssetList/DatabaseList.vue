@@ -14,18 +14,7 @@ export default {
       config: {
         category: 'database',
         url: '/api/v1/assets/databases/',
-        headerActions: {
-          extraActions: [
-            {
-              name: this.$t('CloudSync'),
-              title: this.$t('CloudSync'),
-              icon: 'cloud-provider',
-              has: () => this.$hasPerm('xpack.view_cloudaccount') && this.$hasLicense(),
-              callback: () =>
-                this.$router.push({ name: 'CloudAccountList', query: { category: 'database' } })
-            }
-          ]
-        },
+        // XPAM: no Cloud Sync button (that upstream enterprise feature has no API in XPAM)
         helpMessage: this.$t('DatabaseConnectivityTestHelpMessage')
       }
     }

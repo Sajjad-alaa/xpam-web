@@ -19,11 +19,9 @@ import SSO from './SSO'
 import SAML2 from './SAML2'
 import OAuth2 from './OAuth2'
 import Passkey from './Passkey.vue'
-import Slack from './Slack.vue'
 import { getAuthItems } from './const'
 import { mapState } from 'vuex'
 import Integration from './Integration.vue'
-import UKey from './UKey.vue'
 
 export default {
   components: {
@@ -39,8 +37,6 @@ export default {
     SAML2,
     OAuth2,
     Passkey,
-    Slack,
-    UKey,
     Integration
   },
   data() {

@@ -71,7 +71,6 @@ export default {
       url: `/api/v1/users/profile/`,
       profilePhone: null,
       showPasswordDialog: false,
-      currentEdit: '',
       biometricFeaturesActions: [
         {
           title: this.$t('FacialFeatures'),
@@ -95,101 +94,6 @@ export default {
         }
       ],
       authQuickActions: [
-        {
-          title: this.$t('WeComOAuth'),
-          attrs: {
-            type: 'primary',
-            label: this.getLabel('wecom'),
-            disabled: this.isDisabled('wecom'),
-            showTip: this.isDisabled('wecom'),
-            tip: this.$t('UnbindHelpText')
-          },
-          has:
-            this.$store.getters.publicSettings.AUTH_WECOM &&
-            !store.getters.publicSettings['PRIVACY_MODE'],
-          callbacks: {
-            click: function () {
-              this.currentEdit = 'wecom'
-              this.verifyDone()
-            }.bind(this)
-          }
-        },
-        {
-          title: this.$t('DingTalkOAuth'),
-          attrs: {
-            type: 'primary',
-            label: this.getLabel('dingtalk'),
-            disabled: this.isDisabled('dingtalk'),
-            showTip: this.isDisabled('dingtalk'),
-            tip: this.$t('UnbindHelpText')
-          },
-          has:
-            this.$store.getters.publicSettings.AUTH_DINGTALK &&
-            !store.getters.publicSettings['PRIVACY_MODE'],
-          callbacks: {
-            click: function () {
-              this.currentEdit = 'dingtalk'
-              this.verifyDone()
-            }.bind(this)
-          }
-        },
-        {
-          title: this.$t('FeiShuOAuth'),
-          attrs: {
-            type: 'primary',
-            label: this.getLabel('feishu'),
-            disabled: this.isDisabled('feishu'),
-            showTip: this.isDisabled('feishu'),
-            tip: this.$t('UnbindHelpText')
-          },
-          has:
-            this.$store.getters.publicSettings.AUTH_FEISHU &&
-            !store.getters.publicSettings['PRIVACY_MODE'],
-          callbacks: {
-            click: function () {
-              this.currentEdit = 'feishu'
-              this.verifyDone()
-            }.bind(this)
-          }
-        },
-        {
-          title: this.$t('LarkOAuth'),
-          attrs: {
-            type: 'primary',
-            label: this.getLabel('lark'),
-            disabled: this.isDisabled('lark'),
-            showTip: this.isDisabled('lark'),
-            tip: this.$t('UnbindHelpText')
-          },
-          has:
-            this.$store.getters.publicSettings.AUTH_LARK &&
-            !store.getters.publicSettings['PRIVACY_MODE'],
-          callbacks: {
-            click: function () {
-              this.currentEdit = 'lark'
-              this.verifyDone()
-            }.bind(this)
-          }
-        },
-        {
-          title: this.$t('SlackOAuth'),
-          attrs: {
-            type: 'primary',
-            label: this.getLabel('slack'),
-            disabled: this.isDisabled('slack'),
-            showTip: this.isDisabled('slack'),
-            tip: this.$t('UnbindHelpText')
-          },
-          has:
-            this.$store.getters.publicSettings.AUTH_SLACK &&
-            !store.getters.publicSettings['PRIVACY_MODE'],
-          callbacks: {
-            click: function () {
-              this.currentEdit = 'slack'
-              this.verifyDone()
-            }.bind(this)
-          }
-        },
         {
           title: this.$t('SetMFA'),
           attrs: {
@@ -259,66 +163,6 @@ export default {
             name: 'email',
             model: this.object?.receive_backends?.indexOf('email') !== -1
           },
-          callbacks: {
-            change: this.updateUserReceiveBackends
-          }
-        },
-        {
-          title: this.$t('WeCom'),
-          type: 'switch',
-          attrs: {
-            name: 'wecom',
-            model: this.object?.receive_backends?.indexOf('wecom') !== -1
-          },
-          has: this.$store.getters.publicSettings.AUTH_WECOM,
-          callbacks: {
-            change: this.updateUserReceiveBackends
-          }
-        },
-        {
-          title: this.$t('DingTalk'),
-          type: 'switch',
-          attrs: {
-            name: 'dingtalk',
-            model: this.object?.receive_backends.indexOf('dingtalk') !== -1
-          },
-          has: this.$store.getters.publicSettings.AUTH_DINGTALK,
-          callbacks: {
-            change: this.updateUserReceiveBackends
-          }
-        },
-        {
-          title: this.$t('FeiShu'),
-          type: 'switch',
-          attrs: {
-            name: 'feishu',
-            model: this.object?.receive_backends.indexOf('feishu') !== -1
-          },
-          has: this.$store.getters.publicSettings.AUTH_FEISHU,
-          callbacks: {
-            change: this.updateUserReceiveBackends
-          }
-        },
-        {
-          title: 'Lark',
-          type: 'switch',
-          attrs: {
-            name: 'lark',
-            model: this.object?.receive_backends.indexOf('lark') !== -1
-          },
-          has: this.$store.getters.publicSettings.AUTH_LARK,
-          callbacks: {
-            change: this.updateUserReceiveBackends
-          }
-        },
-        {
-          title: 'Slack',
-          type: 'switch',
-          attrs: {
-            name: 'slack',
-            model: this.object?.receive_backends.indexOf('slack') !== -1
-          },
-          has: this.$store.getters.publicSettings.AUTH_SLACK,
           callbacks: {
             change: this.updateUserReceiveBackends
           }
@@ -424,18 +268,6 @@ export default {
           key: this.$t('Comment')
         }
       ]
-    },
-    confirmUrl() {
-      return '/api/v1/authentication/confirm-oauth/'
-    },
-    bindOrUnbindUrl() {
-      let url = ''
-      if (!this.object[`${this.currentEdit}_id`]) {
-        url = `/core/auth/${this.currentEdit}/qr/bind/?redirect_url=${this.$route.fullPath}`
-      } else {
-        url = `/api/v1/authentication/${this.currentEdit}/qr/unbind/`
-      }
-      return url
     }
   },
   methods: {
@@ -457,17 +289,8 @@ export default {
           this.$message.error(this.$tc('Error') + ': ' + errMsg)
         })
     },
-    isBind(sourceName) {
-      return !!this.$store.state.users.profile[`${sourceName}_id`]
-    },
-    getLabel(sourceName) {
-      return this.isBind(sourceName) ? this.$t('Unbind') : this.$t('Bind')
-    },
     isUserFromSource(sourceName) {
       return this.$store.state.users.profile.source.value === sourceName
-    },
-    isDisabled(sourceName) {
-      return this.isBind(sourceName) && this.isUserFromSource(sourceName)
     },
     updateUserReceiveBackends(val) {
       this.$axios
@@ -492,21 +315,6 @@ export default {
         }
       }
       return backendList
-    },
-    verifyDone() {
-      this.$axios.get(this.confirmUrl).then(() => {
-        const url = this.bindOrUnbindUrl
-        if (!this.object[`${this.currentEdit}_id`]) {
-          window.open(url, 'Bind', 'width=800,height=600')
-        } else {
-          this.$axios.post(url).then(() => {
-            this.$message.success(this.$tc('UpdateSuccessMsg'))
-            this.$store.dispatch('users/getProfile')
-            // 此处对子组件使用 key 或 $forceUpdate 都无法使得子组件中 button 文本更新
-            window.location.reload()
-          })
-        }
-      })
     },
     exit() {
       this.$emit('update:visible', false)

@@ -241,9 +241,6 @@ export default {
             return <div>{doms}</div>
           }
         },
-        'wecom_id',
-        'dingtalk_id',
-        'feishu_id',
         'mfa_level',
         'source',
         'labels',

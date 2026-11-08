@@ -7,9 +7,6 @@
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item command="download">{{ $t('DownloadCenter') }}</el-dropdown-item>
-          <el-dropdown-item v-if="!hasLicence" command="enterprise">{{
-            $t('EnterpriseEdition')
-          }}</el-dropdown-item>
           <el-dropdown-item command="about" class="about-item">
             <span>{{ $tc('About') }}</span>
             <span class="version-right">{{ appVersion }}</span>
@@ -53,9 +50,6 @@ export default {
       switch (command) {
         case 'download':
           window.open(addBasePath('/core/download/'), '_blank', 'noopener,noreferrer')
-          break
-        case 'enterprise':
-          window.open('https://www.jumpserver.com/#section-edition', '_blank')
           break
         case 'about':
           this.visible = true
