@@ -1,7 +1,6 @@
 import i18n from '@/i18n/i18n'
 import empty from '@/layout/empty'
 import store from '@/store'
-import { openJDMC } from '@/utils/jdmc'
 import { getFirstAccessibleChildPath } from '@/utils/vue'
 
 const Setting = () => import('@/views/settings/index')
@@ -12,14 +11,6 @@ const superAdminOnly = {
   hidden: () => !store.getters.currentUserIsSuperAdmin
 }
 const superAdminOnlyGuard = () => (store.getters.currentUserIsSuperAdmin ? true : { name: '404' })
-
-function redirectAfterExternalAction(from, next) {
-  if (from?.name) {
-    next(false)
-    return
-  }
-  next('/settings/basic')
-}
 
 export default {
   path: '/settings',
@@ -663,25 +654,6 @@ export default {
       ]
     },
     {
-      path: '/settings/jdmc',
-      name: 'DeviceManager',
-      meta: {
-        title: i18n.t('DeviceManager'),
-        icon: 'device',
-        permissions: ['rbac.view_jdmc'],
-        externalAction: {
-          type: 'jdmc',
-          nextPath: '/jdmc/'
-        },
-        // 在开启 JDMC 且有 rbac.view_jdmc 权限时，才显示
-        hidden: ({ settings }) => !settings['JDMC_ENABLED']
-      },
-      beforeEnter: (_to, from, next) => {
-        openJDMC('/jdmc/')
-        redirectAfterExternalAction(from, next)
-      }
-    },
-    {
       path: '/settings/license',
       name: 'License',
       component: () => import('@/views/settings/License'),
@@ -689,15 +661,6 @@ export default {
         title: i18n.t('License'),
         icon: 'license',
         permissions: ['settings.change_license']
-      },
-      beforeEnter: (_to, from, next) => {
-        if (!store.getters.publicSettings?.['JDMC_ENABLED']) {
-          next()
-          return
-        }
-
-        openJDMC('/jdmc/sys-management/sys-auth')
-        redirectAfterExternalAction(from, next)
       }
     }
   ]
