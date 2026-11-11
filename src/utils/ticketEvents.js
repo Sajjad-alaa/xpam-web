@@ -2,12 +2,16 @@
 // on /ws/tickets/events/; the page then reloads its data through the normal API (no ticket content comes over the
 // socket). One socket per browser tab, shared by every listening component; it reconnects with a growing delay
 // and closes when nothing listens any more. After a reconnection the listeners get {type: 'resync'}: changes may
-// have been missed while the socket was down.
+// have been missed while the socket was down. Announcements that arrive together (a change made in several steps)
+// are passed on once per ticket, so a page reloads once.
 import { createWsUrl } from '@/utils/common'
 
+const BATCH_MS = 250
 const listeners = new Set()
+const pendingIds = new Set()
 let socket = null
 let retryTimer = null
+let batchTimer = null
 let attempts = 0
 let wasConnected = false
 
@@ -19,6 +23,20 @@ function notify(event) {
       // (one listener's error must not stop the others)
     }
   })
+}
+
+function flushChanged() {
+  batchTimer = null
+  const ids = [...pendingIds]
+  pendingIds.clear()
+  ids.forEach((id) => notify({ type: 'ticket_changed', id }))
+}
+
+function queueChanged(id) {
+  pendingIds.add(id)
+  if (!batchTimer) {
+    batchTimer = setTimeout(flushChanged, BATCH_MS)
+  }
 }
 
 function connect() {
@@ -41,7 +59,7 @@ function connect() {
       return
     }
     if (data && data.type === 'ticket_changed' && data.id) {
-      notify(data)
+      queueChanged(String(data.id))
     }
   }
   socket.onclose = () => {
@@ -73,6 +91,11 @@ export function onTicketChanged(listener) {
       clearTimeout(retryTimer)
       retryTimer = null
     }
+    if (batchTimer) {
+      clearTimeout(batchTimer)
+      batchTimer = null
+    }
+    pendingIds.clear()
     if (socket) {
       const closing = socket
       socket = null
