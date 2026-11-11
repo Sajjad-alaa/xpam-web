@@ -14,6 +14,7 @@
 
 <script>
 import { GenericListPage } from '@/layout/components'
+import { onTicketChanged } from '@/utils/ticketEvents'
 import { DetailFormatter, TagChoicesFormatter } from '@/components/Table/TableFormatters'
 import { toSafeLocalDateStr } from '@/composables/useDateTime'
 import { APPROVE, CLOSED, OPEN, REJECT, getTicketStateLabel, getTicketTypeLabel } from './const'
@@ -263,6 +264,11 @@ export default {
     setTimeout(() => {
       this.loading = false
     }, 500)
+    // live: a request opened, approved or closed anywhere shows here without reloading the page
+    this.stopTicketEvents = onTicketChanged(() => this.$refs.ListPage?.reloadTable())
+  },
+  beforeUnmount() {
+    this.stopTicketEvents?.()
   },
   methods: {
     reloadTable() {

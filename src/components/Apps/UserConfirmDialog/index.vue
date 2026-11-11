@@ -357,7 +357,7 @@ export default {
       if (!frame || event.source !== frame.contentWindow || !this.faceCaptureUrl) return
       if (event.origin !== new URL(this.faceCaptureUrl, window.location.origin).origin) return
       const message = event.data
-      if (message?.source === 'jumpserver-facelive' && message.event === 'retry_requested') {
+      if (message?.source === 'xpam-facelive' && message.event === 'retry_requested') {
         this.startFaceCapture()
       }
     },

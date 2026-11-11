@@ -63,7 +63,7 @@ export default {
           const queryParams = new URLSearchParams(validValues).toString()
           this.$axios.get(`/core/auth/profile/pubkey/generate/?${queryParams}`).then((res) => {
             vm.createSuccessHandle()
-            downloadText(res, `${name}.jumpserver.pem`)
+            downloadText(res, `${name}.xpam.pem`)
           })
         } else {
           const method = isCreated ? 'post' : 'patch'

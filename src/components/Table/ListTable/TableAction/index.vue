@@ -341,7 +341,7 @@ export default {
     },
     searchPresetStorageKey() {
       try {
-        return new URL(this.tableUrl || this.$route.path, 'http://jumpserver.local').pathname
+        return new URL(this.tableUrl || this.$route.path, 'http://xpam.invalid').pathname
       } catch {
         return this.tableUrl || this.$route.path || 'default'
       }

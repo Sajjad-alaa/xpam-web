@@ -1,5 +1,6 @@
 <template>
   <GenericDetailPage
+    ref="DetailPage"
     v-bind="config"
     v-model:active-menu="config.activeMenu"
     v-model:object="ticket"
@@ -10,6 +11,7 @@
 
 <script>
 import { GenericDetailPage, TabPage } from '@/layout/components'
+import { onTicketChanged } from '@/utils/ticketEvents'
 import TicketDetail from './TicketDetail'
 import AccessTab from './AccessTab.vue'
 
@@ -51,6 +53,17 @@ export default {
         hasRightSide: false
       }
     }
+  },
+  mounted() {
+    // live: this request's state, steps and approvers follow every change without reloading the page
+    this.stopTicketEvents = onTicketChanged((event) => {
+      if (event.type === 'resync' || (this.ticket?.id && event.id === this.ticket.id)) {
+        this.$refs.DetailPage?.getObject()
+      }
+    })
+  },
+  beforeUnmount() {
+    this.stopTicketEvents?.()
   },
   methods: {
     getObjectName() {

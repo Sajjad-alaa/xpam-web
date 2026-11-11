@@ -713,7 +713,7 @@ async function updatePanelPageContext(panel, pageContext, signal) {
       method: 'put',
       data: {
         base_version: panel.context_version || 0,
-        domain: 'jumpserver',
+        domain: 'xpam',
         surface: panel.surface || 'lina.chat',
         sensitivity: 'internal',
         data: context

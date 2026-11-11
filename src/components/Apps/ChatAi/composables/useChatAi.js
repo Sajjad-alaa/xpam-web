@@ -22,7 +22,7 @@ import {
   normalizeFailure
 } from '../utils/failurePresentation'
 
-const APPROVAL_STORAGE_KEY = 'jumpserver_chat_ai_pending_approvals'
+const APPROVAL_STORAGE_KEY = 'xpam_chat_ai_pending_approvals'
 const OUTPUT_EVENTS = new Set([
   'model.requested',
   'message.delta',

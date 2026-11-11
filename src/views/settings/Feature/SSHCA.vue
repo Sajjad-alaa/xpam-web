@@ -97,8 +97,8 @@
               <div>
                 <p>{{ $t('SSHCALinuxInstallCA') }}</p>
                 <code
-                  >install -o root -g root -m 0644 jumpserver-openbao-ssh-ca.pub
-                  /etc/ssh/jumpserver_user_ca.pub</code
+                  >install -o root -g root -m 0644 xpam-openbao-ssh-ca.pub
+                  /etc/ssh/xpam_user_ca.pub</code
                 >
               </div>
             </li>
@@ -106,7 +106,7 @@
               <span class="step-number">2</span>
               <div>
                 <p>{{ $t('SSHCALinuxTrustCA') }}</p>
-                <code>TrustedUserCAKeys /etc/ssh/jumpserver_user_ca.pub</code>
+                <code>TrustedUserCAKeys /etc/ssh/xpam_user_ca.pub</code>
               </div>
             </li>
             <li>
@@ -366,7 +366,7 @@ export default {
       if (!publicKey) {
         return
       }
-      downloadText(`${publicKey}\n`, 'jumpserver-openbao-ssh-ca.pub')
+      downloadText(`${publicKey}\n`, 'xpam-openbao-ssh-ca.pub')
     }
   }
 }

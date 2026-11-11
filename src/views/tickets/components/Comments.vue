@@ -71,6 +71,7 @@ import IBox from '@/components/Common/IBox'
 import MarkDown from '@/components/Widgets/MarkDown'
 import { useDateTime } from '@/composables/useDateTime'
 import { getAssetUrl } from '@/utils/assets'
+import { onTicketChanged } from '@/utils/ticketEvents'
 
 export default {
   name: 'Comments',
@@ -151,8 +152,26 @@ export default {
         this.type_api = 'tickets'
     }
     this.getComment()
+    // live: new comments and approvals appear without reloading the page (the comment being typed is kept)
+    this.stopTicketEvents = onTicketChanged((event) => {
+      if (event.type === 'resync' || (this.object?.id && event.id === this.object.id)) {
+        this.refreshComments()
+      }
+    })
+  },
+  beforeUnmount() {
+    this.stopTicketEvents?.()
   },
   methods: {
+    refreshComments() {
+      if (!this.object?.id) return
+      this.$axios
+        .get(`/api/v1/tickets/comments/?ticket_id=${this.object.id}`)
+        .then((res) => {
+          this.comments = res
+        })
+        .catch(() => {})
+    },
     getComment() {
       this.loading = true
       const url = `/api/v1/tickets/comments/?ticket_id=${this.object.id}`

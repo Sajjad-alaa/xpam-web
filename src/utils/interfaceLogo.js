@@ -2,7 +2,7 @@
 export function isDefaultInterfaceLogo(value) {
   if (!value?.trim()) return true
   try {
-    const pathname = new URL(value.trim(), 'https://jumpserver.invalid').pathname
+    const pathname = new URL(value.trim(), 'https://xpam.invalid').pathname
     return /\/static\/img\/(?:logo\.png|logo_white\.png|logo_text_white\.svg)$/.test(pathname)
   } catch {
     return false

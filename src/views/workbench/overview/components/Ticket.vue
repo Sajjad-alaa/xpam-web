@@ -1,5 +1,5 @@
 <template>
-  <HomeCard v-bind="cardConfig" :table-config="tableConfig" />
+  <HomeCard ref="card" v-bind="cardConfig" :table-config="tableConfig" />
 </template>
 
 <script lang="jsx">
@@ -8,6 +8,7 @@ import i18n from '@/i18n/i18n'
 import { toSafeLocalDateStr } from '@/composables/useDateTime'
 import { getTicketTypeLabel } from '@/views/tickets/const'
 import { mapGetters } from 'vuex'
+import { onTicketChanged } from '@/utils/ticketEvents'
 import HomeCard from './HomeCard'
 export default {
   name: 'HomeAnnouncement',
@@ -100,6 +101,13 @@ export default {
   },
   computed: {
     ...mapGetters(['currentUser'])
+  },
+  mounted() {
+    // live: a request waiting for my approval appears (and leaves) without reloading the page
+    this.stopTicketEvents = onTicketChanged(() => this.$refs.card?.$refs.ListTable?.reloadTable())
+  },
+  beforeUnmount() {
+    this.stopTicketEvents?.()
   },
   watch: {
     url(iNew) {
