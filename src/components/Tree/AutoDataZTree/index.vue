@@ -92,6 +92,9 @@ export default {
               : withBaseApi(this.setting.treeUrl),
           autoParam: ['id=key', 'name=n', 'level=lv'],
           type: 'get',
+          // (parsed as JSON by the request itself: zTree would eval a text answer, which the console's
+          // Content-Security-Policy does not allow)
+          dataType: 'json',
           headers: {
             'X-JMS-ORG': this.$store.getters.currentOrg ? this.$store.getters.currentOrg.id : ''
           }

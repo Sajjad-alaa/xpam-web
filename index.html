@@ -62,23 +62,7 @@
         Please enable it to continue.
     </strong>
 </noscript>
-<script>
-    window.onload = function () {
-        if (location.pathname === '/') {
-            location.pathname = '/web/'
-        }
-        const pathname = window.location.pathname
-        if (pathname.startsWith('/core')) {
-            return
-        }
-        if (pathname.indexOf('/web') === -1) {
-            window.location.href = window.location.origin + '/web/#' + pathname
-        }
-        if (pathname.startsWith('/web/#/chat')) {
-            window.location.href = window.location.origin + pathname
-        }
-    }
-</script>
+<script src="%BASE_URL%redirect.js"></script>
 <div id="app">
 </div>
 <div id="loading">
